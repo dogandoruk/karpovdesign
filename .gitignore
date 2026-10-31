@@ -1,0 +1,15 @@
+# Security
+.env
+*.token
+*.key
+*token*
+
+# Large media & scratch
+competitor_previews/
+Initial Brief/*.pdf
+*.pyc
+__pycache__/
+
+# OS files
+.DS_Store
+Thumbs.db

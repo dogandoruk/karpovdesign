@@ -1,0 +1,1063 @@
+=== PAGE 1 ===
+karpovdesign.com — Website Brief
+Oct 30, 2026 · ​@alex
+Goals
+karpovdesign.com is the portfolio and front door for Karpov Design LLC, a North Carolina
+residential design and consulting practice. It should win residential clients, sell
+downloadable designs, and teach. The owner must be able to add projects himself by
+dropping files into a folder, with no coding.
+The site must:
+1. Show every project on one scrolling page as a hero image plus a short info card,
+filterable by category.
+2. Open a full gallery page for each project, with a way back to all projects.
+3. Take client inquiries, and explain the workflow, services and fees.
+4. Sell downloads (plan sets, templates, CAD files) in a webshop.
+5. Carry news that mirrors Instagram and other social posts.
+6. Host an education area with YouTube videos and a Q&A forum.
+7. Update itself from a shared folder, using simple file-naming rules (see Updating the
+site).
+Who visits: homeowners and small developers looking for a residential designer; builders
+and contractors; people buying plan sets; students and designers following the education
+content.
+Look and feel: clean, image-first, lots of white (or dark) space, project images doing the
+talking, minimal text on the main pages. It should work equally well on a phone.
+Wording rule (legal): the owner is not yet a licensed architect. Nowhere on the site may
+the words "architect", "architecture" or "architectural" describe the company or its
+services. Use "residential design", "design consulting" and "Karpov Design" instead. Old
+project text from karpovad.com must be reworded where it uses these terms. Past
+employment at architecture firms and the degree names can stay as facts.
+karpovdesign.com — Website Brief
+Page 1 of 23
+
+
+=== PAGE 2 ===
+Design mindset and the home page
+The site should sell how the owner thinks, not only finished pictures. High-end clients hire
+a person and a process, so the home page leads with sketching, making and the path from
+idea to building.
+Home page, top to bottom
+1. Full-screen opening reel. A silent, looping montage of about 30 seconds: 3–5 second
+clips of hand sketching and watercolour, a physical model being made, a 3D model
+turning, a render resolving, a site visit, a finished room. Clips alternate with still images.
+Over it, one short line (for example "Homes designed around how you live") and two
+buttons: See projects and Start a project.
+A visible pause button (accessibility).
+On phones and slow connections, show a still image or a lighter reel so the page
+loads fast.
+Clips and stills come from a folder 6 Home reel , played in file-number order ( 01
+Sketch.mp4 , 02 Model.jpg …), so the owner can refresh the reel himself.
+2. How I design. A drawn process graphic: five or six stages, each shown with images
+from one real project as it develops (first sketch → massing study → plans → 3D view →
+construction → finished photo). One line per stage on what the client decides and
+receives. It links to the full Workflow page.
+3. Selected work. Three featured projects, large.
+4. Why work with me. Three or four short value points backed by facts, such as
+competition wins, built work across four countries, BIM and construction-document
+experience, and seeing the design in 3D before anything is built.
+5. Client words, latest news, and a final "Start a project" call to action.
+Logo animation
+The KAD mark is built from lines, and they can animate: the lines slide in from the screen
+edges and lock into the square mark, then the mark settles into the header as the opening
+reel fades up. It's a nice signature if it stays brief, and it shouldn't be a gate.
+No "click to enter" splash page. An extra click before any content loses visitors and
+hides the site from search engines. The animation plays over the opening reel, which is
+already loading behind it.
+karpovdesign.com — Website Brief
+Page 2 of 23
+
+
+=== PAGE 3 ===
+About 1.5 seconds, first visit only (remembered for later visits), and any click or scroll
+skips it.
+Off for visitors whose device asks for reduced motion; they simply see the mark.
+Reused sparingly: the same lines drawing in can mark page transitions or loading, kept
+subtle.
+Process on every project page
+Each project page gets a Process strip above the final gallery: sketches, diagrams, study
+models and early options, so visitors see the thinking behind the result. In the project
+folder these files start with P ( P01 Concept sketch.jpg , P02 Massing options.jpg );
+the site places them in the strip automatically.
+Graphics that explain the value
+The process timeline (Services page): stages, the client's decision at each one, and
+what they receive, drawn as one clean diagram.
+Cost of change: a simple curve showing that changes are cheap on paper and
+expensive once building starts. It explains why paying for good design up front saves
+money. The graphic is conceptual, with no invented figures.
+Before / after sliders for renovations.
+Custom design versus a stock plan: a short side-by-side of what a client gets (fit to
+site, light, budget, how they live).
+3D walk-throughs and 360° views embedded on project pages, showing how clients
+will experience their home before it's built.
+Reaching high-end clients
+Methods for the designer and owner to plan together. The site should support each one.
+Method
+What it means
+Where it lives on
+the site
+Case studies
+For key projects: the client's
+problem, the design approach, the
+result, a client quote. Stories sell
+better than image grids.
+Project pages,
+Home
+karpovdesign.com — Website Brief
+Page 3 of 23
+
+
+=== PAGE 4 ===
+Method
+What it means
+Where it lives on
+the site
+Professional photography and
+video
+Hire a photographer, with drone,
+for every built project. This is the
+single biggest quality signal.
+Everywhere
+A premium inquiry process
+A qualifying form (budget range,
+timeline, site), a reply within one
+business day, an intro call, then a
+polished proposal PDF. Offer a
+paid feasibility study as a low-risk
+first step.
+Contact, Services
+Remote collaboration as a
+feature
+Video meetings, shared 3D
+models, VR walk-throughs and an
+online project room. Presented as
+a strength, it answers "you're
+based abroad?"
+Services, FAQ
+A guide in exchange for an email
+A free downloadable guide such
+as "Planning a custom home in
+North Carolina", then an
+occasional newsletter.
+Home, Education,
+footer
+Builder, realtor and interior
+designer partnerships
+A short "For builders and
+partners" page: how you work
+with contractors, what drawings
+they get, and a referral contact.
+Services or footer
+Local search
+A Google Business Profile, project
+pages titled with their town, and
+fast pages.
+Site-wide
+Social channels
+Instagram and Pinterest reels of
+sketching and process; a Houzz
+profile; LinkedIn for builders and
+developers.
+News, footer
+Publications and awards
+Submit finished homes to design
+magazines and award programs;
+show press logos.
+About, Home
+karpovdesign.com — Website Brief
+Page 4 of 23
+
+
+=== PAGE 5 ===
+Site map
+The main menu holds the seven sections in this order; Projects is the default landing link
+after Home. The footer on every page carries the legal pages, newsletter signup and social
+links.
+Projects
+The Projects page is the heart of the site: one long scrolling page of hero images, each
+with its info card, that re-sorts by category. Each hero opens that project's own gallery
+page.
+Method
+What it means
+Where it lives on
+the site
+A consistent brand
+One logo, typeface, colour set, and
+matching templates for proposals
+and presentation boards.
+Everywhere
+site map · 7 sections + footer
+karpovdesign.com — Website Brief
+Page 5 of 23
+
+
+=== PAGE 6 ===
+All-projects page
+Layout: one project per row (or a two-column grid on wide screens). Each block = the
+hero image, large, plus the info card beside or below it.
+Info card fields: Title, Year, Category, Type, Program, Size, Location, Client, Role, Status.
+Team appears only on the project page, since some team lists are long.
+Default order: newest first, with an optional "Featured" flag that pins a project to the
+top.
+Category filter bar at the top, sticky while scrolling: All · Single-Family Residential ·
+Multifamily Residential · Commercial · Cultural · Academic · Conceptual · Urban
+Planning · Furniture · Art. Clicking one rearranges the list with a short animation; no
+page reload.
+A project can carry more than one category (a student housing concept is both
+Multifamily and Academic and Conceptual), so it shows under each.
+Optional second filter: Status (Built · In progress · Competition · Concept), since
+clients often want to see built work only.
+Images load lazily as you scroll, so a page of 30+ projects stays fast.
+Project page (one per project)
+Opens when the hero image or title is clicked. Its address is readable, e.g.
+karpovdesign.com/projects/outside-in.
+Top: hero image full width, then the title and the full info card, including Team.
+Middle: the project description (2 to 4 short paragraphs).
+Gallery: every image for the project in the order given by the file numbers. Clicking an
+image opens a full-screen viewer with arrows, swipe on phones, and Esc to close.
+Optional captions from the file name.
+Optional extras: a PDF (presentation board or brochure) download; a short video or 3D
+walk-through link.
+Navigation: a "← All projects" button at top and bottom that returns to the list with the
+same filter still selected and the same scroll position. Also "Previous / Next project"
+links.
+Starting categories for the existing projects
+Suggested categories for the 21 projects copied from karpovad.com. Private residential
+projects not on the old site will be added in the same format.
+karpovdesign.com — Website Brief
+Page 6 of 23
+
+
+=== PAGE 7 ===
+Project
+Categories
+Status
+Outside-In (2019)
+Single-Family Residential,
+Conceptual
+Concept
+Modular House (2018)
+Single-Family Residential
+Competition
+SEED – Artists'
+Getaway (2015)
+Single-Family Residential
+Concept
+Flowing Garden (2017)
+Multifamily Residential, Urban
+Planning
+Competition
+Summer Island (2011)
+Multifamily Residential, Academic,
+Conceptual
+Concept
+Multi City (2015)
+Multifamily Residential, Cultural,
+Urban Planning
+Competition, 1st place
+IZKA (2013–2016)
+Commercial, Cultural
+Competition, 1st place
+Folding Edge (2017)
+Commercial
+Competition
+Growing Cell (2015)
+Commercial, Urban Planning
+Competition
+Beer Code (2017)
+Commercial, Cultural
+Competition, finalist
+Community Plaza (2016)
+Cultural
+Competition
+Tent Hill (2018)
+Cultural
+Competition
+Flex Tower (2018)
+Academic, Conceptual
+Concept
+Natures Gateway (2018)
+Academic, Urban Planning,
+Conceptual
+Concept
+Pijp Park (2017–)
+Urban Planning
+In progress
+Valley of Life (2016)
+Urban Planning
+Competition, honourable
+mention
+Life Bridge (2015)
+Urban Planning
+Competition, 3rd place
+Chrono Orb (2015)
+Art
+Competition
+Eternity Ring (2017)
+Art
+Built (produced)
+Hand Study (2009)
+Art
+Studies
+karpovdesign.com — Website Brief
+Page 7 of 23
+
+
+=== PAGE 8 ===
+Many of these are municipal offices and public spaces. A tenth category, Civic / Public,
+would describe them better than Commercial; the owner should decide (see Open
+questions).
+Collaborations
+Work done as an employee of other offices gets its own clearly labelled view, so it shows
+depth of experience without being mistaken for Karpov Design's own commissions. This
+matters twice over: it's honest credit to the firms, and since the owner is not a licensed
+architect, the site must never suggest he was the architect of record on those buildings.
+How to show it
+Same grid, separate view. The Projects page gets a switch at the top: Karpov Design ·
+Collaborations · All. It defaults to Karpov Design. Collaborations use the same hero-
+and-card layout and the same category filters, so there's no second system to
+maintain. A "Collaborations" link in the main menu opens the page already switched to
+that view.
+A visible credit on every card: a small label such as "With Aboutblank, Istanbul" above
+the title, so it's never ambiguous whose project it is.
+Two extra card fields for these projects: Office (the lead firm, linked to its website)
+and My role (what the owner personally did).
+On the project page: a credit line at the top ("Project by Aboutblank Architects.
+Aleksandr Karpov was project designer and BIM manager on the design team."), the
+full team list, and image credits ("Images © Aboutblank").
+Ordering: within Collaborations, built work first, then competition wins, then other
+competitions. Built buildings are the strongest proof of experience.
+How to frame it
+Lead with the role, then the firm. "Project Architect / BIM Manager at Aboutblank" is a
+job title from the time and can stay as fact in the bio. On project cards, describe what
+was done in plain verbs: "design development, 3D modeling, visualization, BIM
+Project
+Categories
+Status
+Travel Sketches (2009–)
+Art
+Ongoing
+karpovdesign.com — Website Brief
+Page 8 of 23
+
+
+=== PAGE 9 ===
+coordination, construction documents". Avoid "designed by" or "my project" unless he
+truly led it.
+Be specific about contribution. Use the old site's Role field, made concrete. "Lead
+designer, concept" (Multi City) is a strong, honest claim; "design assistance" undersells
+work that included full BIM management. Each card should answer: what did he do, at
+what stage?
+Credit awards to the team. "1st place, IZKA Headquarters competition (Aboutblank
+team)" rather than "1st place" alone.
+Tie it to what clients get now. A one-paragraph intro at the top of the view, e.g. "Before
+founding Karpov Design I spent years on design teams in Istanbul, Amsterdam and
+Charlotte, from high-rise housing to municipal headquarters. That experience in
+coordination, documentation and BIM now goes into every residential project."
+Get permission before publishing. Ask each firm, in writing, for permission to show the
+project and use its images, and how they want to be credited. Use only images the firm
+approves, or your own renders and drawings you're allowed to reuse. Keep the replies
+on file. If a firm says no, list the project in text on the About page instead (name, year,
+role) with no images.
+Keep the legal wording rule. Firm names and real job titles can appear as facts. The
+company itself is never described as providing architecture.
+Which projects belong here
+From the old site and the About page. Office names are from karpovad.com; confirm each
+before publishing.
+Project
+Office
+Role (from old site)
+Notes
+IZKA Headquarters
+(2013–2016)
+Aboutblank,
+Istanbul
+Design, modeling,
+visualization, BIM
+management,
+construction
+documents
+1st place; Turgut
+Cansever jury
+special award
+Multi City (2015)
+Aboutblank
+Lead designer,
+concept, BIM
+management
+1st place
+karpovdesign.com — Website Brief
+Page 9 of 23
+
+
+=== PAGE 10 ===
+Beer Code and Folding Edge were KAD's own competition entries with invited
+collaborators, so they stay under Karpov Design with the partners credited in Team.
+In the update folder
+Collaboration projects go in the same 1 Projects folder with the same naming rules.
+Three more lines in info.txt mark them: Office: (the firm, which switches the project
+into the Collaborations view), Office link: (the firm's website) and Image credit: .
+Leave these blank for Karpov Design's own projects.
+Project
+Office
+Role (from old site)
+Notes
+Growing Cell (2015)
+Aboutblank
+Design, modeling,
+BIM, construction
+documents
+Life Bridge (2015)
+Aboutblank with
+BOOM
+Landscape
+Design, modeling,
+visualization
+3rd place
+Valley of Life (2016)
+Aboutblank with
+KCAP
+Design, modeling,
+visualization
+Honourable
+mention
+Community Plaza
+(2016)
+Aboutblank
+Design, modeling, BIM
+Pijp Park (2017–)
+AbbinkXco
+(AXCO),
+Amsterdam
+Design, modeling,
+visualization,
+animation
+Pending
+construction
+Flowing Garden (2017)
+Not stated on old
+site
+Design, modeling, BIM
+Confirm the office
+Royal Garden Kartal,
+Sky Blue, Yakacik
+towers; Cekmekoy
+High School; Captain's
+Quarters
+Aboutblank
+Not on old site
+Built work: add if
+images can be
+obtained
+De Krijgsman housing,
+Muiden
+AbbinkXco
+Not on old site
+Built work
+Villa development,
+Copenhagen
+RAFN
+Not on old site
+Built work
+karpovdesign.com — Website Brief
+Page 10 of 23
+
+
+=== PAGE 11 ===
+Other sections
+Five more sections round out the site. Each is listed with what it must do; wording and
+prices come from the owner.
+Inquiry portal (Contact)
+A guided inquiry form, not just a blank message box. Fields: name, email, phone, project
+location (city, state), project type (new home, addition, renovation, multifamily,
+commercial, consulting, other), approximate size, budget range, desired start date, how
+they heard about us, message, and file upload for a survey, lot plan or photos.
+On submit: an email to the owner with all answers, an automatic "we received your
+inquiry" email to the client, and a copy saved in a simple list (a spreadsheet or the site's
+admin).
+Spam protection that doesn't make people solve puzzles (an invisible check).
+Optional: "Book a 30-minute intro call" with a calendar booking link. The owner works
+from Turkey, so bookings should show times in the visitor's own time zone.
+Contact details on the page: email, US phone number, service area statement (North
+Carolina and where else the owner works), social links.
+Services, workflow and fees
+Services: short cards, each with an icon or image, one paragraph and a typical
+deliverable. Starting list: residential design (new homes), additions and renovations,
+multifamily design, design consulting, drafting and construction drawings, 3D modeling
+and visualization, permit drawing sets.
+Workflow: a numbered, drawn step diagram of how a project runs, for example: inquiry
+→ intro call → proposal and agreement → site and needs survey → concept design →
+design development → construction drawings → permit support → construction
+questions. Each step has one or two lines on what the client gets and what they decide.
+Fees: explain how pricing works rather than list fixed prices. Show the fee methods
+used (for example fixed fee per phase, per-square-foot ranges, hourly rate for
+consulting), what affects the price, and what's included or extra (site visits, revisions,
+engineering by others). End with a call to action to the inquiry form. Figures come from
+the owner.
+A short FAQ on this page: Do you work outside North Carolina? Do I need an architect
+or engineer too? How long does a typical house design take? How do revisions work?
+How do remote meetings work?
+karpovdesign.com — Website Brief
+Page 11 of 23
+
+
+=== PAGE 12 ===
+Client consulting (design consultations)
+The site offers two kinds of paid one-to-one session, and they must never be mixed: client
+consulting is for people planning a building, and student consulting is for people learning
+design and software. Each has its own page, its own button wording, its own booking type
+and its own prices, so a homeowner never lands on a Revit lesson and a student never
+books a design consultation.
+The booking tool holds the two as separate session types with separate intake forms.
+Inquiries from each go to separate labels in the owner's inbox.
+A paid one-to-one video session for anyone with an idea to talk through: a homeowner
+weighing a lot or a renovation, a builder testing a layout, a developer sizing a project.
+The owner sketches live, reviews plans or photos, and sends a short summary
+afterward.
+Client consulting
+Student consulting
+Who it's for
+Homeowners, builders, developers,
+investors
+Students, recent graduates,
+designers learning tools
+Purpose
+Brainstorm a real project: a lot, a
+renovation, a layout, feasibility
+Learn: software skills, portfolio and
+competition reviews, design
+fundamentals
+Where it lives
+Services section, and calls to action
+across Home, Projects and Contact
+Education section only, linked from
+videos, courses and the Q&A forum
+Button
+wording
+Book a consultation
+Book a tutoring session
+What they
+get
+Live sketching, review of their plans
+or photos, a written summary
+Screen-shared lesson, files or
+exercises, a recording if agreed
+Pricing
+Professional consulting rate; fee
+credited toward the design fee if
+they hire Karpov Design
+Lower, education rate; packages of
+several sessions
+Intake
+questions
+Property address, goals, budget
+range, timeline, files
+School or level, software, topic,
+portfolio link
+Follow-up
+Leads to a proposal and design
+agreement
+Leads to courses, books and more
+sessions
+karpovdesign.com — Website Brief
+Page 12 of 23
+
+
+=== PAGE 13 ===
+Offered in two or three lengths (for example 45 and 90 minutes) and booked from a
+calendar in the visitor's time zone. Payment is taken at booking, the video-call link is
+sent automatically, and the booking form asks for the address, goals and any files
+beforehand.
+Suggested hook: the consultation fee is credited toward the design fee if the client
+goes on to hire Karpov Design. The free 30-minute intro call on the Contact page stays
+for people who simply want to check fit.
+Book a consultation links appear on the Home page (in the opening reel and "Why
+work with me"), on Services, Fees and Contact, at the end of every project page ("Have
+a project like this? Book a consultation"), and in the footer.
+It uses the same booking tool as private tutoring, with separate session types and
+prices.
+Webshop (downloads, books, courses)
+Sells three kinds of product: downloads (house plan sets, CAD and Revit families,
+templates, presentation boards, study guides), books, and online courses. The shop
+can be filtered by these three types.
+Books: ebooks (PDF or EPUB) delivered as instant downloads, and printed books.
+Printed copies are fulfilled by a print-on-demand service or sold through a link to an
+outside store such as Amazon, so the owner never ships anything himself from Turkey.
+Courses: video lessons grouped into modules, with downloadable worksheets. Buyers
+get a login, see only the courses they bought, and can pick up where they left off. Each
+course has a free preview lesson. Course videos must be private (not public YouTube),
+either on a course platform linked from the site or on a private video host.
+Each product page: images, description, file format and size, what's included, price,
+license terms, "Buy" button.
+After payment the buyer gets the download link instantly by email. The owner doesn't
+have to send anything by hand.
+Plan sets are sold as a license to build once (or similar), with terms the buyer accepts
+at checkout. Plans must note that local codes and a local professional's review may be
+required.
+Payments, sales tax and receipts are handled by a dedicated checkout service,
+connected to the LLC's business bank account.
+Products are added the same way as projects: a folder per product (see Updating the
+site).
+karpovdesign.com — Website Brief
+Page 13 of 23
+
+
+=== PAGE 14 ===
+News
+A dated feed of short posts: new projects, construction progress, awards, events.
+Newest first, with images and tags linking to the related project.
+Same content as Instagram and other social media. Two options for the designer to
+price: (a) automatically show the latest Instagram posts on the site, or (b) the owner
+posts on the site first and shares the link out. A combination works: a live Instagram
+strip on the home page, plus full posts in News.
+Each post can be shared with one click to Instagram, Facebook, LinkedIn, X and by
+email.
+Education
+Video library: YouTube videos embedded and grouped by topic (drafting, Revit,
+SketchUp, residential codes, design process). New videos appear automatically from a
+chosen YouTube playlist or channel.
+Resources: free downloads, recommended books and tools, glossary.
+Q&A forum: visitors ask questions, others and the owner answer. It needs sign-in for
+posting (to stop spam), owner moderation (approve, edit, delete), topic categories, and
+email alerts to the owner for new questions. A hosted forum linked from the site is
+acceptable if it matches the site's look.
+Student consulting (private tutoring): one-to-one online sessions, booked and paid
+for on the site. A tutoring page lists the topics (for example Revit, SketchUp, AutoCAD,
+Rhino and Grasshopper, rendering, portfolio and competition reviews, residential
+design basics), session lengths, prices and packages of several sessions. A "Book a
+session" button opens a booking calendar in the visitor's time zone, takes payment
+upfront and sends a video-call link automatically. Links to it appear on every video,
+course and Q&A page, in the main menu under Education, and on the Services page.
+Free videos here link to the related paid courses and books in the Shop.
+Client file portal
+Clients need a private place to send surveys, photos and comments, and to receive
+drawings for review and final sets. Keep this separate from the website: building it into
+the site adds logins, security and cost for little gain. The site only carries a Client login link
+in the footer that opens the portal.
+karpovdesign.com — Website Brief
+Page 14 of 23
+
+
+=== PAGE 15 ===
+Start with shared Google Drive folders (part of the Google Workspace plan already
+recommended): one folder per client project, shared only with that client, using the
+same layout every time:
+01 From client (survey, photos, inspiration)
+02 For review (drawings and models awaiting comments)
+03 Issued (final, signed-off sets)
+04 Contracts and invoices
+Move to a dedicated portal tool later if clients need branded logins, approvals with
+sign-off, messaging and invoices in one place. It stays a separate service linked from
+the site.
+Keep the website content folder apart. It is never shared with clients, so nothing
+private can be published by mistake, and nothing on the website can expose client
+files.
+Proposed additions
+These weren't in the original list but most design-practice sites need them. Must-haves
+are marked; the rest can come later.
+Item
+Why
+Priority
+Home page
+Opening reel, process graphic, featured work and
+value points, as set out in Design mindset and the
+home page.
+Must
+About page
+Bio, photo, education, experience, awards, design
+philosophy. Content exists on karpovad.com and
+needs rewording.
+Must
+Legal pages
+Privacy policy, terms of use, shop terms and plan
+license, cookie notice. Required once there's a
+shop and forms.
+Must
+Service disclaimer
+One line in the footer and on Services: the
+company provides residential design and
+consulting and is not an architecture firm. Wording
+to be checked against NC rules.
+Must
+karpovdesign.com — Website Brief
+Page 15 of 23
+
+
+=== PAGE 16 ===
+Updating the site
+The owner updates the site by adding a folder of images and one filled-in text form to a
+shared cloud folder; the site rebuilds itself. No logging in to a website editor, no code. This
+is the most important technical requirement.
+Item
+Why
+Priority
+Mobile and accessibility
+Works on phones first; readable contrast, image
+descriptions (alt text), keyboard use.
+Must
+Search engine basics
+Page titles and descriptions, image alt text,
+sitemap, Google Business Profile link, fast loading.
+Must
+Visitor statistics
+Simple privacy-friendly analytics: which projects
+get viewed, where inquiries come from.
+Must
+Testimonials
+Short quotes from past clients, with permission, on
+Home and Services.
+Should
+Awards and press
+A compact list with logos; the award list already
+exists.
+Should
+Newsletter signup
+Collect emails for news and new shop items; one
+field in the footer.
+Should
+Furniture pieces
+Furniture projects (mostly conceptual) use the
+normal project format under the Furniture
+category. Pieces later made for sale can also get a
+Shop listing.
+Should
+Client portal
+Shared Google Drive folders at launch, linked from
+the footer; a dedicated portal tool later (see Client
+file portal).
+Later
+Languages
+English first; Turkish or Russian versions if those
+markets matter.
+Later
+Plan finder
+Filters on the shop for bedrooms, square footage,
+stories and lot width.
+Later
+karpovdesign.com — Website Brief
+Page 16 of 23
+
+
+=== PAGE 17 ===
+How it works
+1. The owner keeps one cloud folder, Karpov Design Website, synced to his computer
+(Google Drive or Dropbox, designer's choice).
+2. To add a project, he copies the blank template folder, renames it, drops in images, and
+fills in info.txt .
+3. The site checks the folder automatically (for example every hour, plus a manual
+"publish now" button or link).
+4. It resizes and compresses the images, builds the project page, adds the card to the
+Projects list under the right categories, and publishes.
+5. The owner gets an email: what was published, plus any problems in plain language
+("2026 Smith Residence: the Year line is empty" or "Category 'Single Family' not
+recognised, did you mean Single-Family Residential?").
+6. A folder that breaks the rules is skipped, never half-published. The rest of the site
+keeps working.
+Folder layout
+Karpov Design Website/
+├── 0 Templates/            ← blank copies to duplicate
+├── 1 Projects/
+│   ├── 2019 Outside-In/
+│   │   ├── info.txt
+│   │   ├── 00 Hero.jpg
+│   │   ├── 01 Site plan.jpg
+│   │   ├── 02 Courtyard view.jpg
+│   │   └── Presentation board.pdf   (optional)
+│   └── _2026 Smith Residence/      ← starts with _ = draft, not shown
+├── 2 News/
+│   └── 2026-10-30 Apex renovation update/
+│       ├── post.txt
+│       └── 01.jpg
+├── 3 Shop/
+│   └── Cottage Plan A/
+│       ├── product.txt
+│       ├── 00 Cover.jpg
+│       └── DOWNLOAD Cottage Plan A.zip
+├── 4 Education/
+│   └── videos.txt
+└── 5 Pages/
+karpovdesign.com — Website Brief
+Page 17 of 23
+
+
+=== PAGE 18 ===
+    ├── about.txt
+    ├── services.txt
+    ├── fees.txt
+    └── faq.txt
+Naming rules
+What
+Rule
+Example
+Project
+folder
+Year, a space, then the title.
+The title becomes the page
+address.
+2019 Outside-In →
+karpovdesign.com/projects/outside-in
+Hero image
+Starts with 00 . Exactly one
+per project.
+00 Hero.jpg
+Gallery
+images
+Two-digit number, a space, an
+optional caption. Shown in
+number order; the caption
+shows under the image.
+03 Living room.jpg
+Drafts
+Put _ at the front of a folder
+name to hide it. Remove the
+_ to publish.
+_2026 Smith Residence
+Removing
+Delete the folder or add _
+back. The page disappears at
+the next update.
+News folder
+Date as YYYY-MM-DD, a
+space, the headline.
+2026-10-30 Apex renovation update
+Shop
+download
+The file to sell starts with
+DOWNLOAD . It is never shown
+publicly.
+DOWNLOAD Cottage Plan A.zip
+Image files
+JPG or PNG, at least 2400 px
+on the long side. The site
+makes the small versions.
+karpovdesign.com — Website Brief
+Page 18 of 23
+
+
+=== PAGE 19 ===
+The project form (info.txt)
+One field per line, Field: value . A line of three dashes, then the description in plain
+paragraphs. Fields left blank are hidden on the card. Categories must come from the fixed
+list (one or more, comma-separated).
+Title: Outside-In
+Year: 2019
+Categories: Single-Family Residential, Conceptual
+Status: Concept
+Type: Concept
+Program: Private Residence
+Size: 2,269 sq.ft. (210.8 sq.m.)
+Location: Vilnius, Lithuania
+Client: Private
+Team: Aleksandr Karpov
+Role: Complete design and development
+Featured: no
+---
+A dynamic residence for an active family. The OUTSIDE-IN house
+makes the outdoors a central core...
+The shop's product.txt and the news post.txt follow the same pattern (product: Title,
+Product type (Download, Ebook, Printed book or Course), Price, Format, Includes, License,
+plus a link for printed books or the course platform; post: Title, Date, Related project, Tags,
+then the text). videos.txt is one line per video: topic, title, YouTube link.
+First load
+The designer loads the 21 projects from the old site as the first batch, using the content
+archive (text and image list) that accompanies this brief. The owner supplies the original
+image files and his private residential projects in the folder format above.
+Content archive: ​KAD Website Content Archive
+Technical requirements and deliverables
+The designer picks the tools, but the folder-based updating above is the deciding
+requirement. Drag-and-drop page builders (Figma Sites, Canva, Wix, Squarespace) are
+edited by hand inside their own editors and don't read a folder of files, so they would need
+karpovdesign.com — Website Brief
+Page 19 of 23
+
+
+=== PAGE 20 ===
+a workaround. A site generated from files, hosted on a modern static host and fed from
+the cloud folder, fits best. Any proposal must say how the folder workflow is met.
+Requirements
+Domain: karpovdesign.com (already registered by the owner). Also set up a business
+email address on the domain, such as hello@karpovdesign.com.
+Ownership: every account (hosting, domain, payment, forum, analytics, cloud folder) is
+in the name of Karpov Design LLC, and the owner holds the main login. The designer
+gets his own access, which can be removed.
+Speed: project pages load quickly on a phone connection, even with 30+ images.
+Images are served in modern formats at the right size.
+Security: HTTPS everywhere, form spam protection, no payment data stored on the
+site.
+Backups: the cloud folder is the master copy of all content; the site can be rebuilt from
+it at any time.
+Running costs: the proposal lists every monthly or yearly fee (hosting, shop, forum,
+form service, email).
+What the designer delivers
+1. Design mockups for Home, Projects list, Project page, Contact and Shop, on desktop
+and phone, for approval before building.
+2. The finished site on karpovdesign.com, with the 21 existing projects and the owner's
+new residential projects loaded.
+3. The folder system working end to end, with the template folder and blank forms.
+4. A one-page "How to update the site" guide in plain language, plus a short screen-
+recorded video.
+5. A live test: the owner adds a project, a news post and a shop item himself while the
+designer watches, before sign-off.
+6. A handover list of every account and login, and 30 days of support for fixes after
+launch.
+karpovdesign.com — Website Brief
+Page 20 of 23
+
+
+=== PAGE 21 ===
+Recommended hosting and platforms
+Recommendation: a site built from files and hosted on Cloudflare Pages, with Google
+Workspace for email and the content folder, and Podia for the shop, books and courses.
+That runs about $49 a month to start, plus sales fees, and about $94 a month with the
+forum and paid hosting tier. Prices were checked on 30 Oct 2026 and should be confirmed
+by the designer.
+The stack
+Part
+Recommendation
+Cost
+Why
+Website
+hosting
+Cloudflare Pages, free plan
+$0; Pro $20/mo
+billed yearly if
+ever needed
+Unlimited static traffic and
+500 builds a month on the
+free plan; fast worldwide
+(limits)
+Site
+builder
+A static site generator (for
+example Astro or Eleventy),
+chosen by the designer
+$0
+Builds every page from the
+content folder, which is
+what makes the drop-in
+folder system possible
+Content
+folder and
+email
+Google Workspace Business
+Starter:
+hello@karpovdesign.com
+plus Google Drive
+$7/user/mo
+billed yearly
+($8.40 monthly)
+(pricing)
+One login for business email
+and the website folder
+Shop,
+ebooks,
+courses
+Podia, Mover plan
+$42/mo billed
+yearly ($49
+monthly) + 5%
+per sale; Shaker
+$84/mo yearly
+with 0% fee
+(pricing)
+Downloads, ebooks and
+video courses with buyer
+logins in one place; Stripe or
+PayPal card fees also apply
+Printed
+books
+Print-on-demand (for
+example Amazon KDP),
+linked from the shop
+Per-copy
+printing cost, no
+monthly fee
+Nothing is shipped from
+Turkey
+Q&A
+forum
+Discourse, Starter hosted
+plan, added once there's
+demand
+$25/mo
+(pricing)
+Proper Q&A with
+moderation and email
+alerts; can sit at
+forum.karpovdesign.com
+karpovdesign.com — Website Brief
+Page 21 of 23
+
+
+=== PAGE 22 ===
+Private tutoring needs a booking tool that takes payment and adds a video-call link
+(Podia's coaching option, or a scheduler such as Calendly connected to Stripe). The
+designer should confirm which works and what it adds to the monthly cost.
+Monthly running cost
+Podia's Shaker plan pays for itself once sales pass roughly $840 a month, the point where
+5% equals the $42 difference.
+Notes for the designer
+Build only on change. Checking the folder every hour must trigger a rebuild only when
+something changed. Rebuilding every hour regardless would use about 744 builds a
+month, over the free plan's 500.
+Large video files. The home reel's video clips should be compressed for the web, or
+served from a video host, so they don't slow the site down.
+Sales tax. Confirm how Podia handles US sales tax on digital products for a North
+Carolina LLC. Lemon Squeezy (5% + $0.50 per sale, no monthly fee) acts as the legal
+seller and handles sales tax itself, but its owner Stripe is steering users to a newer
+Stripe service, so it isn't recommended for a new shop (review).
+Part
+Recommendation
+Cost
+Why
+Inquiry
+form
+Built into the site, or the
+host's form service
+$0
+Netlify, for example, now
+includes form submissions
+free on all its plans
+(changelog)
+Domain
+karpovdesign.com, already
+owned
+Existing yearly
+renewal
+Stage
+What's on
+Approx. monthly
+Launch
+Hosting (free), Google Workspace, Podia Mover
+≈ $49 + 5% of sales
+Growing
+Add Discourse forum and Cloudflare Pro
+≈ $94 + 5% of sales
+Higher sales
+Switch Podia to Shaker (0% fee)
+≈ $136
+karpovdesign.com — Website Brief
+Page 22 of 23
+
+
+=== PAGE 23 ===
+Why not Squarespace, Wix, Webflow or Figma Sites. They're edited by hand in their
+own editors and can't read the content folder, and they'd add their own monthly fee on
+top of the shop.
+One-off build cost is the designer's quote and isn't included above.
+Open questions
+Add a ninth project category, Civic / Public, for the municipal and public-space
+projects?
+Google Drive or Dropbox for the content folder?
+Decided: sizes in square feet with square metres in brackets, e.g. 2,269 sq ft (210.8 m²).
+The owner enters square feet only; the site calculates the metres.
+Which old projects to keep on the new site, and which to move to an "Archive" filter?
+Instagram: show posts automatically, or post on the site first and share out?
+Forum: built into the site, or a hosted forum linked from it?
+Fee methods and figures to publish on the Fees page.
+First shop products and their prices.
+Light or dark overall look? The old site used dark grey.
+Decided: the company name is Karpov Design, and the KAD mark stays as the logo.
+Launch date and budget.
+karpovdesign.com — Website Brief
+Page 23 of 23
+
+
