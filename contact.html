@@ -53,6 +53,14 @@
     ::-webkit-scrollbar-thumb {
       background: #adb5bd;
     }
+    /* Mobile touch fallback for variant overlay */
+    @media (hover: none) {
+      .variant-hover-overlay {
+        opacity: 0.95 !important;
+        transform: translateY(0) !important;
+        background: linear-gradient(to top, rgba(15, 18, 22, 0.85) 0%, rgba(15, 18, 22, 0.40) 60%, transparent 100%) !important;
+      }
+    }
   </style>
 
   <title>Contact & Inquiries &bull; Aleksandre Karpov &bull; Karpov Design LLC</title>
@@ -184,7 +192,7 @@
               <div>
                 <label class="block text-xs font-mono uppercase tracking-wider text-[#1a1d20] mb-2">Project Typology</label>
                 <select class="w-full bg-[#f8f9fa] border border-[#e2e5e8] p-3 text-xs text-[#1a1d20] focus:outline-none focus:border-[#1a1d20]">
-                  <option>Residential Architecture</option>
+                  <option>Residential Design & Consulting</option>
                   <option>Mountain / Coastal Retreat</option>
                   <option>Commercial / Hospitality Design</option>
                   <option>BIM / Computational Coordination</option>

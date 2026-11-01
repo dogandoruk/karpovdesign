@@ -60,6 +60,14 @@ SHARED_HEAD_TAGS = """
     ::-webkit-scrollbar-thumb {
       background: #adb5bd;
     }
+    /* Mobile touch fallback for variant overlay */
+    @media (hover: none) {
+      .variant-hover-overlay {
+        opacity: 0.95 !important;
+        transform: translateY(0) !important;
+        background: linear-gradient(to top, rgba(15, 18, 22, 0.85) 0%, rgba(15, 18, 22, 0.40) 60%, transparent 100%) !important;
+      }
+    }
   </style>
 """
 
@@ -487,7 +495,7 @@ JS_TEMPLATE = """
               <div class="absolute inset-0 bg-black/0 group-hover:bg-black/60 transition-colors duration-500 ease-out"></div>
               
               <!-- Hover-revealed text container -->
-              <div class="absolute inset-0 p-5 flex flex-col justify-between opacity-0 group-hover:opacity-100 translate-y-3 group-hover:translate-y-0 transition-all duration-500 ease-out">
+              <div class="variant-hover-overlay absolute inset-0 p-5 flex flex-col justify-between opacity-0 group-hover:opacity-100 translate-y-3 group-hover:translate-y-0 transition-all duration-500 ease-out">
                 <div class="flex items-center justify-between">
                   <span class="bg-white/90 text-[#1a1d20] text-[9px] font-mono uppercase tracking-widest px-2 py-0.5">${p.typology}</span>
                   ${awardTag}
@@ -641,7 +649,7 @@ def generate_landing_page(is_variant=False):
     
     hero_markup = """
   <!-- Hero Banner: Monumental Architectural Visual with Dead-Center White Vector Line-Art Logo -->
-  <section class="relative w-full h-[85vh] md:h-[90vh] bg-[#1a1d20] overflow-hidden flex items-center justify-center">
+  <section class="relative w-full h-[85dvh] md:h-[90dvh] bg-[#1a1d20] overflow-hidden flex items-center justify-center">
     <img src="assets/official/projects/seed-retreat/seed_2.jpg" alt="Architectural Hero" class="absolute inset-0 w-full h-full object-cover opacity-60">
     <div class="absolute inset-0 bg-gradient-to-t from-[#1a1d20]/80 via-transparent to-[#1a1d20]/40"></div>
     
@@ -999,7 +1007,7 @@ def generate_contact_page():
               <div>
                 <label class="block text-xs font-mono uppercase tracking-wider text-[#1a1d20] mb-2">Project Typology</label>
                 <select class="w-full bg-[#f8f9fa] border border-[#e2e5e8] p-3 text-xs text-[#1a1d20] focus:outline-none focus:border-[#1a1d20]">
-                  <option>Residential Architecture</option>
+                  <option>Residential Design & Consulting</option>
                   <option>Mountain / Coastal Retreat</option>
                   <option>Commercial / Hospitality Design</option>
                   <option>BIM / Computational Coordination</option>
