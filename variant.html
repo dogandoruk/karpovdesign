@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="assets/official/logo_charcoal.svg">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    if (!window.tailwind) {
+      document.write('<script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"><\/script>');
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-main: #f8f9fa;
+      --bg-surface: #ffffff;
+      --text-main: #1a1d20;
+      --text-muted: #595f65;
+      --border-line: #e2e5e8;
+      --accent: #de602e;
+    }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg-main);
+      color: var(--text-main);
+    }
+    .card-frame {
+      border: 1px solid transparent;
+      transition: border-color 0.3s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .card-frame:hover {
+      border-color: #1a1d20;
+    }
+    .sticky-filter-bar {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: rgba(248, 249, 250, 0.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid #e2e5e8;
+    }
+    ::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f3f5;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #adb5bd;
+    }
+  </style>
+
+  <title>Aleksandre Karpov — Visual Archive & Practice (Overlay Variant)</title>
+</head>
+<body class="antialiased bg-[#f8f9fa] text-[#1a1d20]">
+
+  
+  <!-- Field Architecture Inspired Header: 25% Negative Space Left, 75% Active Right -->
+  <header class="w-full bg-[#f8f9fa]/95 backdrop-blur-md border-b border-[#e2e5e8] z-50 sticky top-0 transition-all">
+    <div class="max-w-[1920px] mx-auto px-6 md:px-12 lg:px-16 flex flex-col lg:flex-row items-stretch min-h-[80px]">
+      
+      <!-- 25% Negative Space Desktop Column -->
+      <div class="hidden lg:flex lg:w-1/4 items-center border-r border-[#e2e5e8]/80 pr-8">
+        <a href="index.html" class="flex items-center gap-3 group">
+          <img src="assets/official/logo_charcoal.svg" alt="KAD Monogram" class="h-8 w-auto">
+          <span class="text-xs tracking-[0.25em] uppercase font-mono text-[#595f65] group-hover:text-[#1a1d20] transition-colors">EST. 2013</span>
+        </a>
+      </div>
+
+      <!-- 75% Active Content Column -->
+      <div class="w-full lg:w-3/4 flex items-center justify-between py-4 lg:py-0 lg:pl-10">
+        <div class="flex items-center gap-3">
+          <a href="index.html" class="lg:hidden">
+            <img src="assets/official/logo_charcoal.svg" alt="KAD Monogram" class="h-7 w-auto">
+          </a>
+          <div>
+            <a href="index.html" class="block text-sm md:text-base font-semibold tracking-[0.2em] uppercase text-[#1a1d20] hover:opacity-80 transition-opacity">
+              Aleksandre Karpov
+            </a>
+            <span class="block text-[10px] md:text-[11px] tracking-[0.18em] uppercase text-[#595f65]">
+              Residential Design & Practice &bull; Karpov Design LLC
+            </span>
+          </div>
+        </div>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="flex items-center gap-8 text-xs tracking-[0.2em] uppercase">
+          <a href="index.html#works" class="text-[#1a1d20] font-semibold border-b border-[#1a1d20] pb-0.5">Works</a>
+          <a href="about.html" class="text-[#595f65] hover:text-[#1a1d20] transition-colors">About</a>
+          <a href="contact.html" class="text-[#595f65] hover:text-[#1a1d20] transition-colors">Contact</a>
+        </nav>
+      </div>
+
+    </div>
+  </header>
+
+
+  <main>
+    
+  <!-- Hero Banner: Monumental Architectural Visual with Dead-Center White Vector Line-Art Logo -->
+  <section class="relative w-full h-[85vh] md:h-[90vh] bg-[#1a1d20] overflow-hidden flex items-center justify-center">
+    <img src="assets/official/projects/seed-retreat/seed_2.jpg" alt="Architectural Hero" class="absolute inset-0 w-full h-full object-cover opacity-60">
+    <div class="absolute inset-0 bg-gradient-to-t from-[#1a1d20]/80 via-transparent to-[#1a1d20]/40"></div>
+    
+    <!-- Dead-Center Logo Container -->
+    <div class="relative z-10 flex flex-col items-center justify-center text-center px-6">
+      <img src="assets/official/logo_white.svg" alt="Aleksandre Karpov Logo" class="h-28 md:h-36 lg:h-44 w-auto mb-6 drop-shadow-md">
+      <h1 class="text-xl md:text-2xl lg:text-3xl font-semibold tracking-[0.25em] uppercase text-white">
+        Aleksandre Karpov
+      </h1>
+      <p class="text-xs md:text-sm font-mono tracking-[0.3em] uppercase text-white/80 mt-2">
+        Architecture &bull; Practice &bull; Residential Design
+      </p>
+    </div>
+
+    <!-- Bottom Scroll Indicator -->
+    <a href="#works" class="absolute bottom-8 z-10 text-white/70 hover:text-white transition-colors flex flex-col items-center gap-2">
+      <span class="text-[10px] font-mono tracking-[0.25em] uppercase">Explore Works</span>
+      <svg class="w-4 h-4 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+    </a>
+  </section>
+
+    
+  <!-- Aleksandre's 5-Phase Workflow Section: Pure Architectural Drawing Strip -->
+  <section class="w-full border-b border-[#e2e5e8] bg-[#ffffff] py-16 px-6 md:px-12 lg:px-16">
+    <div class="max-w-[1920px] mx-auto flex flex-col lg:flex-row items-stretch">
+      
+      <!-- 25% Left Asymmetric Margin -->
+      <div class="w-full lg:w-1/4 pr-8 mb-8 lg:mb-0 border-r-0 lg:border-r border-[#e2e5e8]/80">
+        <span class="text-[11px] font-mono uppercase tracking-[0.25em] text-[#de602e] block mb-2">Practice Methodology</span>
+        <h2 class="text-2xl md:text-3xl font-semibold tracking-tight text-[#1a1d20] mb-4">Five-Phase Architectural Workflow</h2>
+        <p class="text-xs md:text-sm text-[#595f65] leading-relaxed max-w-xs">
+          From tactile analog hand drafting through computational BIM coordination to realized physical architecture.
+        </p>
+      </div>
+
+      <!-- 75% Right Process Strip (5 Phases) -->
+      <div class="w-full lg:w-3/4 lg:pl-10">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+          
+          <!-- Phase 1 -->
+          <div class="border border-[#e2e5e8] bg-[#f8f9fa] p-4 flex flex-col justify-between group hover:border-[#1a1d20] transition-colors">
+            <div class="aspect-[4/3] w-full overflow-hidden bg-[#e9ecef] mb-3">
+              <img src="assets/official/projects/hand-study/hand_study02.jpg" alt="Phase 1 Sketch" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            </div>
+            <div>
+              <span class="text-[10px] font-mono uppercase tracking-widest text-[#de602e] block">01 / Concept</span>
+              <h4 class="text-xs font-semibold uppercase tracking-wider text-[#1a1d20] mt-1">Analog Sketch</h4>
+              <p class="text-[11px] text-[#595f65] mt-1 leading-snug">Plein-air watercolors and charcoal volumetric intuition.</p>
+            </div>
+          </div>
+
+          <!-- Phase 2 -->
+          <div class="border border-[#e2e5e8] bg-[#f8f9fa] p-4 flex flex-col justify-between group hover:border-[#1a1d20] transition-colors">
+            <div class="aspect-[4/3] w-full overflow-hidden bg-[#e9ecef] mb-3">
+              <img src="assets/official/projects/growing-cell/growingcell_1.jpg" alt="Phase 2 Massing" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            </div>
+            <div>
+              <span class="text-[10px] font-mono uppercase tracking-widest text-[#de602e] block">02 / Form</span>
+              <h4 class="text-xs font-semibold uppercase tracking-wider text-[#1a1d20] mt-1">Massing Study</h4>
+              <p class="text-[11px] text-[#595f65] mt-1 leading-snug">Topographical integration, solar envelope and site density.</p>
+            </div>
+          </div>
+
+          <!-- Phase 3 -->
+          <div class="border border-[#e2e5e8] bg-[#f8f9fa] p-4 flex flex-col justify-between group hover:border-[#1a1d20] transition-colors">
+            <div class="aspect-[4/3] w-full overflow-hidden bg-[#e9ecef] mb-3">
+              <img src="assets/official/projects/life-bridge/life_bridge_17.jpg" alt="Phase 3 Technical" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            </div>
+            <div>
+              <span class="text-[10px] font-mono uppercase tracking-widest text-[#de602e] block">03 / Precision</span>
+              <h4 class="text-xs font-semibold uppercase tracking-wider text-[#1a1d20] mt-1">Technical Plans</h4>
+              <p class="text-[11px] text-[#595f65] mt-1 leading-snug">Structural tectonic sections, code adherence and assemblies.</p>
+            </div>
+          </div>
+
+          <!-- Phase 4 -->
+          <div class="border border-[#e2e5e8] bg-[#f8f9fa] p-4 flex flex-col justify-between group hover:border-[#1a1d20] transition-colors">
+            <div class="aspect-[4/3] w-full overflow-hidden bg-[#e9ecef] mb-3">
+              <img src="assets/official/projects/seed-retreat/seed_2.jpg" alt="Phase 4 BIM 3D" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            </div>
+            <div>
+              <span class="text-[10px] font-mono uppercase tracking-widest text-[#de602e] block">04 / Model</span>
+              <h4 class="text-xs font-semibold uppercase tracking-wider text-[#1a1d20] mt-1">3D BIM Model</h4>
+              <p class="text-[11px] text-[#595f65] mt-1 leading-snug">Parametric daylight analysis and clash-detection coordination.</p>
+            </div>
+          </div>
+
+          <!-- Phase 5 -->
+          <div class="border border-[#e2e5e8] bg-[#f8f9fa] p-4 flex flex-col justify-between group hover:border-[#1a1d20] transition-colors">
+            <div class="aspect-[4/3] w-full overflow-hidden bg-[#e9ecef] mb-3">
+              <img src="assets/official/projects/izka-tower/izka_10.jpg" alt="Phase 5 Realized" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            </div>
+            <div>
+              <span class="text-[10px] font-mono uppercase tracking-widest text-[#de602e] block">05 / Realization</span>
+              <h4 class="text-xs font-semibold uppercase tracking-wider text-[#1a1d20] mt-1">Realized Work</h4>
+              <p class="text-[11px] text-[#595f65] mt-1 leading-snug">Material realization, craftsmanship and sensory commissioning.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+    
+  <!-- Lateral Sticky Filter Bar: Pins upon scroll -->
+  <div class="sticky-filter-bar px-6 md:px-12 lg:px-16 py-4">
+    <div class="max-w-[1920px] mx-auto flex flex-col lg:flex-row items-stretch">
+      
+      <!-- 25% Left Column: Filter Indicator -->
+      <div class="hidden lg:flex lg:w-1/4 items-center pr-8 border-r border-[#e2e5e8]">
+        <span class="text-xs font-mono uppercase tracking-[0.2em] text-[#1a1d20] flex items-center gap-2">
+          <span class="w-2 h-2 bg-[#de602e] inline-block"></span>
+          Index &bull; <span id="active-count-label">21 Projects</span>
+        </span>
+      </div>
+
+      <!-- 75% Right Column: Interactive Filter Controls -->
+      <div class="w-full lg:w-3/4 flex flex-wrap items-center justify-between gap-4 lg:pl-10">
+        
+        <!-- Typologies -->
+        <div class="flex flex-wrap items-center gap-1.5 text-xs">
+          <span class="text-[10px] font-mono uppercase tracking-wider text-[#595f65] mr-1 hidden sm:inline">Typology:</span>
+          <button onclick="setFilter('typology', 'all')" id="btn-typ-all" class="filter-btn px-3 py-1 text-xs font-mono uppercase tracking-wider border border-[#1a1d20] bg-[#1a1d20] text-white">All</button>
+          <button onclick="setFilter('typology', 'Residential')" id="btn-typ-residential" class="filter-btn px-3 py-1 text-xs font-mono uppercase tracking-wider border border-[#e2e5e8] bg-white text-[#595f65] hover:border-[#1a1d20] hover:text-[#1a1d20]">Residential</button>
+          <button onclick="setFilter('typology', 'Commercial')" id="btn-typ-commercial" class="filter-btn px-3 py-1 text-xs font-mono uppercase tracking-wider border border-[#e2e5e8] bg-white text-[#595f65] hover:border-[#1a1d20] hover:text-[#1a1d20]">Commercial</button>
+          <button onclick="setFilter('typology', 'Cultural')" id="btn-typ-cultural" class="filter-btn px-3 py-1 text-xs font-mono uppercase tracking-wider border border-[#e2e5e8] bg-white text-[#595f65] hover:border-[#1a1d20] hover:text-[#1a1d20]">Cultural</button>
+          <button onclick="setFilter('typology', 'Art')" id="btn-typ-art" class="filter-btn px-3 py-1 text-xs font-mono uppercase tracking-wider border border-[#e2e5e8] bg-white text-[#595f65] hover:border-[#1a1d20] hover:text-[#1a1d20]">Art</button>
+          <button onclick="setFilter('typology', 'Conceptual')" id="btn-typ-conceptual" class="filter-btn px-3 py-1 text-xs font-mono uppercase tracking-wider border border-[#e2e5e8] bg-white text-[#595f65] hover:border-[#1a1d20] hover:text-[#1a1d20]">Conceptual</button>
+        </div>
+
+        <!-- Sorting & Status -->
+        <div class="flex items-center gap-3 text-xs">
+          <!-- Award Toggle -->
+          <button onclick="toggleAwardFilter()" id="btn-award-toggle" class="px-2.5 py-1 text-xs font-mono uppercase tracking-wider border border-[#e2e5e8] bg-white text-[#595f65] hover:border-[#de602e] hover:text-[#de602e] flex items-center gap-1.5">
+            <span class="w-1.5 h-1.5 bg-[#de602e] inline-block"></span> Awards Only
+          </button>
+
+          <!-- Status Dropdown/Toggle -->
+          <select id="select-status" onchange="setStatusFilter(this.value)" class="px-2.5 py-1 text-xs font-mono uppercase tracking-wider border border-[#e2e5e8] bg-white text-[#595f65] focus:outline-none focus:border-[#1a1d20]">
+            <option value="all">Status: All</option>
+            <option value="Completion">Completed Works</option>
+            <option value="Concepts">Concepts & Studies</option>
+          </select>
+
+          <!-- Recency Sort -->
+          <select id="select-sort" onchange="setSort(this.value)" class="px-2.5 py-1 text-xs font-mono uppercase tracking-wider border border-[#e2e5e8] bg-white text-[#595f65] focus:outline-none focus:border-[#1a1d20]">
+            <option value="newest">Sort: Newest</option>
+            <option value="oldest">Sort: Oldest</option>
+          </select>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+    
+  <!-- Works Grid Section: 25% Negative Space Desktop Margin + 75% 3-Column Works Grid -->
+  <section id="works" class="w-full bg-[#f8f9fa] py-16 px-6 md:px-12 lg:px-16 border-b border-[#e2e5e8]">
+    <div class="max-w-[1920px] mx-auto flex flex-col lg:flex-row items-stretch">
+      
+      <!-- 25% Negative Space Desktop Margin -->
+      <div class="hidden lg:block lg:w-1/4 pr-8 border-r border-[#e2e5e8]">
+        <div class="sticky top-28">
+          <span class="text-[11px] font-mono uppercase tracking-[0.25em] text-[#de602e] block mb-2">Selected Works</span>
+          <h2 class="text-3xl font-semibold tracking-tight text-[#1a1d20] mb-4">Architectural Portfolio</h2>
+          <p class="text-xs text-[#595f65] leading-relaxed max-w-xs mb-6">
+            Strict rectangular geometry with architectural stroke transitions. Selecting filters reorders matching projects to the top smoothly without hiding work.
+          </p>
+          <div class="p-4 bg-white border border-[#e2e5e8] text-xs">
+            <span class="font-semibold block text-[#1a1d20] mb-1">Dual Practice Discipline</span>
+            <span class="text-[#595f65] block leading-relaxed">
+              Every commission balances tactile analog sensitivity with high-performance digital BIM construction administration.
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 75% Active Grid (3 Projects per row) -->
+      <div class="w-full lg:w-3/4 lg:pl-10">
+        
+        <!-- Active Filter Notification Pill -->
+        <div id="reorder-banner" class="mb-6 p-3 bg-white border border-[#e2e5e8] flex items-center justify-between text-xs font-mono text-[#595f65] hidden">
+          <span id="reorder-banner-text">Showing matches at top</span>
+          <button onclick="resetAllFilters()" class="text-[#de602e] underline hover:text-[#1a1d20]">Reset Filter</button>
+        </div>
+
+        <div id="works-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Dynamically Rendered Cards -->
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+    
+  <!-- Accolades & Recognition Section: Pure Editorial Sans-Serif Listing -->
+  <section class="w-full border-b border-[#e2e5e8] bg-[#f8f9fa] py-20 px-6 md:px-12 lg:px-16">
+    <div class="max-w-[1920px] mx-auto flex flex-col lg:flex-row items-stretch">
+      
+      <!-- 25% Left Margin -->
+      <div class="w-full lg:w-1/4 pr-8 mb-8 lg:mb-0 border-r-0 lg:border-r border-[#e2e5e8]/80">
+        <span class="text-[11px] font-mono uppercase tracking-[0.25em] text-[#de602e] block mb-2">Recognition</span>
+        <h2 class="text-2xl md:text-3xl font-semibold tracking-tight text-[#1a1d20] mb-4">Competitions & Accolades</h2>
+        <p class="text-xs md:text-sm text-[#595f65] leading-relaxed max-w-xs">
+          International architectural awards, invited competition victories, and academic distinction.
+        </p>
+      </div>
+
+      <!-- 75% Right Accolades List -->
+      <div class="w-full lg:w-3/4 lg:pl-10">
+        <div class="divide-y divide-[#e2e5e8] border-t border-b border-[#e2e5e8]">
+          
+          <!-- Item 1 -->
+          <div class="py-6 flex flex-col md:flex-row md:items-baseline justify-between gap-4 group">
+            <div class="md:w-1/2">
+              <span class="text-[10px] font-mono uppercase tracking-widest text-[#de602e]">1st Place Winner &bull; Invited Competition</span>
+              <h3 class="text-base md:text-lg font-semibold text-[#1a1d20] mt-1">Eskişehir Industrial Regeneration (Multi-City)</h3>
+              <p class="text-xs text-[#595f65] mt-1">51,000 m² municipal depot adaptive reuse into cultural and tech center.</p>
+            </div>
+            <div class="md:w-1/4 text-xs text-[#595f65]">
+              <span>Two-Phase International Jury Selection</span>
+            </div>
+            <div class="md:w-1/4 text-left md:text-right font-mono text-xs text-[#1a1d20]">
+              <span>2015 &bull; Eskişehir, TR</span>
+            </div>
+          </div>
+
+          <!-- Item 2 -->
+          <div class="py-6 flex flex-col md:flex-row md:items-baseline justify-between gap-4 group">
+            <div class="md:w-1/2">
+              <span class="text-[10px] font-mono uppercase tracking-widest text-[#de602e]">2nd Place Award &bull; National Competition</span>
+              <h3 class="text-base md:text-lg font-semibold text-[#1a1d20] mt-1">Caferağa Community Center & Plaza</h3>
+              <p class="text-xs text-[#595f65] mt-1">Civic cultural gathering venue, public library, and tiered urban courtyards.</p>
+            </div>
+            <div class="md:w-1/4 text-xs text-[#595f65]">
+              <span>Kadıköy Municipality Civic Council</span>
+            </div>
+            <div class="md:w-1/4 text-left md:text-right font-mono text-xs text-[#1a1d20]">
+              <span>2016 &bull; Istanbul, TR</span>
+            </div>
+          </div>
+
+          <!-- Item 3 -->
+          <div class="py-6 flex flex-col md:flex-row md:items-baseline justify-between gap-4 group">
+            <div class="md:w-1/2">
+              <span class="text-[10px] font-mono uppercase tracking-widest text-[#de602e]">Competition Selection & Finalist</span>
+              <h3 class="text-base md:text-lg font-semibold text-[#1a1d20] mt-1">Sivas Unity Bridge & Cultural Crossing</h3>
+              <p class="text-xs text-[#595f65] mt-1">Inhabited civic bridge weaving public amphitheatres and active promenade.</p>
+            </div>
+            <div class="md:w-1/4 text-xs text-[#595f65]">
+              <span>Sivas Kızılırmak River Commission</span>
+            </div>
+            <div class="md:w-1/4 text-left md:text-right font-mono text-xs text-[#1a1d20]">
+              <span>2015 &bull; Sivas, TR</span>
+            </div>
+          </div>
+
+          <!-- Item 4 -->
+          <div class="py-6 flex flex-col md:flex-row md:items-baseline justify-between gap-4 group">
+            <div class="md:w-1/2">
+              <span class="text-[10px] font-mono uppercase tracking-widest text-[#de602e]">Academic Pedigree & Honors</span>
+              <h3 class="text-base md:text-lg font-semibold text-[#1a1d20] mt-1">UNC Charlotte School of Architecture &bull; 3.488 GPA</h3>
+              <p class="text-xs text-[#595f65] mt-1">Bachelor of Arts in Architecture. Advanced digital lab fellow, Studio X.</p>
+            </div>
+            <div class="md:w-1/4 text-xs text-[#595f65]">
+              <span>Lund University Architecture Fellowship (Sweden)</span>
+            </div>
+            <div class="md:w-1/4 text-left md:text-right font-mono text-xs text-[#1a1d20]">
+              <span>2018–2021 &bull; USA / SE</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  </main>
+
+  
+  <!-- Centered Architectural Footer -->
+  <footer class="w-full bg-[#ffffff] border-t border-[#e2e5e8] py-16 px-6 md:px-12 lg:px-16">
+    <div class="max-w-[1920px] mx-auto flex flex-col lg:flex-row items-start">
+      
+      <!-- 25% Left Margin on Desktop -->
+      <div class="hidden lg:block lg:w-1/4 pr-8">
+        <p class="text-xs uppercase tracking-[0.2em] font-mono text-[#595f65]">Studio & Practice</p>
+        <p class="text-xs text-[#595f65] mt-2">North Carolina &bull; Aegean Basin</p>
+      </div>
+
+      <!-- 75% Active Right Content -->
+      <div class="w-full lg:w-3/4 lg:pl-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
+        <div>
+          <div class="flex items-center gap-4 mb-3">
+            <img src="assets/official/logo_charcoal.svg" alt="KAD Logo" class="h-9 w-auto">
+            <div>
+              <span class="text-sm font-semibold tracking-[0.2em] uppercase text-[#1a1d20] block">Karpov Design LLC</span>
+              <span class="text-xs text-[#595f65] block">Aleksandre Karpov &bull; Charlotte, NC</span>
+            </div>
+          </div>
+          <p class="text-xs text-[#595f65] max-w-xl leading-relaxed">
+            Architectural design, computational BIM coordination, and analog spatial research. Compliant with NC General Statutes for residential design and international architectural commissions.
+          </p>
+        </div>
+
+        <div class="flex flex-col items-start md:items-end gap-2 text-xs text-[#595f65]">
+          <div class="flex gap-6 tracking-[0.15em] uppercase">
+            <a href="index.html#works" class="hover:text-[#1a1d20] transition-colors">Works</a>
+            <a href="about.html" class="hover:text-[#1a1d20] transition-colors">About</a>
+            <a href="contact.html" class="hover:text-[#1a1d20] transition-colors">Contact</a>
+          </div>
+          <span class="font-mono text-[11px] text-[#767676] mt-2">&copy; 2026 Karpov Design LLC. All rights reserved.</span>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  
+  <!-- Project Deep Dive Inspection Modal (Sharp 90-degree zero-fillet geometry) -->
+  <div id="project-modal" class="fixed inset-0 z-50 bg-[#1a1d20]/80 backdrop-blur-md hidden flex items-center justify-center p-4 md:p-8">
+    <div class="bg-[#ffffff] border border-[#1a1d20] w-full max-w-6xl max-h-[92vh] flex flex-col overflow-hidden shadow-2xl relative">
+      
+      <!-- Modal Top Bar -->
+      <div class="flex items-center justify-between border-b border-[#e2e5e8] px-6 py-4 bg-[#f8f9fa]">
+        <div class="flex items-center gap-3">
+          <span id="modal-typology" class="text-[10px] font-mono uppercase tracking-widest px-2 py-0.5 bg-[#1a1d20] text-white">Typology</span>
+          <span id="modal-status" class="text-[10px] font-mono uppercase tracking-widest text-[#de602e]">Status</span>
+        </div>
+        <button onclick="closeModal()" class="text-[#595f65] hover:text-[#1a1d20] transition-colors p-1" title="Close (Esc)">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <!-- Modal Body (Split: Image Gallery + Architectural Description) -->
+      <div class="flex-1 overflow-y-auto p-6 md:p-8 flex flex-col lg:flex-row gap-8">
+        
+        <!-- Left: Image Viewer -->
+        <div class="w-full lg:w-3/5 flex flex-col gap-4">
+          <div class="w-full aspect-[16/10] bg-[#1a1d20] overflow-hidden border border-[#e2e5e8]">
+            <img id="modal-main-img" src="" alt="Project Image" class="w-full h-full object-cover">
+          </div>
+          <!-- Thumbnails Strip -->
+          <div id="modal-thumbs" class="flex gap-2 overflow-x-auto pb-2">
+            <!-- Injected via JS -->
+          </div>
+        </div>
+
+        <!-- Right: Architectural Specification -->
+        <div class="w-full lg:w-2/5 flex flex-col justify-between">
+          <div>
+            <span id="modal-location-year" class="text-xs font-mono text-[#595f65] tracking-wider uppercase block mb-1">Location &bull; Year</span>
+            <h2 id="modal-title" class="text-2xl md:text-3xl font-semibold tracking-tight text-[#1a1d20] mb-3">Project Title</h2>
+            <div id="modal-award-box" class="p-3 bg-[#f8f9fa] border-l-2 border-[#de602e] mb-4 hidden">
+              <span class="text-[10px] font-mono uppercase tracking-widest text-[#de602e] block">Recognition</span>
+              <p id="modal-award-text" class="text-xs font-semibold text-[#1a1d20] mt-0.5"></p>
+            </div>
+            <p id="modal-description" class="text-xs md:text-sm text-[#595f65] leading-relaxed mb-6"></p>
+          </div>
+
+          <div class="border-t border-[#e2e5e8] pt-4 mt-auto">
+            <div class="flex justify-between items-center">
+              <button onclick="navigateModal(-1)" class="text-xs font-mono tracking-wider uppercase text-[#595f65] hover:text-[#1a1d20] transition-colors flex items-center gap-1">
+                &larr; Prev Project
+              </button>
+              <button onclick="navigateModal(1)" class="text-xs font-mono tracking-wider uppercase text-[#595f65] hover:text-[#1a1d20] transition-colors flex items-center gap-1">
+                Next Project &rarr;
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  
+  <script>
+    const PROJECTS = [{"id": "pijp-park", "dir": "01 PIJP PARK", "title": "De Pijp Community Center & Park", "category": "Cultural", "typology": "Cultural", "status": "Concepts", "location": "Amsterdam, Netherlands", "year": "2016", "award": true, "awardText": "ArchMedium International Architecture Competition Finalist", "description": "Urban park integration and community cultural pavilion within Amsterdam's historic De Pijp quarter, reconnecting neighborhood density with porous green civic corridors.", "primary_file": "pijp park 4.jpg", "primary_image": "assets/official/projects/pijp-park/pijp_park_4.jpg", "images": ["assets/official/projects/pijp-park/pijp_park_4.jpg", "assets/official/projects/pijp-park/pijp_park_5.jpg", "assets/official/projects/pijp-park/pijp_park_6.jpg"]}, {"id": "seed-retreat", "dir": "02 SEED ARTISTS GETAWAY", "title": "SEED Artists Getaway", "category": "Residential", "typology": "Residential", "status": "Concepts", "location": "Black Mountain, NC, USA", "year": "2018", "award": true, "awardText": "UNCC School of Architecture Honor Studio Selection", "description": "A secluded residential sanctuary and studio retreat embedded in the Blue Ridge Mountains, harmonizing local timber framing with passive thermal envelopes.", "primary_file": "seed 2.jpg", "primary_image": "assets/official/projects/seed-retreat/seed_2.jpg", "images": ["assets/official/projects/seed-retreat/seed_2.jpg", "assets/official/projects/seed-retreat/seed_8.jpg", "assets/official/projects/seed-retreat/seed_9.jpg"]}, {"id": "izka-tower", "dir": "03 IZKA", "title": "\u0130ZKA Corporate Headquarters", "category": "Commercial", "typology": "Commercial", "status": "Completion", "location": "Izmir, Turkey", "year": "2015", "award": true, "awardText": "Built Commercial Commission with Aboutblank Architecture", "description": "High-performance commercial office tower designed with Aboutblank Architecture, featuring responsive kinetic sun-shading louvers and optimized floorplates.", "primary_file": "izka 10.jpg", "primary_image": "assets/official/projects/izka-tower/izka_10.jpg", "images": ["assets/official/projects/izka-tower/izka_10.jpg", "assets/official/projects/izka-tower/izka_7.jpg", "assets/official/projects/izka-tower/izka_9.jpg"]}, {"id": "beer-code", "dir": "04 BEER CODE", "title": "Beer Code Gastropub & Brewery", "category": "Commercial", "typology": "Commercial", "status": "Completion", "location": "Eski\u015fehir, Turkey", "year": "2017", "award": false, "awardText": "", "description": "Bespoke industrial gastropub interior featuring custom metalwork, raw structural masonry, and integrated microbrewery tasting experience.", "primary_file": "beer 1.jpg", "primary_image": "assets/official/projects/beer-code/beer_1.jpg", "images": ["assets/official/projects/beer-code/beer_1.jpg", "assets/official/projects/beer-code/beer_13.jpg"]}, {"id": "travel-sketches", "dir": "05 TRAVEL SKETCHES", "title": "Rome & Mediterranean Watercolors", "category": "Art", "typology": "Art", "status": "Completion", "location": "Rome, Italy & Aegean Coast", "year": "2016", "award": true, "awardText": "Featured Fine Art Portfolio & Studio Selection", "description": "Plein-air architectural watercolors and analog field studies capturing Roman antiquity, classical light, and monumental urban spatial sequences.", "primary_file": "ak 1.jpg", "primary_image": "assets/official/projects/travel-sketches/ak_1.jpg", "images": ["assets/official/projects/travel-sketches/ak_1.jpg", "assets/official/projects/travel-sketches/ak_10.jpg", "assets/official/projects/travel-sketches/ak_12.jpg", "assets/official/projects/travel-sketches/ak_14.jpg", "assets/official/projects/travel-sketches/ak_18.jpg", "assets/official/projects/travel-sketches/ak_2.jpg", "assets/official/projects/travel-sketches/ak_21.jpg", "assets/official/projects/travel-sketches/ak_23.jpg", "assets/official/projects/travel-sketches/ak_27.jpg", "assets/official/projects/travel-sketches/ak_29.jpg", "assets/official/projects/travel-sketches/ak_34.jpg", "assets/official/projects/travel-sketches/ak_36.jpg", "assets/official/projects/travel-sketches/ak_39.jpg", "assets/official/projects/travel-sketches/ak_4.jpg", "assets/official/projects/travel-sketches/ak_40.jpg", "assets/official/projects/travel-sketches/ak_41.jpg", "assets/official/projects/travel-sketches/ak_42.jpg", "assets/official/projects/travel-sketches/ak_47.jpg", "assets/official/projects/travel-sketches/ak_49.jpg", "assets/official/projects/travel-sketches/ak_50.jpg", "assets/official/projects/travel-sketches/ak_54.jpg", "assets/official/projects/travel-sketches/ak_57.jpg", "assets/official/projects/travel-sketches/ak_58.jpg", "assets/official/projects/travel-sketches/ak_59.jpg", "assets/official/projects/travel-sketches/ak_61.jpg", "assets/official/projects/travel-sketches/ak_62.jpg", "assets/official/projects/travel-sketches/ak_65.jpg", "assets/official/projects/travel-sketches/ak_67.jpg", "assets/official/projects/travel-sketches/ak_9.jpg", "assets/official/projects/travel-sketches/ak81.jpg", "assets/official/projects/travel-sketches/ak86.jpg", "assets/official/projects/travel-sketches/ak90.jpg"]}, {"id": "growing-cell", "dir": "06 GROWING CELL", "title": "Growing Cell Modular Habitat", "category": "Conceptual", "typology": "Conceptual", "status": "Concepts", "location": "Theoretical Research", "year": "2017", "award": false, "awardText": "", "description": "Biological cellular aggregation model exploring adaptable, self-assembling spatial growth systems for high-density resilient future cities.", "primary_file": "growingcell 1.jpg", "primary_image": "assets/official/projects/growing-cell/growingcell_1.jpg", "images": ["assets/official/projects/growing-cell/growingcell_1.jpg", "assets/official/projects/growing-cell/growingcell_3.jpg", "assets/official/projects/growing-cell/growingcell_4.jpg"]}, {"id": "valley-of-life", "dir": "07 VALLEY OF LIFE", "title": "Beylikd\u00fcz\u00fc Valley of Life", "category": "Cultural", "typology": "Cultural", "status": "Concepts", "location": "Istanbul, Turkey", "year": "2016", "award": true, "awardText": "Beylikd\u00fcz\u00fc Valley of Life National Competition Award", "description": "Ecological corridor master plan converting a desiccated dry river valley into a resilient green civic park and recreational waterfront infrastructure.", "primary_file": "VALEY OF LIFE 1.jpg", "primary_image": "assets/official/projects/valley-of-life/valey_of_life_1.jpg", "images": ["assets/official/projects/valley-of-life/valey_of_life_1.jpg", "assets/official/projects/valley-of-life/valey_of_life_10.jpg", "assets/official/projects/valley-of-life/valey_of_life_12.jpg", "assets/official/projects/valley-of-life/valey_of_life_7.jpg", "assets/official/projects/valley-of-life/valey_of_life_9.jpg"]}, {"id": "life-bridge", "dir": "08 LIFE BRIDGE", "title": "Sivas Unity Bridge & Cultural Crossing", "category": "Cultural", "typology": "Cultural", "status": "Concepts", "location": "Sivas, Turkey", "year": "2015", "award": true, "awardText": "Sivas Kizilirmak Bridge International Competition", "description": "Inhabited pedestrian infrastructure spanning the K\u0131z\u0131l\u0131rmak River, weaving public amphitheaters, cycling lanes, and open gathering plazas into a unified civic deck.", "primary_file": "LIFE BRIDGE 10.jpg", "primary_image": "assets/official/projects/life-bridge/life_bridge_10.jpg", "images": ["assets/official/projects/life-bridge/life_bridge_10.jpg", "assets/official/projects/life-bridge/life_bridge_17.jpg", "assets/official/projects/life-bridge/life_bridge_7.jpg", "assets/official/projects/life-bridge/life_bridge_8.jpg", "assets/official/projects/life-bridge/life_bridge_9.jpg"]}, {"id": "multi-city", "dir": "09 MULTI CITY", "title": "Eski\u015fehir Industrial Regeneration (Multi-City)", "category": "Commercial", "typology": "Commercial", "status": "Concepts", "location": "Eski\u015fehir, Turkey", "year": "2015", "award": true, "awardText": "1st Place Winner - Two-Phase Invited Competition (51,000 m\u00b2)", "description": "1st Prize winning adaptive reuse master plan transforming an abandoned municipal vehicle depot into a 51,000 m\u00b2 thriving mixed-use tech incubator, retail promenade, and cultural center.", "primary_file": "MULTI CITY 10.jpg", "primary_image": "assets/official/projects/multi-city/multi_city_10.jpg", "images": ["assets/official/projects/multi-city/multi_city_10.jpg", "assets/official/projects/multi-city/multi_city_15.jpg", "assets/official/projects/multi-city/multi_city_21.jpg", "assets/official/projects/multi-city/multi_city_27.jpg", "assets/official/projects/multi-city/multi_city_3.jpg", "assets/official/projects/multi-city/multi_city_8.jpg"]}, {"id": "hand-study", "dir": "10 HAND STUDY", "title": "Analog Charcoal & Structural Drafting Studies", "category": "Art", "typology": "Art", "status": "Completion", "location": "Charlotte, NC & Europe", "year": "2018", "award": false, "awardText": "", "description": "Exploratory hand drafting, charcoal volumetric studies, and anatomical tectonic investigations demonstrating pure tactile mastery of architectural proportion.", "primary_file": "HAND STUDY02.jpg", "primary_image": "assets/official/projects/hand-study/hand_study02.jpg", "images": ["assets/official/projects/hand-study/hand_study02.jpg", "assets/official/projects/hand-study/hand_study07.jpg", "assets/official/projects/hand-study/hand_study08.jpg", "assets/official/projects/hand-study/hand_study09.jpg", "assets/official/projects/hand-study/hand_study14.jpg", "assets/official/projects/hand-study/hand_study16.jpg", "assets/official/projects/hand-study/hand_study17.jpg", "assets/official/projects/hand-study/hand_study18.jpg", "assets/official/projects/hand-study/hand_study20.jpg", "assets/official/projects/hand-study/hand_study28.jpg", "assets/official/projects/hand-study/hand_study32.jpg", "assets/official/projects/hand-study/hand_study33.jpg"]}, {"id": "folding-edge", "dir": "11 FOLDING EDGE", "title": "Folding Edge Sky Garden Pavilion", "category": "Cultural", "typology": "Cultural", "status": "Concepts", "location": "UNCC Architectural Labs, USA", "year": "2019", "award": false, "awardText": "", "description": "Origami-inspired origami geometric envelope engineered with self-supporting folded steel plates, creating dramatic cantilevered sky observation terraces.", "primary_file": "FOLDING EDGE 11.jpg", "primary_image": "assets/official/projects/folding-edge/folding_edge_11.jpg", "images": ["assets/official/projects/folding-edge/folding_edge_11.jpg", "assets/official/projects/folding-edge/folding_edge_14.jpg", "assets/official/projects/folding-edge/folding_edge_2.jpg", "assets/official/projects/folding-edge/folding_edge_5.jpg", "assets/official/projects/folding-edge/folding_edge_9.jpg"]}, {"id": "community-plaza", "dir": "12 COMMUNITY PLAZA", "title": "Cafera\u011fa Community Center & Public Plaza", "category": "Cultural", "typology": "Cultural", "status": "Concepts", "location": "Kad\u0131k\u00f6y, Istanbul, Turkey", "year": "2016", "award": true, "awardText": "2nd Place Winner - National Architectural Competition", "description": "2nd Prize winning civic center providing tiered community halls, public library facilities, and permeable street-level urban plazas in historic Kad\u0131k\u00f6y.", "primary_file": "COMMUNITY PLAZA 2.jpg", "primary_image": "assets/official/projects/community-plaza/community_plaza_2.jpg", "images": ["assets/official/projects/community-plaza/community_plaza_2.jpg", "assets/official/projects/community-plaza/community_plaza_4.jpg", "assets/official/projects/community-plaza/community_plaza_5.jpg", "assets/official/projects/community-plaza/community_plaza_7.jpg", "assets/official/projects/community-plaza/community_plaza_8.jpg"]}, {"id": "summer-island", "dir": "13 SUMMER ISLAND", "title": "Summer Island Coastal Resort & Villas", "category": "Residential", "typology": "Residential", "status": "Concepts", "location": "Aegean Archipelago", "year": "2018", "award": false, "awardText": "", "description": "Low-slung subterranean coastal villas carved into limestone topography, celebrating panoramic sea vistas with minimal ecological footprint.", "primary_file": "SUMMER ISLAND 10.jpg", "primary_image": "assets/official/projects/summer-island/summer_island_10.jpg", "images": ["assets/official/projects/summer-island/summer_island_10.jpg", "assets/official/projects/summer-island/summer_island_12.jpg", "assets/official/projects/summer-island/summer_island_13.jpg", "assets/official/projects/summer-island/summer_island_15.jpg", "assets/official/projects/summer-island/summer_island_17.jpg", "assets/official/projects/summer-island/summer_island_18.jpg", "assets/official/projects/summer-island/summer_island_3.jpg", "assets/official/projects/summer-island/summer_island_5.jpg", "assets/official/projects/summer-island/summer_island_6.jpg", "assets/official/projects/summer-island/summer_island_8.jpg"]}, {"id": "flowing-garden", "dir": "14 FLOWING GARDEN", "title": "Flowing Garden Estate & Terraces", "category": "Residential", "typology": "Residential", "status": "Concepts", "location": "North Carolina Foothills, USA", "year": "2019", "award": false, "awardText": "", "description": "Stepped residential volumes intertwined with continuous rainwater bioretention bioswales and native botanical gardens.", "primary_file": "FLOWING GARDEN 13.jpg", "primary_image": "assets/official/projects/flowing-garden/flowing_garden_13.jpg", "images": ["assets/official/projects/flowing-garden/flowing_garden_13.jpg", "assets/official/projects/flowing-garden/flowing_garden_17.jpg", "assets/official/projects/flowing-garden/flowing_garden_5.jpg", "assets/official/projects/flowing-garden/flowing_garden_8.jpg"]}, {"id": "tent-hill", "dir": "15 TENT HILL", "title": "Tent Hill Tensile Pavilion", "category": "Conceptual", "typology": "Conceptual", "status": "Concepts", "location": "Appalachian Ridgeline, USA", "year": "2018", "award": false, "awardText": "", "description": "Lightweight high-tensile membrane structure responding to wind loads and solar angles, forming a luminous canopy over natural knolls.", "primary_file": "TENT HILL 14.jpg", "primary_image": "assets/official/projects/tent-hill/tent_hill_14.jpg", "images": ["assets/official/projects/tent-hill/tent_hill_14.jpg", "assets/official/projects/tent-hill/tent_hill_15.jpg", "assets/official/projects/tent-hill/tent_hill_2.jpg", "assets/official/projects/tent-hill/tent_hill_4.jpg", "assets/official/projects/tent-hill/tent_hill_5.jpg", "assets/official/projects/tent-hill/tent_hill_8.jpg"]}, {"id": "chrono-orb", "dir": "16 CHRONO ORB", "title": "Chrono Orb Parametric Installation", "category": "Art", "typology": "Art", "status": "Completion", "location": "Exhibition Space, USA", "year": "2019", "award": false, "awardText": "", "description": "Kinetic light and shadow pavilion calibrated to solar ephemeris, projecting dynamic shadow geometries throughout seasonal solstices.", "primary_file": "CHRONO ORB 1.jpg", "primary_image": "assets/official/projects/chrono-orb/chrono_orb_1.jpg", "images": ["assets/official/projects/chrono-orb/chrono_orb_1.jpg", "assets/official/projects/chrono-orb/chrono_orb_2.jpg", "assets/official/projects/chrono-orb/chrono_orb_5.jpg"]}, {"id": "eternity-ring", "dir": "17 ETERNITY RING", "title": "Eternity Ring Monumental Forum", "category": "Art", "typology": "Art", "status": "Concepts", "location": "Civic Memorial Park", "year": "2017", "award": false, "awardText": "", "description": "Continuous circular weathered-steel monolith defining an acoustic sanctuary and reflective water forum for quiet commemoration.", "primary_file": "ETERNIGY RING 2.jpg", "primary_image": "assets/official/projects/eternity-ring/eternigy_ring_2.jpg", "images": ["assets/official/projects/eternity-ring/eternigy_ring_2.jpg", "assets/official/projects/eternity-ring/eternigy_ring_6.jpg", "assets/official/projects/eternity-ring/eternigy_ring_7.jpg"]}, {"id": "modular-house", "dir": "18 MODULAR HOUSE", "title": "Modular Prefab Mass-Timber Housing", "category": "Residential", "typology": "Residential", "status": "Concepts", "location": "Charlotte, NC, USA", "year": "2020", "award": false, "awardText": "", "description": "Scalable mass-timber housing system designed for rapid off-site fabrication, circular demountability, and net-zero operational energy.", "primary_file": "MODULAR HOUSE 11.jpg", "primary_image": "assets/official/projects/modular-house/modular_house_11.jpg", "images": ["assets/official/projects/modular-house/modular_house_11.jpg", "assets/official/projects/modular-house/modular_house_12.jpg", "assets/official/projects/modular-house/modular_house_9.jpg"]}, {"id": "natures-gateway", "dir": "19 NATURES GATEWAY", "title": "Nature's Gateway Forest Observatory", "category": "Cultural", "typology": "Cultural", "status": "Concepts", "location": "Great Smoky Mountains, USA", "year": "2018", "award": false, "awardText": "", "description": "Vertical timber lookout tower providing elevated canopy walkways and educational exhibits focused on regional forest preservation.", "primary_file": "NATURES GATEWAY 12.jpg", "primary_image": "assets/official/projects/natures-gateway/natures_gateway_12.jpg", "images": ["assets/official/projects/natures-gateway/natures_gateway_12.jpg", "assets/official/projects/natures-gateway/natures_gateway_3.jpg"]}, {"id": "flex-tower", "dir": "20 FLEX TOWER", "title": "Flex Tower Sustainable Skyscraper", "category": "Commercial", "typology": "Commercial", "status": "Concepts", "location": "High-Density Metropolis", "year": "2019", "award": false, "awardText": "", "description": "Aerodynamically sculpted high-rise tower integrating sky courts, natural stack ventilation, and flexible modular floorplates for hybrid working.", "primary_file": "FLEX TOWER 02.jpg", "primary_image": "assets/official/projects/flex-tower/flex_tower_02.jpg", "images": ["assets/official/projects/flex-tower/flex_tower_02.jpg"]}, {"id": "outside-in", "dir": "21 OUTSIDE-IN", "title": "Outside-In Courtyard Residence", "category": "Residential", "typology": "Residential", "status": "Completion", "location": "Suburban Estate", "year": "2017", "award": true, "awardText": "Private Residential Commission", "description": "Introspective courtyard residence inverting traditional suburban typologies by wrapping living zones around a tranquil Japanese zen courtyard.", "primary_file": "OUTSIDE IN 10.jpg", "primary_image": "assets/official/projects/outside-in/outside_in_10.jpg", "images": ["assets/official/projects/outside-in/outside_in_10.jpg", "assets/official/projects/outside-in/outside_in_11.jpg", "assets/official/projects/outside-in/outside_in_12.jpg", "assets/official/projects/outside-in/outside_in_5.jpg", "assets/official/projects/outside-in/outside_in_7.jpg", "assets/official/projects/outside-in/outside_in_8.jpg", "assets/official/projects/outside-in/outside_in_9.jpg"]}];
+    const IS_VARIANT = true;
+
+    let currentTypology = 'all';
+    let currentStatus = 'all';
+    let awardOnly = false;
+    let currentSort = 'newest';
+    let currentModalIndex = 0;
+    let activeOrderedList = [...PROJECTS];
+
+    function renderCards() {
+      const container = document.getElementById('works-grid');
+      container.innerHTML = '';
+
+      const matches = [];
+      const nonMatches = [];
+
+      PROJECTS.forEach(p => {
+        let match = true;
+        if (currentTypology !== 'all' && p.typology.toLowerCase() !== currentTypology.toLowerCase()) {
+          match = false;
+        }
+        if (currentStatus !== 'all' && p.status !== currentStatus) {
+          match = false;
+        }
+        if (awardOnly && !p.award) {
+          match = false;
+        }
+        if (match) {
+          matches.push(p);
+        } else {
+          nonMatches.push(p);
+        }
+      });
+
+      const sortFn = (a, b) => {
+        const yA = parseInt(a.year) || 0;
+        const yB = parseInt(b.year) || 0;
+        return currentSort === 'newest' ? yB - yA : yA - yB;
+      };
+
+      matches.sort(sortFn);
+      nonMatches.sort(sortFn);
+
+      const hasActiveFilter = (currentTypology !== 'all' || currentStatus !== 'all' || awardOnly);
+      activeOrderedList = hasActiveFilter ? [...matches, ...nonMatches] : [...matches];
+
+      const banner = document.getElementById('reorder-banner');
+      const bannerText = document.getElementById('reorder-banner-text');
+      if (hasActiveFilter) {
+        banner.classList.remove('hidden');
+        bannerText.textContent = `Prioritizing ${matches.length} matching commission(s) at top (${nonMatches.length} other works retained below)`;
+      } else {
+        banner.classList.add('hidden');
+      }
+
+      activeOrderedList.forEach((p, index) => {
+        const isMatched = matches.includes(p);
+        const card = document.createElement('div');
+        
+        const dimClass = hasActiveFilter && !isMatched ? 'opacity-50 hover:opacity-100 transition-opacity' : '';
+        card.className = `group cursor-pointer bg-white border border-[#e2e5e8] card-frame flex flex-col justify-between overflow-hidden ${dimClass}`;
+        card.onclick = () => openModal(p.id);
+
+        if (!IS_VARIANT) {
+          // VERSION 1: Titles & metadata BELOW image, ALWAYS VISIBLE
+          const awardTag = p.award ? '<span class="absolute top-3 right-3 bg-[#de602e] text-white text-[9px] font-mono uppercase tracking-widest px-2 py-0.5">Award</span>' : '';
+          const statusText = p.status === 'Completion' ? 'Completed Work' : 'Concept / Study';
+          card.innerHTML = `
+            <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#e9ecef]">
+              <img src="${p.primary_image}" alt="${p.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+              <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300"></div>
+              ${awardTag}
+            </div>
+            <div class="p-4 flex flex-col justify-between flex-1 border-t border-[#e2e5e8]">
+              <div>
+                <div class="flex items-center justify-between text-[10px] font-mono text-[#595f65] uppercase tracking-wider mb-1">
+                  <span>${p.typology}</span>
+                  <span>${p.year}</span>
+                </div>
+                <h3 class="text-sm font-semibold text-[#1a1d20] leading-snug group-hover:text-[#de602e] transition-colors">${p.title}</h3>
+                <p class="text-[11px] text-[#595f65] mt-1">${p.location}</p>
+              </div>
+              <div class="mt-3 pt-2 border-t border-[#f0f2f4] flex items-center justify-between text-[10px] font-mono text-[#767676]">
+                <span>${statusText}</span>
+                <span class="group-hover:translate-x-1 transition-transform">&rarr;</span>
+              </div>
+            </div>
+          `;
+        } else {
+          // VERSION 2: Titles & metadata ON IMAGE OVERLAY, HIDDEN BY DEFAULT, GLIDES UP ON HOVER
+          const awardTag = p.award ? '<span class="bg-[#de602e] text-white text-[9px] font-mono uppercase tracking-widest px-2 py-0.5">Award</span>' : '';
+          const statusText = p.status === 'Completion' ? 'Completed Commission &rarr;' : 'Design Exploration &rarr;';
+          card.innerHTML = `
+            <div class="relative w-full aspect-[16/11] overflow-hidden bg-[#1a1d20]">
+              <img src="${p.primary_image}" alt="${p.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+              
+              <!-- Subtle dark veil on hover -->
+              <div class="absolute inset-0 bg-black/0 group-hover:bg-black/60 transition-colors duration-500 ease-out"></div>
+              
+              <!-- Hover-revealed text container -->
+              <div class="absolute inset-0 p-5 flex flex-col justify-between opacity-0 group-hover:opacity-100 translate-y-3 group-hover:translate-y-0 transition-all duration-500 ease-out">
+                <div class="flex items-center justify-between">
+                  <span class="bg-white/90 text-[#1a1d20] text-[9px] font-mono uppercase tracking-widest px-2 py-0.5">${p.typology}</span>
+                  ${awardTag}
+                </div>
+                <div>
+                  <div class="flex items-center gap-2 text-[10px] font-mono text-white/80 uppercase tracking-widest mb-1">
+                    <span>${p.location}</span>
+                    <span>&bull;</span>
+                    <span>${p.year}</span>
+                  </div>
+                  <h3 class="text-base font-semibold text-white leading-tight drop-shadow-sm">${p.title}</h3>
+                  <span class="inline-block mt-2 text-[10px] font-mono uppercase tracking-wider text-[#f19f55]">
+                    ${statusText}
+                  </span>
+                </div>
+              </div>
+
+            </div>
+          `;
+        }
+
+        container.appendChild(card);
+      });
+
+      const countLabel = document.getElementById('active-count-label');
+      if (countLabel) countLabel.textContent = `${matches.length} of ${PROJECTS.length} Projects`;
+    }
+
+    function setFilter(type, value) {
+      if (type === 'typology') {
+        currentTypology = value;
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+          btn.className = 'filter-btn px-3 py-1 text-xs font-mono uppercase tracking-wider border border-[#e2e5e8] bg-white text-[#595f65] hover:border-[#1a1d20] hover:text-[#1a1d20]';
+        });
+        const activeBtn = document.getElementById(`btn-typ-${value.toLowerCase()}`);
+        if (activeBtn) {
+          activeBtn.className = 'filter-btn px-3 py-1 text-xs font-mono uppercase tracking-wider border border-[#1a1d20] bg-[#1a1d20] text-white';
+        }
+      }
+      renderCards();
+    }
+
+    function setStatusFilter(val) {
+      currentStatus = val;
+      renderCards();
+    }
+
+    function setSort(val) {
+      currentSort = val;
+      renderCards();
+    }
+
+    function toggleAwardFilter() {
+      awardOnly = !awardOnly;
+      const btn = document.getElementById('btn-award-toggle');
+      if (awardOnly) {
+        btn.className = 'px-2.5 py-1 text-xs font-mono uppercase tracking-wider border border-[#de602e] bg-[#de602e] text-white flex items-center gap-1.5';
+      } else {
+        btn.className = 'px-2.5 py-1 text-xs font-mono uppercase tracking-wider border border-[#e2e5e8] bg-white text-[#595f65] hover:border-[#de602e] hover:text-[#de602e] flex items-center gap-1.5';
+      }
+      renderCards();
+    }
+
+    function resetAllFilters() {
+      currentTypology = 'all';
+      currentStatus = 'all';
+      awardOnly = false;
+      document.getElementById('select-status').value = 'all';
+      const awardBtn = document.getElementById('btn-award-toggle');
+      if (awardBtn) awardBtn.className = 'px-2.5 py-1 text-xs font-mono uppercase tracking-wider border border-[#e2e5e8] bg-white text-[#595f65] hover:border-[#de602e] hover:text-[#de602e] flex items-center gap-1.5';
+      setFilter('typology', 'all');
+    }
+
+    // Modal Interaction
+    function openModal(projectId) {
+      const idx = activeOrderedList.findIndex(p => p.id === projectId);
+      if (idx === -1) return;
+      currentModalIndex = idx;
+      populateModal(activeOrderedList[currentModalIndex]);
+      document.getElementById('project-modal').classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+      window.location.hash = `project-${projectId}`;
+    }
+
+    function closeModal() {
+      document.getElementById('project-modal').classList.add('hidden');
+      document.body.style.overflow = '';
+      if (window.location.hash.startsWith('#project-')) {
+        history.replaceState(null, null, ' ');
+      }
+    }
+
+    function navigateModal(direction) {
+      currentModalIndex = (currentModalIndex + direction + activeOrderedList.length) % activeOrderedList.length;
+      populateModal(activeOrderedList[currentModalIndex]);
+      window.location.hash = `project-${activeOrderedList[currentModalIndex].id}`;
+    }
+
+    function populateModal(p) {
+      document.getElementById('modal-title').textContent = p.title;
+      document.getElementById('modal-typology').textContent = p.typology;
+      document.getElementById('modal-status').textContent = p.status === 'Completion' ? 'Built Commission' : 'Design Exploration';
+      document.getElementById('modal-location-year').textContent = `${p.location} • ${p.year}`;
+      document.getElementById('modal-description').textContent = p.description;
+
+      const awardBox = document.getElementById('modal-award-box');
+      const awardText = document.getElementById('modal-award-text');
+      if (p.award && p.awardText) {
+        awardBox.classList.remove('hidden');
+        awardText.textContent = p.awardText;
+      } else {
+        awardBox.classList.add('hidden');
+      }
+
+      const mainImg = document.getElementById('modal-main-img');
+      mainImg.src = p.primary_image;
+
+      const thumbs = document.getElementById('modal-thumbs');
+      thumbs.innerHTML = '';
+      if (p.images && p.images.length > 0) {
+        p.images.forEach(imgUrl => {
+          const t = document.createElement('img');
+          t.src = imgUrl;
+          t.className = 'w-16 h-12 object-cover border border-[#e2e5e8] cursor-pointer hover:border-[#1a1d20] transition-colors shrink-0';
+          t.onclick = () => { mainImg.src = imgUrl; };
+          thumbs.appendChild(t);
+        });
+      }
+    }
+
+    window.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeModal();
+      if (!document.getElementById('project-modal').classList.contains('hidden')) {
+        if (e.key === 'ArrowLeft') navigateModal(-1);
+        if (e.key === 'ArrowRight') navigateModal(1);
+      }
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
+      renderCards();
+      if (window.location.hash.startsWith('#project-')) {
+        const slug = window.location.hash.replace('#project-', '');
+        openModal(slug);
+      }
+    });
+  </script>
+
+
+</body>
+</html>

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="assets/official/logo_charcoal.svg">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    if (!window.tailwind) {
+      document.write('<script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"><\/script>');
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-main: #f8f9fa;
+      --bg-surface: #ffffff;
+      --text-main: #1a1d20;
+      --text-muted: #595f65;
+      --border-line: #e2e5e8;
+      --accent: #de602e;
+    }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg-main);
+      color: var(--text-main);
+    }
+    .card-frame {
+      border: 1px solid transparent;
+      transition: border-color 0.3s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .card-frame:hover {
+      border-color: #1a1d20;
+    }
+    .sticky-filter-bar {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: rgba(248, 249, 250, 0.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid #e2e5e8;
+    }
+    ::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f3f5;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #adb5bd;
+    }
+  </style>
+
+  <title>Academy & Masterclasses &bull; Aleksandre Karpov &bull; Karpov Design LLC</title>
+</head>
+<body class="antialiased bg-[#f8f9fa] text-[#1a1d20]">
+
+  <!-- Dedicated Header for Academy (Unlinked from Main Nav) -->
+  <header class="w-full bg-[#f8f9fa]/95 backdrop-blur-md border-b border-[#e2e5e8] z-50 sticky top-0 transition-all">
+    <div class="max-w-[1920px] mx-auto px-6 md:px-12 lg:px-16 flex items-center justify-between min-h-[80px]">
+      <a href="index.html" class="flex items-center gap-3">
+        <img src="assets/official/logo_charcoal.svg" alt="KAD Logo" class="h-8 w-auto">
+        <div>
+          <span class="text-sm font-semibold tracking-[0.2em] uppercase text-[#1a1d20] block">Aleksandre Karpov</span>
+          <span class="text-[10px] tracking-[0.18em] uppercase text-[#595f65] block">Academy &bull; Educational Division</span>
+        </div>
+      </a>
+      <a href="index.html" class="text-xs font-mono uppercase tracking-widest text-[#595f65] hover:text-[#1a1d20] transition-colors">
+        &larr; Return to Practice
+      </a>
+    </div>
+  </header>
+
+  <!-- Breadcrumb Navigation -->
+  <div class="w-full bg-white border-b border-[#e2e5e8] py-3 px-6 md:px-12 lg:px-16">
+    <div class="max-w-[1920px] mx-auto text-xs font-mono uppercase tracking-widest text-[#595f65]">
+      <a href="index.html" class="hover:text-[#1a1d20]">Home</a>
+      <span class="mx-2">&bull;</span>
+      <span class="text-[#1a1d20] font-semibold">Academy (Private Syllabus)</span>
+    </div>
+  </div>
+
+  <main class="w-full bg-[#f8f9fa] py-16 px-6 md:px-12 lg:px-16">
+    <div class="max-w-[1920px] mx-auto space-y-16">
+      
+      <!-- Centerpiece Masterclass Player -->
+      <div class="border border-[#1a1d20] bg-white p-6 md:p-10 card-frame">
+        <div class="flex flex-col lg:flex-row gap-8 items-start">
+          <div class="w-full lg:w-2/3 aspect-video bg-[#1a1d20] relative overflow-hidden">
+            <img src="assets/official/projects/izka-tower/izka_10.jpg" alt="Masterclass Video" class="w-full h-full object-cover opacity-70">
+            <div class="absolute inset-0 flex items-center justify-center">
+              <button onclick="playAcademyDemo()" class="w-16 h-16 bg-white/90 hover:bg-[#de602e] text-[#1a1d20] hover:text-white flex items-center justify-center transition-colors shadow-lg">
+                <svg class="w-6 h-6 ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+              </button>
+            </div>
+            <span class="absolute bottom-4 left-4 bg-black/80 text-white text-[10px] font-mono uppercase tracking-widest px-2.5 py-1">
+              Masterclass &bull; 48 Min Studio Session
+            </span>
+          </div>
+
+          <div class="w-full lg:w-1/3 flex flex-col justify-between">
+            <div>
+              <span class="text-[10px] font-mono uppercase tracking-widest text-[#de602e] block mb-1">Featured Masterclass</span>
+              <h2 class="text-xl md:text-2xl font-semibold text-[#1a1d20] mb-3">Tectonic Synthesis: From Watercolor Intuition to BIM Execution</h2>
+              <p class="text-xs md:text-sm text-[#595f65] leading-relaxed mb-4">
+                Aleksandre Karpov breaks down the complete workflow of bridging analog artistic gesture with rigorous Revit parametric families, daylight simulation, and constructible documentation.
+              </p>
+            </div>
+            <div class="border-t border-[#e2e5e8] pt-4">
+              <span class="text-xs font-mono text-[#595f65] block mb-2">Lecturer: Aleksandre Karpov &bull; UNCC Studio Fellow</span>
+              <button class="w-full py-2.5 bg-[#1a1d20] hover:bg-[#de602e] text-white text-xs font-mono uppercase tracking-widest transition-colors">
+                Access Full Studio Lecture &rarr;
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3 Video Tutorial Modules -->
+      <div>
+        <h3 class="text-lg font-semibold uppercase tracking-wider text-[#1a1d20] mb-6">Technical Video Modules</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="bg-white border border-[#e2e5e8] card-frame overflow-hidden">
+            <div class="aspect-video bg-[#1a1d20] overflow-hidden">
+              <img src="assets/official/projects/seed-retreat/seed_8.jpg" alt="Tutorial 1" class="w-full h-full object-cover">
+            </div>
+            <div class="p-5">
+              <span class="text-[10px] font-mono uppercase tracking-widest text-[#de602e]">Module 01</span>
+              <h4 class="text-sm font-semibold text-[#1a1d20] mt-1 mb-2">Mass-Timber Envelope Systems</h4>
+              <p class="text-xs text-[#595f65] leading-relaxed">Passive ventilation, cross-laminated timber thermal mass, and envelope integration.</p>
+            </div>
+          </div>
+
+          <div class="bg-white border border-[#e2e5e8] card-frame overflow-hidden">
+            <div class="aspect-video bg-[#1a1d20] overflow-hidden">
+              <img src="assets/official/projects/multi-city/multi_city_15.jpg" alt="Tutorial 2" class="w-full h-full object-cover">
+            </div>
+            <div class="p-5">
+              <span class="text-[10px] font-mono uppercase tracking-widest text-[#de602e]">Module 02</span>
+              <h4 class="text-sm font-semibold text-[#1a1d20] mt-1 mb-2">Adaptive Reuse & Structural BIM</h4>
+              <p class="text-xs text-[#595f65] leading-relaxed">Laser scanning registration, point-cloud integration, and historic masonry rehabilitation.</p>
+            </div>
+          </div>
+
+          <div class="bg-white border border-[#e2e5e8] card-frame overflow-hidden">
+            <div class="aspect-video bg-[#1a1d20] overflow-hidden">
+              <img src="assets/official/projects/travel-sketches/ak_10.jpg" alt="Tutorial 3" class="w-full h-full object-cover">
+            </div>
+            <div class="p-5">
+              <span class="text-[10px] font-mono uppercase tracking-widest text-[#de602e]">Module 03</span>
+              <h4 class="text-sm font-semibold text-[#1a1d20] mt-1 mb-2">Plein-Air Spatial Perception</h4>
+              <p class="text-xs text-[#595f65] leading-relaxed">Translating atmospheric perspective and wash depth into physical spatial sequences.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Downloadable BIM Resources -->
+      <div class="border-t border-[#e2e5e8] pt-12">
+        <h3 class="text-lg font-semibold uppercase tracking-wider text-[#1a1d20] mb-6">Computational Resources & Templates</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="p-6 bg-white border border-[#e2e5e8] flex items-center justify-between">
+            <div>
+              <span class="text-[10px] font-mono uppercase tracking-widest text-[#de602e]">BIM Package &bull; R2024</span>
+              <h4 class="text-sm font-semibold text-[#1a1d20] mt-0.5">Parametric Louver & Shading Family Pack</h4>
+              <span class="text-xs text-[#595f65]">Dynamo + Revit Adaptive Components (.rfa)</span>
+            </div>
+            <a href="#" class="px-4 py-2 border border-[#1a1d20] hover:bg-[#1a1d20] hover:text-white text-xs font-mono uppercase tracking-wider transition-colors">
+              Download .ZIP
+            </a>
+          </div>
+
+          <div class="p-6 bg-white border border-[#e2e5e8] flex items-center justify-between">
+            <div>
+              <span class="text-[10px] font-mono uppercase tracking-widest text-[#de602e]">Drawing Standard</span>
+              <h4 class="text-sm font-semibold text-[#1a1d20] mt-0.5">Architectural Line-Weight & Graphic Standard</h4>
+              <span class="text-xs text-[#595f65]">UNCC / Karpov Design Pen Weights & Layouts (.ctb / .pdf)</span>
+            </div>
+            <a href="#" class="px-4 py-2 border border-[#1a1d20] hover:bg-[#1a1d20] hover:text-white text-xs font-mono uppercase tracking-wider transition-colors">
+              Download .PDF
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  
+  <!-- Centered Architectural Footer -->
+  <footer class="w-full bg-[#ffffff] border-t border-[#e2e5e8] py-16 px-6 md:px-12 lg:px-16">
+    <div class="max-w-[1920px] mx-auto flex flex-col lg:flex-row items-start">
+      
+      <!-- 25% Left Margin on Desktop -->
+      <div class="hidden lg:block lg:w-1/4 pr-8">
+        <p class="text-xs uppercase tracking-[0.2em] font-mono text-[#595f65]">Studio & Practice</p>
+        <p class="text-xs text-[#595f65] mt-2">North Carolina &bull; Aegean Basin</p>
+      </div>
+
+      <!-- 75% Active Right Content -->
+      <div class="w-full lg:w-3/4 lg:pl-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
+        <div>
+          <div class="flex items-center gap-4 mb-3">
+            <img src="assets/official/logo_charcoal.svg" alt="KAD Logo" class="h-9 w-auto">
+            <div>
+              <span class="text-sm font-semibold tracking-[0.2em] uppercase text-[#1a1d20] block">Karpov Design LLC</span>
+              <span class="text-xs text-[#595f65] block">Aleksandre Karpov &bull; Charlotte, NC</span>
+            </div>
+          </div>
+          <p class="text-xs text-[#595f65] max-w-xl leading-relaxed">
+            Architectural design, computational BIM coordination, and analog spatial research. Compliant with NC General Statutes for residential design and international architectural commissions.
+          </p>
+        </div>
+
+        <div class="flex flex-col items-start md:items-end gap-2 text-xs text-[#595f65]">
+          <div class="flex gap-6 tracking-[0.15em] uppercase">
+            <a href="index.html#works" class="hover:text-[#1a1d20] transition-colors">Works</a>
+            <a href="about.html" class="hover:text-[#1a1d20] transition-colors">About</a>
+            <a href="contact.html" class="hover:text-[#1a1d20] transition-colors">Contact</a>
+          </div>
+          <span class="font-mono text-[11px] text-[#767676] mt-2">&copy; 2026 Karpov Design LLC. All rights reserved.</span>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+
+  <script>
+    function playAcademyDemo() {
+      alert('Masterclass streaming session loaded. In production, this launches the full video stream.');
+    }
+  </script>
+
+</body>
+</html>
