@@ -177,6 +177,7 @@
 
     <!-- 2. The 5 Typologies Strip (Residential, Commercial, Cultural, Conceptual, Art) -->
     <!-- DIRECT TRANSITION: ZERO INTRO TEXT, ZERO LABELS, TALL EDGE-TO-EDGE PANELS -->
+    <div class="h-16 w-full bg-[#f8f9fa]"></div>
     <section id="typology-strip" class="relative w-full bg-[#f0f2f4]">
       <div class="grid grid-cols-1 md:grid-cols-5 h-[760px] w-full overflow-hidden">
 
@@ -191,7 +192,6 @@
           
           <!-- Text: 100% Hidden by Default, Moves in Gently from Bottom on Hover -->
           <div class="relative z-10 hover-reveal-text">
-            <span class="text-xs font-mono text-[#f19f55] tracking-widest uppercase block mb-1">01 / Typology</span>
             <h2 class="text-3xl md:text-4xl font-serif-luxury text-white">
               Residential
             </h2>
@@ -207,7 +207,6 @@
           <div class="absolute inset-0 hover-darken-veil"></div>
 
           <div class="relative z-10 hover-reveal-text">
-            <span class="text-xs font-mono text-[#f19f55] tracking-widest uppercase block mb-1">02 / Typology</span>
             <h2 class="text-3xl md:text-4xl font-serif-luxury text-white">
               Commercial
             </h2>
@@ -223,7 +222,6 @@
           <div class="absolute inset-0 hover-darken-veil"></div>
 
           <div class="relative z-10 hover-reveal-text">
-            <span class="text-xs font-mono text-[#f19f55] tracking-widest uppercase block mb-1">03 / Typology</span>
             <h2 class="text-3xl md:text-4xl font-serif-luxury text-white">
               Cultural
             </h2>
@@ -239,7 +237,6 @@
           <div class="absolute inset-0 hover-darken-veil"></div>
 
           <div class="relative z-10 hover-reveal-text">
-            <span class="text-xs font-mono text-[#f19f55] tracking-widest uppercase block mb-1">04 / Typology</span>
             <h2 class="text-3xl md:text-4xl font-serif-luxury text-white">
               Conceptual
             </h2>
@@ -255,7 +252,6 @@
           <div class="absolute inset-0 hover-darken-veil"></div>
 
           <div class="relative z-10 hover-reveal-text">
-            <span class="text-xs font-mono text-[#f19f55] tracking-widest uppercase block mb-1">05 / Typology</span>
             <h2 class="text-3xl md:text-4xl font-serif-luxury text-white">
               Art
             </h2>
@@ -290,49 +286,48 @@
           </div>
         </div>
 
-        <!-- The Philips-Style Showcase Component Container -->
+        <!-- The Philips-Style Showcase Component Container (Main Image Left, Unfocused Reel Right) -->
         <div class="bg-[#ffffff] rounded-2xl p-6 md:p-8 shadow-sm">
-          
-          <!-- Large Central Featured Image Showcase Viewport -->
-          <!-- Text Badge is Hidden Until User Hovers Over the Image -->
-          <div class="relative w-full h-[460px] md:h-[620px] rounded-xl overflow-hidden bg-[#f0f2f4] group">
+          <div class="flex flex-col lg:flex-row gap-6 items-stretch">
             
-            <img id="main-feature-img" 
-                 src="assets/portfolio_plates/plate_page_30.jpg" 
-                 alt="Main Architectural View"
-                 class="w-full h-full object-contain transition-all duration-500">
-            
-            <!-- Caption Card: Hidden by Default, Glides Up Gently from Bottom on Hover -->
-            <div class="absolute bottom-6 left-6 z-10 bg-[#ffffff]/95 backdrop-blur-md px-5 py-3 rounded-xl shadow-md hover-reveal-text">
-              <span id="main-feature-phase" class="text-[10px] uppercase font-mono text-[#de602e] tracking-wider block">Portfolio Plate 30</span>
-              <h4 id="main-feature-title" class="text-sm font-semibold text-[#1a1d20]">Urban Context & Atrium Volume</h4>
+            <!-- Left: Large Central Featured Image Showcase Viewport (~78% width) -->
+            <div class="relative w-full lg:w-[78%] h-[480px] md:h-[640px] rounded-xl overflow-hidden bg-[#f0f2f4] group flex-shrink-0">
+              
+              <img id="main-feature-img" 
+                   src="assets/portfolio_plates/plate_page_30.jpg" 
+                   alt="Main Architectural View"
+                   class="w-full h-full object-contain transition-all duration-500">
+              
+              <!-- Caption Card: Hidden by Default, Glides Up Gently from Bottom on Hover -->
+              <div class="absolute bottom-6 left-6 z-10 bg-[#ffffff]/95 backdrop-blur-md px-5 py-3 rounded-xl shadow-md hover-reveal-text">
+                <span id="main-feature-phase" class="text-[10px] uppercase font-mono text-[#de602e] tracking-wider block">Portfolio Plate 30</span>
+                <h4 id="main-feature-title" class="text-sm font-semibold text-[#1a1d20]">Urban Context & Atrium Volume</h4>
+              </div>
+
+              <!-- Subtle Left/Right Navigation Chevrons (Zero Button Borders) -->
+              <button onclick="prevImage()" 
+                      aria-label="Previous plate"
+                      class="absolute left-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/90 hover:bg-[#de602e] hover:text-white text-[#1a1d20] flex items-center justify-center shadow-md transition-all duration-300 border-0">
+                <svg class="w-5 h-5 -translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+              </button>
+              <button onclick="nextImage()" 
+                      aria-label="Next plate"
+                      class="absolute right-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/90 hover:bg-[#de602e] hover:text-white text-[#1a1d20] flex items-center justify-center shadow-md transition-all duration-300 border-0">
+                <svg class="w-5 h-5 translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+              </button>
+
+              <!-- Subtle Slide Counter Pill -->
+              <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-md px-3 py-1 rounded-full text-[11px] font-mono text-[#38606a] shadow-sm">
+                <span id="slide-counter">1 of 5</span>
+              </div>
             </div>
 
-            <!-- Subtle Left/Right Navigation Chevrons (Zero Button Borders) -->
-            <button onclick="prevImage()" 
-                    aria-label="Previous plate"
-                    class="absolute left-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/90 hover:bg-[#de602e] hover:text-white text-[#1a1d20] flex items-center justify-center shadow-md transition-all duration-300 border-0">
-              <svg class="w-5 h-5 -translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
-            </button>
-            <button onclick="nextImage()" 
-                    aria-label="Next plate"
-                    class="absolute right-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/90 hover:bg-[#de602e] hover:text-white text-[#1a1d20] flex items-center justify-center shadow-md transition-all duration-300 border-0">
-              <svg class="w-5 h-5 translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-            </button>
-
-            <!-- Subtle Slide Counter Pill -->
-            <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-md px-3 py-1 rounded-full text-[11px] font-mono text-[#38606a] shadow-sm">
-              <span id="slide-counter">1 of 5</span>
-            </div>
-          </div>
-
-          <!-- Bottom 5-Thumbnail Carousel Strip (Hover & Click Switcher) -->
-          <div class="mt-6">
-            <div class="grid grid-cols-5 gap-3 md:gap-4" id="thumbnail-strip">
+            <!-- Right: Vertical Un-focused Image Reel (~22% width, stacked vertically) -->
+            <div class="w-full lg:w-[22%] flex flex-row lg:flex-col gap-3 justify-between" id="thumbnail-strip">
               
               <!-- Thumb 0 -->
               <div onclick="setAlbumView(0)" id="thumb-btn-0" 
-                   class="group relative h-20 md:h-28 rounded-lg overflow-hidden cursor-pointer transition-all duration-300 ring-2 ring-[#de602e]">
+                   class="group relative h-20 lg:h-[118px] w-full rounded-lg overflow-hidden cursor-pointer transition-all duration-300 ring-2 ring-[#de602e]">
                 <img id="thumb-img-0" src="assets/portfolio_plates/plate_page_30.jpg" class="w-full h-full object-cover">
                 <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
                 <div class="absolute bottom-1 left-2 z-10 hover-reveal-text">
@@ -342,7 +337,7 @@
 
               <!-- Thumb 1 -->
               <div onclick="setAlbumView(1)" id="thumb-btn-1" 
-                   class="group relative h-20 md:h-28 rounded-lg overflow-hidden cursor-pointer transition-all duration-300 ring-0 hover:ring-2 hover:ring-[#de602e]">
+                   class="group relative h-20 lg:h-[118px] w-full rounded-lg overflow-hidden cursor-pointer transition-all duration-300 ring-0 hover:ring-2 hover:ring-[#de602e]">
                 <img id="thumb-img-1" src="assets/portfolio_plates/plate_page_31.jpg" class="w-full h-full object-cover">
                 <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
                 <div class="absolute bottom-1 left-2 z-10 hover-reveal-text">
@@ -352,7 +347,7 @@
 
               <!-- Thumb 2 -->
               <div onclick="setAlbumView(2)" id="thumb-btn-2" 
-                   class="group relative h-20 md:h-28 rounded-lg overflow-hidden cursor-pointer transition-all duration-300 ring-0 hover:ring-2 hover:ring-[#de602e]">
+                   class="group relative h-20 lg:h-[118px] w-full rounded-lg overflow-hidden cursor-pointer transition-all duration-300 ring-0 hover:ring-2 hover:ring-[#de602e]">
                 <img id="thumb-img-2" src="assets/projects/commercial_izka/img_01_558x425.jpeg" class="w-full h-full object-cover">
                 <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
                 <div class="absolute bottom-1 left-2 z-10 hover-reveal-text">
@@ -362,7 +357,7 @@
 
               <!-- Thumb 3 -->
               <div onclick="setAlbumView(3)" id="thumb-btn-3" 
-                   class="group relative h-20 md:h-28 rounded-lg overflow-hidden cursor-pointer transition-all duration-300 ring-0 hover:ring-2 hover:ring-[#de602e]">
+                   class="group relative h-20 lg:h-[118px] w-full rounded-lg overflow-hidden cursor-pointer transition-all duration-300 ring-0 hover:ring-2 hover:ring-[#de602e]">
                 <img id="thumb-img-3" src="assets/portfolio_plates/plate_page_18.jpg" class="w-full h-full object-cover">
                 <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
                 <div class="absolute bottom-1 left-2 z-10 hover-reveal-text">
@@ -372,7 +367,7 @@
 
               <!-- Thumb 4 -->
               <div onclick="setAlbumView(4)" id="thumb-btn-4" 
-                   class="group relative h-20 md:h-28 rounded-lg overflow-hidden cursor-pointer transition-all duration-300 ring-0 hover:ring-2 hover:ring-[#de602e]">
+                   class="group relative h-20 lg:h-[118px] w-full rounded-lg overflow-hidden cursor-pointer transition-all duration-300 ring-0 hover:ring-2 hover:ring-[#de602e]">
                 <img id="thumb-img-4" src="assets/portfolio_plates/plate_page_19.jpg" class="w-full h-full object-cover">
                 <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
                 <div class="absolute bottom-1 left-2 z-10 hover-reveal-text">
@@ -388,136 +383,201 @@
       </div>
     </section>
 
-    <!-- 4. Honors & Accolades Section (Clean, Stylish Architectural Layout Below Album) -->
-    <section id="accolades-section" class="py-20 px-8 md:px-16 lg:px-24 bg-[#ffffff]">
-      <div class="max-w-6xl mx-auto">
+    <!-- 4. Honors & Accolades Section<!-- 4. Honors & Accolades Section (Clean, Stylish Architectural Layout Below Album) -->
+    <section id="accolades-section" class="py-24 px-8 md:px-16 lg:px-24 bg-[#ffffff]">
+      <div class="max-w-5xl mx-auto">
         
-        <div class="flex flex-col md:flex-row md:items-end justify-between pb-8 border-b border-[#e5e7eb] mb-12 gap-4">
+        <div class="pb-10 border-b border-[#e5e7eb] mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div>
             <span class="text-xs font-mono text-[#de602e] tracking-widest uppercase">Recognition</span>
             <h2 class="text-3xl md:text-5xl font-serif-luxury text-[#1a1d20] mt-1">Honors & Accolades</h2>
           </div>
-          <p class="text-xs text-[#767676] max-w-md font-mono">
-            National competition awards, academic distinctions, and realized master planning recognitions (2007–2016).
+          <p class="text-xs text-[#767676] max-w-sm font-mono">
+            National competition awards, realized master planning recognitions, and academic distinctions (2007–2016).
           </p>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <!-- Pure Editorial List (Zero Cards, Zero Pills) -->
+        <div class="divide-y divide-[#e5e7eb]">
           
-          <!-- Column 1: Major National Architecture & Competition Wins -->
-          <div class="space-y-4">
-            <h3 class="text-sm font-mono tracking-widest uppercase text-[#2b4951] mb-6 flex items-center gap-2">
-              <span class="w-2 h-2 rounded-full bg-[#de602e]"></span>
-              National Architecture & Competition Wins
-            </h3>
-
-            <!-- Award 1 -->
-            <div class="p-6 rounded-2xl bg-[#f8f9fa] hover:bg-[#f0f2f4] transition-colors">
-              <div class="flex items-center justify-between mb-2">
-                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono uppercase bg-[#de602e] text-white font-semibold">1st Place & National Award</span>
-                <span class="text-xs font-mono text-[#767676]">2016</span>
+          <!-- Item 1 -->
+          <div class="py-6 flex flex-col md:flex-row md:items-baseline justify-between gap-2 md:gap-8 group hover:bg-[#f8f9fa]/80 transition-colors px-3 -mx-3 rounded-xl">
+            <div class="flex items-baseline gap-6">
+              <span class="font-mono text-sm text-[#de602e] font-semibold w-16 flex-shrink-0">2016</span>
+              <div>
+                <h3 class="text-xl md:text-2xl font-serif-luxury text-[#1a1d20] group-hover:text-[#de602e] transition-colors">
+                  Turgut Cansever National Architecture Award — 1st Place
+                </h3>
+                <p class="text-xs md:text-sm text-[#767676] mt-1 font-sans">
+                  İZKA (İzmir Development Agency) Headquarters — Design development & BIM coordination with aboutblank.
+                </p>
               </div>
-              <h4 class="text-lg font-serif-luxury text-[#1a1d20]">Turgut Cansever National Architecture Award</h4>
-              <p class="text-xs text-[#4c4c4c] mt-1">İZKA (İzmir Development Agency) Headquarters — Design development & BIM coordination.</p>
             </div>
-
-            <!-- Award 2 -->
-            <div class="p-6 rounded-2xl bg-[#f8f9fa] hover:bg-[#f0f2f4] transition-colors">
-              <div class="flex items-center justify-between mb-2">
-                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono uppercase bg-[#2b4951] text-white font-semibold">1st Place</span>
-                <span class="text-xs font-mono text-[#767676]">2015</span>
-              </div>
-              <h4 class="text-lg font-serif-luxury text-[#1a1d20]">Eskişehir Industrial Regeneration</h4>
-              <p class="text-xs text-[#4c4c4c] mt-1">Vehicle Maintenance Workshop Adaptive Reuse — Lead Designer, concept & master planning.</p>
-            </div>
-
-            <!-- Award 3 -->
-            <div class="p-6 rounded-2xl bg-[#f8f9fa] hover:bg-[#f0f2f4] transition-colors">
-              <div class="flex items-center justify-between mb-2">
-                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono uppercase bg-[#2b4951] text-white font-semibold">1st Place</span>
-                <span class="text-xs font-mono text-[#767676]">2013</span>
-              </div>
-              <h4 class="text-lg font-serif-luxury text-[#1a1d20]">İZKA Headquarters National Competition</h4>
-              <p class="text-xs text-[#4c4c4c] mt-1">Primary architectural competition victory with aboutblank design team.</p>
-            </div>
-
-            <!-- Award 4 -->
-            <div class="p-6 rounded-2xl bg-[#f8f9fa] hover:bg-[#f0f2f4] transition-colors">
-              <div class="flex items-center justify-between mb-2">
-                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono uppercase bg-[#38606a] text-white font-semibold">1st Mention</span>
-                <span class="text-xs font-mono text-[#767676]">2015</span>
-              </div>
-              <h4 class="text-lg font-serif-luxury text-[#1a1d20]">Climate Zone 7 National Competition</h4>
-              <p class="text-xs text-[#4c4c4c] mt-1">Extreme microclimatic passive design & regional sustainability research.</p>
-            </div>
+            <span class="text-xs font-mono text-[#38606a] uppercase tracking-wider flex-shrink-0 self-start md:self-auto">
+              National Award
+            </span>
           </div>
 
-          <!-- Column 2: Competition Honors & Academic Distinctions -->
-          <div class="space-y-4">
-            <h3 class="text-sm font-mono tracking-widest uppercase text-[#2b4951] mb-6 flex items-center gap-2">
-              <span class="w-2 h-2 rounded-full bg-[#38606a]"></span>
-              Competition Honors & Academic Distinctions
-            </h3>
-
-            <!-- Honor 1 -->
-            <div class="p-6 rounded-2xl bg-[#f8f9fa] hover:bg-[#f0f2f4] transition-colors">
-              <div class="flex items-center justify-between mb-2">
-                <span class="text-[11px] font-mono text-[#de602e] font-semibold">3RD PLACE</span>
-                <span class="text-xs font-mono text-[#767676]">2015</span>
+          <!-- Item 2 -->
+          <div class="py-6 flex flex-col md:flex-row md:items-baseline justify-between gap-2 md:gap-8 group hover:bg-[#f8f9fa]/80 transition-colors px-3 -mx-3 rounded-xl">
+            <div class="flex items-baseline gap-6">
+              <span class="font-mono text-sm text-[#de602e] font-semibold w-16 flex-shrink-0">2015</span>
+              <div>
+                <h3 class="text-xl md:text-2xl font-serif-luxury text-[#1a1d20] group-hover:text-[#de602e] transition-colors">
+                  Eskişehir Industrial Regeneration — 1st Place
+                </h3>
+                <p class="text-xs md:text-sm text-[#767676] mt-1 font-sans">
+                  Vehicle Maintenance Workshop Adaptive Reuse — Lead Designer, concept & master planning for elevated civic network.
+                </p>
               </div>
-              <h4 class="text-base font-serif-luxury text-[#1a1d20]">Beylikdüzü Municipality Bridge & Valley</h4>
-              <p class="text-xs text-[#4c4c4c] mt-1">Urban infrastructure & civic valley connectivity national competition.</p>
             </div>
+            <span class="text-xs font-mono text-[#38606a] uppercase tracking-wider flex-shrink-0 self-start md:self-auto">
+              National Competition
+            </span>
+          </div>
 
-            <!-- Honor 2 -->
-            <div class="p-6 rounded-2xl bg-[#f8f9fa] hover:bg-[#f0f2f4] transition-colors">
-              <div class="flex items-center justify-between mb-2">
-                <span class="text-[11px] font-mono text-[#de602e] font-semibold">3RD PLACE</span>
-                <span class="text-xs font-mono text-[#767676]">2014</span>
+          <!-- Item 3 -->
+          <div class="py-6 flex flex-col md:flex-row md:items-baseline justify-between gap-2 md:gap-8 group hover:bg-[#f8f9fa]/80 transition-colors px-3 -mx-3 rounded-xl">
+            <div class="flex items-baseline gap-6">
+              <span class="font-mono text-sm text-[#de602e] font-semibold w-16 flex-shrink-0">2015</span>
+              <div>
+                <h3 class="text-xl md:text-2xl font-serif-luxury text-[#1a1d20] group-hover:text-[#de602e] transition-colors">
+                  Climate Zone 7 National Architectural Competition — 1st Mention
+                </h3>
+                <p class="text-xs md:text-sm text-[#767676] mt-1 font-sans">
+                  Extreme microclimatic passive design & regional sustainability research.
+                </p>
               </div>
-              <h4 class="text-base font-serif-luxury text-[#1a1d20]">Gökçeada High School Educational Campus</h4>
-              <p class="text-xs text-[#4c4c4c] mt-1">Island environmental school complex & student community housing.</p>
             </div>
+            <span class="text-xs font-mono text-[#38606a] uppercase tracking-wider flex-shrink-0 self-start md:self-auto">
+              National Competition
+            </span>
+          </div>
 
-            <!-- Honor 3 -->
-            <div class="p-6 rounded-2xl bg-[#f8f9fa] hover:bg-[#f0f2f4] transition-colors">
-              <div class="flex items-center justify-between mb-2">
-                <span class="text-[11px] font-mono text-[#de602e] font-semibold">3RD PLACE</span>
-                <span class="text-xs font-mono text-[#767676]">2014</span>
+          <!-- Item 4 -->
+          <div class="py-6 flex flex-col md:flex-row md:items-baseline justify-between gap-2 md:gap-8 group hover:bg-[#f8f9fa]/80 transition-colors px-3 -mx-3 rounded-xl">
+            <div class="flex items-baseline gap-6">
+              <span class="font-mono text-sm text-[#de602e] font-semibold w-16 flex-shrink-0">2015</span>
+              <div>
+                <h3 class="text-xl md:text-2xl font-serif-luxury text-[#1a1d20] group-hover:text-[#de602e] transition-colors">
+                  Beylikdüzü Municipality Bridge & Valley — 3rd Place
+                </h3>
+                <p class="text-xs md:text-sm text-[#767676] mt-1 font-sans">
+                  Urban infrastructure & civic valley connectivity national competition.
+                </p>
               </div>
-              <h4 class="text-base font-serif-luxury text-[#1a1d20]">Mehmetkavuk Mosque & Cultural Complex</h4>
-              <p class="text-xs text-[#4c4c4c] mt-1">Terraced worship space and community center in Malatya.</p>
             </div>
+            <span class="text-xs font-mono text-[#38606a] uppercase tracking-wider flex-shrink-0 self-start md:self-auto">
+              National Competition
+            </span>
+          </div>
 
-            <!-- Honor 4 -->
-            <div class="p-6 rounded-2xl bg-[#f8f9fa] hover:bg-[#f0f2f4] transition-colors">
-              <div class="flex items-center justify-between mb-2">
-                <span class="text-[11px] font-mono text-[#38606a] font-semibold">HONORABLE MENTION</span>
-                <span class="text-xs font-mono text-[#767676]">2015</span>
+          <!-- Item 5 -->
+          <div class="py-6 flex flex-col md:flex-row md:items-baseline justify-between gap-2 md:gap-8 group hover:bg-[#f8f9fa]/80 transition-colors px-3 -mx-3 rounded-xl">
+            <div class="flex items-baseline gap-6">
+              <span class="font-mono text-sm text-[#de602e] font-semibold w-16 flex-shrink-0">2015</span>
+              <div>
+                <h3 class="text-xl md:text-2xl font-serif-luxury text-[#1a1d20] group-hover:text-[#de602e] transition-colors">
+                  Maltepe Gülsuyu Cemevi Cultural Center — Honorable Mention
+                </h3>
+                <p class="text-xs md:text-sm text-[#767676] mt-1 font-sans">
+                  Civic sanctuary & cultural gathering halls national competition.
+                </p>
               </div>
-              <h4 class="text-base font-serif-luxury text-[#1a1d20]">Maltepe Gülsuyu Cemevi Cultural Center</h4>
-              <p class="text-xs text-[#4c4c4c] mt-1">Civic sanctuary & cultural gathering halls national competition.</p>
             </div>
+            <span class="text-xs font-mono text-[#38606a] uppercase tracking-wider flex-shrink-0 self-start md:self-auto">
+              National Competition
+            </span>
+          </div>
 
-            <!-- Honor 5 -->
-            <div class="p-6 rounded-2xl bg-[#f8f9fa] hover:bg-[#f0f2f4] transition-colors">
-              <div class="flex items-center justify-between mb-2">
-                <span class="text-[11px] font-mono text-[#38606a] font-semibold">HONORABLE MENTION</span>
-                <span class="text-xs font-mono text-[#767676]">2014</span>
+          <!-- Item 6 -->
+          <div class="py-6 flex flex-col md:flex-row md:items-baseline justify-between gap-2 md:gap-8 group hover:bg-[#f8f9fa]/80 transition-colors px-3 -mx-3 rounded-xl">
+            <div class="flex items-baseline gap-6">
+              <span class="font-mono text-sm text-[#de602e] font-semibold w-16 flex-shrink-0">2014</span>
+              <div>
+                <h3 class="text-xl md:text-2xl font-serif-luxury text-[#1a1d20] group-hover:text-[#de602e] transition-colors">
+                  Gökçeada High School Educational Campus — 3rd Place
+                </h3>
+                <p class="text-xs md:text-sm text-[#767676] mt-1 font-sans">
+                  Island environmental school complex & student community housing.
+                </p>
               </div>
-              <h4 class="text-base font-serif-luxury text-[#1a1d20]">Bishkek 2040 Urban Vision & Master-Plan</h4>
-              <p class="text-xs text-[#4c4c4c] mt-1">Regional transportation corridor and high-density civic planning.</p>
             </div>
+            <span class="text-xs font-mono text-[#38606a] uppercase tracking-wider flex-shrink-0 self-start md:self-auto">
+              National Competition
+            </span>
+          </div>
 
-            <!-- Academic Distinctions -->
-            <div class="p-6 rounded-2xl bg-[#f8f9fa] hover:bg-[#f0f2f4] transition-colors">
-              <div class="flex items-center justify-between mb-2">
-                <span class="text-[11px] font-mono text-[#2b4951] font-semibold">ACADEMIC & EARLY HONORS</span>
-                <span class="text-xs font-mono text-[#767676]">2007–2008</span>
+          <!-- Item 7 -->
+          <div class="py-6 flex flex-col md:flex-row md:items-baseline justify-between gap-2 md:gap-8 group hover:bg-[#f8f9fa]/80 transition-colors px-3 -mx-3 rounded-xl">
+            <div class="flex items-baseline gap-6">
+              <span class="font-mono text-sm text-[#de602e] font-semibold w-16 flex-shrink-0">2014</span>
+              <div>
+                <h3 class="text-xl md:text-2xl font-serif-luxury text-[#1a1d20] group-hover:text-[#de602e] transition-colors">
+                  Mehmetkavuk Mosque & Cultural Complex — 3rd Place
+                </h3>
+                <p class="text-xs md:text-sm text-[#767676] mt-1 font-sans">
+                  Terraced worship space and community center in Malatya.
+                </p>
               </div>
-              <h4 class="text-base font-serif-luxury text-[#1a1d20]">Boardman Scholarship & Scholastic Silver Key</h4>
-              <p class="text-xs text-[#4c4c4c] mt-1">UNCC Architecture Merit Scholarship (3.488 GPA) & Myers Park Fine Arts Silver Key.</p>
             </div>
+            <span class="text-xs font-mono text-[#38606a] uppercase tracking-wider flex-shrink-0 self-start md:self-auto">
+              National Competition
+            </span>
+          </div>
+
+          <!-- Item 8 -->
+          <div class="py-6 flex flex-col md:flex-row md:items-baseline justify-between gap-2 md:gap-8 group hover:bg-[#f8f9fa]/80 transition-colors px-3 -mx-3 rounded-xl">
+            <div class="flex items-baseline gap-6">
+              <span class="font-mono text-sm text-[#de602e] font-semibold w-16 flex-shrink-0">2014</span>
+              <div>
+                <h3 class="text-xl md:text-2xl font-serif-luxury text-[#1a1d20] group-hover:text-[#de602e] transition-colors">
+                  Bishkek 2040 Urban Vision & Master-Plan — Honorable Mention
+                </h3>
+                <p class="text-xs md:text-sm text-[#767676] mt-1 font-sans">
+                  Regional transportation corridor and high-density civic planning.
+                </p>
+              </div>
+            </div>
+            <span class="text-xs font-mono text-[#38606a] uppercase tracking-wider flex-shrink-0 self-start md:self-auto">
+              Master Planning
+            </span>
+          </div>
+
+          <!-- Item 9 -->
+          <div class="py-6 flex flex-col md:flex-row md:items-baseline justify-between gap-2 md:gap-8 group hover:bg-[#f8f9fa]/80 transition-colors px-3 -mx-3 rounded-xl">
+            <div class="flex items-baseline gap-6">
+              <span class="font-mono text-sm text-[#de602e] font-semibold w-16 flex-shrink-0">2013</span>
+              <div>
+                <h3 class="text-xl md:text-2xl font-serif-luxury text-[#1a1d20] group-hover:text-[#de602e] transition-colors">
+                  İZKA Headquarters National Competition — 1st Place
+                </h3>
+                <p class="text-xs md:text-sm text-[#767676] mt-1 font-sans">
+                  Primary architectural competition victory with aboutblank design team.
+                </p>
+              </div>
+            </div>
+            <span class="text-xs font-mono text-[#38606a] uppercase tracking-wider flex-shrink-0 self-start md:self-auto">
+              National Competition
+            </span>
+          </div>
+
+          <!-- Item 10 -->
+          <div class="py-6 flex flex-col md:flex-row md:items-baseline justify-between gap-2 md:gap-8 group hover:bg-[#f8f9fa]/80 transition-colors px-3 -mx-3 rounded-xl">
+            <div class="flex items-baseline gap-6">
+              <span class="font-mono text-sm text-[#de602e] font-semibold w-16 flex-shrink-0">2007–08</span>
+              <div>
+                <h3 class="text-xl md:text-2xl font-serif-luxury text-[#1a1d20] group-hover:text-[#de602e] transition-colors">
+                  Boardman Scholarship & Scholastic Silver Key
+                </h3>
+                <p class="text-xs md:text-sm text-[#767676] mt-1 font-sans">
+                  UNCC Architecture Merit Scholarship (3.488 GPA) & Myers Park Fine Arts Silver Key recipient.
+                </p>
+              </div>
+            </div>
+            <span class="text-xs font-mono text-[#38606a] uppercase tracking-wider flex-shrink-0 self-start md:self-auto">
+              Academic & Fine Art
+            </span>
           </div>
 
         </div>
@@ -1305,9 +1365,9 @@
         const thumbBtn = document.getElementById(`thumb-btn-${i}`);
         if (thumbBtn) {
           if (i === index) {
-            thumbBtn.className = "group relative h-20 md:h-28 rounded-lg overflow-hidden cursor-pointer transition-all duration-300 ring-2 ring-[#de602e]";
+            thumbBtn.className = "group relative h-20 lg:h-[118px] w-full rounded-lg overflow-hidden cursor-pointer transition-all duration-300 ring-2 ring-[#de602e]";
           } else {
-            thumbBtn.className = "group relative h-20 md:h-28 rounded-lg overflow-hidden cursor-pointer transition-all duration-300 ring-0 hover:ring-2 hover:ring-[#de602e]";
+            thumbBtn.className = "group relative h-20 lg:h-[118px] w-full rounded-lg overflow-hidden cursor-pointer transition-all duration-300 ring-0 hover:ring-2 hover:ring-[#de602e]";
           }
         }
       }
