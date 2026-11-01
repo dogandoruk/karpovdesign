@@ -8,6 +8,7 @@
 competitor_previews/
 Initial Brief/*.pdf
 Official Assets/
+*.psd
 *.pyc
 __pycache__/
 
