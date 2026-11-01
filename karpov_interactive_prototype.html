@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Alexandr Karpov — Architectural Portfolio</title>
+  <title>Alexandr Karpov — Architecture, Design & Practice</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     if (!window.tailwind) {
@@ -15,6 +15,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
   <style>
     :root {
+      /* 60-30-10 Rule - LIGHT ARCHITECTURAL PALETTE */
       --bg-main: #f8f9fa;
       --bg-surface: #ffffff;
       --bg-surface-alt: #f0f2f4;
@@ -107,8 +108,8 @@
 </head>
 <body class="antialiased selection:bg-[#de602e] selection:text-white bg-[#f8f9fa] text-[#1a1d20]">
 
-  <!-- Top Global Navigation Bar: Wide, Spacious, Editorial (Inspired by Field Architecture) -->
-  <header class="fixed top-0 left-0 right-0 z-50 bg-[#ffffff]/90 backdrop-blur-md px-8 md:px-16 lg:px-24 py-6 md:py-8 flex items-center justify-between transition-all duration-300">
+  <!-- Top Global Navigation Bar (Inspired by fieldarchitecture.com - Spacious, Pure Editorial Nav, Zero Button Borders) -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-[#ffffff]/90 backdrop-blur-md px-8 md:px-16 lg:px-24 py-6 md:py-8 flex items-center justify-between transition-all duration-300 shadow-sm">
     
     <!-- Left: KAD Monogram + Studio Name -->
     <a href="#hero" onclick="switchPageView('home')" class="flex items-center gap-4 group">
@@ -119,28 +120,24 @@
       </div>
     </a>
 
-    <!-- Right: Wide Field-Architecture Style Nav Links (No Button Borders, Spacious Tracking) -->
+    <!-- Right: Navigation Links (Works, Academy, Contact - Zero Button Borders, Spacious Tracking) -->
     <nav class="flex items-center gap-8 md:gap-12 lg:gap-16 text-xs md:text-[13px] tracking-[0.25em] uppercase font-medium">
-      <button onclick="switchPageView('home')" id="tab-home" class="transition-colors text-[#de602e] font-semibold border-0 bg-transparent p-0">
-        Work
-      </button>
-      <button onclick="switchPageView('category')" id="tab-category" class="transition-colors text-[#4c4c4c] hover:text-[#1a1d20] border-0 bg-transparent p-0">
-        Archive
-      </button>
-      <button onclick="switchPageView('project')" id="tab-project" class="transition-colors text-[#4c4c4c] hover:text-[#1a1d20] border-0 bg-transparent p-0">
-        Case Study
+      <button onclick="switchPageView('category')" id="tab-works" class="transition-colors text-[#4c4c4c] hover:text-[#1a1d20] border-0 bg-transparent p-0">
+        Works
       </button>
       <button onclick="switchPageView('academy')" id="tab-academy" class="transition-colors text-[#4c4c4c] hover:text-[#1a1d20] border-0 bg-transparent p-0">
         Academy
       </button>
+      <button onclick="switchPageView('contact')" id="tab-contact" class="transition-colors text-[#4c4c4c] hover:text-[#1a1d20] border-0 bg-transparent p-0">
+        Contact
+      </button>
     </nav>
   </header>
 
-  <!-- VIEW 1: HOMEPAGE (Default) -->
-  <main id="view-home" class="view-section">
-
-    <!-- 1. Full-Bleed Viewport Hero -->
-    <!-- Name towards Left with Seamless Gradient Fading into Deep Architectural Visual -->
+  <!-- VIEW CONTAINER 1: HOMEPAGE (The Spatial Journey) -->
+  <main id="view-home" class="view-section min-h-screen">
+    
+    <!-- 1. High-Impact Full-Bleed 100vh Hero Banner (Clean Name Only, Seamless Gradient, No Near Accolades) -->
     <section id="hero" class="relative w-full h-screen overflow-hidden flex items-center bg-[#1a1d20]">
       
       <!-- Architectural Background Image (Natural Depth & Rich Tone) -->
@@ -154,7 +151,7 @@
       <!-- Seamless Left-to-Right White Gradient Overlay (Blends Into Image Naturally) -->
       <div class="absolute inset-y-0 left-0 w-full md:w-3/4 lg:w-3/5 hero-seamless-gradient pointer-events-none"></div>
 
-      <!-- Left-Aligned Name Container (Moved towards Left) -->
+      <!-- Left-Aligned Name Container (Clean Name Only, No Accolades) -->
       <div class="relative z-10 max-w-2xl pl-8 md:pl-16 lg:pl-24 pr-6 pt-16">
         
         <!-- KAD Logo Strokes -->
@@ -162,17 +159,10 @@
           <img src="data:image/png;base64,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" alt="KAD Logo Strokes" class="w-16 md:w-22 h-auto filter drop-shadow-sm">
         </div>
 
-        <!-- Name: Alexandr Karpov -->
+        <!-- Name Only: Alexandr Karpov -->
         <h1 class="text-5xl md:text-7xl lg:text-8xl font-normal text-[#1a1d20] font-serif-luxury tracking-tight leading-none mb-4">
           Alexandr Karpov
         </h1>
-
-        <!-- Accolade Under Name: ONLY Turgut Cansever Award -->
-        <div>
-          <p class="text-sm md:text-base text-[#2b4951] font-semibold tracking-wide font-mono">
-            Turgut Cansever National Architecture Award (2016)
-          </p>
-        </div>
 
       </div>
 
@@ -186,7 +176,7 @@
     </section>
 
     <!-- 2. The 5 Typologies Strip (Residential, Commercial, Cultural, Conceptual, Art) -->
-    <!-- DIRECT TRANSITION: ALL TEXT HIDDEN BY DEFAULT, GLIDES UP FROM BOTTOM ON HOVER -->
+    <!-- DIRECT TRANSITION: ZERO INTRO TEXT, ZERO LABELS, TALL EDGE-TO-EDGE PANELS -->
     <section id="typology-strip" class="relative w-full bg-[#f0f2f4]">
       <div class="grid grid-cols-1 md:grid-cols-5 h-[760px] w-full overflow-hidden">
 
@@ -215,7 +205,7 @@
                style="background-image: url('assets/portfolio_plates/plate_page_30.jpg');"></div>
           
           <div class="absolute inset-0 hover-darken-veil"></div>
-          
+
           <div class="relative z-10 hover-reveal-text">
             <span class="text-xs font-mono text-[#f19f55] tracking-widest uppercase block mb-1">02 / Typology</span>
             <h2 class="text-3xl md:text-4xl font-serif-luxury text-white">
@@ -231,7 +221,7 @@
                style="background-image: url('assets/portfolio_plates/plate_page_10.jpg');"></div>
           
           <div class="absolute inset-0 hover-darken-veil"></div>
-          
+
           <div class="relative z-10 hover-reveal-text">
             <span class="text-xs font-mono text-[#f19f55] tracking-widest uppercase block mb-1">03 / Typology</span>
             <h2 class="text-3xl md:text-4xl font-serif-luxury text-white">
@@ -247,7 +237,7 @@
                style="background-image: url('assets/portfolio_plates/plate_page_32.jpg');"></div>
           
           <div class="absolute inset-0 hover-darken-veil"></div>
-          
+
           <div class="relative z-10 hover-reveal-text">
             <span class="text-xs font-mono text-[#f19f55] tracking-widest uppercase block mb-1">04 / Typology</span>
             <h2 class="text-3xl md:text-4xl font-serif-luxury text-white">
@@ -263,7 +253,7 @@
                style="background-image: url('assets/portfolio_plates/plate_page_36.jpg');"></div>
           
           <div class="absolute inset-0 hover-darken-veil"></div>
-          
+
           <div class="relative z-10 hover-reveal-text">
             <span class="text-xs font-mono text-[#f19f55] tracking-widest uppercase block mb-1">05 / Typology</span>
             <h2 class="text-3xl md:text-4xl font-serif-luxury text-white">
@@ -275,8 +265,7 @@
       </div>
     </section>
 
-    <!-- 3. Dynamic Architectural Album Component (Philips-Style Showcase) -->
-    <!-- Text Over Image is Hidden by Default, Appears on Hover Moving from Bottom -->
+    <!-- 3. Dynamic Interactive Architectural Album Section (Accordion Response to Clicked Typology) -->
     <section id="album-section" class="py-16 px-6 md:px-16 lg:px-24 bg-[#f8f9fa]">
       <div class="max-w-6xl mx-auto">
 
@@ -316,255 +305,485 @@
             <!-- Caption Card: Hidden by Default, Glides Up Gently from Bottom on Hover -->
             <div class="absolute bottom-6 left-6 z-10 bg-[#ffffff]/95 backdrop-blur-md px-5 py-3 rounded-xl shadow-md hover-reveal-text">
               <span id="main-feature-phase" class="text-[10px] uppercase font-mono text-[#de602e] tracking-wider block">Portfolio Plate 30</span>
-              <h4 id="main-feature-title" class="text-sm font-medium text-[#1a1d20]">Public Atrium & Ground Plaza</h4>
+              <h4 id="main-feature-title" class="text-sm font-semibold text-[#1a1d20]">Urban Context & Atrium Volume</h4>
             </div>
 
-            <!-- Left / Right Chevron Slide Arrows (Zero Borders) -->
+            <!-- Subtle Left/Right Navigation Chevrons (Zero Button Borders) -->
             <button onclick="prevImage()" 
-                    class="absolute left-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-[#ffffff]/90 hover:bg-[#de602e] text-[#1a1d20] hover:text-white flex items-center justify-center transition-all duration-300 shadow-md hover:scale-110 border-0">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                    aria-label="Previous plate"
+                    class="absolute left-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/90 hover:bg-[#de602e] hover:text-white text-[#1a1d20] flex items-center justify-center shadow-md transition-all duration-300 border-0">
+              <svg class="w-5 h-5 -translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
             </button>
             <button onclick="nextImage()" 
-                    class="absolute right-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-[#ffffff]/90 hover:bg-[#de602e] text-[#1a1d20] hover:text-white flex items-center justify-center transition-all duration-300 shadow-md hover:scale-110 border-0">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                    aria-label="Next plate"
+                    class="absolute right-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/90 hover:bg-[#de602e] hover:text-white text-[#1a1d20] flex items-center justify-center shadow-md transition-all duration-300 border-0">
+              <svg class="w-5 h-5 translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
             </button>
+
+            <!-- Subtle Slide Counter Pill -->
+            <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-md px-3 py-1 rounded-full text-[11px] font-mono text-[#38606a] shadow-sm">
+              <span id="slide-counter">1 of 5</span>
+            </div>
           </div>
 
-          <!-- Horizontal 5-Thumbnail Carousel Strip -->
+          <!-- Bottom 5-Thumbnail Carousel Strip (Hover & Click Switcher) -->
           <div class="mt-6">
-            <div class="flex items-center justify-between text-xs text-[#767676] mb-3 px-1">
-              <span>Project Plates & Drawings</span>
-              <span id="thumbnail-counter" class="font-mono text-[#de602e]">1 of 5</span>
-            </div>
-
-            <div class="grid grid-cols-5 gap-3 md:gap-4">
-              <!-- Thumbnail 0 -->
-              <div onclick="setAlbumView(0)" class="thumb-card group relative h-20 md:h-24 rounded-lg overflow-hidden cursor-pointer shadow-sm transition-all bg-[#f0f2f4] ring-2 ring-[#de602e]">
+            <div class="grid grid-cols-5 gap-3 md:gap-4" id="thumbnail-strip">
+              
+              <!-- Thumb 0 -->
+              <div onclick="setAlbumView(0)" id="thumb-btn-0" 
+                   class="group relative h-20 md:h-28 rounded-lg overflow-hidden cursor-pointer transition-all duration-300 ring-2 ring-[#de602e]">
                 <img id="thumb-img-0" src="assets/portfolio_plates/plate_page_30.jpg" class="w-full h-full object-cover">
-                <div class="absolute inset-0 bg-black/10 group-hover:bg-black/40 transition-colors"></div>
-                <div id="thumb-label-0" class="absolute bottom-1.5 left-2 right-2 text-[10px] font-mono text-white truncate drop-shadow hover-reveal-text">Plate 30</div>
+                <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
+                <div class="absolute bottom-1 left-2 z-10 hover-reveal-text">
+                  <span id="thumb-lbl-0" class="text-[9px] font-mono text-white/90 uppercase tracking-tighter truncate block">P01 Context</span>
+                </div>
               </div>
 
-              <!-- Thumbnail 1 -->
-              <div onclick="setAlbumView(1)" class="thumb-card group relative h-20 md:h-24 rounded-lg overflow-hidden cursor-pointer shadow-sm transition-all bg-[#f0f2f4]">
+              <!-- Thumb 1 -->
+              <div onclick="setAlbumView(1)" id="thumb-btn-1" 
+                   class="group relative h-20 md:h-28 rounded-lg overflow-hidden cursor-pointer transition-all duration-300 ring-0 hover:ring-2 hover:ring-[#de602e]">
                 <img id="thumb-img-1" src="assets/portfolio_plates/plate_page_31.jpg" class="w-full h-full object-cover">
-                <div class="absolute inset-0 bg-black/10 group-hover:bg-black/40 transition-colors"></div>
-                <div id="thumb-label-1" class="absolute bottom-1.5 left-2 right-2 text-[10px] font-mono text-white truncate drop-shadow hover-reveal-text">Plate 31</div>
+                <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
+                <div class="absolute bottom-1 left-2 z-10 hover-reveal-text">
+                  <span id="thumb-lbl-1" class="text-[9px] font-mono text-white/90 uppercase tracking-tighter truncate block">P02 Floor Plans</span>
+                </div>
               </div>
 
-              <!-- Thumbnail 2 -->
-              <div onclick="setAlbumView(2)" class="thumb-card group relative h-20 md:h-24 rounded-lg overflow-hidden cursor-pointer shadow-sm transition-all bg-[#f0f2f4]">
-                <img id="thumb-img-2" src="assets/projects/commercial_izka/img_01_558x425.jpeg" class="w-full h-full object-cover">
-                <div class="absolute inset-0 bg-black/10 group-hover:bg-black/40 transition-colors"></div>
-                <div id="thumb-label-2" class="absolute bottom-1.5 left-2 right-2 text-[10px] font-mono text-white truncate drop-shadow hover-reveal-text">Atrium View</div>
+              <!-- Thumb 2 -->
+              <div onclick="setAlbumView(2)" id="thumb-btn-2" 
+                   class="group relative h-20 md:h-28 rounded-lg overflow-hidden cursor-pointer transition-all duration-300 ring-0 hover:ring-2 hover:ring-[#de602e]">
+                <img id="thumb-img-2" src="assets/projects/commercial_izka/izka_atrium_drawing.jpg" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
+                <div class="absolute bottom-1 left-2 z-10 hover-reveal-text">
+                  <span id="thumb-lbl-2" class="text-[9px] font-mono text-white/90 uppercase tracking-tighter truncate block">P03 Atrium</span>
+                </div>
               </div>
 
-              <!-- Thumbnail 3 -->
-              <div onclick="setAlbumView(3)" class="thumb-card group relative h-20 md:h-24 rounded-lg overflow-hidden cursor-pointer shadow-sm transition-all bg-[#f0f2f4]">
-                <img id="thumb-img-3" src="assets/portfolio_plates/plate_page_18.jpg" class="w-full h-full object-cover">
-                <div class="absolute inset-0 bg-black/10 group-hover:bg-black/40 transition-colors"></div>
-                <div id="thumb-label-3" class="absolute bottom-1.5 left-2 right-2 text-[10px] font-mono text-white truncate drop-shadow hover-reveal-text">Konak Center</div>
+              <!-- Thumb 3 -->
+              <div onclick="setAlbumView(3)" id="thumb-btn-3" 
+                   class="group relative h-20 md:h-28 rounded-lg overflow-hidden cursor-pointer transition-all duration-300 ring-0 hover:ring-2 hover:ring-[#de602e]">
+                <img id="thumb-img-3" src="assets/projects/commercial_izka/izka_facade_render.jpg" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
+                <div class="absolute bottom-1 left-2 z-10 hover-reveal-text">
+                  <span id="thumb-lbl-3" class="text-[9px] font-mono text-white/90 uppercase tracking-tighter truncate block">P04 BIM Model</span>
+                </div>
               </div>
 
-              <!-- Thumbnail 4 -->
-              <div onclick="setAlbumView(4)" class="thumb-card group relative h-20 md:h-24 rounded-lg overflow-hidden cursor-pointer shadow-sm transition-all bg-[#f0f2f4]">
-                <img id="thumb-img-4" src="assets/portfolio_plates/plate_page_19.jpg" class="w-full h-full object-cover">
-                <div class="absolute inset-0 bg-black/10 group-hover:bg-black/40 transition-colors"></div>
-                <div id="thumb-label-4" class="absolute bottom-1.5 left-2 right-2 text-[10px] font-mono text-white truncate drop-shadow hover-reveal-text">Konak Plans</div>
+              <!-- Thumb 4 -->
+              <div onclick="setAlbumView(4)" id="thumb-btn-4" 
+                   class="group relative h-20 md:h-28 rounded-lg overflow-hidden cursor-pointer transition-all duration-300 ring-0 hover:ring-2 hover:ring-[#de602e]">
+                <img id="thumb-img-4" src="assets/projects/commercial_izka/izka_site_axon.jpg" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
+                <div class="absolute bottom-1 left-2 z-10 hover-reveal-text">
+                  <span id="thumb-lbl-4" class="text-[9px] font-mono text-white/90 uppercase tracking-tighter truncate block">P05 Section</span>
+                </div>
               </div>
+
             </div>
-          </div>
-
-          <!-- Bottom Meta Bar -->
-          <div class="mt-8 pt-4 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#767676]">
-            <div class="flex items-center gap-6">
-              <span id="meta-location">İzmir, Turkey</span>
-              <span>·</span>
-              <span id="meta-date">2013–2016</span>
-            </div>
-            
-            <button onclick="openProjectDetail('commercial')" class="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#de602e] hover:text-[#ad4b24] transition-colors border-0 bg-transparent">
-              <span>View Case Study</span>
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-            </button>
           </div>
 
         </div>
+
+      </div>
+    </section>
+
+    <!-- 4. Honors & Accolades Section (Clean, Stylish Architectural Layout Below Album) -->
+    <section id="accolades-section" class="py-20 px-8 md:px-16 lg:px-24 bg-[#ffffff]">
+      <div class="max-w-6xl mx-auto">
+        
+        <div class="flex flex-col md:flex-row md:items-end justify-between pb-8 border-b border-[#e5e7eb] mb-12 gap-4">
+          <div>
+            <span class="text-xs font-mono text-[#de602e] tracking-widest uppercase">Recognition</span>
+            <h2 class="text-3xl md:text-5xl font-serif-luxury text-[#1a1d20] mt-1">Honors & Accolades</h2>
+          </div>
+          <p class="text-xs text-[#767676] max-w-md font-mono">
+            National competition awards, academic distinctions, and realized master planning recognitions (2007–2016).
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          
+          <!-- Column 1: Major National Architecture & Competition Wins -->
+          <div class="space-y-4">
+            <h3 class="text-sm font-mono tracking-widest uppercase text-[#2b4951] mb-6 flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-[#de602e]"></span>
+              National Architecture & Competition Wins
+            </h3>
+
+            <!-- Award 1 -->
+            <div class="p-6 rounded-2xl bg-[#f8f9fa] hover:bg-[#f0f2f4] transition-colors">
+              <div class="flex items-center justify-between mb-2">
+                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono uppercase bg-[#de602e] text-white font-semibold">1st Place & National Award</span>
+                <span class="text-xs font-mono text-[#767676]">2016</span>
+              </div>
+              <h4 class="text-lg font-serif-luxury text-[#1a1d20]">Turgut Cansever National Architecture Award</h4>
+              <p class="text-xs text-[#4c4c4c] mt-1">İZKA (İzmir Development Agency) Headquarters — Design development & BIM coordination.</p>
+            </div>
+
+            <!-- Award 2 -->
+            <div class="p-6 rounded-2xl bg-[#f8f9fa] hover:bg-[#f0f2f4] transition-colors">
+              <div class="flex items-center justify-between mb-2">
+                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono uppercase bg-[#2b4951] text-white font-semibold">1st Place</span>
+                <span class="text-xs font-mono text-[#767676]">2015</span>
+              </div>
+              <h4 class="text-lg font-serif-luxury text-[#1a1d20]">Eskişehir Industrial Regeneration</h4>
+              <p class="text-xs text-[#4c4c4c] mt-1">Vehicle Maintenance Workshop Adaptive Reuse — Lead Designer, concept & master planning.</p>
+            </div>
+
+            <!-- Award 3 -->
+            <div class="p-6 rounded-2xl bg-[#f8f9fa] hover:bg-[#f0f2f4] transition-colors">
+              <div class="flex items-center justify-between mb-2">
+                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono uppercase bg-[#2b4951] text-white font-semibold">1st Place</span>
+                <span class="text-xs font-mono text-[#767676]">2013</span>
+              </div>
+              <h4 class="text-lg font-serif-luxury text-[#1a1d20]">İZKA Headquarters National Competition</h4>
+              <p class="text-xs text-[#4c4c4c] mt-1">Primary architectural competition victory with aboutblank design team.</p>
+            </div>
+
+            <!-- Award 4 -->
+            <div class="p-6 rounded-2xl bg-[#f8f9fa] hover:bg-[#f0f2f4] transition-colors">
+              <div class="flex items-center justify-between mb-2">
+                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono uppercase bg-[#38606a] text-white font-semibold">1st Mention</span>
+                <span class="text-xs font-mono text-[#767676]">2015</span>
+              </div>
+              <h4 class="text-lg font-serif-luxury text-[#1a1d20]">Climate Zone 7 National Competition</h4>
+              <p class="text-xs text-[#4c4c4c] mt-1">Extreme microclimatic passive design & regional sustainability research.</p>
+            </div>
+          </div>
+
+          <!-- Column 2: Competition Honors & Academic Distinctions -->
+          <div class="space-y-4">
+            <h3 class="text-sm font-mono tracking-widest uppercase text-[#2b4951] mb-6 flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-[#38606a]"></span>
+              Competition Honors & Academic Distinctions
+            </h3>
+
+            <!-- Honor 1 -->
+            <div class="p-6 rounded-2xl bg-[#f8f9fa] hover:bg-[#f0f2f4] transition-colors">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-[11px] font-mono text-[#de602e] font-semibold">3RD PLACE</span>
+                <span class="text-xs font-mono text-[#767676]">2015</span>
+              </div>
+              <h4 class="text-base font-serif-luxury text-[#1a1d20]">Beylikdüzü Municipality Bridge & Valley</h4>
+              <p class="text-xs text-[#4c4c4c] mt-1">Urban infrastructure & civic valley connectivity national competition.</p>
+            </div>
+
+            <!-- Honor 2 -->
+            <div class="p-6 rounded-2xl bg-[#f8f9fa] hover:bg-[#f0f2f4] transition-colors">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-[11px] font-mono text-[#de602e] font-semibold">3RD PLACE</span>
+                <span class="text-xs font-mono text-[#767676]">2014</span>
+              </div>
+              <h4 class="text-base font-serif-luxury text-[#1a1d20]">Gökçeada High School Educational Campus</h4>
+              <p class="text-xs text-[#4c4c4c] mt-1">Island environmental school complex & student community housing.</p>
+            </div>
+
+            <!-- Honor 3 -->
+            <div class="p-6 rounded-2xl bg-[#f8f9fa] hover:bg-[#f0f2f4] transition-colors">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-[11px] font-mono text-[#de602e] font-semibold">3RD PLACE</span>
+                <span class="text-xs font-mono text-[#767676]">2014</span>
+              </div>
+              <h4 class="text-base font-serif-luxury text-[#1a1d20]">Mehmetkavuk Mosque & Cultural Complex</h4>
+              <p class="text-xs text-[#4c4c4c] mt-1">Terraced worship space and community center in Malatya.</p>
+            </div>
+
+            <!-- Honor 4 -->
+            <div class="p-6 rounded-2xl bg-[#f8f9fa] hover:bg-[#f0f2f4] transition-colors">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-[11px] font-mono text-[#38606a] font-semibold">HONORABLE MENTION</span>
+                <span class="text-xs font-mono text-[#767676]">2015</span>
+              </div>
+              <h4 class="text-base font-serif-luxury text-[#1a1d20]">Maltepe Gülsuyu Cemevi Cultural Center</h4>
+              <p class="text-xs text-[#4c4c4c] mt-1">Civic sanctuary & cultural gathering halls national competition.</p>
+            </div>
+
+            <!-- Honor 5 -->
+            <div class="p-6 rounded-2xl bg-[#f8f9fa] hover:bg-[#f0f2f4] transition-colors">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-[11px] font-mono text-[#38606a] font-semibold">HONORABLE MENTION</span>
+                <span class="text-xs font-mono text-[#767676]">2014</span>
+              </div>
+              <h4 class="text-base font-serif-luxury text-[#1a1d20]">Bishkek 2040 Urban Vision & Master-Plan</h4>
+              <p class="text-xs text-[#4c4c4c] mt-1">Regional transportation corridor and high-density civic planning.</p>
+            </div>
+
+            <!-- Academic Distinctions -->
+            <div class="p-6 rounded-2xl bg-[#f8f9fa] hover:bg-[#f0f2f4] transition-colors">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-[11px] font-mono text-[#2b4951] font-semibold">ACADEMIC & EARLY HONORS</span>
+                <span class="text-xs font-mono text-[#767676]">2007–2008</span>
+              </div>
+              <h4 class="text-base font-serif-luxury text-[#1a1d20]">Boardman Scholarship & Scholastic Silver Key</h4>
+              <p class="text-xs text-[#4c4c4c] mt-1">UNCC Architecture Merit Scholarship (3.488 GPA) & Myers Park Fine Arts Silver Key.</p>
+            </div>
+          </div>
+
+        </div>
+
       </div>
     </section>
 
   </main>
 
-  <!-- VIEW 2: CATEGORY ARCHIVE PAGE -->
-  <!-- Card Text Over Image is Hidden by Default, Glides Up on Hover -->
+  <!-- VIEW CONTAINER 2: WORKS (Category Archive Grid) -->
   <main id="view-category" class="view-section hidden pt-32 px-8 md:px-16 lg:px-24 min-h-screen bg-[#f8f9fa]">
     <div class="max-w-6xl mx-auto py-10">
       
-      <div class="pb-6 mb-10 flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
+      <div class="flex flex-col md:flex-row md:items-end justify-between pb-8 border-b border-[#e5e7eb] mb-12 gap-6">
         <div>
-          <span class="text-xs font-mono text-[#de602e] tracking-widest uppercase">Archive Directory</span>
-          <h1 id="category-archive-title" class="text-4xl font-serif-luxury text-[#1a1d20] mt-1">All Works</h1>
+          <span class="text-xs font-mono text-[#de602e] tracking-widest uppercase">Archive</span>
+          <h1 class="text-4xl md:text-5xl font-serif-luxury text-[#1a1d20] mt-1" id="category-archive-title">Selected Works</h1>
         </div>
-        
-        <!-- Filter Tabs (No Button Borders) -->
-        <div class="flex items-center gap-1.5 flex-wrap bg-[#f0f2f4] p-1.5 rounded-full text-xs">
-          <button onclick="filterCategoryGrid('all')" id="cat-filter-all" class="px-4 py-1.5 rounded-full font-medium bg-[#de602e] text-white border-0 transition-all">All</button>
-          <button onclick="filterCategoryGrid('residential')" id="cat-filter-residential" class="px-4 py-1.5 rounded-full font-medium text-[#4c4c4c] hover:text-[#1a1d20] border-0 transition-all">Residential</button>
-          <button onclick="filterCategoryGrid('commercial')" id="cat-filter-commercial" class="px-4 py-1.5 rounded-full font-medium text-[#4c4c4c] hover:text-[#1a1d20] border-0 transition-all">Commercial</button>
-          <button onclick="filterCategoryGrid('cultural')" id="cat-filter-cultural" class="px-4 py-1.5 rounded-full font-medium text-[#4c4c4c] hover:text-[#1a1d20] border-0 transition-all">Cultural</button>
-          <button onclick="filterCategoryGrid('conceptual')" id="cat-filter-conceptual" class="px-4 py-1.5 rounded-full font-medium text-[#4c4c4c] hover:text-[#1a1d20] border-0 transition-all">Conceptual</button>
-          <button onclick="filterCategoryGrid('art')" id="cat-filter-art" class="px-4 py-1.5 rounded-full font-medium text-[#4c4c4c] hover:text-[#1a1d20] border-0 transition-all">Art</button>
+
+        <!-- Category Filters (Zero Button Borders) -->
+        <div class="flex items-center gap-2 overflow-x-auto pb-1 text-xs font-mono">
+          <button onclick="filterCategoryGrid('all')" id="cat-filter-all" class="px-3.5 py-1 rounded-full font-medium bg-[#de602e] text-white border-0 transition-all">All</button>
+          <button onclick="filterCategoryGrid('residential')" id="cat-filter-residential" class="px-3.5 py-1 rounded-full font-medium text-[#4c4c4c] hover:text-[#1a1d20] border-0 transition-all">Residential</button>
+          <button onclick="filterCategoryGrid('commercial')" id="cat-filter-commercial" class="px-3.5 py-1 rounded-full font-medium text-[#4c4c4c] hover:text-[#1a1d20] border-0 transition-all">Commercial</button>
+          <button onclick="filterCategoryGrid('cultural')" id="cat-filter-cultural" class="px-3.5 py-1 rounded-full font-medium text-[#4c4c4c] hover:text-[#1a1d20] border-0 transition-all">Cultural</button>
+          <button onclick="filterCategoryGrid('conceptual')" id="cat-filter-conceptual" class="px-3.5 py-1 rounded-full font-medium text-[#4c4c4c] hover:text-[#1a1d20] border-0 transition-all">Conceptual</button>
+          <button onclick="filterCategoryGrid('art')" id="cat-filter-art" class="px-3.5 py-1 rounded-full font-medium text-[#4c4c4c] hover:text-[#1a1d20] border-0 transition-all">Art</button>
         </div>
       </div>
 
-      <!-- Project Grid: Text Over Image Hidden by Default, Glides Up on Hover -->
-      <div id="category-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- 9-Project Grounded Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="category-cards-container">
         
-        <!-- 1. SEED (Residential) -->
-        <div onclick="openProjectDetail('residential')" class="cat-card residential group relative h-80 rounded-2xl overflow-hidden cursor-pointer shadow-sm hover:shadow-lg transition-all">
-          <img src="assets/portfolio_plates/plate_page_04.jpg" class="w-full h-full object-cover group-hover:scale-105 transition-all duration-700">
-          <div class="absolute inset-0 hover-darken-veil"></div>
-          <div class="absolute bottom-6 left-6 right-6 z-10 hover-reveal-text">
-            <span class="text-xs text-[#f19f55] font-mono block mb-1">2015 · RESIDENTIAL</span>
-            <h3 class="text-2xl font-serif-luxury text-white">SEED — Artists' Getaway</h3>
+        <!-- Project 1: SEED -->
+        <div onclick="openProjectDetail('residential')" class="cat-card residential group relative bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all cursor-pointer">
+          <div class="aspect-[4/3] overflow-hidden bg-[#f0f2f4] relative">
+            <img src="assets/portfolio_plates/plate_page_04.jpg" class="w-full h-full object-cover">
+            <div class="absolute inset-0 hover-darken-veil"></div>
+            <div class="absolute bottom-4 left-4 right-4 z-10 hover-reveal-text">
+              <span class="text-[10px] font-mono text-[#f19f55] uppercase block mb-1">2015 · Residential</span>
+              <h3 class="text-lg font-serif-luxury text-white">SEED — Artists' Getaway</h3>
+            </div>
+          </div>
+          <div class="p-6">
+            <span class="text-[10px] font-mono uppercase bg-[#e6f1f4] text-[#2b4951] px-2.5 py-0.5 rounded-full font-semibold">Residential</span>
+            <h3 class="text-xl font-serif-luxury text-[#1a1d20] mt-3">SEED — Artists' Getaway</h3>
+            <p class="text-xs text-[#767676] mt-2 line-clamp-2">Aerodynamic mobile residential concept with expanding wet-core mechanics tailored to the New Mexico desert.</p>
           </div>
         </div>
 
-        <!-- 2. İZKA (Commercial) -->
-        <div onclick="openProjectDetail('commercial')" class="cat-card commercial group relative h-80 rounded-2xl overflow-hidden cursor-pointer shadow-sm hover:shadow-lg transition-all">
-          <img src="assets/portfolio_plates/plate_page_30.jpg" class="w-full h-full object-cover group-hover:scale-105 transition-all duration-700">
-          <div class="absolute inset-0 hover-darken-veil"></div>
-          <div class="absolute bottom-6 left-6 right-6 z-10 hover-reveal-text">
-            <span class="text-xs text-[#f19f55] font-mono block mb-1">2013–2016 · COMMERCIAL</span>
-            <h3 class="text-2xl font-serif-luxury text-white">İZKA Headquarters</h3>
+        <!-- Project 2: İZKA Headquarters -->
+        <div onclick="openProjectDetail('commercial')" class="cat-card commercial group relative bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all cursor-pointer">
+          <div class="aspect-[4/3] overflow-hidden bg-[#f0f2f4] relative">
+            <img src="assets/portfolio_plates/plate_page_30.jpg" class="w-full h-full object-cover">
+            <div class="absolute inset-0 hover-darken-veil"></div>
+            <div class="absolute bottom-4 left-4 right-4 z-10 hover-reveal-text">
+              <span class="text-[10px] font-mono text-[#f19f55] uppercase block mb-1">2013–2016 · Commercial</span>
+              <h3 class="text-lg font-serif-luxury text-white">İZKA Headquarters</h3>
+            </div>
+          </div>
+          <div class="p-6">
+            <span class="text-[10px] font-mono uppercase bg-[#de602e] text-white px-2.5 py-0.5 rounded-full font-semibold">Award Winner</span>
+            <h3 class="text-xl font-serif-luxury text-[#1a1d20] mt-3">İZKA Headquarters</h3>
+            <p class="text-xs text-[#767676] mt-2 line-clamp-2">1st Place & Turgut Cansever National Architecture Award (2016). Landmark civic atrium with energy-responsive double-skin facade.</p>
           </div>
         </div>
 
-        <!-- 3. Caferaga (Cultural) -->
-        <div onclick="openProjectDetail('cultural')" class="cat-card cultural group relative h-80 rounded-2xl overflow-hidden cursor-pointer shadow-sm hover:shadow-lg transition-all">
-          <img src="assets/portfolio_plates/plate_page_10.jpg" class="w-full h-full object-cover group-hover:scale-105 transition-all duration-700">
-          <div class="absolute inset-0 hover-darken-veil"></div>
-          <div class="absolute bottom-6 left-6 right-6 z-10 hover-reveal-text">
-            <span class="text-xs text-[#f19f55] font-mono block mb-1">2016 · CULTURAL</span>
-            <h3 class="text-2xl font-serif-luxury text-white">Caferaga Community Center</h3>
+        <!-- Project 3: Caferaga Community Center -->
+        <div onclick="openProjectDetail('cultural')" class="cat-card cultural group relative bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all cursor-pointer">
+          <div class="aspect-[4/3] overflow-hidden bg-[#f0f2f4] relative">
+            <img src="assets/portfolio_plates/plate_page_10.jpg" class="w-full h-full object-cover">
+            <div class="absolute inset-0 hover-darken-veil"></div>
+            <div class="absolute bottom-4 left-4 right-4 z-10 hover-reveal-text">
+              <span class="text-[10px] font-mono text-[#f19f55] uppercase block mb-1">2016 · Cultural</span>
+              <h3 class="text-lg font-serif-luxury text-white">Caferaga Community Center</h3>
+            </div>
+          </div>
+          <div class="p-6">
+            <span class="text-[10px] font-mono uppercase bg-[#e6f1f4] text-[#2b4951] px-2.5 py-0.5 rounded-full font-semibold">Cultural</span>
+            <h3 class="text-xl font-serif-luxury text-[#1a1d20] mt-3">Caferaga Community Center</h3>
+            <p class="text-xs text-[#767676] mt-2 line-clamp-2">Subterranean auditorium with landscaped public amphitheater roof integration in historic Kadıköy.</p>
           </div>
         </div>
 
-        <!-- 4. Sivas Bridge (Cultural) -->
-        <div onclick="openProjectDetail('cultural')" class="cat-card cultural group relative h-80 rounded-2xl overflow-hidden cursor-pointer shadow-sm hover:shadow-lg transition-all">
-          <img src="assets/portfolio_plates/plate_page_12.jpg" class="w-full h-full object-cover group-hover:scale-105 transition-all duration-700">
-          <div class="absolute inset-0 hover-darken-veil"></div>
-          <div class="absolute bottom-6 left-6 right-6 z-10 hover-reveal-text">
-            <span class="text-xs text-[#f19f55] font-mono block mb-1">2016 · INFRASTRUCTURE</span>
-            <h3 class="text-2xl font-serif-luxury text-white">Sivas Unity Bridge</h3>
+        <!-- Project 4: Sivas Unity Bridge -->
+        <div onclick="openProjectDetail('cultural')" class="cat-card cultural group relative bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all cursor-pointer">
+          <div class="aspect-[4/3] overflow-hidden bg-[#f0f2f4] relative">
+            <img src="assets/portfolio_plates/plate_page_12.jpg" class="w-full h-full object-cover">
+            <div class="absolute inset-0 hover-darken-veil"></div>
+            <div class="absolute bottom-4 left-4 right-4 z-10 hover-reveal-text">
+              <span class="text-[10px] font-mono text-[#f19f55] uppercase block mb-1">2016 · Cultural</span>
+              <h3 class="text-lg font-serif-luxury text-white">Sivas Unity Bridge</h3>
+            </div>
+          </div>
+          <div class="p-6">
+            <span class="text-[10px] font-mono uppercase bg-[#e6f1f4] text-[#2b4951] px-2.5 py-0.5 rounded-full font-semibold">Civic Infrastructure</span>
+            <h3 class="text-xl font-serif-luxury text-[#1a1d20] mt-3">Sivas Unity Bridge</h3>
+            <p class="text-xs text-[#767676] mt-2 line-clamp-2">Civic pedestrian span uniting historical Sivas across topography and riverbed with integrated community nodes.</p>
           </div>
         </div>
 
-        <!-- 5. Eskişehir Multi City (Conceptual) -->
-        <div onclick="openProjectDetail('conceptual')" class="cat-card conceptual group relative h-80 rounded-2xl overflow-hidden cursor-pointer shadow-sm hover:shadow-lg transition-all">
-          <img src="assets/portfolio_plates/plate_page_32.jpg" class="w-full h-full object-cover group-hover:scale-105 transition-all duration-700">
-          <div class="absolute inset-0 hover-darken-veil"></div>
-          <div class="absolute bottom-6 left-6 right-6 z-10 hover-reveal-text">
-            <span class="text-xs text-[#f19f55] font-mono block mb-1">2015 · CONCEPTUAL</span>
-            <h3 class="text-2xl font-serif-luxury text-white">Eskişehir Depot Regeneration</h3>
+        <!-- Project 5: Eskişehir Industrial Regeneration -->
+        <div onclick="openProjectDetail('conceptual')" class="cat-card conceptual group relative bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all cursor-pointer">
+          <div class="aspect-[4/3] overflow-hidden bg-[#f0f2f4] relative">
+            <img src="assets/portfolio_plates/plate_page_32.jpg" class="w-full h-full object-cover">
+            <div class="absolute inset-0 hover-darken-veil"></div>
+            <div class="absolute bottom-4 left-4 right-4 z-10 hover-reveal-text">
+              <span class="text-[10px] font-mono text-[#f19f55] uppercase block mb-1">2015 · Conceptual</span>
+              <h3 class="text-lg font-serif-luxury text-white">Eskişehir Industrial Regeneration</h3>
+            </div>
+          </div>
+          <div class="p-6">
+            <span class="text-[10px] font-mono uppercase bg-[#de602e] text-white px-2.5 py-0.5 rounded-full font-semibold">1st Place</span>
+            <h3 class="text-xl font-serif-luxury text-[#1a1d20] mt-3">Eskişehir Regeneration</h3>
+            <p class="text-xs text-[#767676] mt-2 line-clamp-2">1st Place National Competition (2015). Adaptive reuse master plan converting former train depot into elevated creative corridors.</p>
           </div>
         </div>
 
-        <!-- 6. Rome Watercolors (Art) -->
-        <div onclick="openProjectDetail('art')" class="cat-card art group relative h-80 rounded-2xl overflow-hidden cursor-pointer shadow-sm hover:shadow-lg transition-all">
-          <img src="assets/portfolio_plates/plate_page_36.jpg" class="w-full h-full object-cover group-hover:scale-105 transition-all duration-700">
-          <div class="absolute inset-0 hover-darken-veil"></div>
-          <div class="absolute bottom-6 left-6 right-6 z-10 hover-reveal-text">
-            <span class="text-xs text-[#f19f55] font-mono block mb-1">2010 · FINE ART</span>
-            <h3 class="text-2xl font-serif-luxury text-white">Rome Watercolors</h3>
+        <!-- Project 6: Sky Garden Residences -->
+        <div onclick="openProjectDetail('residential')" class="cat-card residential group relative bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all cursor-pointer">
+          <div class="aspect-[4/3] overflow-hidden bg-[#f0f2f4] relative">
+            <img src="assets/portfolio_plates/plate_page_20.jpg" class="w-full h-full object-cover">
+            <div class="absolute inset-0 hover-darken-veil"></div>
+            <div class="absolute bottom-4 left-4 right-4 z-10 hover-reveal-text">
+              <span class="text-[10px] font-mono text-[#f19f55] uppercase block mb-1">2015–2016 · Residential</span>
+              <h3 class="text-lg font-serif-luxury text-white">Sky Garden Residences</h3>
+            </div>
+          </div>
+          <div class="p-6">
+            <span class="text-[10px] font-mono uppercase bg-[#e6f1f4] text-[#2b4951] px-2.5 py-0.5 rounded-full font-semibold">Multi-Family</span>
+            <h3 class="text-xl font-serif-luxury text-[#1a1d20] mt-3">Sky Garden Residences</h3>
+            <p class="text-xs text-[#767676] mt-2 line-clamp-2">High-density residential towers featuring stepped terraces and vertical sky parks in Istanbul.</p>
           </div>
         </div>
 
-        <!-- 7. Istanbul Watercolors (Art) -->
-        <div onclick="openProjectDetail('art')" class="cat-card art group relative h-80 rounded-2xl overflow-hidden cursor-pointer shadow-sm hover:shadow-lg transition-all">
-          <img src="assets/portfolio_plates/plate_page_37.jpg" class="w-full h-full object-cover group-hover:scale-105 transition-all duration-700">
-          <div class="absolute inset-0 hover-darken-veil"></div>
-          <div class="absolute bottom-6 left-6 right-6 z-10 hover-reveal-text">
-            <span class="text-xs text-[#f19f55] font-mono block mb-1">2015 · FINE ART</span>
-            <h3 class="text-2xl font-serif-luxury text-white">Istanbul Watercolors</h3>
+        <!-- Project 7: Aziz Mosque & Cultural Center -->
+        <div onclick="openProjectDetail('cultural')" class="cat-card cultural group relative bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all cursor-pointer">
+          <div class="aspect-[4/3] overflow-hidden bg-[#f0f2f4] relative">
+            <img src="assets/portfolio_plates/plate_page_22.jpg" class="w-full h-full object-cover">
+            <div class="absolute inset-0 hover-darken-veil"></div>
+            <div class="absolute bottom-4 left-4 right-4 z-10 hover-reveal-text">
+              <span class="text-[10px] font-mono text-[#f19f55] uppercase block mb-1">2014–2015 · Cultural</span>
+              <h3 class="text-lg font-serif-luxury text-white">Aziz Mosque Complex</h3>
+            </div>
+          </div>
+          <div class="p-6">
+            <span class="text-[10px] font-mono uppercase bg-[#e6f1f4] text-[#2b4951] px-2.5 py-0.5 rounded-full font-semibold">Civic Sacred</span>
+            <h3 class="text-xl font-serif-luxury text-[#1a1d20] mt-3">Aziz Mosque Complex</h3>
+            <p class="text-xs text-[#767676] mt-2 line-clamp-2">Sacred geometry with daylight shafts filtering through terraced courtyards and acoustic vaulted shells.</p>
           </div>
         </div>
 
-        <!-- 8. Sky Garden (Residential) -->
-        <div onclick="openProjectDetail('residential')" class="cat-card residential group relative h-80 rounded-2xl overflow-hidden cursor-pointer shadow-sm hover:shadow-lg transition-all">
-          <img src="assets/portfolio_plates/plate_page_20.jpg" class="w-full h-full object-cover group-hover:scale-105 transition-all duration-700">
-          <div class="absolute inset-0 hover-darken-veil"></div>
-          <div class="absolute bottom-6 left-6 right-6 z-10 hover-reveal-text">
-            <span class="text-xs text-[#f19f55] font-mono block mb-1">2015–2016 · RESIDENTIAL</span>
-            <h3 class="text-2xl font-serif-luxury text-white">Sky Garden Residences</h3>
+        <!-- Project 8: Rome Watercolors -->
+        <div onclick="openProjectDetail('art')" class="cat-card art group relative bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all cursor-pointer">
+          <div class="aspect-[4/3] overflow-hidden bg-[#f0f2f4] relative">
+            <img src="assets/portfolio_plates/plate_page_36.jpg" class="w-full h-full object-cover">
+            <div class="absolute inset-0 hover-darken-veil"></div>
+            <div class="absolute bottom-4 left-4 right-4 z-10 hover-reveal-text">
+              <span class="text-[10px] font-mono text-[#f19f55] uppercase block mb-1">2010 · Fine Art</span>
+              <h3 class="text-lg font-serif-luxury text-white">Rome Architectural Studies</h3>
+            </div>
+          </div>
+          <div class="p-6">
+            <span class="text-[10px] font-mono uppercase bg-[#e6f1f4] text-[#2b4951] px-2.5 py-0.5 rounded-full font-semibold">Fine Art</span>
+            <h3 class="text-xl font-serif-luxury text-[#1a1d20] mt-3">Rome Watercolors</h3>
+            <p class="text-xs text-[#767676] mt-2 line-clamp-2">Piazza Navona, Villa Rotonda, and Turtle Fountain monumental scale watercolor studies.</p>
           </div>
         </div>
 
-        <!-- 9. Aziz Mosque (Cultural) -->
-        <div onclick="openProjectDetail('cultural')" class="cat-card cultural group relative h-80 rounded-2xl overflow-hidden cursor-pointer shadow-sm hover:shadow-lg transition-all">
-          <img src="assets/portfolio_plates/plate_page_22.jpg" class="w-full h-full object-cover group-hover:scale-105 transition-all duration-700">
-          <div class="absolute inset-0 hover-darken-veil"></div>
-          <div class="absolute bottom-6 left-6 right-6 z-10 hover-reveal-text">
-            <span class="text-xs text-[#f19f55] font-mono block mb-1">2014 · CULTURAL</span>
-            <h3 class="text-2xl font-serif-luxury text-white">Aziz Mosque</h3>
+        <!-- Project 9: Istanbul Watercolors -->
+        <div onclick="openProjectDetail('art')" class="cat-card art group relative bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all cursor-pointer">
+          <div class="aspect-[4/3] overflow-hidden bg-[#f0f2f4] relative">
+            <img src="assets/portfolio_plates/plate_page_37.jpg" class="w-full h-full object-cover">
+            <div class="absolute inset-0 hover-darken-veil"></div>
+            <div class="absolute bottom-4 left-4 right-4 z-10 hover-reveal-text">
+              <span class="text-[10px] font-mono text-[#f19f55] uppercase block mb-1">2015 · Fine Art</span>
+              <h3 class="text-lg font-serif-luxury text-white">Istanbul Watercolors</h3>
+            </div>
+          </div>
+          <div class="p-6">
+            <span class="text-[10px] font-mono uppercase bg-[#e6f1f4] text-[#2b4951] px-2.5 py-0.5 rounded-full font-semibold">Fine Art</span>
+            <h3 class="text-xl font-serif-luxury text-[#1a1d20] mt-3">Istanbul Watercolors</h3>
+            <p class="text-xs text-[#767676] mt-2 line-clamp-2">Bosphorus shores, Büyük Mecidiye Cami in Ortaköy, and Hagia Sophia atmospheric wash series.</p>
           </div>
         </div>
 
       </div>
+
     </div>
   </main>
 
-  <!-- VIEW 3: PROJECT DETAIL PAGE -->
+  <!-- VIEW CONTAINER 3: PROJECT DETAIL VIEW -->
   <main id="view-project" class="view-section hidden pt-32 px-8 md:px-16 lg:px-24 min-h-screen bg-[#f8f9fa]">
-    <div class="max-w-5xl mx-auto py-10">
+    <div class="max-w-6xl mx-auto py-10">
       
-      <button onclick="switchPageView('category')" class="inline-flex items-center gap-2 text-xs font-mono uppercase text-[#de602e] hover:text-[#ad4b24] mb-6 border-0 bg-transparent">
+      <button onclick="switchPageView('category')" class="flex items-center gap-2 text-xs font-mono text-[#767676] hover:text-[#de602e] mb-8 transition-colors border-0 bg-transparent p-0">
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
-        <span>Back to Archive</span>
+        <span>Back to Works</span>
       </button>
 
-      <!-- Primary Featured Showcase (Title Over Image Hidden by Default, Glides Up on Hover) -->
-      <div class="group relative h-[520px] rounded-2xl overflow-hidden mb-8 bg-[#f0f2f4] shadow-sm">
+      <div class="w-full h-[480px] md:h-[620px] rounded-3xl overflow-hidden bg-black mb-12 shadow-sm">
         <img id="detail-hero-img" src="assets/portfolio_plates/plate_page_30.jpg" class="w-full h-full object-contain">
-        <div class="absolute inset-0 hover-darken-veil"></div>
-        <div class="absolute bottom-6 left-6 right-6 z-10 bg-[#ffffff]/95 backdrop-blur-md p-6 rounded-xl shadow-md hover-reveal-text">
-          <span id="detail-typology" class="text-xs font-mono text-[#de602e] uppercase block mb-1">Commercial</span>
-          <h1 id="detail-title" class="text-3xl md:text-4xl font-serif-luxury text-[#1a1d20]">İZKA Headquarters</h1>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 mb-16">
+        <div class="lg:col-span-2">
+          <span id="detail-typology" class="text-xs font-mono uppercase text-[#de602e] tracking-widest block mb-2">Commercial / Mixed-Use</span>
+          <h1 id="detail-title" class="text-4xl md:text-5xl font-serif-luxury text-[#1a1d20] mb-6">İZKA Headquarters</h1>
+          
+          <div class="prose text-sm text-[#4c4c4c] leading-relaxed space-y-4">
+            <p>
+              Designed as a civic landmark for regional economic development, the headquarters synthesizes high-efficiency office environments with open public galleries and vertical gardens.
+            </p>
+            <p>
+              The central atrium operates as a passive thermal chimney, inducing natural ventilation across the core while the outer double-skin curtain wall attenuates solar heat gain in the Mediterranean climate.
+            </p>
+          </div>
+        </div>
+
+        <div class="bg-white p-8 rounded-2xl shadow-sm border-0 h-fit space-y-5 text-xs font-mono">
+          <div>
+            <span class="text-[#767676] block mb-1">YEAR</span>
+            <span id="detail-meta-year" class="font-semibold text-[#1a1d20] text-sm">2013–2016</span>
+          </div>
+          <div>
+            <span class="text-[#767676] block mb-1">LOCATION</span>
+            <span id="detail-meta-loc" class="font-semibold text-[#1a1d20] text-sm">İzmir, Turkey</span>
+          </div>
+          <div>
+            <span class="text-[#767676] block mb-1">ROLE</span>
+            <span id="detail-meta-role" class="font-semibold text-[#1a1d20] text-sm">BIM Management & Design Team</span>
+          </div>
+          <div>
+            <span class="text-[#767676] block mb-1">AWARDS</span>
+            <span id="detail-meta-rec" class="font-semibold text-[#de602e] text-sm">Turgut Cansever National Award (2016)</span>
+          </div>
         </div>
       </div>
 
-      <!-- Secondary Drawings & Plates Strip -->
-      <div class="mb-10">
-        <span class="text-xs font-mono text-[#38606a] uppercase tracking-wider block mb-3">Portfolio Plates & Technical Drawings</span>
-        <div id="detail-plates-row" class="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <div class="h-32 rounded-lg overflow-hidden bg-[#f0f2f4] shadow-sm">
-            <img id="detail-sub-0" src="assets/portfolio_plates/plate_page_30.jpg" class="w-full h-full object-cover">
+      <!-- Process Strip -->
+      <div class="pt-8 border-t border-[#e5e7eb]">
+        <h3 class="text-xs font-mono uppercase tracking-widest text-[#767676] mb-6">Process & Drawings Strip</h3>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div class="rounded-xl overflow-hidden bg-white p-2 shadow-sm">
+            <img id="detail-sub-0" src="assets/portfolio_plates/plate_page_30.jpg" class="w-full h-36 object-cover rounded-lg">
+            <span class="text-[10px] font-mono text-[#767676] mt-2 block">P01 Massing Study</span>
           </div>
-          <div class="h-32 rounded-lg overflow-hidden bg-[#f0f2f4] shadow-sm">
-            <img id="detail-sub-1" src="assets/portfolio_plates/plate_page_31.jpg" class="w-full h-full object-cover">
+          <div class="rounded-xl overflow-hidden bg-white p-2 shadow-sm">
+            <img id="detail-sub-1" src="assets/portfolio_plates/plate_page_31.jpg" class="w-full h-36 object-cover rounded-lg">
+            <span class="text-[10px] font-mono text-[#767676] mt-2 block">P02 Floor Plans</span>
           </div>
-          <div class="h-32 rounded-lg overflow-hidden bg-[#f0f2f4] shadow-sm">
-            <img id="detail-sub-2" src="assets/projects/commercial_izka/img_01_558x425.jpeg" class="w-full h-full object-cover">
+          <div class="rounded-xl overflow-hidden bg-white p-2 shadow-sm">
+            <img id="detail-sub-2" src="assets/projects/commercial_izka/izka_atrium_drawing.jpg" class="w-full h-36 object-cover rounded-lg">
+            <span class="text-[10px] font-mono text-[#767676] mt-2 block">P03 Section Model</span>
           </div>
-          <div class="h-32 rounded-lg overflow-hidden bg-[#f0f2f4] shadow-sm">
-            <img id="detail-sub-3" src="assets/portfolio_plates/plate_page_18.jpg" class="w-full h-full object-cover">
+          <div class="rounded-xl overflow-hidden bg-white p-2 shadow-sm">
+            <img id="detail-sub-3" src="assets/projects/commercial_izka/izka_site_axon.jpg" class="w-full h-36 object-cover rounded-lg">
+            <span class="text-[10px] font-mono text-[#767676] mt-2 block">P04 BIM Detailing</span>
           </div>
         </div>
-      </div>
-
-      <!-- Project Metadata Grid -->
-      <div class="bg-[#ffffff] p-6 rounded-xl text-xs shadow-sm grid grid-cols-1 md:grid-cols-4 gap-4">
-        <div><span class="text-[#767676] block mb-1">Year:</span> <span id="detail-meta-year" class="text-[#1a1d20] font-medium text-sm">2013–2016</span></div>
-        <div><span class="text-[#767676] block mb-1">Location:</span> <span id="detail-meta-loc" class="text-[#1a1d20] font-medium text-sm">İzmir, Turkey</span></div>
-        <div><span class="text-[#767676] block mb-1">Role:</span> <span id="detail-meta-role" class="text-[#1a1d20] font-medium text-sm">Design, BIM & Visualization</span></div>
-        <div><span class="text-[#767676] block mb-1">Recognition:</span> <span id="detail-meta-rec" class="text-[#de602e] font-medium text-sm">1st Place & Turgut Cansever Award</span></div>
       </div>
 
     </div>
   </main>
 
-  <!-- VIEW 4: ACADEMY PAGE -->
-  <!-- Centerpiece Video Highlight (Big), 3 Dummy Videos, 4 Workshops, 2 Downloadables -->
+  <!-- VIEW CONTAINER 4: ACADEMY (Video Centerpiece, 3 Tutorials, 4 Workshops, 2 Downloads) -->
   <main id="view-academy" class="view-section hidden pt-32 px-8 md:px-16 lg:px-24 min-h-screen bg-[#f8f9fa]">
     <div class="max-w-6xl mx-auto py-10">
       
@@ -572,6 +791,7 @@
       <div class="pb-8 mb-12 text-center max-w-2xl mx-auto">
         <span class="text-xs font-mono text-[#de602e] tracking-widest uppercase">Academy</span>
         <h1 class="text-4xl md:text-5xl font-serif-luxury text-[#1a1d20] mt-1">Workshops & Lectures</h1>
+        <p class="text-xs text-[#767676] mt-3">Revit BIM workflows, parametric facade design, and architectural visualization tutorials.</p>
       </div>
 
       <!-- 1. BIG CENTERED FEATURED VIDEO HIGHLIGHT -->
@@ -615,7 +835,6 @@
                 <svg class="w-5 h-5 translate-x-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg>
               </div>
             </div>
-            <!-- Title Glides Up from Bottom on Hover -->
             <div class="absolute bottom-4 left-4 right-4 z-10 hover-reveal-text">
               <span class="text-[10px] font-mono text-[#f19f55] block mb-0.5">35 MINS</span>
               <h4 class="text-sm font-serif-luxury text-white">Analog Watercolor to Computational Geometry</h4>
@@ -716,18 +935,18 @@
             <div>
               <span class="text-[11px] font-mono text-[#de602e] block mb-1">REVIT TEMPLATE (.RTE)</span>
               <h4 class="text-xl font-serif-luxury text-[#1a1d20] mb-1">Residential BIM Standard Template</h4>
-              <p class="text-xs text-[#767676]">Pre-configured LOD 300 wall schedules, detail sheets, and titleblocks.</p>
+              <p class="text-xs text-[#767676]">Clean graphic overrides, custom title blocks, and residential schedule presets.</p>
             </div>
-            <button class="px-6 py-3 bg-[#2b4951] hover:bg-[#de602e] text-white text-xs font-semibold rounded-full uppercase tracking-wider whitespace-nowrap transition-all border-0">Download Package</button>
+            <button class="px-6 py-3 bg-[#2b4951] hover:bg-[#de602e] text-white text-xs font-semibold uppercase tracking-wider rounded-full transition-all border-0 flex-shrink-0">Download Preset</button>
           </div>
 
           <div class="bg-[#ffffff] p-8 rounded-2xl shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
             <div>
-              <span class="text-[11px] font-mono text-[#de602e] block mb-1">PDF DESIGN GUIDE</span>
-              <h4 class="text-xl font-serif-luxury text-[#1a1d20] mb-1">Expanding Wet-Core Mechanics Guide</h4>
-              <p class="text-xs text-[#767676]">Folding space principles, wall storage clearances, and plumbing schematics.</p>
+              <span class="text-[11px] font-mono text-[#de602e] block mb-1">STUDY GUIDE (.PDF)</span>
+              <h4 class="text-xl font-serif-luxury text-[#1a1d20] mb-1">Architectural Watercolor Study Guide</h4>
+              <p class="text-xs text-[#767676]">28 pages of pigment mixing, brushwork drills, and field sketching techniques from Rome.</p>
             </div>
-            <button class="px-6 py-3 bg-[#f0f2f4] hover:bg-[#de602e] hover:text-white text-[#1a1d20] text-xs font-semibold rounded-full uppercase tracking-wider whitespace-nowrap transition-all border-0">Download PDF</button>
+            <button class="px-6 py-3 bg-[#2b4951] hover:bg-[#de602e] text-white text-xs font-semibold uppercase tracking-wider rounded-full transition-all border-0 flex-shrink-0">Download Guide</button>
           </div>
         </div>
       </div>
@@ -735,63 +954,231 @@
     </div>
   </main>
 
-  <!-- Interactive JavaScript Controller -->
+  <!-- VIEW CONTAINER 5: CONTACT (40% Viewport Portrait on Left, Coordinates & Inquiry on Right) -->
+  <main id="view-contact" class="view-section hidden pt-28 md:pt-36 px-6 md:px-12 lg:px-20 min-h-screen bg-[#f8f9fa]">
+    <div class="max-w-7xl mx-auto py-8">
+      <div class="flex flex-col lg:flex-row items-start gap-12 lg:gap-16">
+        
+        <!-- Left Side: 40% Viewport Image of Alex -->
+        <div class="w-full lg:w-[40%] flex-shrink-0">
+          <div class="sticky top-32">
+            <div class="relative w-full rounded-3xl overflow-hidden shadow-lg bg-[#1a1d20] aspect-[4/5] max-h-[740px]">
+              <img src="assets/alex_portrait.png" 
+                   alt="Alexandr Karpov" 
+                   class="w-full h-full object-cover object-top">
+              <div class="absolute inset-0 bg-gradient-to-t from-[#1a1d20]/80 via-transparent to-transparent"></div>
+              <div class="absolute bottom-6 left-6 right-6 text-white">
+                <span class="text-[10px] font-mono uppercase tracking-[0.2em] text-[#f19f55] block mb-1">Principal Designer</span>
+                <h3 class="text-2xl font-serif-luxury">Alexandr Karpov</h3>
+                <p class="text-xs text-white/80 font-mono mt-0.5">Karpov Design LLC · Charlotte, NC</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Side: 60% Viewport Contact Information & Guided Inquiry Portal -->
+        <div class="w-full lg:w-[60%] flex-grow">
+          
+          <!-- Header Datum -->
+          <div class="pb-8 border-b border-[#e5e7eb] mb-8">
+            <span class="text-xs font-mono text-[#de602e] tracking-widest uppercase">Contact</span>
+            <h1 class="text-4xl md:text-5xl font-serif-luxury text-[#1a1d20] mt-1">Start a Conversation</h1>
+            <p class="text-sm text-[#4c4c4c] mt-2 max-w-xl">
+              Inquiries for custom residential design, additions & renovations, BIM consulting, and fine art commissions across North Carolina and remote collaborations worldwide.
+            </p>
+          </div>
+
+          <!-- Direct Coordinates Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+            <div class="bg-white p-6 rounded-2xl shadow-sm">
+              <span class="text-[10px] font-mono text-[#767676] uppercase tracking-wider block mb-1">Direct Inquiries</span>
+              <a href="mailto:hello@karpovdesign.com" class="text-base font-semibold text-[#1a1d20] hover:text-[#de602e] transition-colors block">hello@karpovdesign.com</a>
+              <a href="mailto:karpovaleksandr.aka@gmail.com" class="text-xs text-[#767676] hover:text-[#1a1d20] transition-colors block mt-1">karpovaleksandr.aka@gmail.com</a>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl shadow-sm">
+              <span class="text-[10px] font-mono text-[#767676] uppercase tracking-wider block mb-1">Direct Phone</span>
+              <div class="flex items-center gap-2">
+                <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-[#e6f1f4] text-[#2b4951] font-semibold">USA</span>
+                <a href="tel:+17048459596" class="text-sm font-semibold text-[#1a1d20] hover:text-[#de602e] transition-colors">+1 (704) 845-9596</a>
+              </div>
+              <div class="flex items-center gap-2 mt-2">
+                <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-[#f0f2f4] text-[#4c4c4c] font-semibold">INTL</span>
+                <a href="tel:+905385907458" class="text-xs text-[#4c4c4c] hover:text-[#1a1d20] transition-colors">+90 538-590-7458</a>
+              </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl shadow-sm">
+              <span class="text-[10px] font-mono text-[#767676] uppercase tracking-wider block mb-1">Studio Practice</span>
+              <p class="text-sm font-semibold text-[#1a1d20]">Karpov Design LLC</p>
+              <p class="text-xs text-[#767676] mt-0.5">9818 Fairway Ridge Rd.<br>Charlotte, NC 28277 (USA)</p>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl shadow-sm">
+              <span class="text-[10px] font-mono text-[#767676] uppercase tracking-wider block mb-1">Consultations & Timezones</span>
+              <p class="text-sm font-semibold text-[#1a1d20]">30-Min Intro Call</p>
+              <p class="text-xs text-[#767676] mt-0.5">Video consultations available in client time zone (US Eastern Time & European / TR UTC+3).</p>
+            </div>
+          </div>
+
+          <!-- Guided Client Inquiry Portal (Brief p. 11) -->
+          <div class="bg-white p-8 md:p-10 rounded-3xl shadow-sm">
+            <h3 class="text-2xl font-serif-luxury text-[#1a1d20] mb-2">Project Inquiry Portal</h3>
+            <p class="text-xs text-[#767676] mb-6">Tell us about your project site, goals, and desired timeline. We typically respond within one business day.</p>
+
+            <form onsubmit="event.preventDefault(); alert('Thank you! Your inquiry has been sent to Aleksandr Karpov. We will respond within one business day.');" class="space-y-6">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label class="block text-xs font-mono uppercase text-[#4c4c4c] mb-2">Full Name *</label>
+                  <input type="text" required placeholder="Jane Doe" class="w-full px-4 py-3 rounded-xl bg-[#f8f9fa] border-0 text-sm focus:ring-2 focus:ring-[#de602e] outline-none">
+                </div>
+                <div>
+                  <label class="block text-xs font-mono uppercase text-[#4c4c4c] mb-2">Email Address *</label>
+                  <input type="email" required placeholder="jane@example.com" class="w-full px-4 py-3 rounded-xl bg-[#f8f9fa] border-0 text-sm focus:ring-2 focus:ring-[#de602e] outline-none">
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label class="block text-xs font-mono uppercase text-[#4c4c4c] mb-2">Phone Number</label>
+                  <input type="tel" placeholder="+1 (704) 000-0000" class="w-full px-4 py-3 rounded-xl bg-[#f8f9fa] border-0 text-sm focus:ring-2 focus:ring-[#de602e] outline-none">
+                </div>
+                <div>
+                  <label class="block text-xs font-mono uppercase text-[#4c4c4c] mb-2">Project Location (City, State) *</label>
+                  <input type="text" required placeholder="e.g., Charlotte, NC or Remote" class="w-full px-4 py-3 rounded-xl bg-[#f8f9fa] border-0 text-sm focus:ring-2 focus:ring-[#de602e] outline-none">
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label class="block text-xs font-mono uppercase text-[#4c4c4c] mb-2">Project Typology *</label>
+                  <select class="w-full px-4 py-3 rounded-xl bg-[#f8f9fa] border-0 text-sm focus:ring-2 focus:ring-[#de602e] outline-none text-[#1a1d20]">
+                    <option>Custom Single-Family Residence</option>
+                    <option>Addition & Renovation</option>
+                    <option>Multi-Family Residential</option>
+                    <option>Commercial / Hospitality</option>
+                    <option>BIM & Design Consulting</option>
+                    <option>Fine Art / Watercolor Commission</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-xs font-mono uppercase text-[#4c4c4c] mb-2">Approximate Scope / Budget</label>
+                  <select class="w-full px-4 py-3 rounded-xl bg-[#f8f9fa] border-0 text-sm focus:ring-2 focus:ring-[#de602e] outline-none text-[#1a1d20]">
+                    <option>Custom Home ($500k – $1.5M+)</option>
+                    <option>Addition / Renovation ($150k – $500k)</option>
+                    <option>Commercial / Multi-Family</option>
+                    <option>Consulting / Master Planning</option>
+                    <option>Fine Art & Studies</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-xs font-mono uppercase text-[#4c4c4c] mb-2">Project Vision & Goals *</label>
+                <textarea rows="4" required placeholder="Describe your site, timeline, aesthetic direction, or specific design goals..." class="w-full px-4 py-3 rounded-xl bg-[#f8f9fa] border-0 text-sm focus:ring-2 focus:ring-[#de602e] outline-none"></textarea>
+              </div>
+
+              <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2">
+                <p class="text-[11px] text-[#767676] font-mono">
+                  🔒 Direct inquiry. No spam. Confidential client consultation.
+                </p>
+                <button type="submit" class="w-full sm:w-auto px-8 py-3.5 bg-[#de602e] hover:bg-[#ad4b24] text-white text-xs font-semibold tracking-widest uppercase rounded-full transition-all border-0 shadow-md">
+                  Send Inquiry
+                </button>
+              </div>
+            </form>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer (Zero Button Borders) -->
+  <footer class="bg-[#1a1d20] text-white py-16 px-8 md:px-16 lg:px-24 border-t border-white/10">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
+      
+      <div class="flex items-center gap-4">
+        <img src="data:image/png;base64,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" alt="KAD Logo" class="h-8 w-auto filter invert opacity-90">
+        <div>
+          <span class="text-sm font-semibold tracking-widest uppercase font-brand-display block">Alexandr Karpov</span>
+          <span class="text-[10px] text-white/50 uppercase font-mono tracking-wider">Karpov Design LLC · Charlotte, NC</span>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-8 text-xs font-mono uppercase tracking-wider text-white/60">
+        <button onclick="switchPageView('home')" class="hover:text-white transition-colors border-0 bg-transparent p-0">Home</button>
+        <button onclick="switchPageView('category')" class="hover:text-white transition-colors border-0 bg-transparent p-0">Works</button>
+        <button onclick="switchPageView('academy')" class="hover:text-white transition-colors border-0 bg-transparent p-0">Academy</button>
+        <button onclick="switchPageView('contact')" class="hover:text-white transition-colors border-0 bg-transparent p-0">Contact</button>
+      </div>
+
+      <div class="text-[11px] text-white/40 font-mono text-center md:text-right">
+        <span>© 2026 Karpov Design LLC. All rights reserved.</span>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Interactive Logic Engine -->
   <script>
+    // Authentic 5-Typology Data Model
     const typologyData = {
-      'residential': {
-        badge: 'Residential',
-        title: 'SEED — Artists\' Getaway',
+      residential: {
+        badge: 'Residential / Modular',
+        title: "SEED — Artists' Getaway",
         date: '2015',
-        location: 'Private Retreat',
+        location: 'New Mexico, USA',
         year: '2015',
-        role: 'Sole Designer & Parametric Development',
-        rec: '2016 Portfolio Feature (Pages 04–05)',
+        role: 'Lead Designer, Concept & Detailing',
+        rec: 'Private Commission (2015)',
         heroPlate: 'assets/portfolio_plates/plate_page_04.jpg',
         subPlates: [
           'assets/portfolio_plates/plate_page_04.jpg',
           'assets/portfolio_plates/plate_page_05.jpg',
-          'assets/projects/residential_seed/img_01_842x596.jpeg',
-          'assets/portfolio_plates/plate_page_20.jpg'
+          'assets/portfolio_plates/plate_page_20.jpg',
+          'assets/projects/residential_seed/seed_floorplan.jpg'
         ],
         images: [
-          { url: 'assets/portfolio_plates/plate_page_04.jpg', phase: 'Plate 04', title: 'Exterior Elevation & Floor Plan' },
+          { url: 'assets/portfolio_plates/plate_page_04.jpg', phase: 'Plate 04', title: 'Road-Legal Trailer Footprint' },
           { url: 'assets/portfolio_plates/plate_page_05.jpg', phase: 'Plate 05', title: 'Expanding Wet-Core Mechanics' },
-          { url: 'assets/projects/residential_seed/img_01_842x596.jpeg', phase: 'Render', title: 'SEED Landscape Integration' },
-          { url: 'assets/portfolio_plates/plate_page_20.jpg', phase: 'Plate 20', title: 'Sky Garden Residences' },
-          { url: 'assets/portfolio_plates/plate_page_08.jpg', phase: 'Plate 08', title: 'Topkapi 3S Kale' }
+          { url: 'assets/portfolio_plates/plate_page_20.jpg', phase: 'Plate 20', title: 'Stepped Terraces Context' },
+          { url: 'assets/projects/residential_seed/seed_floorplan.jpg', phase: 'Plan', title: 'Interior Kinetic Wall Cavities' },
+          { url: 'assets/projects/residential_seed/seed_axonometric.jpg', phase: 'Section', title: 'Shell Insulation & Ventilation' }
         ]
       },
-      'commercial': {
-        badge: 'Commercial',
+      commercial: {
+        badge: 'Commercial / Headquarters',
         title: 'İZKA Headquarters',
         date: '2013–2016',
         location: 'İzmir, Turkey',
         year: '2013–2016',
-        role: 'Design Development, BIM & Visualization',
-        rec: '1st Place & Turgut Cansever Award',
+        role: 'BIM Manager & Project Team',
+        rec: '1st Place & Turgut Cansever National Architecture Award (2016)',
         heroPlate: 'assets/portfolio_plates/plate_page_30.jpg',
         subPlates: [
           'assets/portfolio_plates/plate_page_30.jpg',
           'assets/portfolio_plates/plate_page_31.jpg',
-          'assets/projects/commercial_izka/img_01_558x425.jpeg',
-          'assets/portfolio_plates/plate_page_18.jpg'
+          'assets/projects/commercial_izka/izka_atrium_drawing.jpg',
+          'assets/projects/commercial_izka/izka_facade_render.jpg'
         ],
         images: [
-          { url: 'assets/portfolio_plates/plate_page_30.jpg', phase: 'Plate 30', title: 'Public Atrium & Plaza' },
-          { url: 'assets/portfolio_plates/plate_page_31.jpg', phase: 'Plate 31', title: 'Transverse Building Section' },
-          { url: 'assets/projects/commercial_izka/img_01_558x425.jpeg', phase: 'Atrium View', title: 'Central Spiral Ramp' },
-          { url: 'assets/portfolio_plates/plate_page_18.jpg', phase: 'Plate 18', title: 'Konak Government Center' },
-          { url: 'assets/portfolio_plates/plate_page_19.jpg', phase: 'Plate 19', title: 'Konak Floor Plans' }
+          { url: 'assets/portfolio_plates/plate_page_30.jpg', phase: 'Plate 30', title: 'Urban Context & Atrium Volume' },
+          { url: 'assets/portfolio_plates/plate_page_31.jpg', phase: 'Plate 31', title: 'Floor Plans & Environmental Core' },
+          { url: 'assets/projects/commercial_izka/izka_atrium_drawing.jpg', phase: 'Drawing', title: 'Central Atrium Technical Section' },
+          { url: 'assets/projects/commercial_izka/izka_facade_render.jpg', phase: 'Render', title: 'Double-Skin Parametric Facade' },
+          { url: 'assets/projects/commercial_izka/izka_site_axon.jpg', phase: 'Axon', title: 'Structural Diagrid Perspective' }
         ]
       },
-      'cultural': {
-        badge: 'Cultural',
+      cultural: {
+        badge: 'Cultural / Civic Center',
         title: 'Caferaga Community Center',
         date: '2016',
-        location: 'Istanbul, Turkey',
+        location: 'Kadıköy, Istanbul',
         year: '2016',
-        role: 'Design Team Member & 3D Visualization',
-        rec: 'National Architectural Competition',
+        role: 'Design Team & 3D Visualization',
+        rec: 'National Competition (2016)',
         heroPlate: 'assets/portfolio_plates/plate_page_10.jpg',
         subPlates: [
           'assets/portfolio_plates/plate_page_10.jpg',
@@ -802,13 +1189,13 @@
         images: [
           { url: 'assets/portfolio_plates/plate_page_10.jpg', phase: 'Plate 10', title: 'Public Roofscape & Street Front' },
           { url: 'assets/portfolio_plates/plate_page_11.jpg', phase: 'Plate 11', title: 'Floor Plans & Auditorium' },
-          { url: 'assets/portfolio_plates/plate_page_12.jpg', phase: 'Plate 12', title: 'Sivas Unity Bridge' },
-          { url: 'assets/portfolio_plates/plate_page_22.jpg', phase: 'Plate 22', title: 'Aziz Mosque & Cultural Center' },
-          { url: 'assets/portfolio_plates/plate_page_14.jpg', phase: 'Plate 14', title: 'Beylikdüzü Valley of Life' }
+          { url: 'assets/portfolio_plates/plate_page_12.jpg', phase: 'Plate 12', title: 'Sivas Unity Bridge Span' },
+          { url: 'assets/portfolio_plates/plate_page_22.jpg', phase: 'Plate 22', title: 'Aziz Mosque Terraced Courtyard' },
+          { url: 'assets/projects/cultural_caferaga/caferaga_facade_elevation.jpg', phase: 'Section', title: 'Acoustic Ceiling Shell' }
         ]
       },
-      'conceptual': {
-        badge: 'Conceptual',
+      conceptual: {
+        badge: 'Conceptual / Industrial Regeneration',
         title: 'Eskişehir Industrial Regeneration',
         date: '2015',
         location: 'Eskişehir, Turkey',
@@ -824,14 +1211,14 @@
         ],
         images: [
           { url: 'assets/portfolio_plates/plate_page_32.jpg', phase: 'Plate 32', title: 'Depot Site Adaptive Reuse' },
-          { url: 'assets/portfolio_plates/plate_page_33.jpg', phase: 'Plate 33', title: 'Elevated Walkways' },
-          { url: 'assets/portfolio_plates/plate_page_34.jpg', phase: 'Plate 34', title: 'Passive Green Zones' },
-          { url: 'assets/portfolio_plates/plate_page_35.jpg', phase: 'Plate 35', title: 'Cultural Public Plaza' },
-          { url: 'assets/portfolio_plates/plate_page_26.jpg', phase: 'Plate 26', title: 'Center City East' }
+          { url: 'assets/portfolio_plates/plate_page_33.jpg', phase: 'Plate 33', title: 'Elevated Walkways & Public Spine' },
+          { url: 'assets/portfolio_plates/plate_page_34.jpg', phase: 'Plate 34', title: 'Structural Retrofit Detailing' },
+          { url: 'assets/portfolio_plates/plate_page_35.jpg', phase: 'Plate 35', title: 'Community Greenhouse Infill' },
+          { url: 'assets/projects/conceptual_multicity/multicity_masterplan.jpg', phase: 'Masterplan', title: 'Multi City Regional Flow' }
         ]
       },
-      'art': {
-        badge: 'Art',
+      art: {
+        badge: 'Art / Hand Drawing & Watercolors',
         title: 'Rome & Istanbul Watercolors',
         date: '2010–2015',
         location: 'Rome & Istanbul',
@@ -858,6 +1245,7 @@
     let currentTypologyKey = 'commercial';
     let currentImageIndex = 0;
 
+    // Fast Typology Switcher in Album
     function selectTypology(key) {
       currentTypologyKey = key;
       currentImageIndex = 0;
@@ -865,36 +1253,44 @@
 
       document.getElementById('album-badge').innerText = data.badge;
       document.getElementById('album-title').innerText = data.title;
-      document.getElementById('meta-date').innerText = data.date;
-      document.getElementById('meta-location').innerText = data.location;
 
+      // Update button pill colors
       const keys = ['residential', 'commercial', 'cultural', 'conceptual', 'art'];
       keys.forEach(k => {
         const btn = document.getElementById(`btn-${k}`);
-        if (k === key) {
-          btn.className = "px-4 py-1.5 rounded-full text-xs font-medium bg-[#de602e] text-white transition-colors border-0";
-        } else {
-          btn.className = "px-4 py-1.5 rounded-full text-xs font-medium bg-[#f0f2f4] text-[#4c4c4c] hover:bg-[#e5e7eb] transition-colors border-0";
+        if (btn) {
+          if (k === key) {
+            btn.className = "px-4 py-1.5 rounded-full text-xs font-medium bg-[#de602e] text-white transition-colors border-0";
+          } else {
+            btn.className = "px-4 py-1.5 rounded-full text-xs font-medium bg-[#f0f2f4] text-[#4c4c4c] hover:bg-[#e5e7eb] transition-colors border-0";
+          }
         }
       });
 
-      for (let i = 0; i < 5; i++) {
-        const img = data.images[i];
-        document.getElementById(`thumb-img-${i}`).src = img.url;
-        document.getElementById(`thumb-label-${i}`).innerText = img.phase;
-      }
+      // Populate 5 thumbnails
+      data.images.forEach((img, idx) => {
+        const thumbImg = document.getElementById(`thumb-img-${idx}`);
+        const thumbLbl = document.getElementById(`thumb-lbl-${idx}`);
+        if (thumbImg) thumbImg.src = img.url;
+        if (thumbLbl) thumbLbl.innerText = `${img.phase} ${img.title}`;
+      });
 
       setAlbumView(0);
-      document.getElementById('album-section').scrollIntoView({ behavior: 'smooth' });
+
+      // Smooth scroll into album showcase
+      const albumSection = document.getElementById('album-section');
+      if (albumSection) {
+        albumSection.scrollIntoView({ behavior: 'smooth' });
+      }
     }
 
+    // Switch active image within current album
     function setAlbumView(index) {
       currentImageIndex = index;
-      const data = typologyData[currentTypologyKey];
-      const imgData = data.images[index];
-
+      const imgData = typologyData[currentTypologyKey].images[index];
+      
       const mainImg = document.getElementById('main-feature-img');
-      mainImg.style.opacity = '0.3';
+      mainImg.style.opacity = '0.4';
       setTimeout(() => {
         mainImg.src = imgData.url;
         mainImg.style.opacity = '1';
@@ -902,28 +1298,34 @@
 
       document.getElementById('main-feature-phase').innerText = imgData.phase;
       document.getElementById('main-feature-title').innerText = imgData.title;
-      document.getElementById('thumbnail-counter').innerText = `${index + 1} of 5`;
+      document.getElementById('slide-counter').innerText = `${index + 1} of 5`;
 
-      const thumbCards = document.querySelectorAll('.thumb-card');
-      thumbCards.forEach((card, idx) => {
-        if (idx === index) {
-          card.classList.add('ring-2', 'ring-[#de602e]');
-        } else {
-          card.classList.remove('ring-2', 'ring-[#de602e]');
+      // Update thumbnail rings
+      for (let i = 0; i < 5; i++) {
+        const thumbBtn = document.getElementById(`thumb-btn-${i}`);
+        if (thumbBtn) {
+          if (i === index) {
+            thumbBtn.className = "group relative h-20 md:h-28 rounded-lg overflow-hidden cursor-pointer transition-all duration-300 ring-2 ring-[#de602e]";
+          } else {
+            thumbBtn.className = "group relative h-20 md:h-28 rounded-lg overflow-hidden cursor-pointer transition-all duration-300 ring-0 hover:ring-2 hover:ring-[#de602e]";
+          }
         }
-      });
+      }
     }
 
     function nextImage() {
-      let nextIdx = (currentImageIndex + 1) % 5;
+      const total = typologyData[currentTypologyKey].images.length;
+      const nextIdx = (currentImageIndex + 1) % total;
       setAlbumView(nextIdx);
     }
 
     function prevImage() {
-      let prevIdx = (currentImageIndex - 1 + 5) % 5;
+      const total = typologyData[currentTypologyKey].images.length;
+      const prevIdx = (currentImageIndex - 1 + total) % total;
       setAlbumView(prevIdx);
     }
 
+    // Open Project Detail Page for a Specific Typology
     function openProjectDetail(key) {
       const data = typologyData[key];
       document.getElementById('detail-hero-img').src = data.heroPlate;
@@ -944,6 +1346,7 @@
       switchPageView('project');
     }
 
+    // Filter Category Archive Grid
     function filterCategoryGrid(cat) {
       const cards = document.querySelectorAll('.cat-card');
       cards.forEach(card => {
@@ -957,15 +1360,17 @@
       const filters = ['all', 'residential', 'commercial', 'cultural', 'conceptual', 'art'];
       filters.forEach(f => {
         const btn = document.getElementById(`cat-filter-${f}`);
-        if (f === cat) {
-          btn.className = "px-4 py-1.5 rounded-full font-medium bg-[#de602e] text-white border-0 transition-all";
-        } else {
-          btn.className = "px-4 py-1.5 rounded-full font-medium text-[#4c4c4c] hover:text-[#1a1d20] border-0 transition-all";
+        if (btn) {
+          if (f === cat) {
+            btn.className = "px-3.5 py-1 rounded-full font-medium bg-[#de602e] text-white border-0 transition-all";
+          } else {
+            btn.className = "px-3.5 py-1 rounded-full font-medium text-[#4c4c4c] hover:text-[#1a1d20] border-0 transition-all";
+          }
         }
       });
 
       const titles = {
-        'all': 'All Works',
+        'all': 'All Selected Works',
         'residential': 'Residential Works',
         'commercial': 'Commercial Works',
         'cultural': 'Cultural Works',
@@ -975,28 +1380,44 @@
       document.getElementById('category-archive-title').innerText = titles[cat];
     }
 
+    // Multi-page switcher
     function switchPageView(view) {
-      const sections = ['home', 'category', 'project', 'academy'];
-      const tabs = {
-        'home': document.getElementById('tab-home'),
-        'category': document.getElementById('tab-category'),
-        'project': document.getElementById('tab-project'),
-        'academy': document.getElementById('tab-academy')
-      };
+      const sections = ['home', 'category', 'project', 'academy', 'contact'];
 
       sections.forEach(v => {
         const el = document.getElementById(`view-${v}`);
-        const tab = tabs[v];
-        if (v === view) {
-          el.classList.remove('hidden');
-          tab.classList.remove('text-[#4c4c4c]');
-          tab.classList.add('text-[#de602e]', 'font-semibold');
-        } else {
-          el.classList.add('hidden');
+        if (el) {
+          if (v === view) {
+            el.classList.remove('hidden');
+          } else {
+            el.classList.add('hidden');
+          }
+        }
+      });
+
+      // Update active nav link styling
+      const tabWorks = document.getElementById('tab-works');
+      const tabAcademy = document.getElementById('tab-academy');
+      const tabContact = document.getElementById('tab-contact');
+
+      [tabWorks, tabAcademy, tabContact].forEach(tab => {
+        if (tab) {
           tab.classList.remove('text-[#de602e]', 'font-semibold');
           tab.classList.add('text-[#4c4c4c]');
         }
       });
+
+      if (view === 'category' && tabWorks) {
+        tabWorks.classList.add('text-[#de602e]', 'font-semibold');
+        tabWorks.classList.remove('text-[#4c4c4c]');
+      } else if (view === 'academy' && tabAcademy) {
+        tabAcademy.classList.add('text-[#de602e]', 'font-semibold');
+        tabAcademy.classList.remove('text-[#4c4c4c]');
+      } else if (view === 'contact' && tabContact) {
+        tabContact.classList.add('text-[#de602e]', 'font-semibold');
+        tabContact.classList.remove('text-[#4c4c4c]');
+      }
+
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   </script>
