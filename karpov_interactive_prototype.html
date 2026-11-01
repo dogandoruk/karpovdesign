@@ -92,6 +92,17 @@
     .group:hover .hover-darken-veil {
       opacity: 1;
     }
+
+    /* Touch device fallback: reveal text on screens without hover */
+    @media (hover: none) {
+      .hover-reveal-text {
+        opacity: 0.95;
+        transform: translateY(0);
+      }
+      .hover-darken-veil {
+        opacity: 0.75;
+      }
+    }
   </style>
 </head>
 <body class="antialiased selection:bg-[#de602e] selection:text-white bg-[#f8f9fa] text-[#1a1d20]">
@@ -613,7 +624,7 @@
 
           <!-- Video 2 -->
           <div class="group relative rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all cursor-pointer aspect-video bg-[#1a1d20]">
-            <img src="https://images.unsplash.com/photo-1541888946425-d0fbb186156f?auto=format&fit=crop&w=600&q=75" class="w-full h-full object-cover">
+            <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=600&q=75" class="w-full h-full object-cover">
             <div class="absolute inset-0 hover-darken-veil"></div>
             <div class="absolute inset-0 flex items-center justify-center">
               <div class="w-10 h-10 rounded-full bg-white/90 text-[#de602e] flex items-center justify-center shadow-md group-hover:scale-110 transition-transform">
