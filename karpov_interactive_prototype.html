@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%231a1d20'/><text x='50' y='68' font-size='55' font-family='serif' fill='%23de602e' text-anchor='middle'>K</text></svg>">
   <title>Alexandr Karpov — Architecture, Design & Practice</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -262,8 +263,8 @@
     </section>
 
     <!-- 3. Dynamic Interactive Architectural Album Section (Accordion Response to Clicked Typology) -->
-    <section id="album-section" class="py-16 px-6 md:px-16 lg:px-24 bg-[#f8f9fa]">
-      <div class="max-w-6xl mx-auto">
+    <section id="album-section" class="py-16 px-6 md:px-16 bg-[#f8f9fa] w-full">
+      <div class="w-full">
 
         <!-- Header Datum for Active Typology (Clean, Minimal) -->
         <div class="flex flex-col md:flex-row md:items-end justify-between pb-4 mb-6 gap-4">
@@ -291,7 +292,7 @@
           <div class="flex flex-col lg:flex-row gap-6 items-stretch">
             
             <!-- Left: Large Central Featured Image Showcase Viewport (~78% width) -->
-            <div class="relative w-full lg:w-[78%] h-[480px] md:h-[640px] rounded-xl overflow-hidden bg-[#f0f2f4] group flex-shrink-0">
+            <div class="relative w-full lg:w-[80%] h-[540px] md:h-[720px] lg:h-[820px] rounded-xl overflow-hidden bg-[#f0f2f4] group flex-shrink-0">
               
               <img id="main-feature-img" 
                    src="assets/portfolio_plates/plate_page_30.jpg" 
@@ -323,11 +324,11 @@
             </div>
 
             <!-- Right: Vertical Un-focused Image Reel (~22% width, stacked vertically) -->
-            <div class="w-full lg:w-[22%] flex flex-row lg:flex-col gap-3 justify-between" id="thumbnail-strip">
+            <div class="w-full lg:w-[20%] flex flex-row lg:flex-col gap-3 justify-between" id="thumbnail-strip">
               
               <!-- Thumb 0 -->
               <div onclick="setAlbumView(0)" id="thumb-btn-0" 
-                   class="group relative h-20 lg:h-[118px] w-full rounded-lg overflow-hidden cursor-pointer transition-all duration-300 ring-2 ring-[#de602e]">
+                   class="group relative h-20 lg:h-[154px] w-full rounded-lg overflow-hidden cursor-pointer transition-all duration-300 ring-2 ring-[#de602e]">
                 <img id="thumb-img-0" src="assets/portfolio_plates/plate_page_30.jpg" class="w-full h-full object-cover">
                 <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
                 <div class="absolute bottom-1 left-2 z-10 hover-reveal-text">
@@ -337,7 +338,7 @@
 
               <!-- Thumb 1 -->
               <div onclick="setAlbumView(1)" id="thumb-btn-1" 
-                   class="group relative h-20 lg:h-[118px] w-full rounded-lg overflow-hidden cursor-pointer transition-all duration-300 ring-0 hover:ring-2 hover:ring-[#de602e]">
+                   class="group relative h-20 lg:h-[154px] w-full rounded-lg overflow-hidden cursor-pointer transition-all duration-300 ring-0 hover:ring-2 hover:ring-[#de602e]">
                 <img id="thumb-img-1" src="assets/portfolio_plates/plate_page_31.jpg" class="w-full h-full object-cover">
                 <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
                 <div class="absolute bottom-1 left-2 z-10 hover-reveal-text">
@@ -347,7 +348,7 @@
 
               <!-- Thumb 2 -->
               <div onclick="setAlbumView(2)" id="thumb-btn-2" 
-                   class="group relative h-20 lg:h-[118px] w-full rounded-lg overflow-hidden cursor-pointer transition-all duration-300 ring-0 hover:ring-2 hover:ring-[#de602e]">
+                   class="group relative h-20 lg:h-[154px] w-full rounded-lg overflow-hidden cursor-pointer transition-all duration-300 ring-0 hover:ring-2 hover:ring-[#de602e]">
                 <img id="thumb-img-2" src="assets/projects/commercial_izka/img_01_558x425.jpeg" class="w-full h-full object-cover">
                 <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
                 <div class="absolute bottom-1 left-2 z-10 hover-reveal-text">
@@ -357,7 +358,7 @@
 
               <!-- Thumb 3 -->
               <div onclick="setAlbumView(3)" id="thumb-btn-3" 
-                   class="group relative h-20 lg:h-[118px] w-full rounded-lg overflow-hidden cursor-pointer transition-all duration-300 ring-0 hover:ring-2 hover:ring-[#de602e]">
+                   class="group relative h-20 lg:h-[154px] w-full rounded-lg overflow-hidden cursor-pointer transition-all duration-300 ring-0 hover:ring-2 hover:ring-[#de602e]">
                 <img id="thumb-img-3" src="assets/portfolio_plates/plate_page_18.jpg" class="w-full h-full object-cover">
                 <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
                 <div class="absolute bottom-1 left-2 z-10 hover-reveal-text">
@@ -367,7 +368,7 @@
 
               <!-- Thumb 4 -->
               <div onclick="setAlbumView(4)" id="thumb-btn-4" 
-                   class="group relative h-20 lg:h-[118px] w-full rounded-lg overflow-hidden cursor-pointer transition-all duration-300 ring-0 hover:ring-2 hover:ring-[#de602e]">
+                   class="group relative h-20 lg:h-[154px] w-full rounded-lg overflow-hidden cursor-pointer transition-all duration-300 ring-0 hover:ring-2 hover:ring-[#de602e]">
                 <img id="thumb-img-4" src="assets/portfolio_plates/plate_page_19.jpg" class="w-full h-full object-cover">
                 <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
                 <div class="absolute bottom-1 left-2 z-10 hover-reveal-text">
@@ -383,7 +384,7 @@
       </div>
     </section>
 
-    <!-- 4. Honors & Accolades Section<!-- 4. Honors & Accolades Section (Clean, Stylish Architectural Layout Below Album) -->
+    <!-- 4. Honors & Accolades Section (Clean, Stylish Architectural Layout Below Album) -->
     <section id="accolades-section" class="py-24 px-8 md:px-16 lg:px-24 bg-[#ffffff]">
       <div class="max-w-5xl mx-auto">
         
@@ -1365,9 +1366,9 @@
         const thumbBtn = document.getElementById(`thumb-btn-${i}`);
         if (thumbBtn) {
           if (i === index) {
-            thumbBtn.className = "group relative h-20 lg:h-[118px] w-full rounded-lg overflow-hidden cursor-pointer transition-all duration-300 ring-2 ring-[#de602e]";
+            thumbBtn.className = "group relative h-20 lg:h-[154px] w-full rounded-lg overflow-hidden cursor-pointer transition-all duration-300 ring-2 ring-[#de602e]";
           } else {
-            thumbBtn.className = "group relative h-20 lg:h-[118px] w-full rounded-lg overflow-hidden cursor-pointer transition-all duration-300 ring-0 hover:ring-2 hover:ring-[#de602e]";
+            thumbBtn.className = "group relative h-20 lg:h-[154px] w-full rounded-lg overflow-hidden cursor-pointer transition-all duration-300 ring-0 hover:ring-2 hover:ring-[#de602e]";
           }
         }
       }
