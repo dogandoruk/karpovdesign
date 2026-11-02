@@ -341,59 +341,24 @@
   </section>
 
     
-  <!-- Contact Form Section Embedded at Bottom of Landing Page (25% Left Pure Negative Space) -->
+  <!-- Get in Touch CTA Section at Bottom of Landing Page (25% Left Pure Negative Space) -->
   <section id="contact-section" class="w-full bg-[#f8f9fa] py-20 px-6 md:px-12 lg:px-16 border-t border-[#e2e5e8]">
     <div class="max-w-[1920px] mx-auto flex flex-col lg:flex-row items-stretch">
       
       <!-- 25% Left Pure Negative Space -->
       <div class="hidden lg:block lg:w-1/4"></div>
 
-      <!-- 75% Active Form Container -->
-      <div class="w-full lg:w-3/4 lg:pl-12">
-        <div class="mb-8">
-          <h2 class="text-xl md:text-2xl font-semibold tracking-[0.25em] uppercase text-[#38606a]">Get in touch</h2>
+      <!-- 75% Active Container -->
+      <div class="w-full lg:w-3/4 lg:pl-12 flex flex-col sm:flex-row sm:items-center justify-between gap-8 bg-white border border-[#e2e5e8] p-8 md:p-12">
+        <div>
+          <h2 class="text-xl md:text-2xl font-semibold tracking-[0.25em] uppercase text-[#38606a] mb-3">Get in touch</h2>
+          <p class="text-sm text-[#595f65] max-w-xl leading-relaxed">
+            Direct dialogue for architectural commissions, strategic collaborations, and urban consultations.
+          </p>
         </div>
-
-        <form onsubmit="handleInquirySubmit(event)" class="space-y-6 bg-white border border-[#e2e5e8] p-8 md:p-10">
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <div>
-              <label class="block text-xs font-mono uppercase tracking-wider text-[#1a1d20] mb-2">Name *</label>
-              <input type="text" required placeholder="Your full name" class="w-full bg-[#f8f9fa] border border-[#e2e5e8] p-3 text-xs text-[#1a1d20] focus:outline-none focus:border-[#de602e]">
-            </div>
-            <div>
-              <label class="block text-xs font-mono uppercase tracking-wider text-[#1a1d20] mb-2">Email *</label>
-              <input type="email" required placeholder="your.email@domain.com" class="w-full bg-[#f8f9fa] border border-[#e2e5e8] p-3 text-xs text-[#1a1d20] focus:outline-none focus:border-[#de602e]">
-            </div>
-          </div>
-
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <div>
-              <label class="block text-xs font-mono uppercase tracking-wider text-[#1a1d20] mb-2">Site Location</label>
-              <input type="text" placeholder="e.g. Asheville, NC" class="w-full bg-[#f8f9fa] border border-[#e2e5e8] p-3 text-xs text-[#1a1d20] focus:outline-none focus:border-[#de602e]">
-            </div>
-            <div>
-              <label class="block text-xs font-mono uppercase tracking-wider text-[#1a1d20] mb-2">Telephone</label>
-              <input type="tel" placeholder="e.g. +1 (704) 000-0000" class="w-full bg-[#f8f9fa] border border-[#e2e5e8] p-3 text-xs text-[#1a1d20] focus:outline-none focus:border-[#de602e]">
-            </div>
-          </div>
-
-          <div>
-            <label class="block text-xs font-mono uppercase tracking-wider text-[#1a1d20] mb-2">Project Scope & Program Requirements *</label>
-            <textarea id="landing-scope-textarea" rows="5" required placeholder="Describe your vision, site parameters, program requirements..." oninput="autoExpandTextarea(this)" class="w-full bg-[#f8f9fa] border border-[#e2e5e8] p-4 text-xs text-[#1a1d20] focus:outline-none focus:border-[#de602e] resize-none leading-relaxed"></textarea>
-          </div>
-
-          <div class="flex items-center justify-between pt-2">
-            <span class="text-[11px] text-[#595f65]">Confidentiality guaranteed.</span>
-            <!-- Orange Submit Button -->
-            <button type="submit" class="px-10 py-3 bg-[#de602e] hover:bg-[#ad4b24] text-white text-xs font-mono uppercase tracking-widest font-semibold transition-colors shadow-sm">
-              Submit &rarr;
-            </button>
-          </div>
-          
-          <div id="form-success" class="hidden p-4 bg-[#e4f0f2] border border-[#38606a] text-xs text-[#2b4951]">
-            Thank you. Your message has been sent directly to Aleksandre Karpov.
-          </div>
-        </form>
+        <a href="contact.html" class="inline-flex items-center justify-center px-10 py-4 bg-[#de602e] hover:bg-[#ad4b24] text-white text-xs font-mono uppercase tracking-[0.2em] font-semibold transition-colors shadow-sm whitespace-nowrap">
+          Get in touch &rarr;
+        </a>
       </div>
 
     </div>

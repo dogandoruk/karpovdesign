@@ -202,25 +202,25 @@
   </main>
 
   <!-- Near-Fullscreen Image Lightbox Modal -->
-  <div id="image-lightbox" class="fixed inset-0 z-50 bg-[#1a1d20]/95 backdrop-blur-md hidden flex flex-col items-center justify-between p-4 md:p-6" onclick="handleLightboxBackdrop(event)">
+  <div id="image-lightbox" class="fixed inset-0 z-50 bg-[#1a1d20]/95 backdrop-blur-md hidden flex flex-col items-center justify-between p-4 md:p-6 cursor-pointer" onclick="handleLightboxClick(event)">
     
-    <!-- Top Left: Blue "X" Button Without Any Borders per user directive -->
-    <button onclick="closeLightbox()" class="fixed top-4 left-6 z-60 text-blue-500 hover:text-blue-400 text-3xl font-bold bg-transparent border-none p-2 cursor-pointer transition-colors focus:outline-none" title="Close (Esc)" aria-label="Close popup">✕</button>
+    <!-- Top Left: Authentic Eyeblue (#67aec0) "X" Button Without Any Borders per user directive -->
+    <button onclick="closeLightbox()" class="fixed top-4 left-6 z-60 text-[#67aec0] hover:text-[#38606a] text-3xl font-bold bg-transparent border-none p-2 cursor-pointer transition-colors focus:outline-none" title="Close (Esc)" aria-label="Close popup">✕</button>
 
     <!-- Top Bar: Counter -->
-    <div class="w-full max-w-[1920px] flex items-center justify-end text-white/80 pt-2">
+    <div class="w-full max-w-[1920px] flex items-center justify-end text-white/80 pt-2 pointer-events-none">
       <span id="lightbox-counter" class="text-xs font-mono uppercase tracking-widest">Plate 1 of 3</span>
     </div>
 
     <!-- Center Image Container & Flank Arrows -->
-    <div class="relative w-full flex-1 flex items-center justify-center my-2 select-none" onclick="event.stopPropagation()">
-      <button onclick="navigateLightbox(-1)" class="absolute left-2 md:left-6 z-10 text-white/80 hover:text-white bg-black/50 hover:bg-black/80 p-3 md:p-4 rounded-full transition-colors text-xl font-mono focus:outline-none" title="Previous (Left Arrow)">&#8592;</button>
-      <img id="lightbox-img" src="" alt="Enlarged Project Plate" class="max-w-[92vw] max-h-[82vh] object-contain drop-shadow-2xl transition-all duration-300">
-      <button onclick="navigateLightbox(1)" class="absolute right-2 md:right-6 z-10 text-white/80 hover:text-white bg-black/50 hover:bg-black/80 p-3 md:p-4 rounded-full transition-colors text-xl font-mono focus:outline-none" title="Next (Right Arrow)">&#8594;</button>
+    <div class="relative w-full flex-1 flex items-center justify-center my-2 select-none">
+      <button onclick="navigateLightbox(-1); event.stopPropagation();" class="absolute left-2 md:left-6 z-10 text-white/80 hover:text-white bg-black/50 hover:bg-black/80 p-3 md:p-4 rounded-full transition-colors text-xl font-mono focus:outline-none" title="Previous (Left Arrow)">&#8592;</button>
+      <img id="lightbox-img" src="" alt="Enlarged Project Plate" class="max-w-[92vw] max-h-[82vh] object-contain drop-shadow-2xl transition-all duration-300 cursor-default" onclick="event.stopPropagation()">
+      <button onclick="navigateLightbox(1); event.stopPropagation();" class="absolute right-2 md:right-6 z-10 text-white/80 hover:text-white bg-black/50 hover:bg-black/80 p-3 md:p-4 rounded-full transition-colors text-xl font-mono focus:outline-none" title="Next (Right Arrow)">&#8594;</button>
     </div>
 
     <!-- Bottom Caption -->
-    <div class="w-full max-w-[1920px] text-center text-xs font-mono uppercase tracking-widest text-white/60 pb-2">
+    <div class="w-full max-w-[1920px] text-center text-xs font-mono uppercase tracking-widest text-white/60 pb-2 pointer-events-none">
       <span>De Pijp Community Center & Park &bull; Visual Documentation</span>
     </div>
   </div>
@@ -262,10 +262,12 @@
       }
     }
 
-    function handleLightboxBackdrop(e) {
-      if (e.target.id === 'image-lightbox') {
-        closeLightbox();
+    function handleLightboxClick(e) {
+      // If clicked on the image itself or an arrow button, do not close
+      if (e.target.closest('#lightbox-img') || e.target.closest('button')) {
+        return;
       }
+      closeLightbox();
     }
 
     window.addEventListener('keydown', (e) => {

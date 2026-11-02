@@ -358,59 +358,24 @@ def generate_accolades_section():
 
 def generate_landing_contact_section():
     return """
-  <!-- Contact Form Section Embedded at Bottom of Landing Page (25% Left Pure Negative Space) -->
+  <!-- Get in Touch CTA Section at Bottom of Landing Page (25% Left Pure Negative Space) -->
   <section id="contact-section" class="w-full bg-[#f8f9fa] py-20 px-6 md:px-12 lg:px-16 border-t border-[#e2e5e8]">
     <div class="max-w-[1920px] mx-auto flex flex-col lg:flex-row items-stretch">
       
       <!-- 25% Left Pure Negative Space -->
       <div class="hidden lg:block lg:w-1/4"></div>
 
-      <!-- 75% Active Form Container -->
-      <div class="w-full lg:w-3/4 lg:pl-12">
-        <div class="mb-8">
-          <h2 class="text-xl md:text-2xl font-semibold tracking-[0.25em] uppercase text-[#38606a]">Get in touch</h2>
+      <!-- 75% Active Container -->
+      <div class="w-full lg:w-3/4 lg:pl-12 flex flex-col sm:flex-row sm:items-center justify-between gap-8 bg-white border border-[#e2e5e8] p-8 md:p-12">
+        <div>
+          <h2 class="text-xl md:text-2xl font-semibold tracking-[0.25em] uppercase text-[#38606a] mb-3">Get in touch</h2>
+          <p class="text-sm text-[#595f65] max-w-xl leading-relaxed">
+            Direct dialogue for architectural commissions, strategic collaborations, and urban consultations.
+          </p>
         </div>
-
-        <form onsubmit="handleInquirySubmit(event)" class="space-y-6 bg-white border border-[#e2e5e8] p-8 md:p-10">
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <div>
-              <label class="block text-xs font-mono uppercase tracking-wider text-[#1a1d20] mb-2">Name *</label>
-              <input type="text" required placeholder="Your full name" class="w-full bg-[#f8f9fa] border border-[#e2e5e8] p-3 text-xs text-[#1a1d20] focus:outline-none focus:border-[#de602e]">
-            </div>
-            <div>
-              <label class="block text-xs font-mono uppercase tracking-wider text-[#1a1d20] mb-2">Email *</label>
-              <input type="email" required placeholder="your.email@domain.com" class="w-full bg-[#f8f9fa] border border-[#e2e5e8] p-3 text-xs text-[#1a1d20] focus:outline-none focus:border-[#de602e]">
-            </div>
-          </div>
-
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <div>
-              <label class="block text-xs font-mono uppercase tracking-wider text-[#1a1d20] mb-2">Site Location</label>
-              <input type="text" placeholder="e.g. Asheville, NC" class="w-full bg-[#f8f9fa] border border-[#e2e5e8] p-3 text-xs text-[#1a1d20] focus:outline-none focus:border-[#de602e]">
-            </div>
-            <div>
-              <label class="block text-xs font-mono uppercase tracking-wider text-[#1a1d20] mb-2">Telephone</label>
-              <input type="tel" placeholder="e.g. +1 (704) 000-0000" class="w-full bg-[#f8f9fa] border border-[#e2e5e8] p-3 text-xs text-[#1a1d20] focus:outline-none focus:border-[#de602e]">
-            </div>
-          </div>
-
-          <div>
-            <label class="block text-xs font-mono uppercase tracking-wider text-[#1a1d20] mb-2">Project Scope & Program Requirements *</label>
-            <textarea id="landing-scope-textarea" rows="5" required placeholder="Describe your vision, site parameters, program requirements..." oninput="autoExpandTextarea(this)" class="w-full bg-[#f8f9fa] border border-[#e2e5e8] p-4 text-xs text-[#1a1d20] focus:outline-none focus:border-[#de602e] resize-none leading-relaxed"></textarea>
-          </div>
-
-          <div class="flex items-center justify-between pt-2">
-            <span class="text-[11px] text-[#595f65]">Confidentiality guaranteed.</span>
-            <!-- Orange Submit Button -->
-            <button type="submit" class="px-10 py-3 bg-[#de602e] hover:bg-[#ad4b24] text-white text-xs font-mono uppercase tracking-widest font-semibold transition-colors shadow-sm">
-              Submit &rarr;
-            </button>
-          </div>
-          
-          <div id="form-success" class="hidden p-4 bg-[#e4f0f2] border border-[#38606a] text-xs text-[#2b4951]">
-            Thank you. Your message has been sent directly to Aleksandre Karpov.
-          </div>
-        </form>
+        <a href="contact.html" class="inline-flex items-center justify-center px-10 py-4 bg-[#de602e] hover:bg-[#ad4b24] text-white text-xs font-mono uppercase tracking-[0.2em] font-semibold transition-colors shadow-sm whitespace-nowrap">
+          Get in touch &rarr;
+        </a>
       </div>
 
     </div>
@@ -1062,18 +1027,34 @@ def generate_about_page():
           </p>
         </div>
 
-        <!-- Bio Narrative -->
-        <div class="max-w-3xl">
-          <h2 class="text-xl md:text-2xl font-semibold text-[#1a1d20] mb-4">Dual Mastery: Analog Fine Art & Computational BIM</h2>
-          <p class="text-sm md:text-base text-[#595f65] leading-relaxed mb-4">
-            Aleksandre Karpov operates at the convergence of tactile architectural draftsmanship and advanced digital building information modeling. Raised with a rigorous foundation in classical drawing, watercolor plein-air representation, and structural sculpture, he approaches each project with visceral sensitivity to materials, topography, and natural light.
-          </p>
-          <p class="text-sm md:text-base text-[#595f65] leading-relaxed mb-4">
-            Parallel to this analog mastery, Aleksandre possesses extensive experience in computational building coordination, parametric modeling, and Revit/BIM management. He has led technical documentation across international commercial towers, complex mixed-use industrial regenerations, and bespoke mountain residences.
-          </p>
-          <p class="text-sm md:text-base text-[#595f65] leading-relaxed">
-            As principal of Karpov Design LLC, he provides complete residential design commissions and architectural consultation.
-          </p>
+        <!-- Profile Section: Appropriately Larger Portrait + Bio Narrative -->
+        <div class="flex flex-col md:flex-row items-start gap-10 lg:gap-14 border-b border-[#e2e5e8] pb-12">
+          
+          <!-- Appropriately Larger Portrait (md:w-80 lg:w-96) -->
+          <div class="w-full md:w-80 lg:w-96 shrink-0 flex flex-col">
+            <div class="w-full aspect-[4/5] bg-[#1a1d20] border border-[#1a1d20] overflow-hidden shadow-lg">
+              <img src="assets/official/alex_portrait.png" alt="Aleksandre Karpov" class="w-full h-full object-cover">
+            </div>
+            <div class="mt-4 p-4 bg-white border border-[#e2e5e8]">
+              <span class="text-sm font-semibold tracking-wider uppercase text-[#1a1d20] block">Aleksandre Karpov</span>
+              <span class="text-xs font-mono text-[#595f65] uppercase tracking-widest block mt-1">Principal &bull; Karpov Design LLC</span>
+            </div>
+          </div>
+
+          <!-- Bio Narrative -->
+          <div class="flex-1 space-y-6">
+            <h2 class="text-xl md:text-2xl font-semibold text-[#1a1d20]">Dual Mastery: Analog Fine Art & Computational BIM</h2>
+            <p class="text-sm md:text-base text-[#595f65] leading-relaxed">
+              Aleksandre Karpov operates at the convergence of tactile architectural draftsmanship and advanced digital building information modeling. Raised with a rigorous foundation in classical drawing, watercolor plein-air representation, and structural sculpture, he approaches each project with visceral sensitivity to materials, topography, and natural light.
+            </p>
+            <p class="text-sm md:text-base text-[#595f65] leading-relaxed">
+              Parallel to this analog mastery, Aleksandre possesses extensive experience in computational building coordination, parametric modeling, and Revit/BIM management. He has led technical documentation across international commercial towers, complex mixed-use industrial regenerations, and bespoke mountain residences.
+            </p>
+            <p class="text-sm md:text-base text-[#595f65] leading-relaxed">
+              As principal of Karpov Design LLC, he provides complete residential design commissions and architectural consultation.
+            </p>
+          </div>
+
         </div>
 
         <!-- Academic & Technical Capabilities -->
@@ -1145,59 +1126,44 @@ def generate_contact_page():
       <!-- 75% Right Active Column -->
       <div class="w-full lg:w-3/4 lg:pl-12 space-y-12">
         
-        <!-- Portrait & Contact Details Row -->
-        <div class="flex flex-col md:flex-row gap-8 items-start">
-          
-          <!-- Scaled down portrait (consistent with 1/4 space layout) -->
-          <div class="w-44 sm:w-52 shrink-0 flex flex-col">
-            <div class="w-full aspect-[4/5] bg-[#1a1d20] border border-[#1a1d20] overflow-hidden">
-              <img src="assets/official/alex_portrait.png" alt="Aleksandre Karpov" class="w-full h-full object-cover">
-            </div>
-            <div class="mt-3 p-3 bg-white border border-[#e2e5e8]">
-              <span class="text-xs font-semibold tracking-wider uppercase text-[#1a1d20] block">Aleksandre Karpov</span>
-              <span class="text-[10px] font-mono text-[#595f65] uppercase tracking-widest block mt-0.5">Karpov Design LLC &bull; Charlotte, NC</span>
-            </div>
+        <!-- Contact Header & Direct Coordinates (Alex portrait migrated to About page) -->
+        <div class="space-y-6">
+          <div>
+            <h1 class="text-3xl md:text-4xl font-semibold tracking-tight text-[#1a1d20] mb-2">Get in touch</h1>
+            <p class="text-sm text-[#595f65] leading-relaxed max-w-xl">
+              For residential design commissions, computational BIM consulting, or competition collaborations, reach out directly.
+            </p>
           </div>
 
-          <!-- Direct Coordinates & Bio -->
-          <div class="flex-1 space-y-6">
+          <!-- Direct Coordinates Grid -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 border-t border-b border-[#e2e5e8] py-6">
             <div>
-              <h1 class="text-3xl md:text-4xl font-semibold tracking-tight text-[#1a1d20] mb-2">Get in touch</h1>
-              <p class="text-sm text-[#595f65] leading-relaxed max-w-xl">
-                For residential design commissions, computational BIM consulting, or competition collaborations, reach out directly.
-              </p>
+              <span class="text-[10px] font-mono uppercase tracking-widest text-[#595f65] block">United States Direct</span>
+              <a href="tel:+17048459596" class="text-sm font-semibold text-[#1a1d20] hover:text-[#de602e] transition-colors mt-1 block">
+                +1 (704) 845-9596
+              </a>
+              <span class="text-xs text-[#767676] block mt-0.5">Charlotte, NC</span>
             </div>
-
-            <!-- Direct Coordinates Grid -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 border-t border-b border-[#e2e5e8] py-4">
-              <div>
-                <span class="text-[10px] font-mono uppercase tracking-widest text-[#595f65] block">United States Direct</span>
-                <a href="tel:+17048459596" class="text-sm font-semibold text-[#1a1d20] hover:text-[#de602e] transition-colors mt-1 block">
-                  +1 (704) 845-9596
-                </a>
-                <span class="text-xs text-[#767676]">Charlotte, North Carolina</span>
-              </div>
-              <div>
-                <span class="text-[10px] font-mono uppercase tracking-widest text-[#595f65] block">International Line</span>
-                <a href="tel:+905385907458" class="text-sm font-semibold text-[#1a1d20] hover:text-[#de602e] transition-colors mt-1 block">
-                  +90 (538) 590-7458
-                </a>
-                <span class="text-xs text-[#767676]">Aegean Basin / European Projects</span>
-              </div>
-              <div>
-                <span class="text-[10px] font-mono uppercase tracking-widest text-[#595f65] block">Electronic Mail</span>
-                <a href="mailto:contact@karpovdesign.com" class="text-sm font-semibold text-[#1a1d20] hover:text-[#de602e] transition-colors mt-1 block">
-                  contact@karpovdesign.com
-                </a>
-              </div>
-              <div>
-                <span class="text-[10px] font-mono uppercase tracking-widest text-[#595f65] block">Studio Location</span>
-                <span class="text-sm font-semibold text-[#1a1d20] mt-1 block">Charlotte, NC 28223</span>
-                <span class="text-xs text-[#767676]">By Appointment Only</span>
-              </div>
+            <div>
+              <span class="text-[10px] font-mono uppercase tracking-widest text-[#595f65] block">International Line</span>
+              <a href="tel:+905385907458" class="text-sm font-semibold text-[#1a1d20] hover:text-[#de602e] transition-colors mt-1 block">
+                +90 (538) 590-7458
+              </a>
+              <span class="text-xs text-[#767676] block mt-0.5">European Projects</span>
+            </div>
+            <div>
+              <span class="text-[10px] font-mono uppercase tracking-widest text-[#595f65] block">Electronic Mail</span>
+              <a href="mailto:contact@karpovdesign.com" class="text-sm font-semibold text-[#1a1d20] hover:text-[#de602e] transition-colors mt-1 block">
+                contact@karpovdesign.com
+              </a>
+              <span class="text-xs text-[#767676] block mt-0.5">Direct Inbox</span>
+            </div>
+            <div>
+              <span class="text-[10px] font-mono uppercase tracking-widest text-[#595f65] block">Studio Location</span>
+              <span class="text-sm font-semibold text-[#1a1d20] mt-1 block">Charlotte, NC 28223</span>
+              <span class="text-xs text-[#767676] block mt-0.5">By Appointment Only</span>
             </div>
           </div>
-
         </div>
 
         <!-- Form: 'Get in touch', zero labels on textarea, orange submit button -->
@@ -1560,25 +1526,25 @@ __HEADER__
   </main>
 
   <!-- Near-Fullscreen Image Lightbox Modal -->
-  <div id="image-lightbox" class="fixed inset-0 z-50 bg-[#1a1d20]/95 backdrop-blur-md hidden flex flex-col items-center justify-between p-4 md:p-6" onclick="handleLightboxBackdrop(event)">
+  <div id="image-lightbox" class="fixed inset-0 z-50 bg-[#1a1d20]/95 backdrop-blur-md hidden flex flex-col items-center justify-between p-4 md:p-6 cursor-pointer" onclick="handleLightboxClick(event)">
     
-    <!-- Top Left: Blue "X" Button Without Any Borders per user directive -->
-    <button onclick="closeLightbox()" class="fixed top-4 left-6 z-60 text-blue-500 hover:text-blue-400 text-3xl font-bold bg-transparent border-none p-2 cursor-pointer transition-colors focus:outline-none" title="Close (Esc)" aria-label="Close popup">✕</button>
+    <!-- Top Left: Authentic Eyeblue (#67aec0) "X" Button Without Any Borders per user directive -->
+    <button onclick="closeLightbox()" class="fixed top-4 left-6 z-60 text-[#67aec0] hover:text-[#38606a] text-3xl font-bold bg-transparent border-none p-2 cursor-pointer transition-colors focus:outline-none" title="Close (Esc)" aria-label="Close popup">✕</button>
 
     <!-- Top Bar: Counter -->
-    <div class="w-full max-w-[1920px] flex items-center justify-end text-white/80 pt-2">
+    <div class="w-full max-w-[1920px] flex items-center justify-end text-white/80 pt-2 pointer-events-none">
       <span id="lightbox-counter" class="text-xs font-mono uppercase tracking-widest">Plate 1 of {len(images)}</span>
     </div>
 
     <!-- Center Image Container & Flank Arrows -->
-    <div class="relative w-full flex-1 flex items-center justify-center my-2 select-none" onclick="event.stopPropagation()">
-      <button onclick="navigateLightbox(-1)" class="absolute left-2 md:left-6 z-10 text-white/80 hover:text-white bg-black/50 hover:bg-black/80 p-3 md:p-4 rounded-full transition-colors text-xl font-mono focus:outline-none" title="Previous (Left Arrow)">&#8592;</button>
-      <img id="lightbox-img" src="" alt="Enlarged Project Plate" class="max-w-[92vw] max-h-[82vh] object-contain drop-shadow-2xl transition-all duration-300">
-      <button onclick="navigateLightbox(1)" class="absolute right-2 md:right-6 z-10 text-white/80 hover:text-white bg-black/50 hover:bg-black/80 p-3 md:p-4 rounded-full transition-colors text-xl font-mono focus:outline-none" title="Next (Right Arrow)">&#8594;</button>
+    <div class="relative w-full flex-1 flex items-center justify-center my-2 select-none">
+      <button onclick="navigateLightbox(-1); event.stopPropagation();" class="absolute left-2 md:left-6 z-10 text-white/80 hover:text-white bg-black/50 hover:bg-black/80 p-3 md:p-4 rounded-full transition-colors text-xl font-mono focus:outline-none" title="Previous (Left Arrow)">&#8592;</button>
+      <img id="lightbox-img" src="" alt="Enlarged Project Plate" class="max-w-[92vw] max-h-[82vh] object-contain drop-shadow-2xl transition-all duration-300 cursor-default" onclick="event.stopPropagation()">
+      <button onclick="navigateLightbox(1); event.stopPropagation();" class="absolute right-2 md:right-6 z-10 text-white/80 hover:text-white bg-black/50 hover:bg-black/80 p-3 md:p-4 rounded-full transition-colors text-xl font-mono focus:outline-none" title="Next (Right Arrow)">&#8594;</button>
     </div>
 
     <!-- Bottom Caption -->
-    <div class="w-full max-w-[1920px] text-center text-xs font-mono uppercase tracking-widest text-white/60 pb-2">
+    <div class="w-full max-w-[1920px] text-center text-xs font-mono uppercase tracking-widest text-white/60 pb-2 pointer-events-none">
       <span>{p['title']} &bull; Visual Documentation</span>
     </div>
   </div>
@@ -1620,10 +1586,12 @@ __HEADER__
       }}
     }}
 
-    function handleLightboxBackdrop(e) {{
-      if (e.target.id === 'image-lightbox') {{
-        closeLightbox();
+    function handleLightboxClick(e) {{
+      // If clicked on the image itself or an arrow button, do not close
+      if (e.target.closest('#lightbox-img') || e.target.closest('button')) {{
+        return;
       }}
+      closeLightbox();
     }}
 
     window.addEventListener('keydown', (e) => {{
