@@ -547,6 +547,9 @@ JS_TEMPLATE = """
 
     // --- Works Grid Logic ---
     let currentTypology = 'all';
+    let currentCompletion = 'all';
+    let currentRecency = 'newest';
+    let currentAward = 'all';
     let currentModalIndex = 0;
     let activeOrderedList = [...PROJECTS];
 
@@ -554,40 +557,42 @@ JS_TEMPLATE = """
       const container = document.getElementById('works-grid');
       container.innerHTML = '';
 
-      const matches = [];
-      const nonMatches = [];
-
-      PROJECTS.forEach(p => {
-        if (currentTypology === 'all' || p.typology.toLowerCase() === currentTypology.toLowerCase()) {
-          matches.push(p);
-        } else {
-          nonMatches.push(p);
-        }
+      // 1. Filter across all active dimensions
+      const filtered = PROJECTS.filter(p => {
+        const matchType = (currentTypology === 'all') || (p.typology.toLowerCase() === currentTypology.toLowerCase());
+        const matchCompletion = (currentCompletion === 'all') ||
+          (currentCompletion === 'built' && p.status === 'Completion') ||
+          (currentCompletion === 'concept' && p.status !== 'Completion');
+        const matchAward = (currentAward === 'all') || (p.award === true);
+        return matchType && matchCompletion && matchAward;
       });
 
-      const hasActiveFilter = (currentTypology !== 'all');
-      activeOrderedList = hasActiveFilter ? [...matches, ...nonMatches] : [...matches];
+      // 2. Sort by Recency
+      filtered.sort((a, b) => {
+        const yearA = parseInt(a.year, 10) || 0;
+        const yearB = parseInt(b.year, 10) || 0;
+        return currentRecency === 'newest' ? (yearB - yearA) : (yearA - yearB);
+      });
+
+      activeOrderedList = filtered;
 
       activeOrderedList.forEach((p, index) => {
-        const isMatched = matches.includes(p);
         const card = document.createElement('div');
-        
-        const dimClass = hasActiveFilter && !isMatched ? 'opacity-40 hover:opacity-100 transition-opacity' : '';
-        card.className = `group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden ${dimClass}`;
+        card.className = 'group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden';
         card.onclick = () => openModal(p.id);
 
         if (!IS_VARIANT) {
-          // DEFAULT VERSION (index.html): TITLE APPEARS ON IMAGE ON HOVER (NO SPACE UNDERNEATH)
+          // DEFAULT VERSION (index.html): TITLE ON IMAGE ON HOVER (10% DARKENING VEIL)
           card.innerHTML = `
             <div class="relative w-full aspect-[4/3] overflow-hidden bg-[#1a1d20]">
               <img src="${p.primary_image}" alt="${p.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
               
-              <!-- Subtle dark veil on hover -->
-              <div class="absolute inset-0 bg-black/0 group-hover:bg-black/55 transition-colors duration-500 ease-out"></div>
+              <!-- Strictly 10% dark veil on hover per user directive -->
+              <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500 ease-out"></div>
               
               <!-- Title appears ON THE IMAGE when hovered -->
               <div class="variant-hover-overlay absolute inset-0 p-6 flex flex-col justify-end opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-500 ease-out">
-                <h3 class="text-base md:text-lg font-semibold text-white leading-tight drop-shadow-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500">${p.title}</h3>
+                <h3 class="text-base md:text-lg font-semibold text-white leading-tight drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] opacity-0 group-hover:opacity-100 transition-opacity duration-500">${p.title}</h3>
               </div>
             </div>
           `;
@@ -610,14 +615,78 @@ JS_TEMPLATE = """
       });
     }
 
-    function setFilter(value) {
+    function setTypology(value) {
       currentTypology = value;
-      document.querySelectorAll('.filter-btn').forEach(btn => {
-        btn.className = 'filter-btn text-[#767676] hover:text-[#1a1d20] pb-1 transition-colors';
+      document.querySelectorAll('.filter-typ-btn').forEach(btn => {
+        btn.className = 'filter-typ-btn text-[#767676] hover:text-[#1a1d20] pb-1 transition-colors';
       });
       const activeBtn = document.getElementById(`btn-typ-${value.toLowerCase()}`);
       if (activeBtn) {
-        activeBtn.className = 'filter-btn text-[#de602e] font-semibold border-b-2 border-[#de602e] pb-1';
+        activeBtn.className = 'filter-typ-btn text-[#de602e] font-semibold border-b-2 border-[#de602e] pb-1';
+      }
+      renderCards();
+    }
+    const setFilter = setTypology;
+
+    function setCompletion(value) {
+      currentCompletion = value;
+      if (!IS_VARIANT) {
+        document.querySelectorAll('.filter-comp-btn').forEach(btn => {
+          btn.className = 'filter-comp-btn text-[#767676] hover:text-[#1a1d20] pb-1 transition-colors';
+        });
+        const activeBtn = document.getElementById(`btn-comp-${value.toLowerCase()}`);
+        if (activeBtn) {
+          activeBtn.className = 'filter-comp-btn text-[#de602e] font-semibold border-b-2 border-[#de602e] pb-1';
+        }
+      } else {
+        const sel = document.getElementById('select-completion');
+        if (sel) {
+          sel.className = (value !== 'all')
+            ? 'bg-transparent text-sm font-mono uppercase tracking-[0.2em] text-[#de602e] font-semibold border-b-2 border-[#de602e] focus:outline-none cursor-pointer py-1 transition-colors'
+            : 'bg-transparent text-sm font-mono uppercase tracking-[0.2em] text-[#767676] hover:text-[#1a1d20] focus:outline-none cursor-pointer py-1 transition-colors';
+        }
+      }
+      renderCards();
+    }
+
+    function setRecency(value) {
+      currentRecency = value;
+      if (!IS_VARIANT) {
+        document.querySelectorAll('.filter-rec-btn').forEach(btn => {
+          btn.className = 'filter-rec-btn text-[#767676] hover:text-[#1a1d20] pb-1 transition-colors';
+        });
+        const activeBtn = document.getElementById(`btn-rec-${value.toLowerCase()}`);
+        if (activeBtn) {
+          activeBtn.className = 'filter-rec-btn text-[#de602e] font-semibold border-b-2 border-[#de602e] pb-1';
+        }
+      } else {
+        const sel = document.getElementById('select-recency');
+        if (sel) {
+          sel.className = (value !== 'newest')
+            ? 'bg-transparent text-sm font-mono uppercase tracking-[0.2em] text-[#de602e] font-semibold border-b-2 border-[#de602e] focus:outline-none cursor-pointer py-1 transition-colors'
+            : 'bg-transparent text-sm font-mono uppercase tracking-[0.2em] text-[#767676] hover:text-[#1a1d20] focus:outline-none cursor-pointer py-1 transition-colors';
+        }
+      }
+      renderCards();
+    }
+
+    function setAward(value) {
+      currentAward = value;
+      if (!IS_VARIANT) {
+        document.querySelectorAll('.filter-award-btn').forEach(btn => {
+          btn.className = 'filter-award-btn text-[#767676] hover:text-[#1a1d20] pb-1 transition-colors';
+        });
+        const activeBtn = document.getElementById(`btn-award-${value.toLowerCase()}`);
+        if (activeBtn) {
+          activeBtn.className = 'filter-award-btn text-[#de602e] font-semibold border-b-2 border-[#de602e] pb-1';
+        }
+      } else {
+        const sel = document.getElementById('select-award');
+        if (sel) {
+          sel.className = (value !== 'all')
+            ? 'bg-transparent text-sm font-mono uppercase tracking-[0.2em] text-[#de602e] font-semibold border-b-2 border-[#de602e] focus:outline-none cursor-pointer py-1 transition-colors'
+            : 'bg-transparent text-sm font-mono uppercase tracking-[0.2em] text-[#767676] hover:text-[#1a1d20] focus:outline-none cursor-pointer py-1 transition-colors';
+        }
       }
       renderCards();
     }
@@ -744,17 +813,91 @@ def generate_landing_page(is_variant=False):
   </section>
 """
 
-    # Figma Typographic Filter Bar (Zero Button Borders, Zero Dropdowns, Pure Horizontal Text Tabs)
-    filter_bar_markup = """
-  <!-- Figma Typographic Filter Bar: Underneath PORTFOLIO, Zero Button Borders -->
+    if not is_variant:
+        filter_bar_markup = """
+  <!-- Default Version Typographic Filters: Type Row + Secondary Filter Row Below (text-sm font-mono uppercase tracking-[0.2em]) -->
+  <div class="w-full bg-[#f8f9fa] pt-8 pb-4 space-y-4">
+    <!-- Row 1: Typology Open Buttons -->
+    <div class="flex flex-wrap items-center gap-6 md:gap-10 text-sm font-mono uppercase tracking-[0.2em] border-b border-[#e2e5e8] pb-3">
+      <button onclick="setTypology('all')" id="btn-typ-all" class="filter-typ-btn text-[#de602e] font-semibold border-b-2 border-[#de602e] pb-1">All</button>
+      <button onclick="setTypology('Residential')" id="btn-typ-residential" class="filter-typ-btn text-[#767676] hover:text-[#1a1d20] pb-1 transition-colors">Residential</button>
+      <button onclick="setTypology('Commercial')" id="btn-typ-commercial" class="filter-typ-btn text-[#767676] hover:text-[#1a1d20] pb-1 transition-colors">Commercial</button>
+      <button onclick="setTypology('Cultural')" id="btn-typ-cultural" class="filter-typ-btn text-[#767676] hover:text-[#1a1d20] pb-1 transition-colors">Cultural</button>
+      <button onclick="setTypology('Conceptual')" id="btn-typ-conceptual" class="filter-typ-btn text-[#767676] hover:text-[#1a1d20] pb-1 transition-colors">Conceptual</button>
+      <button onclick="setTypology('Art')" id="btn-typ-art" class="filter-typ-btn text-[#767676] hover:text-[#1a1d20] pb-1 transition-colors">Art</button>
+    </div>
+
+    <!-- Row 2: Secondary Filters as Open Buttons Underneath Type Filters -->
+    <div class="flex flex-wrap items-center gap-6 sm:gap-10 text-sm font-mono uppercase tracking-[0.2em] pt-1">
+      <!-- Completion Group: ALL / BUILT / CONCEPT -->
+      <div class="flex items-center gap-4 sm:gap-6">
+        <button onclick="setCompletion('all')" id="btn-comp-all" class="filter-comp-btn text-[#de602e] font-semibold border-b-2 border-[#de602e] pb-1">All Status</button>
+        <button onclick="setCompletion('built')" id="btn-comp-built" class="filter-comp-btn text-[#767676] hover:text-[#1a1d20] pb-1 transition-colors">Built</button>
+        <button onclick="setCompletion('concept')" id="btn-comp-concept" class="filter-comp-btn text-[#767676] hover:text-[#1a1d20] pb-1 transition-colors">Concept</button>
+      </div>
+
+      <span class="text-[#cbd5e1] font-light hidden sm:inline">&bull;</span>
+
+      <!-- Recency Group: NEWEST / OLDEST -->
+      <div class="flex items-center gap-4 sm:gap-6">
+        <button onclick="setRecency('newest')" id="btn-rec-newest" class="filter-rec-btn text-[#de602e] font-semibold border-b-2 border-[#de602e] pb-1">Newest</button>
+        <button onclick="setRecency('oldest')" id="btn-rec-oldest" class="filter-rec-btn text-[#767676] hover:text-[#1a1d20] pb-1 transition-colors">Oldest</button>
+      </div>
+
+      <span class="text-[#cbd5e1] font-light hidden sm:inline">&bull;</span>
+
+      <!-- Award Group: ALL / AWARDED -->
+      <div class="flex items-center gap-4 sm:gap-6">
+        <button onclick="setAward('all')" id="btn-award-all" class="filter-award-btn text-[#de602e] font-semibold border-b-2 border-[#de602e] pb-1">All Works</button>
+        <button onclick="setAward('awarded')" id="btn-award-awarded" class="filter-award-btn text-[#767676] hover:text-[#1a1d20] pb-1 transition-colors">Awarded</button>
+      </div>
+    </div>
+  </div>
+"""
+    else:
+        filter_bar_markup = """
+  <!-- Variant Version Typographic Filters: Type Row + Right-Aligned Simplistic Dropdowns (text-sm font-mono uppercase tracking-[0.2em]) -->
   <div class="w-full bg-[#f8f9fa] pt-8 pb-4">
-    <div class="flex flex-wrap items-center gap-6 md:gap-10 text-xs font-mono uppercase tracking-[0.2em] border-b border-[#e2e5e8] pb-4">
-      <button onclick="setFilter('all')" id="btn-typ-all" class="filter-btn text-[#de602e] font-semibold border-b-2 border-[#de602e] pb-1">All</button>
-      <button onclick="setFilter('Residential')" id="btn-typ-residential" class="filter-btn text-[#767676] hover:text-[#1a1d20] pb-1 transition-colors">Residential</button>
-      <button onclick="setFilter('Commercial')" id="btn-typ-commercial" class="filter-btn text-[#767676] hover:text-[#1a1d20] pb-1 transition-colors">Commercial</button>
-      <button onclick="setFilter('Cultural')" id="btn-typ-cultural" class="filter-btn text-[#767676] hover:text-[#1a1d20] pb-1 transition-colors">Cultural</button>
-      <button onclick="setFilter('Conceptual')" id="btn-typ-conceptual" class="filter-btn text-[#767676] hover:text-[#1a1d20] pb-1 transition-colors">Conceptual</button>
-      <button onclick="setFilter('Art')" id="btn-typ-art" class="filter-btn text-[#767676] hover:text-[#1a1d20] pb-1 transition-colors">Art</button>
+    <div class="flex flex-col xl:flex-row xl:items-center justify-between gap-6 border-b border-[#e2e5e8] pb-4">
+      <!-- Left: Typology Open Buttons -->
+      <div class="flex flex-wrap items-center gap-6 md:gap-10 text-sm font-mono uppercase tracking-[0.2em]">
+        <button onclick="setTypology('all')" id="btn-typ-all" class="filter-typ-btn text-[#de602e] font-semibold border-b-2 border-[#de602e] pb-1">All</button>
+        <button onclick="setTypology('Residential')" id="btn-typ-residential" class="filter-typ-btn text-[#767676] hover:text-[#1a1d20] pb-1 transition-colors">Residential</button>
+        <button onclick="setTypology('Commercial')" id="btn-typ-commercial" class="filter-typ-btn text-[#767676] hover:text-[#1a1d20] pb-1 transition-colors">Commercial</button>
+        <button onclick="setTypology('Cultural')" id="btn-typ-cultural" class="filter-typ-btn text-[#767676] hover:text-[#1a1d20] pb-1 transition-colors">Cultural</button>
+        <button onclick="setTypology('Conceptual')" id="btn-typ-conceptual" class="filter-typ-btn text-[#767676] hover:text-[#1a1d20] pb-1 transition-colors">Conceptual</button>
+        <button onclick="setTypology('Art')" id="btn-typ-art" class="filter-typ-btn text-[#767676] hover:text-[#1a1d20] pb-1 transition-colors">Art</button>
+      </div>
+
+      <!-- Right: Simplistic No-Background Dropdowns (Recency, Completion, Award) -->
+      <div class="flex flex-wrap items-center gap-6 sm:gap-8 text-sm font-mono uppercase tracking-[0.2em]">
+        
+        <!-- Recency Dropdown -->
+        <div class="relative inline-block">
+          <select id="select-recency" onchange="setRecency(this.value)" class="bg-transparent text-sm font-mono uppercase tracking-[0.2em] text-[#767676] hover:text-[#1a1d20] focus:outline-none cursor-pointer py-1 transition-colors">
+            <option value="newest" class="bg-white text-[#1a1d20]">Newest</option>
+            <option value="oldest" class="bg-white text-[#1a1d20]">Oldest</option>
+          </select>
+        </div>
+
+        <!-- Completion Dropdown (Built / Concept) -->
+        <div class="relative inline-block">
+          <select id="select-completion" onchange="setCompletion(this.value)" class="bg-transparent text-sm font-mono uppercase tracking-[0.2em] text-[#767676] hover:text-[#1a1d20] focus:outline-none cursor-pointer py-1 transition-colors">
+            <option value="all" class="bg-white text-[#1a1d20]">All Status</option>
+            <option value="built" class="bg-white text-[#1a1d20]">Built</option>
+            <option value="concept" class="bg-white text-[#1a1d20]">Concept</option>
+          </select>
+        </div>
+
+        <!-- Award Dropdown -->
+        <div class="relative inline-block">
+          <select id="select-award" onchange="setAward(this.value)" class="bg-transparent text-sm font-mono uppercase tracking-[0.2em] text-[#767676] hover:text-[#1a1d20] focus:outline-none cursor-pointer py-1 transition-colors">
+            <option value="all" class="bg-white text-[#1a1d20]">All Works</option>
+            <option value="awarded" class="bg-white text-[#1a1d20]">Awarded</option>
+          </select>
+        </div>
+
+      </div>
     </div>
   </div>
 """
