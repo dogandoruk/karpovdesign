@@ -46,14 +46,6 @@
     .card-frame:hover {
       border-color: #1a1d20;
     }
-    .sticky-filter-bar {
-      position: sticky;
-      top: 0;
-      z-index: 40;
-      background: rgba(248, 249, 250, 0.96);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid #e2e5e8;
-    }
     ::-webkit-scrollbar {
       width: 5px;
       height: 5px;
@@ -69,6 +61,10 @@
         opacity: 0.95 !important;
         transform: translateY(0) !important;
         background: linear-gradient(to top, rgba(15, 18, 22, 0.85) 0%, rgba(15, 18, 22, 0.30) 60%, transparent 100%) !important;
+      }
+      .variant-title-space h3 {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
       }
     }
   </style>
@@ -116,14 +112,10 @@
                 <svg class="w-6 h-6 ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
               </button>
             </div>
-            <span class="absolute bottom-4 left-4 bg-black/80 text-white text-[10px] font-mono uppercase tracking-widest px-2.5 py-1">
-              Masterclass &bull; 48 Min Studio Session
-            </span>
           </div>
 
           <div class="w-full lg:w-1/3 flex flex-col justify-between">
             <div>
-              <span class="text-xs font-mono uppercase tracking-widest text-[#38606a] font-semibold block mb-1">Featured Masterclass</span>
               <h2 class="text-xl md:text-2xl font-semibold text-[#1a1d20] mb-3">Tectonic Synthesis: From Watercolor Intuition to BIM Execution</h2>
               <p class="text-xs md:text-sm text-[#595f65] leading-relaxed mb-4">
                 Aleksandre Karpov breaks down the complete workflow of bridging analog artistic gesture with rigorous Revit parametric families, daylight simulation, and constructible documentation.
@@ -148,8 +140,7 @@
               <img src="assets/official/projects/seed-retreat/seed_8.jpg" alt="Tutorial 1" class="w-full h-full object-cover">
             </div>
             <div class="p-5">
-              <span class="text-[10px] font-mono uppercase tracking-widest text-[#de602e]">Module 01</span>
-              <h4 class="text-sm font-semibold text-[#1a1d20] mt-1 mb-2">Mass-Timber Envelope Systems</h4>
+              <h4 class="text-sm font-semibold text-[#1a1d20] mb-2">Mass-Timber Envelope Systems</h4>
               <p class="text-xs text-[#595f65] leading-relaxed">Passive ventilation, cross-laminated timber thermal mass, and envelope integration.</p>
             </div>
           </div>
@@ -159,8 +150,7 @@
               <img src="assets/official/projects/multi-city/multi_city_15.jpg" alt="Tutorial 2" class="w-full h-full object-cover">
             </div>
             <div class="p-5">
-              <span class="text-[10px] font-mono uppercase tracking-widest text-[#de602e]">Module 02</span>
-              <h4 class="text-sm font-semibold text-[#1a1d20] mt-1 mb-2">Adaptive Reuse & Structural BIM</h4>
+              <h4 class="text-sm font-semibold text-[#1a1d20] mb-2">Adaptive Reuse & Structural BIM</h4>
               <p class="text-xs text-[#595f65] leading-relaxed">Laser scanning registration, point-cloud integration, and historic masonry rehabilitation.</p>
             </div>
           </div>
@@ -170,8 +160,7 @@
               <img src="assets/official/projects/travel-sketches/ak_10.jpg" alt="Tutorial 3" class="w-full h-full object-cover">
             </div>
             <div class="p-5">
-              <span class="text-[10px] font-mono uppercase tracking-widest text-[#de602e]">Module 03</span>
-              <h4 class="text-sm font-semibold text-[#1a1d20] mt-1 mb-2">Plein-Air Spatial Perception</h4>
+              <h4 class="text-sm font-semibold text-[#1a1d20] mb-2">Plein-Air Spatial Perception</h4>
               <p class="text-xs text-[#595f65] leading-relaxed">Translating atmospheric perspective and wash depth into physical spatial sequences.</p>
             </div>
           </div>
@@ -184,7 +173,6 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div class="p-6 bg-white border border-[#e2e5e8] flex items-center justify-between">
             <div>
-              <span class="text-[10px] font-mono uppercase tracking-widest text-[#de602e]">BIM Package &bull; R2024</span>
               <h4 class="text-sm font-semibold text-[#1a1d20] mt-0.5">Parametric Louver & Shading Family Pack</h4>
               <span class="text-xs text-[#595f65]">Dynamo + Revit Adaptive Components (.rfa)</span>
             </div>
@@ -195,7 +183,6 @@
 
           <div class="p-6 bg-white border border-[#e2e5e8] flex items-center justify-between">
             <div>
-              <span class="text-[10px] font-mono uppercase tracking-widest text-[#de602e]">Drawing Standard</span>
               <h4 class="text-sm font-semibold text-[#1a1d20] mt-0.5">Architectural Line-Weight & Graphic Standard</h4>
               <span class="text-xs text-[#595f65]">UNCC / Karpov Design Pen Weights & Layouts (.ctb / .pdf)</span>
             </div>
@@ -239,7 +226,7 @@
 
   <script>
     function playAcademyDemo() {
-      alert('Masterclass streaming session loaded. In production, this launches the full video stream.');
+      alert('Masterclass streaming session loaded.');
     }
   </script>
 

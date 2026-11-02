@@ -46,14 +46,6 @@
     .card-frame:hover {
       border-color: #1a1d20;
     }
-    .sticky-filter-bar {
-      position: sticky;
-      top: 0;
-      z-index: 40;
-      background: rgba(248, 249, 250, 0.96);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid #e2e5e8;
-    }
     ::-webkit-scrollbar {
       width: 5px;
       height: 5px;
@@ -69,6 +61,10 @@
         opacity: 0.95 !important;
         transform: translateY(0) !important;
         background: linear-gradient(to top, rgba(15, 18, 22, 0.85) 0%, rgba(15, 18, 22, 0.30) 60%, transparent 100%) !important;
+      }
+      .variant-title-space h3 {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
       }
     }
   </style>
@@ -128,11 +124,10 @@
           </div>
         </div>
 
-        <!-- Right Column: Direct Coordinates & Dynamic Auto-Expanding Inquiry Form -->
+        <!-- Right Column: Direct Coordinates & Dynamic Inquiry Form -->
         <div class="lg:col-span-7 space-y-10">
           
           <div>
-            <span class="text-xs font-mono uppercase tracking-[0.25em] text-[#38606a] font-semibold block mb-2">Direct Consultation</span>
             <h1 class="text-3xl md:text-4xl font-semibold tracking-tight text-[#1a1d20] mb-4">Get in touch</h1>
             <p class="text-sm text-[#595f65] leading-relaxed max-w-xl">
               For residential design commissions, computational BIM consulting, or competition collaborations, reach out directly.
@@ -168,42 +163,39 @@
             </div>
           </div>
 
-          <!-- Form: 'Get in touch', removed Project Typology, Orange 'Submit' button -->
+          <!-- Form: 'Get in touch', zero labels on textarea, orange submit button -->
           <form onsubmit="handleInquirySubmit(event)" class="space-y-6 bg-white border border-[#e2e5e8] p-8">
             <h3 class="text-base font-semibold uppercase tracking-wider text-[#1a1d20]">Get in touch</h3>
             
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div>
-                <label class="block text-xs font-mono uppercase tracking-wider text-[#1a1d20] mb-2">Client Full Name *</label>
-                <input type="text" required placeholder="e.g. Eleanor Vance" class="w-full bg-[#f8f9fa] border border-[#e2e5e8] p-3 text-xs text-[#1a1d20] focus:outline-none focus:border-[#de602e]">
+                <label class="block text-xs font-mono uppercase tracking-wider text-[#1a1d20] mb-2">Name *</label>
+                <input type="text" required placeholder="Your full name" class="w-full bg-[#f8f9fa] border border-[#e2e5e8] p-3 text-xs text-[#1a1d20] focus:outline-none focus:border-[#de602e]">
               </div>
               <div>
-                <label class="block text-xs font-mono uppercase tracking-wider text-[#1a1d20] mb-2">Email Address *</label>
-                <input type="email" required placeholder="e.g. eleanor@estate.com" class="w-full bg-[#f8f9fa] border border-[#e2e5e8] p-3 text-xs text-[#1a1d20] focus:outline-none focus:border-[#de602e]">
+                <label class="block text-xs font-mono uppercase tracking-wider text-[#1a1d20] mb-2">Email *</label>
+                <input type="email" required placeholder="your.email@domain.com" class="w-full bg-[#f8f9fa] border border-[#e2e5e8] p-3 text-xs text-[#1a1d20] focus:outline-none focus:border-[#de602e]">
               </div>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div>
-                <label class="block text-xs font-mono uppercase tracking-wider text-[#1a1d20] mb-2">Estimated Site Location</label>
-                <input type="text" placeholder="e.g. Asheville, NC / Blue Ridge" class="w-full bg-[#f8f9fa] border border-[#e2e5e8] p-3 text-xs text-[#1a1d20] focus:outline-none focus:border-[#de602e]">
+                <label class="block text-xs font-mono uppercase tracking-wider text-[#1a1d20] mb-2">Site Location</label>
+                <input type="text" placeholder="e.g. Asheville, NC" class="w-full bg-[#f8f9fa] border border-[#e2e5e8] p-3 text-xs text-[#1a1d20] focus:outline-none focus:border-[#de602e]">
               </div>
               <div>
                 <label class="block text-xs font-mono uppercase tracking-wider text-[#1a1d20] mb-2">Telephone</label>
-                <input type="tel" placeholder="e.g. +1 (555) 000-0000" class="w-full bg-[#f8f9fa] border border-[#e2e5e8] p-3 text-xs text-[#1a1d20] focus:outline-none focus:border-[#de602e]">
+                <input type="tel" placeholder="e.g. +1 (704) 000-0000" class="w-full bg-[#f8f9fa] border border-[#e2e5e8] p-3 text-xs text-[#1a1d20] focus:outline-none focus:border-[#de602e]">
               </div>
             </div>
 
             <div>
-              <div class="flex justify-between items-center mb-2">
-                <label class="text-xs font-mono uppercase tracking-wider text-[#1a1d20]">Scope & Program Requirements *</label>
-                <span class="text-[10px] font-mono text-[#767676]">Auto-expanding input</span>
-              </div>
-              <textarea id="project-scope-textarea" rows="6" required placeholder="Describe your vision, site topography, target timelines..." oninput="autoExpandTextarea(this)" class="w-full bg-[#f8f9fa] border border-[#e2e5e8] p-4 text-xs text-[#1a1d20] focus:outline-none focus:border-[#de602e] resize-none leading-relaxed"></textarea>
+              <label class="block text-xs font-mono uppercase tracking-wider text-[#1a1d20] mb-2">Project Scope & Program Requirements *</label>
+              <textarea id="contact-scope-textarea" rows="6" required placeholder="Describe your vision, site parameters, program requirements..." oninput="autoExpandTextarea(this)" class="w-full bg-[#f8f9fa] border border-[#e2e5e8] p-4 text-xs text-[#1a1d20] focus:outline-none focus:border-[#de602e] resize-none leading-relaxed"></textarea>
             </div>
 
             <div class="flex items-center justify-between pt-2">
-              <span class="text-[11px] text-[#595f65]">Strict confidentiality guaranteed for all client briefs.</span>
+              <span class="text-[11px] text-[#595f65]">Confidentiality guaranteed.</span>
               <!-- Orange Submit Button -->
               <button type="submit" class="px-10 py-3 bg-[#de602e] hover:bg-[#ad4b24] text-white text-xs font-mono uppercase tracking-widest font-semibold transition-colors shadow-sm">
                 Submit &rarr;
@@ -211,7 +203,7 @@
             </div>
             
             <div id="form-success" class="hidden p-4 bg-[#e4f0f2] border border-[#38606a] text-xs text-[#2b4951]">
-              Thank you. Your inquiry has been routed to Aleksandre Karpov directly. A reply will be issued within one business day.
+              Thank you. Your message has been sent directly to Aleksandre Karpov.
             </div>
           </form>
 
@@ -260,8 +252,8 @@
       e.preventDefault();
       document.getElementById('form-success').classList.remove('hidden');
       e.target.reset();
-      const ta = document.getElementById('project-scope-textarea');
-      ta.style.height = 'auto';
+      const ta = document.getElementById('contact-scope-textarea');
+      if (ta) ta.style.height = 'auto';
     }
   </script>
 

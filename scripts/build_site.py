@@ -108,14 +108,6 @@ SHARED_HEAD_TAGS = """
     .card-frame:hover {
       border-color: #1a1d20;
     }
-    .sticky-filter-bar {
-      position: sticky;
-      top: 0;
-      z-index: 40;
-      background: rgba(248, 249, 250, 0.96);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid #e2e5e8;
-    }
     ::-webkit-scrollbar {
       width: 5px;
       height: 5px;
@@ -131,6 +123,10 @@ SHARED_HEAD_TAGS = """
         opacity: 0.95 !important;
         transform: translateY(0) !important;
         background: linear-gradient(to top, rgba(15, 18, 22, 0.85) 0%, rgba(15, 18, 22, 0.30) 60%, transparent 100%) !important;
+      }
+      .variant-title-space h3 {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
       }
     }
   </style>
@@ -211,8 +207,7 @@ def generate_workflow_section():
         
         <!-- H2 Header above section -->
         <div class="mb-8">
-          <span class="text-xs font-mono uppercase tracking-[0.25em] text-[#38606a] font-semibold block mb-1">Methodology</span>
-          <h2 class="text-2xl md:text-3xl font-semibold tracking-tight text-[#1a1d20]">Five-Phase Architectural Workflow</h2>
+          <h2 class="text-xl md:text-2xl font-semibold tracking-[0.25em] uppercase text-[#38606a]">Five-Phase Architectural Workflow</h2>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
@@ -282,7 +277,7 @@ def generate_workflow_section():
 
 def generate_accolades_section():
     return """
-  <!-- Accolades Section: H2 Left-Aligned within 75% Space, Left 25% Pure Negative Space -->
+  <!-- Accolades Section: Cleaned of 'Recognition' label, Left 25% Pure Negative Space -->
   <section class="w-full border-b border-[#e2e5e8] bg-[#f8f9fa] py-20 px-6 md:px-12 lg:px-16">
     <div class="max-w-[1920px] mx-auto flex flex-col lg:flex-row items-stretch">
       
@@ -292,10 +287,9 @@ def generate_accolades_section():
       <!-- 75% Active Content Space -->
       <div class="w-full lg:w-3/4 lg:pl-12">
         
-        <!-- H2 Header above accolades -->
+        <!-- Heading (No extra labels) -->
         <div class="mb-8">
-          <span class="text-xs font-mono uppercase tracking-[0.25em] text-[#38606a] font-semibold block mb-1">Recognition</span>
-          <h2 class="text-2xl md:text-3xl font-semibold tracking-tight text-[#1a1d20]">Competitions & Accolades</h2>
+          <h2 class="text-xl md:text-2xl font-semibold tracking-[0.25em] uppercase text-[#38606a]">Competitions & Accolades</h2>
         </div>
 
         <div class="divide-y divide-[#e2e5e8] border-t border-b border-[#e2e5e8]">
@@ -362,6 +356,67 @@ def generate_accolades_section():
 
         </div>
 
+      </div>
+
+    </div>
+  </section>
+"""
+
+def generate_landing_contact_section():
+    return """
+  <!-- Contact Form Section Embedded at Bottom of Landing Page (25% Left Pure Negative Space) -->
+  <section id="contact-section" class="w-full bg-[#f8f9fa] py-20 px-6 md:px-12 lg:px-16 border-t border-[#e2e5e8]">
+    <div class="max-w-[1920px] mx-auto flex flex-col lg:flex-row items-stretch">
+      
+      <!-- 25% Left Pure Negative Space -->
+      <div class="hidden lg:block lg:w-1/4"></div>
+
+      <!-- 75% Active Form Container -->
+      <div class="w-full lg:w-3/4 lg:pl-12">
+        <div class="mb-8">
+          <h2 class="text-xl md:text-2xl font-semibold tracking-[0.25em] uppercase text-[#38606a]">Get in touch</h2>
+        </div>
+
+        <form onsubmit="handleInquirySubmit(event)" class="space-y-6 bg-white border border-[#e2e5e8] p-8 md:p-10">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div>
+              <label class="block text-xs font-mono uppercase tracking-wider text-[#1a1d20] mb-2">Name *</label>
+              <input type="text" required placeholder="Your full name" class="w-full bg-[#f8f9fa] border border-[#e2e5e8] p-3 text-xs text-[#1a1d20] focus:outline-none focus:border-[#de602e]">
+            </div>
+            <div>
+              <label class="block text-xs font-mono uppercase tracking-wider text-[#1a1d20] mb-2">Email *</label>
+              <input type="email" required placeholder="your.email@domain.com" class="w-full bg-[#f8f9fa] border border-[#e2e5e8] p-3 text-xs text-[#1a1d20] focus:outline-none focus:border-[#de602e]">
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div>
+              <label class="block text-xs font-mono uppercase tracking-wider text-[#1a1d20] mb-2">Site Location</label>
+              <input type="text" placeholder="e.g. Asheville, NC" class="w-full bg-[#f8f9fa] border border-[#e2e5e8] p-3 text-xs text-[#1a1d20] focus:outline-none focus:border-[#de602e]">
+            </div>
+            <div>
+              <label class="block text-xs font-mono uppercase tracking-wider text-[#1a1d20] mb-2">Telephone</label>
+              <input type="tel" placeholder="e.g. +1 (704) 000-0000" class="w-full bg-[#f8f9fa] border border-[#e2e5e8] p-3 text-xs text-[#1a1d20] focus:outline-none focus:border-[#de602e]">
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-mono uppercase tracking-wider text-[#1a1d20] mb-2">Project Scope & Program Requirements *</label>
+            <textarea id="landing-scope-textarea" rows="5" required placeholder="Describe your vision, site parameters, program requirements..." oninput="autoExpandTextarea(this)" class="w-full bg-[#f8f9fa] border border-[#e2e5e8] p-4 text-xs text-[#1a1d20] focus:outline-none focus:border-[#de602e] resize-none leading-relaxed"></textarea>
+          </div>
+
+          <div class="flex items-center justify-between pt-2">
+            <span class="text-[11px] text-[#595f65]">Confidentiality guaranteed.</span>
+            <!-- Orange Submit Button -->
+            <button type="submit" class="px-10 py-3 bg-[#de602e] hover:bg-[#ad4b24] text-white text-xs font-mono uppercase tracking-widest font-semibold transition-colors shadow-sm">
+              Submit &rarr;
+            </button>
+          </div>
+          
+          <div id="form-success" class="hidden p-4 bg-[#e4f0f2] border border-[#38606a] text-xs text-[#2b4951]">
+            Thank you. Your message has been sent directly to Aleksandre Karpov.
+          </div>
+        </form>
       </div>
 
     </div>
@@ -451,16 +506,9 @@ JS_TEMPLATE = """
         container.appendChild(slideDiv);
       });
 
-      // Click to Pause / Resume
+      // Click anywhere on hero to toggle pause / resume
       container.addEventListener('click', () => {
         isPaused = !isPaused;
-        const pausePill = document.getElementById('hero-pause-indicator');
-        if (pausePill) {
-          pausePill.textContent = isPaused ? 'Paused' : 'Slideshow';
-          pausePill.className = isPaused 
-            ? 'px-2.5 py-0.5 bg-[#de602e] text-white text-[9px] font-mono uppercase tracking-widest'
-            : 'px-2.5 py-0.5 bg-black/60 text-white/80 text-[9px] font-mono uppercase tracking-widest';
-        }
       });
 
       if (IS_VARIANT) {
@@ -503,7 +551,7 @@ JS_TEMPLATE = """
       HERO_SLIDES.forEach((s, idx) => {
         const dot = document.createElement('button');
         dot.id = `hero-dot-${idx}`;
-        dot.className = `w-2.5 h-2.5 rounded-full border border-white transition-all duration-300 ${idx === 0 ? 'bg-[#de602e] border-[#de602e]' : 'bg-transparent'}`;
+        dot.className = `w-3 h-3 rounded-full border border-white transition-all duration-300 ${idx === 0 ? 'bg-[#de602e] border-[#de602e]' : 'bg-transparent'}`;
         dot.title = s.title;
         dot.onclick = (e) => {
           e.stopPropagation();
@@ -517,16 +565,13 @@ JS_TEMPLATE = """
       HERO_SLIDES.forEach((s, idx) => {
         const dot = document.getElementById(`hero-dot-${idx}`);
         if (dot) {
-          dot.className = `w-2.5 h-2.5 rounded-full border border-white transition-all duration-300 ${idx === currentSlide ? 'bg-[#de602e] border-[#de602e]' : 'bg-transparent'}`;
+          dot.className = `w-3 h-3 rounded-full border border-white transition-all duration-300 ${idx === currentSlide ? 'bg-[#de602e] border-[#de602e]' : 'bg-transparent'}`;
         }
       });
     }
 
     // --- Works Grid Logic ---
     let currentTypology = 'all';
-    let currentStatus = 'all';
-    let awardOnly = false;
-    let currentSort = 'newest';
     let currentModalIndex = 0;
     let activeOrderedList = [...PROJECTS];
 
@@ -538,130 +583,68 @@ JS_TEMPLATE = """
       const nonMatches = [];
 
       PROJECTS.forEach(p => {
-        let match = true;
-        if (currentTypology !== 'all' && p.typology.toLowerCase() !== currentTypology.toLowerCase()) {
-          match = false;
-        }
-        if (currentStatus !== 'all' && p.status !== currentStatus) {
-          match = false;
-        }
-        if (awardOnly && !p.award) {
-          match = false;
-        }
-        if (match) {
+        if (currentTypology === 'all' || p.typology.toLowerCase() === currentTypology.toLowerCase()) {
           matches.push(p);
         } else {
           nonMatches.push(p);
         }
       });
 
-      const sortFn = (a, b) => {
-        const yA = parseInt(a.year) || 0;
-        const yB = parseInt(b.year) || 0;
-        return currentSort === 'newest' ? yB - yA : yA - yB;
-      };
-
-      matches.sort(sortFn);
-      nonMatches.sort(sortFn);
-
-      const hasActiveFilter = (currentTypology !== 'all' || currentStatus !== 'all' || awardOnly);
+      const hasActiveFilter = (currentTypology !== 'all');
       activeOrderedList = hasActiveFilter ? [...matches, ...nonMatches] : [...matches];
-
-      const banner = document.getElementById('reorder-banner');
-      const bannerText = document.getElementById('reorder-banner-text');
-      if (hasActiveFilter) {
-        banner.classList.remove('hidden');
-        bannerText.textContent = `Prioritizing ${matches.length} matching commission(s) at top (${nonMatches.length} other works retained below)`;
-      } else {
-        banner.classList.add('hidden');
-      }
 
       activeOrderedList.forEach((p, index) => {
         const isMatched = matches.includes(p);
         const card = document.createElement('div');
         
-        const dimClass = hasActiveFilter && !isMatched ? 'opacity-50 hover:opacity-100 transition-opacity' : '';
-        card.className = `group cursor-pointer bg-white border border-[#e2e5e8] card-frame flex flex-col justify-between overflow-hidden ${dimClass}`;
+        const dimClass = hasActiveFilter && !isMatched ? 'opacity-40 hover:opacity-100 transition-opacity' : '';
+        card.className = `group cursor-pointer bg-white card-frame flex flex-col justify-between overflow-hidden ${dimClass}`;
         card.onclick = () => openModal(p.id);
 
         if (!IS_VARIANT) {
-          // DEFAULT VERSION (index.html): TITLE-LESS BY DEFAULT, TITLE REVEALS ON HOVER
+          // DEFAULT VERSION (index.html): TITLE APPEARS ON IMAGE ON HOVER (NO SPACE UNDERNEATH)
           card.innerHTML = `
             <div class="relative w-full aspect-[4/3] overflow-hidden bg-[#1a1d20]">
               <img src="${p.primary_image}" alt="${p.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
               
               <!-- Subtle dark veil on hover -->
-              <div class="absolute inset-0 bg-black/0 group-hover:bg-black/50 transition-colors duration-500 ease-out"></div>
+              <div class="absolute inset-0 bg-black/0 group-hover:bg-black/55 transition-colors duration-500 ease-out"></div>
               
-              <!-- Hover-revealed ONLY TITLE -->
-              <div class="variant-hover-overlay absolute inset-0 p-6 flex flex-col justify-end opacity-0 group-hover:opacity-100 translate-y-3 group-hover:translate-y-0 transition-all duration-500 ease-out">
+              <!-- Title appears ON THE IMAGE when hovered -->
+              <div class="variant-hover-overlay absolute inset-0 p-6 flex flex-col justify-end opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-500 ease-out">
                 <h3 class="text-base md:text-lg font-semibold text-white leading-tight drop-shadow-sm">${p.title}</h3>
               </div>
             </div>
           `;
         } else {
-          // VARIANT VERSION (variant.html): TITLES VISIBLE BELOW CARDS (ONLY TITLE, NO CLUTTER)
+          // VARIANT VERSION (variant.html): DEDICATED SPACE BELOW IMAGE (EMPTY INITIALLY, TITLE REVEALS IN THAT SPACE ON HOVER)
           card.innerHTML = `
-            <div class="relative w-full aspect-[4/3] overflow-hidden bg-[#e9ecef]">
+            <div class="relative w-full aspect-[4/3] overflow-hidden bg-[#1a1d20]">
               <img src="${p.primary_image}" alt="${p.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-              <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300"></div>
             </div>
-            <div class="p-4 bg-white border-t border-[#e2e5e8]">
-              <h3 class="text-sm md:text-base font-semibold text-[#1a1d20] leading-snug group-hover:text-[#de602e] transition-colors">${p.title}</h3>
+            <!-- Dedicated space UNDERNEATH image: empty by default, title appears on hover -->
+            <div class="variant-title-space p-4 min-h-[64px] bg-white border-t border-[#e2e5e8] flex items-center">
+              <h3 class="text-sm md:text-base font-semibold text-[#1a1d20] leading-snug opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-all duration-300">
+                ${p.title}
+              </h3>
             </div>
           `;
         }
 
         container.appendChild(card);
       });
-
-      const countLabel = document.getElementById('active-count-label');
-      if (countLabel) countLabel.textContent = `${matches.length} of ${PROJECTS.length} Projects`;
     }
 
-    function setFilter(type, value) {
-      if (type === 'typology') {
-        currentTypology = value;
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-          btn.className = 'filter-btn px-3 py-1 text-xs font-mono uppercase tracking-wider border border-[#e2e5e8] bg-white text-[#595f65] hover:border-[#1a1d20] hover:text-[#1a1d20]';
-        });
-        const activeBtn = document.getElementById(`btn-typ-${value.toLowerCase()}`);
-        if (activeBtn) {
-          activeBtn.className = 'filter-btn px-3 py-1 text-xs font-mono uppercase tracking-wider border border-[#de602e] bg-[#de602e] text-white';
-        }
+    function setFilter(value) {
+      currentTypology = value;
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.className = 'filter-btn text-[#767676] hover:text-[#1a1d20] pb-1 transition-colors';
+      });
+      const activeBtn = document.getElementById(`btn-typ-${value.toLowerCase()}`);
+      if (activeBtn) {
+        activeBtn.className = 'filter-btn text-[#de602e] font-semibold border-b-2 border-[#de602e] pb-1';
       }
       renderCards();
-    }
-
-    function setStatusFilter(val) {
-      currentStatus = val;
-      renderCards();
-    }
-
-    function setSort(val) {
-      currentSort = val;
-      renderCards();
-    }
-
-    function toggleAwardFilter() {
-      awardOnly = !awardOnly;
-      const btn = document.getElementById('btn-award-toggle');
-      if (awardOnly) {
-        btn.className = 'px-2.5 py-1 text-xs font-mono uppercase tracking-wider border border-[#de602e] bg-[#de602e] text-white flex items-center gap-1.5';
-      } else {
-        btn.className = 'px-2.5 py-1 text-xs font-mono uppercase tracking-wider border border-[#e2e5e8] bg-white text-[#595f65] hover:border-[#de602e] hover:text-[#de602e] flex items-center gap-1.5';
-      }
-      renderCards();
-    }
-
-    function resetAllFilters() {
-      currentTypology = 'all';
-      currentStatus = 'all';
-      awardOnly = false;
-      document.getElementById('select-status').value = 'all';
-      const awardBtn = document.getElementById('btn-award-toggle');
-      if (awardBtn) awardBtn.className = 'px-2.5 py-1 text-xs font-mono uppercase tracking-wider border border-[#e2e5e8] bg-white text-[#595f65] hover:border-[#de602e] hover:text-[#de602e] flex items-center gap-1.5';
-      setFilter('typology', 'all');
     }
 
     // Modal Interaction
@@ -721,6 +704,19 @@ JS_TEMPLATE = """
       }
     }
 
+    function autoExpandTextarea(el) {
+      el.style.height = 'auto';
+      el.style.height = (el.scrollHeight + 4) + 'px';
+    }
+
+    function handleInquirySubmit(e) {
+      e.preventDefault();
+      document.getElementById('form-success').classList.remove('hidden');
+      e.target.reset();
+      const ta = document.getElementById('landing-scope-textarea');
+      if (ta) ta.style.height = 'auto';
+    }
+
     window.addEventListener('keydown', e => {
       if (e.key === 'Escape') closeModal();
       if (!document.getElementById('project-modal').classList.contains('hidden')) {
@@ -741,17 +737,17 @@ JS_TEMPLATE = """
 """
 
 def generate_landing_page(is_variant=False):
-    title_suffix = "Works Archive (Title-Less Minimal)" if not is_variant else "Works Archive (Titles Visible Variant)"
+    title_suffix = "Works Archive (Default)" if not is_variant else "Works Archive (Variant)"
     
-    # Hero: 5x enlarged white vector line-art logo, multi-project slideshow with click-to-pause
+    # Hero: Centered circles on variant only, zero status pills
     dots_markup = """
     <!-- Circular Pagination Dots (Variant Only) -->
-    <div id="hero-dots-container" class="absolute bottom-8 right-8 z-20 flex items-center gap-2"></div>
+    <div id="hero-dots-container" class="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex items-center gap-3"></div>
 """ if is_variant else ""
 
     hero_markup = f"""
   <!-- Hero Banner: 5x Enlarged White Vector Line-Art Logo + Multi-Project Slideshow (Click to Pause) -->
-  <section class="relative w-full h-[85dvh] md:h-[90dvh] bg-[#1a1d20] overflow-hidden flex items-center justify-center select-none cursor-pointer group">
+  <section class="relative w-full h-[85dvh] md:h-[90dvh] bg-[#1a1d20] overflow-hidden flex items-center justify-center select-none cursor-pointer">
     
     <!-- Slideshow Background Container -->
     <div id="hero-slideshow-container" class="absolute inset-0 w-full h-full">
@@ -761,7 +757,7 @@ def generate_landing_page(is_variant=False):
     <!-- Dark Scrim Veil -->
     <div class="absolute inset-0 bg-black/45 z-5 pointer-events-none"></div>
 
-    <!-- Centerpiece: 5x Enlarged White Vector Line-Art Logo (No extra subtitles) -->
+    <!-- Centerpiece: 5x Enlarged White Vector Line-Art Logo + Aleksandre Karpov (No extra subtitles) -->
     <div class="relative z-10 flex flex-col items-center justify-center text-center px-6 pointer-events-none">
       <img src="assets/official/logo_white.svg" alt="Aleksandre Karpov Logo" class="w-64 sm:w-80 md:w-96 lg:w-[480px] h-auto drop-shadow-2xl">
       <h1 class="text-xl md:text-2xl lg:text-3xl font-semibold tracking-[0.25em] uppercase text-white mt-6 drop-shadow-md">
@@ -769,74 +765,27 @@ def generate_landing_page(is_variant=False):
       </h1>
     </div>
 
-    <!-- Discrete Status Pill (Click to Pause / Resume) -->
-    <div class="absolute bottom-8 left-8 z-20 pointer-events-none">
-      <span id="hero-pause-indicator" class="px-2.5 py-0.5 bg-black/60 text-white/80 text-[9px] font-mono uppercase tracking-widest border border-white/20">
-        Slideshow
-      </span>
-    </div>
-
     {dots_markup}
-
-    <!-- Bottom Scroll Indicator -->
-    <a href="#works" class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 text-white/70 hover:text-white transition-colors flex flex-col items-center gap-1.5 pointer-events-auto">
-      <span class="text-[9px] font-mono tracking-[0.25em] uppercase">Explore</span>
-      <svg class="w-3.5 h-3.5 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
-    </a>
   </section>
 """
 
+    # Figma Typographic Filter Bar (Zero Button Borders, Zero Dropdowns, Pure Horizontal Text Tabs)
     filter_bar_markup = """
-  <!-- Lateral Sticky Filter Bar: H2 Left-Aligned within 75% Space, Left 25% Pure Negative Space -->
-  <div class="sticky-filter-bar px-6 md:px-12 lg:px-16 py-4">
-    <div class="max-w-[1920px] mx-auto flex flex-col lg:flex-row items-stretch">
-      
-      <!-- 25% Left Pure Negative Space -->
-      <div class="hidden lg:block lg:w-1/4"></div>
-
-      <!-- 75% Right Column: Interactive Filter Controls -->
-      <div class="w-full lg:w-3/4 flex flex-wrap items-center justify-between gap-4 lg:pl-12">
-        
-        <!-- Typologies with Eyeblue / Orange styling -->
-        <div class="flex flex-wrap items-center gap-1.5 text-xs">
-          <span class="text-[10px] font-mono uppercase tracking-wider text-[#38606a] font-semibold mr-1 hidden sm:inline">Filter:</span>
-          <button onclick="setFilter('typology', 'all')" id="btn-typ-all" class="filter-btn px-3 py-1 text-xs font-mono uppercase tracking-wider border border-[#de602e] bg-[#de602e] text-white">All</button>
-          <button onclick="setFilter('typology', 'Residential')" id="btn-typ-residential" class="filter-btn px-3 py-1 text-xs font-mono uppercase tracking-wider border border-[#e2e5e8] bg-white text-[#595f65] hover:border-[#1a1d20] hover:text-[#1a1d20]">Residential</button>
-          <button onclick="setFilter('typology', 'Commercial')" id="btn-typ-commercial" class="filter-btn px-3 py-1 text-xs font-mono uppercase tracking-wider border border-[#e2e5e8] bg-white text-[#595f65] hover:border-[#1a1d20] hover:text-[#1a1d20]">Commercial</button>
-          <button onclick="setFilter('typology', 'Cultural')" id="btn-typ-cultural" class="filter-btn px-3 py-1 text-xs font-mono uppercase tracking-wider border border-[#e2e5e8] bg-white text-[#595f65] hover:border-[#1a1d20] hover:text-[#1a1d20]">Cultural</button>
-          <button onclick="setFilter('typology', 'Art')" id="btn-typ-art" class="filter-btn px-3 py-1 text-xs font-mono uppercase tracking-wider border border-[#e2e5e8] bg-white text-[#595f65] hover:border-[#1a1d20] hover:text-[#1a1d20]">Art</button>
-          <button onclick="setFilter('typology', 'Conceptual')" id="btn-typ-conceptual" class="filter-btn px-3 py-1 text-xs font-mono uppercase tracking-wider border border-[#e2e5e8] bg-white text-[#595f65] hover:border-[#1a1d20] hover:text-[#1a1d20]">Conceptual</button>
-        </div>
-
-        <!-- Sorting & Status -->
-        <div class="flex items-center gap-3 text-xs">
-          <!-- Award Toggle -->
-          <button onclick="toggleAwardFilter()" id="btn-award-toggle" class="px-2.5 py-1 text-xs font-mono uppercase tracking-wider border border-[#e2e5e8] bg-white text-[#595f65] hover:border-[#de602e] hover:text-[#de602e] flex items-center gap-1.5">
-            <span class="w-1.5 h-1.5 bg-[#de602e] inline-block"></span> Awards Only
-          </button>
-
-          <!-- Status Dropdown -->
-          <select id="select-status" onchange="setStatusFilter(this.value)" class="px-2.5 py-1 text-xs font-mono uppercase tracking-wider border border-[#e2e5e8] bg-white text-[#595f65] focus:outline-none focus:border-[#1a1d20]">
-            <option value="all">Status: All</option>
-            <option value="Completion">Completed Works</option>
-            <option value="Concepts">Concepts & Studies</option>
-          </select>
-
-          <!-- Recency Sort -->
-          <select id="select-sort" onchange="setSort(this.value)" class="px-2.5 py-1 text-xs font-mono uppercase tracking-wider border border-[#e2e5e8] bg-white text-[#595f65] focus:outline-none focus:border-[#1a1d20]">
-            <option value="newest">Sort: Newest</option>
-            <option value="oldest">Sort: Oldest</option>
-          </select>
-        </div>
-
-      </div>
-
+  <!-- Figma Typographic Filter Bar: Underneath PORTFOLIO, Zero Button Borders -->
+  <div class="w-full bg-[#f8f9fa] pt-8 pb-4">
+    <div class="flex flex-wrap items-center gap-6 md:gap-10 text-xs font-mono uppercase tracking-[0.2em] border-b border-[#e2e5e8] pb-4">
+      <button onclick="setFilter('all')" id="btn-typ-all" class="filter-btn text-[#de602e] font-semibold border-b-2 border-[#de602e] pb-1">All</button>
+      <button onclick="setFilter('Residential')" id="btn-typ-residential" class="filter-btn text-[#767676] hover:text-[#1a1d20] pb-1 transition-colors">Residential</button>
+      <button onclick="setFilter('Commercial')" id="btn-typ-commercial" class="filter-btn text-[#767676] hover:text-[#1a1d20] pb-1 transition-colors">Commercial</button>
+      <button onclick="setFilter('Cultural')" id="btn-typ-cultural" class="filter-btn text-[#767676] hover:text-[#1a1d20] pb-1 transition-colors">Cultural</button>
+      <button onclick="setFilter('Conceptual')" id="btn-typ-conceptual" class="filter-btn text-[#767676] hover:text-[#1a1d20] pb-1 transition-colors">Conceptual</button>
+      <button onclick="setFilter('Art')" id="btn-typ-art" class="filter-btn text-[#767676] hover:text-[#1a1d20] pb-1 transition-colors">Art</button>
     </div>
   </div>
 """
 
-    grid_section = """
-  <!-- Works Grid Section: 25% Pure Negative Space Desktop + 75% 3-Column Works Grid with H2 Above -->
+    grid_section = f"""
+  <!-- Works Grid Section: 25% Pure Negative Space Desktop + 75% 3-Column Works Grid -->
   <section id="works" class="w-full bg-[#f8f9fa] py-16 px-6 md:px-12 lg:px-16 border-b border-[#e2e5e8]">
     <div class="max-w-[1920px] mx-auto flex flex-col lg:flex-row items-stretch">
       
@@ -846,23 +795,15 @@ def generate_landing_page(is_variant=False):
       <!-- 75% Active Grid Space -->
       <div class="w-full lg:w-3/4 lg:pl-12">
         
-        <!-- H2 Header moved ABOVE the section, left-aligned within 75% space -->
-        <div class="mb-8 flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 border-b border-[#e2e5e8] pb-4">
-          <div>
-            <span class="text-xs font-mono uppercase tracking-[0.25em] text-[#38606a] font-semibold block mb-1">Portfolio</span>
-            <h2 class="text-2xl md:text-3xl font-semibold tracking-tight text-[#1a1d20]">Selected Works</h2>
-          </div>
-          <span class="text-xs font-mono text-[#595f65] uppercase tracking-wider" id="active-count-label">21 Projects</span>
+        <!-- Header is strictly PORTFOLIO in Eyeblue (No 'Selected Works' H2) -->
+        <div>
+          <h2 class="text-xl md:text-2xl font-semibold tracking-[0.25em] uppercase text-[#38606a]">PORTFOLIO</h2>
         </div>
 
-        <!-- Active Filter Notification Pill -->
-        <div id="reorder-banner" class="mb-6 p-3 bg-white border border-[#e2e5e8] flex items-center justify-between text-xs font-mono text-[#595f65] hidden">
-          <span id="reorder-banner-text">Showing matches at top</span>
-          <button onclick="resetAllFilters()" class="text-[#de602e] underline hover:text-[#1a1d20]">Reset Filter</button>
-        </div>
+        {filter_bar_markup}
 
         <!-- Generous Spacing between cards (gap-8 md:gap-10) -->
-        <div id="works-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+        <div id="works-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 mt-10">
           <!-- Dynamically Rendered Cards -->
         </div>
 
@@ -888,10 +829,10 @@ def generate_landing_page(is_variant=False):
 
   <main>
     __HERO__
-    __WORKFLOW__
-    __FILTER_BAR__
     __GRID__
+    __WORKFLOW__
     __ACCOLADES__
+    __CONTACT_FORM__
   </main>
 
   __FOOTER__
@@ -905,10 +846,10 @@ def generate_landing_page(is_variant=False):
                .replace('__TITLE_SUFFIX__', title_suffix)\
                .replace('__HEADER__', generate_header("works"))\
                .replace('__HERO__', hero_markup)\
-               .replace('__WORKFLOW__', generate_workflow_section())\
-               .replace('__FILTER_BAR__', filter_bar_markup)\
                .replace('__GRID__', grid_section)\
+               .replace('__WORKFLOW__', generate_workflow_section())\
                .replace('__ACCOLADES__', generate_accolades_section())\
+               .replace('__CONTACT_FORM__', generate_landing_contact_section())\
                .replace('__FOOTER__', generate_footer())\
                .replace('__MODAL__', generate_interactive_modal())\
                .replace('__SCRIPT__', rendered_js)
@@ -944,7 +885,6 @@ def generate_about_page():
         
         <!-- Header -->
         <div class="border-b border-[#e2e5e8] pb-6">
-          <span class="text-xs font-mono uppercase tracking-[0.25em] text-[#38606a] font-semibold block mb-1">Pedigree</span>
           <h1 class="text-3xl md:text-4xl font-semibold tracking-tight text-[#1a1d20]">Aleksandre Karpov</h1>
           <p class="text-xs font-mono text-[#595f65] uppercase tracking-wider mt-2">
             B.A. in Architecture &bull; UNCC 3.488 GPA &bull; Lund University (Sweden)
@@ -961,7 +901,7 @@ def generate_about_page():
             Parallel to this analog mastery, Aleksandre possesses extensive experience in computational building coordination, parametric modeling, and Revit/BIM management. He has led technical documentation across international commercial towers, complex mixed-use industrial regenerations, and bespoke mountain residences.
           </p>
           <p class="text-sm md:text-base text-[#595f65] leading-relaxed">
-            As principal of Karpov Design LLC, he provides complete residential design commissions and architectural consultation compliant with North Carolina General Statutes.
+            As principal of Karpov Design LLC, he provides complete residential design commissions and architectural consultation.
           </p>
         </div>
 
@@ -1041,11 +981,10 @@ def generate_contact_page():
           </div>
         </div>
 
-        <!-- Right Column: Direct Coordinates & Dynamic Auto-Expanding Inquiry Form -->
+        <!-- Right Column: Direct Coordinates & Dynamic Inquiry Form -->
         <div class="lg:col-span-7 space-y-10">
           
           <div>
-            <span class="text-xs font-mono uppercase tracking-[0.25em] text-[#38606a] font-semibold block mb-2">Direct Consultation</span>
             <h1 class="text-3xl md:text-4xl font-semibold tracking-tight text-[#1a1d20] mb-4">Get in touch</h1>
             <p class="text-sm text-[#595f65] leading-relaxed max-w-xl">
               For residential design commissions, computational BIM consulting, or competition collaborations, reach out directly.
@@ -1081,42 +1020,39 @@ def generate_contact_page():
             </div>
           </div>
 
-          <!-- Form: 'Get in touch', removed Project Typology, Orange 'Submit' button -->
+          <!-- Form: 'Get in touch', zero labels on textarea, orange submit button -->
           <form onsubmit="handleInquirySubmit(event)" class="space-y-6 bg-white border border-[#e2e5e8] p-8">
             <h3 class="text-base font-semibold uppercase tracking-wider text-[#1a1d20]">Get in touch</h3>
             
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div>
-                <label class="block text-xs font-mono uppercase tracking-wider text-[#1a1d20] mb-2">Client Full Name *</label>
-                <input type="text" required placeholder="e.g. Eleanor Vance" class="w-full bg-[#f8f9fa] border border-[#e2e5e8] p-3 text-xs text-[#1a1d20] focus:outline-none focus:border-[#de602e]">
+                <label class="block text-xs font-mono uppercase tracking-wider text-[#1a1d20] mb-2">Name *</label>
+                <input type="text" required placeholder="Your full name" class="w-full bg-[#f8f9fa] border border-[#e2e5e8] p-3 text-xs text-[#1a1d20] focus:outline-none focus:border-[#de602e]">
               </div>
               <div>
-                <label class="block text-xs font-mono uppercase tracking-wider text-[#1a1d20] mb-2">Email Address *</label>
-                <input type="email" required placeholder="e.g. eleanor@estate.com" class="w-full bg-[#f8f9fa] border border-[#e2e5e8] p-3 text-xs text-[#1a1d20] focus:outline-none focus:border-[#de602e]">
+                <label class="block text-xs font-mono uppercase tracking-wider text-[#1a1d20] mb-2">Email *</label>
+                <input type="email" required placeholder="your.email@domain.com" class="w-full bg-[#f8f9fa] border border-[#e2e5e8] p-3 text-xs text-[#1a1d20] focus:outline-none focus:border-[#de602e]">
               </div>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div>
-                <label class="block text-xs font-mono uppercase tracking-wider text-[#1a1d20] mb-2">Estimated Site Location</label>
-                <input type="text" placeholder="e.g. Asheville, NC / Blue Ridge" class="w-full bg-[#f8f9fa] border border-[#e2e5e8] p-3 text-xs text-[#1a1d20] focus:outline-none focus:border-[#de602e]">
+                <label class="block text-xs font-mono uppercase tracking-wider text-[#1a1d20] mb-2">Site Location</label>
+                <input type="text" placeholder="e.g. Asheville, NC" class="w-full bg-[#f8f9fa] border border-[#e2e5e8] p-3 text-xs text-[#1a1d20] focus:outline-none focus:border-[#de602e]">
               </div>
               <div>
                 <label class="block text-xs font-mono uppercase tracking-wider text-[#1a1d20] mb-2">Telephone</label>
-                <input type="tel" placeholder="e.g. +1 (555) 000-0000" class="w-full bg-[#f8f9fa] border border-[#e2e5e8] p-3 text-xs text-[#1a1d20] focus:outline-none focus:border-[#de602e]">
+                <input type="tel" placeholder="e.g. +1 (704) 000-0000" class="w-full bg-[#f8f9fa] border border-[#e2e5e8] p-3 text-xs text-[#1a1d20] focus:outline-none focus:border-[#de602e]">
               </div>
             </div>
 
             <div>
-              <div class="flex justify-between items-center mb-2">
-                <label class="text-xs font-mono uppercase tracking-wider text-[#1a1d20]">Scope & Program Requirements *</label>
-                <span class="text-[10px] font-mono text-[#767676]">Auto-expanding input</span>
-              </div>
-              <textarea id="project-scope-textarea" rows="6" required placeholder="Describe your vision, site topography, target timelines..." oninput="autoExpandTextarea(this)" class="w-full bg-[#f8f9fa] border border-[#e2e5e8] p-4 text-xs text-[#1a1d20] focus:outline-none focus:border-[#de602e] resize-none leading-relaxed"></textarea>
+              <label class="block text-xs font-mono uppercase tracking-wider text-[#1a1d20] mb-2">Project Scope & Program Requirements *</label>
+              <textarea id="contact-scope-textarea" rows="6" required placeholder="Describe your vision, site parameters, program requirements..." oninput="autoExpandTextarea(this)" class="w-full bg-[#f8f9fa] border border-[#e2e5e8] p-4 text-xs text-[#1a1d20] focus:outline-none focus:border-[#de602e] resize-none leading-relaxed"></textarea>
             </div>
 
             <div class="flex items-center justify-between pt-2">
-              <span class="text-[11px] text-[#595f65]">Strict confidentiality guaranteed for all client briefs.</span>
+              <span class="text-[11px] text-[#595f65]">Confidentiality guaranteed.</span>
               <!-- Orange Submit Button -->
               <button type="submit" class="px-10 py-3 bg-[#de602e] hover:bg-[#ad4b24] text-white text-xs font-mono uppercase tracking-widest font-semibold transition-colors shadow-sm">
                 Submit &rarr;
@@ -1124,7 +1060,7 @@ def generate_contact_page():
             </div>
             
             <div id="form-success" class="hidden p-4 bg-[#e4f0f2] border border-[#38606a] text-xs text-[#2b4951]">
-              Thank you. Your inquiry has been routed to Aleksandre Karpov directly. A reply will be issued within one business day.
+              Thank you. Your message has been sent directly to Aleksandre Karpov.
             </div>
           </form>
 
@@ -1147,8 +1083,8 @@ def generate_contact_page():
       e.preventDefault();
       document.getElementById('form-success').classList.remove('hidden');
       e.target.reset();
-      const ta = document.getElementById('project-scope-textarea');
-      ta.style.height = 'auto';
+      const ta = document.getElementById('contact-scope-textarea');
+      if (ta) ta.style.height = 'auto';
     }
   </script>
 
@@ -1207,14 +1143,10 @@ def generate_academy_page():
                 <svg class="w-6 h-6 ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
               </button>
             </div>
-            <span class="absolute bottom-4 left-4 bg-black/80 text-white text-[10px] font-mono uppercase tracking-widest px-2.5 py-1">
-              Masterclass &bull; 48 Min Studio Session
-            </span>
           </div>
 
           <div class="w-full lg:w-1/3 flex flex-col justify-between">
             <div>
-              <span class="text-xs font-mono uppercase tracking-widest text-[#38606a] font-semibold block mb-1">Featured Masterclass</span>
               <h2 class="text-xl md:text-2xl font-semibold text-[#1a1d20] mb-3">Tectonic Synthesis: From Watercolor Intuition to BIM Execution</h2>
               <p class="text-xs md:text-sm text-[#595f65] leading-relaxed mb-4">
                 Aleksandre Karpov breaks down the complete workflow of bridging analog artistic gesture with rigorous Revit parametric families, daylight simulation, and constructible documentation.
@@ -1239,8 +1171,7 @@ def generate_academy_page():
               <img src="assets/official/projects/seed-retreat/seed_8.jpg" alt="Tutorial 1" class="w-full h-full object-cover">
             </div>
             <div class="p-5">
-              <span class="text-[10px] font-mono uppercase tracking-widest text-[#de602e]">Module 01</span>
-              <h4 class="text-sm font-semibold text-[#1a1d20] mt-1 mb-2">Mass-Timber Envelope Systems</h4>
+              <h4 class="text-sm font-semibold text-[#1a1d20] mb-2">Mass-Timber Envelope Systems</h4>
               <p class="text-xs text-[#595f65] leading-relaxed">Passive ventilation, cross-laminated timber thermal mass, and envelope integration.</p>
             </div>
           </div>
@@ -1250,8 +1181,7 @@ def generate_academy_page():
               <img src="assets/official/projects/multi-city/multi_city_15.jpg" alt="Tutorial 2" class="w-full h-full object-cover">
             </div>
             <div class="p-5">
-              <span class="text-[10px] font-mono uppercase tracking-widest text-[#de602e]">Module 02</span>
-              <h4 class="text-sm font-semibold text-[#1a1d20] mt-1 mb-2">Adaptive Reuse & Structural BIM</h4>
+              <h4 class="text-sm font-semibold text-[#1a1d20] mb-2">Adaptive Reuse & Structural BIM</h4>
               <p class="text-xs text-[#595f65] leading-relaxed">Laser scanning registration, point-cloud integration, and historic masonry rehabilitation.</p>
             </div>
           </div>
@@ -1261,8 +1191,7 @@ def generate_academy_page():
               <img src="assets/official/projects/travel-sketches/ak_10.jpg" alt="Tutorial 3" class="w-full h-full object-cover">
             </div>
             <div class="p-5">
-              <span class="text-[10px] font-mono uppercase tracking-widest text-[#de602e]">Module 03</span>
-              <h4 class="text-sm font-semibold text-[#1a1d20] mt-1 mb-2">Plein-Air Spatial Perception</h4>
+              <h4 class="text-sm font-semibold text-[#1a1d20] mb-2">Plein-Air Spatial Perception</h4>
               <p class="text-xs text-[#595f65] leading-relaxed">Translating atmospheric perspective and wash depth into physical spatial sequences.</p>
             </div>
           </div>
@@ -1275,7 +1204,6 @@ def generate_academy_page():
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div class="p-6 bg-white border border-[#e2e5e8] flex items-center justify-between">
             <div>
-              <span class="text-[10px] font-mono uppercase tracking-widest text-[#de602e]">BIM Package &bull; R2024</span>
               <h4 class="text-sm font-semibold text-[#1a1d20] mt-0.5">Parametric Louver & Shading Family Pack</h4>
               <span class="text-xs text-[#595f65]">Dynamo + Revit Adaptive Components (.rfa)</span>
             </div>
@@ -1286,7 +1214,6 @@ def generate_academy_page():
 
           <div class="p-6 bg-white border border-[#e2e5e8] flex items-center justify-between">
             <div>
-              <span class="text-[10px] font-mono uppercase tracking-widest text-[#de602e]">Drawing Standard</span>
               <h4 class="text-sm font-semibold text-[#1a1d20] mt-0.5">Architectural Line-Weight & Graphic Standard</h4>
               <span class="text-xs text-[#595f65]">UNCC / Karpov Design Pen Weights & Layouts (.ctb / .pdf)</span>
             </div>
@@ -1304,7 +1231,7 @@ def generate_academy_page():
 
   <script>
     function playAcademyDemo() {
-      alert('Masterclass streaming session loaded. In production, this launches the full video stream.');
+      alert('Masterclass streaming session loaded.');
     }
   </script>
 
@@ -1315,12 +1242,12 @@ def generate_academy_page():
                .replace('__FOOTER__', generate_footer())
 
 def main():
-    print("Building Version 1 (index.html): Title-less minimal default...")
+    print("Building Version 1 (index.html): Default title appears on image on hover...")
     with open('index.html', 'w', encoding='utf-8') as f:
         f.write(generate_landing_page(is_variant=False))
     print("Saved index.html")
 
-    print("Building Version 2 (variant.html): Titles visible variant...")
+    print("Building Version 2 (variant.html): Variant title appears in space below image on hover...")
     with open('variant.html', 'w', encoding='utf-8') as f:
         f.write(generate_landing_page(is_variant=True))
     print("Saved variant.html")
@@ -1340,7 +1267,7 @@ def main():
         f.write(generate_academy_page())
     print("Saved academy.html")
 
-    print("All site pages built successfully with Figma layout and palette alignment!")
+    print("All site pages built successfully with zero extraneous labels!")
 
 if __name__ == '__main__':
     main()
