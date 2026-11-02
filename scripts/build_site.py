@@ -126,14 +126,15 @@ SHARED_HEAD_TAGS = """
   </style>
 """
 
-def generate_header(active_nav="works"):
+def generate_header(active_nav="works", borderless=False):
     works_cls = "text-[#1a1d20] font-semibold border-b-2 border-[#de602e] pb-0.5" if active_nav == "works" else "text-[#595f65] hover:text-[#1a1d20] transition-colors"
     about_cls = "text-[#1a1d20] font-semibold border-b-2 border-[#de602e] pb-0.5" if active_nav == "about" else "text-[#595f65] hover:text-[#1a1d20] transition-colors"
     contact_cls = "text-[#1a1d20] font-semibold border-b-2 border-[#de602e] pb-0.5" if active_nav == "contact" else "text-[#595f65] hover:text-[#1a1d20] transition-colors"
 
-    template = """
+    border_cls = "" if borderless else "border-b border-[#e2e5e8]"
+    template = f"""
   <!-- Top Navigation: Logo + Stacked Text on the Top Left Corner per Figma Design -->
-  <header class="w-full bg-[#f8f9fa]/95 backdrop-blur-md border-b border-[#e2e5e8] z-50 sticky top-0 transition-all">
+  <header class="w-full bg-[#f8f9fa]/95 backdrop-blur-md {border_cls} z-50 sticky top-0 transition-all">
     <div class="max-w-[1920px] mx-auto px-6 md:px-12 lg:px-16 flex items-center justify-between min-h-[84px]">
       
       <!-- Top Left Corner: Logo Monogram + Stacked Typography -->
@@ -158,10 +159,11 @@ def generate_header(active_nav="works"):
 """
     return template.replace('__WORKS_CLS__', works_cls).replace('__ABOUT_CLS__', about_cls).replace('__CONTACT_CLS__', contact_cls)
 
-def generate_footer():
-    return """
+def generate_footer(borderless=False, bg="#ffffff"):
+    border_cls = "" if borderless else "border-t border-[#e2e5e8]"
+    return f"""
   <!-- Centered Architectural Footer: Cleaned of legal blurb -->
-  <footer class="w-full bg-[#ffffff] border-t border-[#e2e5e8] py-16 px-6 md:px-12 lg:px-16">
+  <footer class="w-full bg-[{bg}] {border_cls} py-16 px-6 md:px-12 lg:px-16">
     <div class="max-w-[1920px] mx-auto flex flex-col lg:flex-row items-center justify-between gap-8">
       
       <!-- Left: Logo & Studio Identity -->
@@ -337,7 +339,7 @@ def generate_accolades_section():
           <div class="py-6 flex flex-col md:flex-row md:items-baseline justify-between gap-4">
             <div class="md:w-1/2">
               <span class="text-[10px] font-mono uppercase tracking-widest text-[#de602e]">Academic Pedigree & Honors</span>
-              <h3 class="text-base md:text-lg font-semibold text-[#1a1d20] mt-1">UNC Charlotte School of Architecture &bull; 3.488 GPA</h3>
+              <h3 class="text-base md:text-lg font-semibold text-[#1a1d20] mt-1">UNC Charlotte School of Architecture</h3>
               <p class="text-xs text-[#595f65] mt-1">Bachelor of Arts in Architecture. Advanced digital lab fellow, Studio X.</p>
             </div>
             <div class="md:w-1/4 text-xs text-[#595f65]">
@@ -1001,8 +1003,8 @@ def generate_about_page():
 
   __HEADER__
 
-  <!-- Breadcrumb Navigation -->
-  <div class="w-full bg-white border-b border-[#e2e5e8] py-4 px-6 md:px-12 lg:px-16">
+  <!-- Breadcrumb Navigation (Seamless, No Borders) -->
+  <div class="w-full bg-[#f8f9fa] py-4 px-6 md:px-12 lg:px-16">
     <nav aria-label="Breadcrumb" class="breadcrumb-bar max-w-[1920px] mx-auto text-sm font-mono uppercase tracking-widest text-[#595f65]">
       <a href="index.html" class="hover:text-[#1a1d20] transition-colors">Home</a>
       <span class="mx-2">&bull;</span>
@@ -1010,40 +1012,43 @@ def generate_about_page():
     </nav>
   </div>
 
-  <main class="w-full bg-[#f8f9fa] py-20 px-6 md:px-12 lg:px-16">
+  <main class="w-full bg-[#f8f9fa] py-16 px-6 md:px-12 lg:px-16">
     <div class="max-w-[1920px] mx-auto flex flex-col lg:flex-row items-stretch">
       
-      <!-- 25% Left Pure Negative Space -->
+      <!-- 25% Left Pure Empty Negative Space -->
       <div class="hidden lg:block lg:w-1/4"></div>
 
-      <!-- 75% Right Column Content -->
+      <!-- 75% Right Column Content (Pure Typographic, No Box Outlines) -->
       <div class="w-full lg:w-3/4 lg:pl-12 space-y-16">
         
-        <!-- Header -->
-        <div class="border-b border-[#e2e5e8] pb-6">
-          <h1 class="text-3xl md:text-4xl font-semibold tracking-tight text-[#1a1d20]">Aleksandre Karpov</h1>
-          <p class="text-xs font-mono text-[#595f65] uppercase tracking-wider mt-2">
-            B.A. in Architecture &bull; UNCC 3.488 GPA &bull; Lund University (Sweden)
+        <!-- Header: Aleksandre Karpov + Subtitle (Degree & Universities, Eyeblue Soft accent) -->
+        <div>
+          <h1 class="text-3xl md:text-5xl font-semibold tracking-tight text-[#1a1d20]">Aleksandre Karpov</h1>
+          <p class="text-xs font-mono uppercase tracking-wider text-[#67aec0] font-semibold mt-3">
+            B.A. in Architecture &bull; UNC Charlotte &bull; Lund University (Sweden)
           </p>
         </div>
 
-        <!-- Profile Section: Appropriately Larger Portrait + Bio Narrative -->
-        <div class="flex flex-col md:flex-row items-start gap-10 lg:gap-14 border-b border-[#e2e5e8] pb-12">
+        <!-- Profile Section: Large Portrait + Biography (No borders, No white cards) -->
+        <div class="flex flex-col md:flex-row items-start gap-10 lg:gap-14">
           
-          <!-- Appropriately Larger Portrait (md:w-80 lg:w-96) -->
+          <!-- Appropriately Larger Portrait (md:w-80 lg:w-96, ~384px) sitting directly on #f8f9fa -->
           <div class="w-full md:w-80 lg:w-96 shrink-0 flex flex-col">
-            <div class="w-full aspect-[4/5] bg-[#1a1d20] border border-[#1a1d20] overflow-hidden shadow-lg">
+            <div class="w-full aspect-[4/5] bg-transparent overflow-hidden">
               <img src="assets/official/alex_portrait.png" alt="Aleksandre Karpov" class="w-full h-full object-cover">
             </div>
-            <div class="mt-4 p-4 bg-white border border-[#e2e5e8]">
+            <!-- Caption directly on canvas, zero border, zero white card -->
+            <div class="mt-4">
               <span class="text-sm font-semibold tracking-wider uppercase text-[#1a1d20] block">Aleksandre Karpov</span>
-              <span class="text-xs font-mono text-[#595f65] uppercase tracking-widest block mt-1">Principal &bull; Karpov Design LLC</span>
+              <span class="text-xs font-mono text-[#67aec0] uppercase tracking-widest block mt-1">Principal &bull; Karpov Design LLC</span>
             </div>
           </div>
 
-          <!-- Bio Narrative -->
+          <!-- Bio Narrative with H2 in Eyeblue Mid (#38606a) -->
           <div class="flex-1 space-y-6">
-            <h2 class="text-xl md:text-2xl font-semibold text-[#1a1d20]">Dual Mastery: Analog Fine Art & Computational BIM</h2>
+            <h2 class="text-xl md:text-3xl font-semibold text-[#38606a] tracking-tight leading-snug">
+              Dual Mastery: Analog Fine Art & Computational BIM
+            </h2>
             <p class="text-sm md:text-base text-[#595f65] leading-relaxed">
               Aleksandre Karpov operates at the convergence of tactile architectural draftsmanship and advanced digital building information modeling. Raised with a rigorous foundation in classical drawing, watercolor plein-air representation, and structural sculpture, he approaches each project with visceral sensitivity to materials, topography, and natural light.
             </p>
@@ -1051,36 +1056,126 @@ def generate_about_page():
               Parallel to this analog mastery, Aleksandre possesses extensive experience in computational building coordination, parametric modeling, and Revit/BIM management. He has led technical documentation across international commercial towers, complex mixed-use industrial regenerations, and bespoke mountain residences.
             </p>
             <p class="text-sm md:text-base text-[#595f65] leading-relaxed">
-              As principal of Karpov Design LLC, he provides complete residential design commissions and architectural consultation.
+              As principal of <span class="text-[#2b4951] font-semibold">Karpov Design LLC</span>, he provides complete residential design commissions and architectural consultation.
             </p>
           </div>
 
         </div>
 
-        <!-- Academic & Technical Capabilities -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 border-t border-[#e2e5e8] pt-12">
-          <div class="bg-white border border-[#e2e5e8] p-6 card-frame">
-            <h3 class="text-base font-semibold uppercase tracking-wider text-[#1a1d20] mb-3">Academic Foundation</h3>
-            <ul class="space-y-3 text-xs md:text-sm text-[#595f65]">
-              <li><strong class="text-[#1a1d20]">UNC Charlotte:</strong> Bachelor of Arts in Architecture (3.488 GPA). Recipient of studio merit recognitions.</li>
-              <li><strong class="text-[#1a1d20]">Lund University (Sweden):</strong> Advanced sustainable urbanism and Nordic housing morphology.</li>
-              <li><strong class="text-[#1a1d20]">UNCC Innovative Housing Lab & Studio X:</strong> Research fellow prototyping mass-timber structural assemblies.</li>
+        <!-- Academic & Technical Capabilities (No white boxes, No borders, Eyeblue Mid headings, Deep Eyeblue highlights) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 pt-6">
+          
+          <!-- Academic Foundation -->
+          <div class="space-y-4">
+            <h3 class="text-sm font-mono font-semibold uppercase tracking-[0.2em] text-[#38606a]">Academic Foundation</h3>
+            <ul class="space-y-4 text-xs md:text-sm text-[#595f65] leading-relaxed">
+              <li>
+                <strong class="text-[#2b4951] font-semibold block sm:inline">UNC Charlotte:</strong>
+                Bachelor of Arts in Architecture. Recipient of studio merit recognitions.
+              </li>
+              <li>
+                <strong class="text-[#2b4951] font-semibold block sm:inline">Lund University (Sweden):</strong>
+                Advanced sustainable urbanism and Nordic housing morphology.
+              </li>
+              <li>
+                <strong class="text-[#2b4951] font-semibold block sm:inline">UNCC Innovative Housing Lab & Studio X:</strong>
+                Research fellow prototyping mass-timber structural assemblies.
+              </li>
             </ul>
           </div>
 
-          <div class="bg-white border border-[#e2e5e8] p-6 card-frame">
-            <h3 class="text-base font-semibold uppercase tracking-wider text-[#1a1d20] mb-3">Software & Technical Stack</h3>
-            <ul class="space-y-3 text-xs md:text-sm text-[#595f65]">
-              <li><strong class="text-[#1a1d20]">Computational BIM:</strong> Autodesk Revit, ArchiCAD, Navisworks clash detection.</li>
-              <li><strong class="text-[#1a1d20]">Parametric & Form-Generation:</strong> Rhino 3D, Grasshopper, SketchUp Pro.</li>
-              <li><strong class="text-[#1a1d20]">Visualization & Media:</strong> Enscape, V-Ray, Lumion, Adobe Creative Cloud Suite.</li>
-              <li><strong class="text-[#1a1d20]">Analog Methods:</strong> Ink drafting, charcoal massing, watercolor rendering.</li>
+          <!-- Software & Technical Stack -->
+          <div class="space-y-4">
+            <h3 class="text-sm font-mono font-semibold uppercase tracking-[0.2em] text-[#38606a]">Software & Technical Stack</h3>
+            <ul class="space-y-4 text-xs md:text-sm text-[#595f65] leading-relaxed">
+              <li>
+                <strong class="text-[#2b4951] font-semibold block sm:inline">Computational BIM:</strong>
+                Autodesk Revit, ArchiCAD, Navisworks clash detection.
+              </li>
+              <li>
+                <strong class="text-[#2b4951] font-semibold block sm:inline">Parametric & Form-Generation:</strong>
+                Rhino 3D, Grasshopper, SketchUp Pro.
+              </li>
+              <li>
+                <strong class="text-[#2b4951] font-semibold block sm:inline">Visualization & Media:</strong>
+                Enscape, V-Ray, Lumion, Adobe Creative Cloud Suite.
+              </li>
+              <li>
+                <strong class="text-[#2b4951] font-semibold block sm:inline">Analog Methods:</strong>
+                Ink drafting, charcoal massing, watercolor rendering.
+              </li>
             </ul>
           </div>
+
         </div>
 
-        <!-- Awards Summary -->
-        __ACCOLADES__
+        <!-- Competitions & Accolades (Borderless presentation on #f8f9fa) -->
+        <div class="space-y-8 pt-8">
+          <h2 class="text-xl md:text-2xl font-semibold tracking-[0.25em] uppercase text-[#38606a]">Competitions & Accolades</h2>
+          
+          <div class="space-y-8">
+            <!-- Item 1 -->
+            <div class="flex flex-col md:flex-row md:items-baseline justify-between gap-4">
+              <div class="md:w-1/2">
+                <span class="text-[10px] font-mono uppercase tracking-widest text-[#de602e] font-semibold">1st Place Winner &bull; Invited Competition</span>
+                <h3 class="text-base md:text-lg font-semibold text-[#1a1d20] mt-1">Eskişehir Industrial Regeneration (Multi-City)</h3>
+                <p class="text-xs text-[#595f65] mt-1 leading-relaxed">51,000 m² municipal depot adaptive reuse into cultural and tech center.</p>
+              </div>
+              <div class="md:w-1/4 text-xs text-[#595f65]">
+                <span>Two-Phase International Jury Selection</span>
+              </div>
+              <div class="md:w-1/4 text-left md:text-right font-mono text-xs text-[#2b4951]">
+                <span>2015 &bull; Eskişehir, TR</span>
+              </div>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="flex flex-col md:flex-row md:items-baseline justify-between gap-4">
+              <div class="md:w-1/2">
+                <span class="text-[10px] font-mono uppercase tracking-widest text-[#de602e] font-semibold">2nd Place Award &bull; National Competition</span>
+                <h3 class="text-base md:text-lg font-semibold text-[#1a1d20] mt-1">Caferağa Community Center & Plaza</h3>
+                <p class="text-xs text-[#595f65] mt-1 leading-relaxed">Civic cultural gathering venue, public library, and tiered urban courtyards.</p>
+              </div>
+              <div class="md:w-1/4 text-xs text-[#595f65]">
+                <span>Kadıköy Municipality Civic Council</span>
+              </div>
+              <div class="md:w-1/4 text-left md:text-right font-mono text-xs text-[#2b4951]">
+                <span>2016 &bull; Istanbul, TR</span>
+              </div>
+            </div>
+
+            <!-- Item 3 -->
+            <div class="flex flex-col md:flex-row md:items-baseline justify-between gap-4">
+              <div class="md:w-1/2">
+                <span class="text-[10px] font-mono uppercase tracking-widest text-[#de602e] font-semibold">Competition Selection & Finalist</span>
+                <h3 class="text-base md:text-lg font-semibold text-[#1a1d20] mt-1">Sivas Unity Bridge & Cultural Crossing</h3>
+                <p class="text-xs text-[#595f65] mt-1 leading-relaxed">Inhabited civic bridge weaving public amphitheatres and active promenade.</p>
+              </div>
+              <div class="md:w-1/4 text-xs text-[#595f65]">
+                <span>Sivas Kızılırmak River Commission</span>
+              </div>
+              <div class="md:w-1/4 text-left md:text-right font-mono text-xs text-[#2b4951]">
+                <span>2015 &bull; Sivas, TR</span>
+              </div>
+            </div>
+
+            <!-- Item 4 -->
+            <div class="flex flex-col md:flex-row md:items-baseline justify-between gap-4">
+              <div class="md:w-1/2">
+                <span class="text-[10px] font-mono uppercase tracking-widest text-[#de602e] font-semibold">Academic Pedigree & Honors</span>
+                <h3 class="text-base md:text-lg font-semibold text-[#1a1d20] mt-1">UNC Charlotte School of Architecture</h3>
+                <p class="text-xs text-[#595f65] mt-1 leading-relaxed">Bachelor of Arts in Architecture. Advanced digital lab fellow, Studio X.</p>
+              </div>
+              <div class="md:w-1/4 text-xs text-[#595f65]">
+                <span>Lund University Architecture Fellowship (Sweden)</span>
+              </div>
+              <div class="md:w-1/4 text-left md:text-right font-mono text-xs text-[#2b4951]">
+                <span>2018–2021 &bull; USA / SE</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
 
       </div>
 
@@ -1093,9 +1188,8 @@ def generate_about_page():
 </html>
 """
     return page.replace('__SHARED_HEAD__', SHARED_HEAD_TAGS)\
-               .replace('__HEADER__', generate_header("about"))\
-               .replace('__ACCOLADES__', generate_accolades_section())\
-               .replace('__FOOTER__', generate_footer())
+               .replace('__HEADER__', generate_header("about", borderless=True))\
+               .replace('__FOOTER__', generate_footer(borderless=True, bg="#f8f9fa"))
 
 def generate_contact_page():
     page = """<!DOCTYPE html>
