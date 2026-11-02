@@ -38,10 +38,43 @@
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       background-color: var(--bg-main);
       color: var(--text-main);
+      overflow-x: hidden;
     }
     ::-webkit-scrollbar {
       width: 5px;
       height: 5px;
+    }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    @media (hover: none), (max-width: 1023px) {
+      .touch-default-veil {
+        background: linear-gradient(to top, rgba(26, 29, 32, 0.72) 0%, rgba(26, 29, 32, 0.22) 45%, rgba(0, 0, 0, 0) 100%) !important;
+      }
+      .touch-default-overlay {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+      }
+      .touch-default-title {
+        opacity: 1 !important;
+      }
+      .touch-variant-title {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+      }
+      .variant-title-space {
+        min-height: 52px !important;
+        padding-top: 10px !important;
+        padding-bottom: 12px !important;
+      }
+    }
+    .scroll-fade-right {
+      mask-image: linear-gradient(to right, black 88%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to right, black 88%, transparent 100%);
     }
   </style>
 
@@ -50,13 +83,13 @@
 <body class="antialiased bg-[#f8f9fa] text-[#1a1d20]">
 
 
-  <!-- Top Navigation: Logo + Stacked Text on the Top Left Corner per Figma Design -->
-  <header class="w-full bg-[#f8f9fa]/95 backdrop-blur-md border-b border-[#e2e5e8] z-50 sticky top-0 transition-all">
-    <div class="w-full px-6 md:px-12 lg:px-16 flex items-center justify-between min-h-[84px]">
+  <!-- Top Navigation: Logo + Stacked Text on Top Left, Inline Links on Tablet/Desktop, Field Architecture Light Sheet Toggle on Mobile -->
+  <header class="w-full bg-[#f8f9fa]/95 backdrop-blur-md  z-50 sticky top-0 transition-all">
+    <div class="w-full px-5 md:px-12 lg:px-16 flex items-center justify-between min-h-[72px] md:min-h-[84px]">
       
       <!-- Top Left Corner: Logo Monogram + Stacked Typography -->
-      <a href="index.html" class="flex items-center gap-3.5 group">
-        <img src="assets/official/logo_charcoal.svg" alt="KAD Monogram" class="h-10 md:h-11 w-auto">
+      <a href="index.html" class="flex items-center gap-3 md:gap-3.5 group">
+        <img src="assets/official/logo_charcoal.svg" alt="KAD Monogram" class="h-9 md:h-11 w-auto">
         <div class="flex flex-col text-[11px] font-semibold tracking-[0.2em] uppercase leading-tight text-[#1a1d20]">
           <span>ALEKSANDRE</span>
           <span>KARPOV</span>
@@ -64,38 +97,126 @@
         </div>
       </a>
 
-      <!-- Top Right: Navigation Links -->
-      <nav class="flex items-center gap-8 text-xs tracking-[0.2em] uppercase">
+      <!-- Tablet & Desktop Navigation Links (>= 768px) -->
+      <nav class="hidden md:flex items-center gap-8 text-xs tracking-[0.2em] uppercase">
         <a href="index.html#works" class="text-[#1a1d20] font-semibold border-b-2 border-[#de602e] pb-0.5">Works</a>
         <a href="about.html" class="text-[#595f65] hover:text-[#1a1d20] transition-colors">About</a>
         <a href="contact.html" class="text-[#595f65] hover:text-[#1a1d20] transition-colors">Contact</a>
       </nav>
 
+      <!-- Mobile Navigation Trigger (< 768px) — Field Architecture Style Borderless 'MENU / CLOSE' -->
+      <button id="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Menu" aria-expanded="false" class="md:hidden inline-flex items-center gap-2.5 px-2 py-2 -mr-2 text-xs font-mono uppercase tracking-[0.22em] text-[#1a1d20] focus:outline-none">
+        <span id="mobile-menu-label" class="font-semibold">Menu</span>
+        <div class="w-5 h-3.5 flex flex-col justify-between items-end">
+          <span id="burger-line-1" class="w-5 h-[1.5px] bg-[#1a1d20] transition-all duration-300 origin-center"></span>
+          <span id="burger-line-2" class="w-3.5 h-[1.5px] bg-[#de602e] transition-all duration-300"></span>
+          <span id="burger-line-3" class="w-5 h-[1.5px] bg-[#1a1d20] transition-all duration-300 origin-center"></span>
+        </div>
+      </button>
+
     </div>
   </header>
 
+  <!-- Light Borderless Fullscreen Mobile Navigation Sheet (< 768px) -->
+  <div id="mobile-drawer" class="fixed inset-0 top-[72px] z-40 bg-[#f8f9fa]/98 backdrop-blur-md text-[#1a1d20] hidden flex-col justify-between p-6 overflow-y-auto md:hidden transition-opacity duration-300">
+    <div class="space-y-6 pt-4">
+      <div class="text-xs font-mono uppercase tracking-[0.25em] text-[#67aec0] font-semibold pb-1">
+        Navigation
+      </div>
+      <nav class="flex flex-col space-y-6">
+        <a href="index.html#works" onclick="closeMobileMenu()" class="group flex items-baseline justify-between py-1">
+          <span class="text-2xl font-semibold tracking-[0.15em] uppercase text-[#1a1d20] group-hover:text-[#de602e] transition-colors">Works</span>
+          <span class="text-xs font-mono text-[#38606a] uppercase tracking-widest">21 Projects &rarr;</span>
+        </a>
+        <a href="about.html" onclick="closeMobileMenu()" class="group flex items-baseline justify-between py-1">
+          <span class="text-2xl font-semibold tracking-[0.15em] uppercase text-[#1a1d20] group-hover:text-[#de602e] transition-colors">About</span>
+          <span class="text-xs font-mono text-[#38606a] uppercase tracking-widest">Pedigree &amp; BIM &rarr;</span>
+        </a>
+        <a href="contact.html" onclick="closeMobileMenu()" class="group flex items-baseline justify-between py-1">
+          <span class="text-2xl font-semibold tracking-[0.15em] uppercase text-[#1a1d20] group-hover:text-[#de602e] transition-colors">Contact</span>
+          <span class="text-xs font-mono text-[#38606a] uppercase tracking-widest">Inquiries &rarr;</span>
+        </a>
+      </nav>
+    </div>
+
+    <div class="pt-6 mt-8 space-y-2.5 text-xs font-mono">
+      <div class="flex items-center justify-between">
+        <span class="text-[#67aec0] font-semibold">CHARLOTTE, NC</span>
+        <a href="tel:+17048459596" class="text-[#2b4951] hover:text-[#de602e] font-semibold">+1 (704) 845-9596</a>
+      </div>
+      <div class="flex items-center justify-between">
+        <span class="text-[#67aec0] font-semibold">INTERNATIONAL</span>
+        <a href="tel:+905385907458" class="text-[#2b4951] hover:text-[#de602e] font-semibold">+90 (538) 590-7458</a>
+      </div>
+      <div class="text-[#595f65] pt-1">
+        contact@karpovdesign.com &bull; Karpov Design LLC
+      </div>
+    </div>
+  </div>
+  <script>
+    function toggleMobileMenu() {
+      const drawer = document.getElementById('mobile-drawer');
+      const label = document.getElementById('mobile-menu-label');
+      const l1 = document.getElementById('burger-line-1');
+      const l2 = document.getElementById('burger-line-2');
+      const l3 = document.getElementById('burger-line-3');
+      const btn = document.getElementById('mobile-menu-btn');
+      if (!drawer) return;
+      const isOpen = !drawer.classList.contains('hidden');
+      if (!isOpen) {
+        drawer.classList.remove('hidden');
+        drawer.classList.add('flex');
+        if (label) label.textContent = 'Close';
+        if (btn) btn.setAttribute('aria-expanded', 'true');
+        if (l1) l1.style.transform = 'translateY(6px) rotate(45deg)';
+        if (l2) l2.style.opacity = '0';
+        if (l3) l3.style.transform = 'translateY(-6px) rotate(-45deg)';
+        document.body.style.overflow = 'hidden';
+      } else {
+        closeMobileMenu();
+      }
+    }
+    function closeMobileMenu() {
+      const drawer = document.getElementById('mobile-drawer');
+      const label = document.getElementById('mobile-menu-label');
+      const l1 = document.getElementById('burger-line-1');
+      const l2 = document.getElementById('burger-line-2');
+      const l3 = document.getElementById('burger-line-3');
+      const btn = document.getElementById('mobile-menu-btn');
+      if (!drawer) return;
+      drawer.classList.add('hidden');
+      drawer.classList.remove('flex');
+      if (label) label.textContent = 'Menu';
+      if (btn) btn.setAttribute('aria-expanded', 'false');
+      if (l1) l1.style.transform = '';
+      if (l2) l2.style.opacity = '1';
+      if (l3) l3.style.transform = '';
+      document.body.style.overflow = '';
+    }
+  </script>
+
 
   <!-- Breadcrumb Navigation (Seamless #f8f9fa, Borderless) -->
-  <div class="w-full bg-[#f8f9fa] py-4 px-6 md:px-12 lg:px-16">
-    <nav aria-label="Breadcrumb" class="breadcrumb-bar w-full text-sm font-mono uppercase tracking-widest text-[#595f65]">
-      <a href="index.html" class="hover:text-[#1a1d20] transition-colors">Home</a>
-      <span class="mx-2">&bull;</span>
-      <a href="index.html#works" class="hover:text-[#1a1d20] transition-colors">Works</a>
-      <span class="mx-2">&bull;</span>
-      <span class="text-[#1a1d20] font-semibold">Caferağa Community Center & Public Plaza</span>
+  <div class="w-full bg-[#f8f9fa] py-4 px-5 md:px-12 lg:px-16">
+    <nav aria-label="Breadcrumb" class="breadcrumb-bar w-full text-xs md:text-sm font-mono uppercase tracking-widest text-[#595f65] flex items-center overflow-x-auto no-scrollbar whitespace-nowrap">
+      <a href="index.html" class="hover:text-[#1a1d20] transition-colors shrink-0">Home</a>
+      <span class="mx-2 shrink-0">&bull;</span>
+      <a href="index.html#works" class="hover:text-[#1a1d20] transition-colors shrink-0">Works</a>
+      <span class="mx-2 shrink-0">&bull;</span>
+      <span class="text-[#1a1d20] font-semibold truncate">Caferağa Community Center & Public Plaza</span>
     </nav>
   </div>
 
   <main>
     <!-- Dedicated Hero Banner: Highest Resolution Render -->
-    <section id="project-hero-banner" class="relative w-full h-[60vh] md:h-[75vh] bg-[#1a1d20] overflow-hidden flex items-end">
+    <section id="project-hero-banner" class="relative w-full h-[52svh] sm:h-[60vh] md:h-[75vh] bg-[#1a1d20] overflow-hidden flex items-end">
       <img src="assets/official/projects/community-plaza/community_plaza_2.jpg" alt="Caferağa Community Center & Public Plaza" class="absolute inset-0 w-full h-full object-cover">
       <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-black/20"></div>
 
       <!-- Hero Title & Key Meta -->
-      <div class="relative z-10 w-full px-6 md:px-12 lg:px-16 pb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
+      <div class="relative z-10 w-full px-5 md:px-12 lg:px-16 pb-8 md:pb-12 flex flex-col md:flex-row md:items-end justify-between gap-4 md:gap-6">
         <div>
-          <h1 class="text-3xl md:text-5xl font-semibold tracking-tight text-white drop-shadow-md">Caferağa Community Center & Public Plaza</h1>
+          <h1 class="text-2xl sm:text-3xl md:text-5xl font-semibold tracking-tight text-white drop-shadow-md">Caferağa Community Center & Public Plaza</h1>
         </div>
         <div class="text-xs md:text-sm font-mono text-white/90 uppercase tracking-widest">
           <span>Kadıköy, Istanbul, Turkey &bull; 2016</span>
@@ -103,8 +224,8 @@
       </div>
     </section>
 
-    <!-- Main Content: Strict 25% Left Pure Negative Space -->
-    <section class="w-full bg-[#f8f9fa] py-16 px-6 md:px-12 lg:px-16 border-b border-[#e2e5e8]">
+    <!-- Main Content: Strict 25% Left Pure Negative Space (Borderless on #f8f9fa) -->
+    <section class="w-full bg-[#f8f9fa] py-12 md:py-16 px-5 md:px-12 lg:px-16">
       <div class="w-full flex flex-col lg:flex-row items-stretch">
         
         <!-- 25% Left Pure Empty Negative Space -->
@@ -115,9 +236,9 @@
           
           <!-- Narrative & Brief -->
           <div class="space-y-6 max-w-4xl">
-            <div class="border-b border-[#e2e5e8] pb-6">
+            <div class="pb-2">
               <span class="text-xs font-mono uppercase tracking-[0.25em] text-[#67aec0] font-semibold block mb-3">Project Brief & Spatial Strategy</span>
-              <p class="text-base md:text-lg text-[#1a1d20] leading-relaxed">
+              <p class="text-sm sm:text-base md:text-lg text-[#1a1d20] leading-relaxed">
                 2nd Prize winning civic center providing tiered community halls, public library facilities, and permeable street-level urban plazas in historic Kadıköy.
               </p>
             </div>
@@ -129,8 +250,8 @@
             </div>
 
 
-            <!-- Specifications Table (Eyeblue Soft Labels, Eyeblue Deep Values) -->
-            <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 py-4 border-b border-[#e2e5e8] text-xs font-mono">
+            <!-- Specifications Table (Eyeblue Soft Labels, Eyeblue Deep Values, Borderless) -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 py-4 text-xs font-mono">
               <div>
                 <span class="text-[10px] font-mono uppercase tracking-widest text-[#67aec0] font-semibold block">Typology</span>
                 <span class="text-sm font-semibold text-[#2b4951] block mt-1 uppercase">Cultural</span>
@@ -150,52 +271,52 @@
             </div>
           </div>
 
-          <!-- Large Images Gallery: Laid out in same clean grid as homepage -->
+          <!-- Large Images Gallery: Borderless Plates -->
           <div>
-            <h2 class="text-xl font-semibold tracking-[0.25em] uppercase text-[#38606a] mb-8">Visual Documentation & Plates</h2>
-            <div id="project-gallery" class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
+            <h2 class="text-lg md:text-xl font-semibold tracking-[0.25em] uppercase text-[#38606a] mb-6 md:mb-8">Visual Documentation & Plates</h2>
+            <div id="project-gallery" class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
               
             <div onclick="openLightbox(0)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20] border border-[#e2e5e8]">
+              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
                 <img src="assets/official/projects/community-plaza/community_plaza_2.jpg" alt="Caferağa Community Center & Public Plaza — Plate 1" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-center justify-center">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white/90 text-[#1a1d20] text-xs font-mono uppercase tracking-widest px-3 py-1.5 shadow-md">Enlarge</span>
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
+                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
                 </div>
               </div>
             </div>
 
             <div onclick="openLightbox(1)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20] border border-[#e2e5e8]">
+              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
                 <img src="assets/official/projects/community-plaza/community_plaza_4.jpg" alt="Caferağa Community Center & Public Plaza — Plate 2" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-center justify-center">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white/90 text-[#1a1d20] text-xs font-mono uppercase tracking-widest px-3 py-1.5 shadow-md">Enlarge</span>
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
+                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
                 </div>
               </div>
             </div>
 
             <div onclick="openLightbox(2)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20] border border-[#e2e5e8]">
+              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
                 <img src="assets/official/projects/community-plaza/community_plaza_5.jpg" alt="Caferağa Community Center & Public Plaza — Plate 3" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-center justify-center">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white/90 text-[#1a1d20] text-xs font-mono uppercase tracking-widest px-3 py-1.5 shadow-md">Enlarge</span>
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
+                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
                 </div>
               </div>
             </div>
 
             <div onclick="openLightbox(3)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20] border border-[#e2e5e8]">
+              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
                 <img src="assets/official/projects/community-plaza/community_plaza_7.jpg" alt="Caferağa Community Center & Public Plaza — Plate 4" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-center justify-center">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white/90 text-[#1a1d20] text-xs font-mono uppercase tracking-widest px-3 py-1.5 shadow-md">Enlarge</span>
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
+                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
                 </div>
               </div>
             </div>
 
             <div onclick="openLightbox(4)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20] border border-[#e2e5e8]">
+              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
                 <img src="assets/official/projects/community-plaza/community_plaza_8.jpg" alt="Caferağa Community Center & Public Plaza — Plate 5" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-center justify-center">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white/90 text-[#1a1d20] text-xs font-mono uppercase tracking-widest px-3 py-1.5 shadow-md">Enlarge</span>
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
+                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
                 </div>
               </div>
             </div>
@@ -203,12 +324,12 @@
             </div>
           </div>
 
-          <!-- Previous / Next Commission Navigation -->
-          <div class="border-t border-[#e2e5e8] pt-10 flex items-center justify-between text-xs font-mono uppercase tracking-widest">
-            <a href="project-folding-edge.html" class="text-[#595f65] hover:text-[#de602e] transition-colors flex items-center gap-2">
+          <!-- Previous / Next Commission Navigation (Borderless, Stacked on Mobile) -->
+          <div class="pt-8 md:pt-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-xs font-mono uppercase tracking-widest">
+            <a href="project-folding-edge.html" class="py-1 text-[#595f65] hover:text-[#de602e] transition-colors flex items-center gap-2">
               &larr; Prev: Folding Edge Sky Garden Pavilion
             </a>
-            <a href="project-summer-island.html" class="text-[#595f65] hover:text-[#de602e] transition-colors flex items-center gap-2">
+            <a href="project-summer-island.html" class="py-1 text-[#595f65] hover:text-[#de602e] transition-colors flex items-center sm:justify-end gap-2 sm:text-right">
               Next: Summer Island Coastal Resort & Villas &rarr;
             </a>
           </div>
@@ -219,26 +340,26 @@
     </section>
   </main>
 
-  <!-- Near-Fullscreen Image Lightbox Modal -->
-  <div id="image-lightbox" class="fixed inset-0 z-50 bg-[#1a1d20]/95 backdrop-blur-md hidden flex flex-col items-center justify-between p-4 md:p-6 cursor-pointer" onclick="handleLightboxClick(event)">
+  <!-- Near-Fullscreen Image Lightbox Modal (Borderless Controls + Touch Swipe) -->
+  <div id="image-lightbox" class="fixed inset-0 z-50 bg-[#1a1d20]/95 backdrop-blur-md hidden flex flex-col items-center justify-between p-4 md:p-6 cursor-pointer select-none" onclick="handleLightboxClick(event)">
     
     <!-- Top Left: Authentic Eyeblue (#67aec0) "X" Button Without Any Borders per user directive -->
-    <button onclick="closeLightbox()" class="fixed top-4 left-6 z-60 text-[#67aec0] hover:text-[#38606a] text-3xl font-bold bg-transparent border-none p-2 cursor-pointer transition-colors focus:outline-none" title="Close (Esc)" aria-label="Close popup">✕</button>
+    <button onclick="closeLightbox()" class="fixed top-4 left-6 z-60 text-[#67aec0] hover:text-[#de602e] text-3xl font-bold bg-transparent border-none p-2 cursor-pointer transition-colors focus:outline-none" title="Close (Esc)" aria-label="Close popup">✕</button>
 
     <!-- Top Bar: Counter -->
     <div class="w-full flex items-center justify-end text-white/80 pt-2 pointer-events-none">
-      <span id="lightbox-counter" class="text-xs font-mono uppercase tracking-widest">Plate 1 of 5</span>
+      <span id="lightbox-counter" class="text-xs font-mono uppercase tracking-widest bg-[#2b4951]/80 px-3 py-1.5 text-[#e4f0f2]">Plate 1 of 5</span>
     </div>
 
-    <!-- Center Image Container & Flank Arrows -->
+    <!-- Center Image Container & Borderless Flank Arrows -->
     <div class="relative w-full flex-1 flex items-center justify-center my-2 select-none">
-      <button onclick="navigateLightbox(-1); event.stopPropagation();" class="absolute left-2 md:left-6 z-10 text-white/80 hover:text-white bg-black/50 hover:bg-black/80 p-3 md:p-4 rounded-full transition-colors text-xl font-mono focus:outline-none" title="Previous (Left Arrow)">&#8592;</button>
-      <img id="lightbox-img" src="" alt="Enlarged Project Plate" class="max-w-[92vw] max-h-[82vh] object-contain drop-shadow-2xl transition-all duration-300 cursor-default" onclick="event.stopPropagation()">
-      <button onclick="navigateLightbox(1); event.stopPropagation();" class="absolute right-2 md:right-6 z-10 text-white/80 hover:text-white bg-black/50 hover:bg-black/80 p-3 md:p-4 rounded-full transition-colors text-xl font-mono focus:outline-none" title="Next (Right Arrow)">&#8594;</button>
+      <button onclick="navigateLightbox(-1); event.stopPropagation();" class="absolute left-1 md:left-6 z-10 w-10 h-10 md:w-12 md:h-12 text-white bg-[#1a1d20]/70 hover:bg-[#de602e] flex items-center justify-center transition-colors text-lg font-mono focus:outline-none" title="Previous (Left Arrow)">&#8592;</button>
+      <img id="lightbox-img" src="" alt="Enlarged Project Plate" class="max-w-[94vw] max-h-[82vh] object-contain drop-shadow-2xl transition-all duration-300 cursor-default" onclick="event.stopPropagation()">
+      <button onclick="navigateLightbox(1); event.stopPropagation();" class="absolute right-1 md:right-6 z-10 w-10 h-10 md:w-12 md:h-12 text-white bg-[#1a1d20]/70 hover:bg-[#de602e] flex items-center justify-center transition-colors text-lg font-mono focus:outline-none" title="Next (Right Arrow)">&#8594;</button>
     </div>
 
     <!-- Bottom Caption -->
-    <div class="w-full text-center text-xs font-mono uppercase tracking-widest text-white/60 pb-2 pointer-events-none">
+    <div class="w-full text-center text-xs font-mono uppercase tracking-widest text-white/75 pb-2 pointer-events-none">
       <span>Caferağa Community Center & Public Plaza &bull; Visual Documentation</span>
     </div>
   </div>
@@ -281,7 +402,6 @@
     }
 
     function handleLightboxClick(e) {
-      // If clicked on the image itself or an arrow button, do not close
       if (e.target.closest('#lightbox-img') || e.target.closest('button')) {
         return;
       }
@@ -296,16 +416,33 @@
         if (e.key === 'ArrowRight') navigateLightbox(1);
       }
     });
+
+    // Touch-swipe support for lightbox on mobile & tablet
+    let lbTouchStartX = 0;
+    window.addEventListener('DOMContentLoaded', () => {
+      const lb = document.getElementById('image-lightbox');
+      if (lb) {
+        lb.addEventListener('touchstart', (e) => {
+          lbTouchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+        lb.addEventListener('touchend', (e) => {
+          const diff = e.changedTouches[0].screenX - lbTouchStartX;
+          if (Math.abs(diff) > 42) {
+            navigateLightbox(diff < 0 ? 1 : -1);
+          }
+        }, { passive: true });
+      }
+    });
   </script>
 
 
-  <!-- Centered Architectural Footer: Cleaned of legal blurb -->
-  <footer class="w-full bg-[#ffffff] border-t border-[#e2e5e8] py-16 px-6 md:px-12 lg:px-16">
-    <div class="w-full flex flex-col lg:flex-row items-center justify-between gap-8">
+  <!-- Centered Architectural Footer: Borderless on #f8f9fa -->
+  <footer class="w-full bg-[#f8f9fa]  py-12 md:py-16 px-5 md:px-12 lg:px-16">
+    <div class="w-full flex flex-col lg:flex-row items-center justify-between gap-6 md:gap-8">
       
       <!-- Left: Logo & Studio Identity -->
       <div class="flex items-center gap-4">
-        <img src="assets/official/logo_charcoal.svg" alt="KAD Logo" class="h-10 w-auto">
+        <img src="assets/official/logo_charcoal.svg" alt="KAD Logo" class="h-9 md:h-10 w-auto">
         <div>
           <span class="text-sm font-semibold tracking-[0.2em] uppercase text-[#1a1d20] block">Karpov Design LLC</span>
           <span class="text-xs text-[#595f65] block">Aleksandre Karpov &bull; Charlotte, NC</span>

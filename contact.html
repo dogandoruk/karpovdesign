@@ -38,10 +38,43 @@
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       background-color: var(--bg-main);
       color: var(--text-main);
+      overflow-x: hidden;
     }
     ::-webkit-scrollbar {
       width: 5px;
       height: 5px;
+    }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    @media (hover: none), (max-width: 1023px) {
+      .touch-default-veil {
+        background: linear-gradient(to top, rgba(26, 29, 32, 0.72) 0%, rgba(26, 29, 32, 0.22) 45%, rgba(0, 0, 0, 0) 100%) !important;
+      }
+      .touch-default-overlay {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+      }
+      .touch-default-title {
+        opacity: 1 !important;
+      }
+      .touch-variant-title {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+      }
+      .variant-title-space {
+        min-height: 52px !important;
+        padding-top: 10px !important;
+        padding-bottom: 12px !important;
+      }
+    }
+    .scroll-fade-right {
+      mask-image: linear-gradient(to right, black 88%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to right, black 88%, transparent 100%);
     }
   </style>
 
@@ -50,13 +83,13 @@
 <body class="antialiased bg-[#f8f9fa] text-[#1a1d20]">
 
   
-  <!-- Top Navigation: Logo + Stacked Text on the Top Left Corner per Figma Design -->
+  <!-- Top Navigation: Logo + Stacked Text on Top Left, Inline Links on Tablet/Desktop, Field Architecture Light Sheet Toggle on Mobile -->
   <header class="w-full bg-[#f8f9fa]/95 backdrop-blur-md  z-50 sticky top-0 transition-all">
-    <div class="w-full px-6 md:px-12 lg:px-16 flex items-center justify-between min-h-[84px]">
+    <div class="w-full px-5 md:px-12 lg:px-16 flex items-center justify-between min-h-[72px] md:min-h-[84px]">
       
       <!-- Top Left Corner: Logo Monogram + Stacked Typography -->
-      <a href="index.html" class="flex items-center gap-3.5 group">
-        <img src="assets/official/logo_charcoal.svg" alt="KAD Monogram" class="h-10 md:h-11 w-auto">
+      <a href="index.html" class="flex items-center gap-3 md:gap-3.5 group">
+        <img src="assets/official/logo_charcoal.svg" alt="KAD Monogram" class="h-9 md:h-11 w-auto">
         <div class="flex flex-col text-[11px] font-semibold tracking-[0.2em] uppercase leading-tight text-[#1a1d20]">
           <span>ALEKSANDRE</span>
           <span>KARPOV</span>
@@ -64,37 +97,125 @@
         </div>
       </a>
 
-      <!-- Top Right: Navigation Links -->
-      <nav class="flex items-center gap-8 text-xs tracking-[0.2em] uppercase">
+      <!-- Tablet & Desktop Navigation Links (>= 768px) -->
+      <nav class="hidden md:flex items-center gap-8 text-xs tracking-[0.2em] uppercase">
         <a href="index.html#works" class="text-[#595f65] hover:text-[#1a1d20] transition-colors">Works</a>
         <a href="about.html" class="text-[#595f65] hover:text-[#1a1d20] transition-colors">About</a>
         <a href="contact.html" class="text-[#1a1d20] font-semibold border-b-2 border-[#de602e] pb-0.5">Contact</a>
       </nav>
 
+      <!-- Mobile Navigation Trigger (< 768px) — Field Architecture Style Borderless 'MENU / CLOSE' -->
+      <button id="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Menu" aria-expanded="false" class="md:hidden inline-flex items-center gap-2.5 px-2 py-2 -mr-2 text-xs font-mono uppercase tracking-[0.22em] text-[#1a1d20] focus:outline-none">
+        <span id="mobile-menu-label" class="font-semibold">Menu</span>
+        <div class="w-5 h-3.5 flex flex-col justify-between items-end">
+          <span id="burger-line-1" class="w-5 h-[1.5px] bg-[#1a1d20] transition-all duration-300 origin-center"></span>
+          <span id="burger-line-2" class="w-3.5 h-[1.5px] bg-[#de602e] transition-all duration-300"></span>
+          <span id="burger-line-3" class="w-5 h-[1.5px] bg-[#1a1d20] transition-all duration-300 origin-center"></span>
+        </div>
+      </button>
+
     </div>
   </header>
 
+  <!-- Light Borderless Fullscreen Mobile Navigation Sheet (< 768px) -->
+  <div id="mobile-drawer" class="fixed inset-0 top-[72px] z-40 bg-[#f8f9fa]/98 backdrop-blur-md text-[#1a1d20] hidden flex-col justify-between p-6 overflow-y-auto md:hidden transition-opacity duration-300">
+    <div class="space-y-6 pt-4">
+      <div class="text-xs font-mono uppercase tracking-[0.25em] text-[#67aec0] font-semibold pb-1">
+        Navigation
+      </div>
+      <nav class="flex flex-col space-y-6">
+        <a href="index.html#works" onclick="closeMobileMenu()" class="group flex items-baseline justify-between py-1">
+          <span class="text-2xl font-semibold tracking-[0.15em] uppercase text-[#1a1d20] group-hover:text-[#de602e] transition-colors">Works</span>
+          <span class="text-xs font-mono text-[#38606a] uppercase tracking-widest">21 Projects &rarr;</span>
+        </a>
+        <a href="about.html" onclick="closeMobileMenu()" class="group flex items-baseline justify-between py-1">
+          <span class="text-2xl font-semibold tracking-[0.15em] uppercase text-[#1a1d20] group-hover:text-[#de602e] transition-colors">About</span>
+          <span class="text-xs font-mono text-[#38606a] uppercase tracking-widest">Pedigree &amp; BIM &rarr;</span>
+        </a>
+        <a href="contact.html" onclick="closeMobileMenu()" class="group flex items-baseline justify-between py-1">
+          <span class="text-2xl font-semibold tracking-[0.15em] uppercase text-[#1a1d20] group-hover:text-[#de602e] transition-colors">Contact</span>
+          <span class="text-xs font-mono text-[#38606a] uppercase tracking-widest">Inquiries &rarr;</span>
+        </a>
+      </nav>
+    </div>
+
+    <div class="pt-6 mt-8 space-y-2.5 text-xs font-mono">
+      <div class="flex items-center justify-between">
+        <span class="text-[#67aec0] font-semibold">CHARLOTTE, NC</span>
+        <a href="tel:+17048459596" class="text-[#2b4951] hover:text-[#de602e] font-semibold">+1 (704) 845-9596</a>
+      </div>
+      <div class="flex items-center justify-between">
+        <span class="text-[#67aec0] font-semibold">INTERNATIONAL</span>
+        <a href="tel:+905385907458" class="text-[#2b4951] hover:text-[#de602e] font-semibold">+90 (538) 590-7458</a>
+      </div>
+      <div class="text-[#595f65] pt-1">
+        contact@karpovdesign.com &bull; Karpov Design LLC
+      </div>
+    </div>
+  </div>
+  <script>
+    function toggleMobileMenu() {
+      const drawer = document.getElementById('mobile-drawer');
+      const label = document.getElementById('mobile-menu-label');
+      const l1 = document.getElementById('burger-line-1');
+      const l2 = document.getElementById('burger-line-2');
+      const l3 = document.getElementById('burger-line-3');
+      const btn = document.getElementById('mobile-menu-btn');
+      if (!drawer) return;
+      const isOpen = !drawer.classList.contains('hidden');
+      if (!isOpen) {
+        drawer.classList.remove('hidden');
+        drawer.classList.add('flex');
+        if (label) label.textContent = 'Close';
+        if (btn) btn.setAttribute('aria-expanded', 'true');
+        if (l1) l1.style.transform = 'translateY(6px) rotate(45deg)';
+        if (l2) l2.style.opacity = '0';
+        if (l3) l3.style.transform = 'translateY(-6px) rotate(-45deg)';
+        document.body.style.overflow = 'hidden';
+      } else {
+        closeMobileMenu();
+      }
+    }
+    function closeMobileMenu() {
+      const drawer = document.getElementById('mobile-drawer');
+      const label = document.getElementById('mobile-menu-label');
+      const l1 = document.getElementById('burger-line-1');
+      const l2 = document.getElementById('burger-line-2');
+      const l3 = document.getElementById('burger-line-3');
+      const btn = document.getElementById('mobile-menu-btn');
+      if (!drawer) return;
+      drawer.classList.add('hidden');
+      drawer.classList.remove('flex');
+      if (label) label.textContent = 'Menu';
+      if (btn) btn.setAttribute('aria-expanded', 'false');
+      if (l1) l1.style.transform = '';
+      if (l2) l2.style.opacity = '1';
+      if (l3) l3.style.transform = '';
+      document.body.style.overflow = '';
+    }
+  </script>
+
 
   <!-- Breadcrumb Navigation (Seamless #f8f9fa, Borderless) -->
-  <div class="w-full bg-[#f8f9fa] py-4 px-6 md:px-12 lg:px-16">
-    <nav aria-label="Breadcrumb" class="breadcrumb-bar w-full text-sm font-mono uppercase tracking-widest text-[#595f65]">
+  <div class="w-full bg-[#f8f9fa] py-4 px-5 md:px-12 lg:px-16">
+    <nav aria-label="Breadcrumb" class="breadcrumb-bar w-full text-xs md:text-sm font-mono uppercase tracking-widest text-[#595f65]">
       <a href="index.html" class="hover:text-[#1a1d20] transition-colors">Home</a>
       <span class="mx-2">&bull;</span>
       <span class="text-[#1a1d20] font-semibold">Contact</span>
     </nav>
   </div>
 
-  <main class="w-full bg-[#f8f9fa] py-16 px-6 md:px-12 lg:px-16">
+  <main class="w-full bg-[#f8f9fa] py-12 md:py-16 px-5 md:px-12 lg:px-16">
     <div class="w-full flex flex-col lg:flex-row items-stretch">
       
       <!-- 25% Left Pure Empty Negative Space -->
       <div class="hidden lg:block lg:w-1/4"></div>
 
       <!-- 75% Right Active Column -->
-      <div class="w-full lg:w-3/4 lg:pl-12 space-y-16">
+      <div class="w-full lg:w-3/4 lg:pl-12 space-y-14 md:space-y-16">
         
         <!-- Contact Header & Direct Coordinates (Eyeblue Mid H1, Eyeblue Soft Labels, Eyeblue Deep Values) -->
-        <div class="space-y-10">
+        <div class="space-y-8 md:space-y-10">
           <div>
             <h1 class="text-3xl md:text-5xl font-semibold tracking-tight text-[#38606a] mb-4">Get in touch</h1>
             <p class="text-sm md:text-base text-[#595f65] leading-relaxed max-w-2xl">
@@ -133,48 +254,48 @@
           </div>
         </div>
 
-        <!-- Form: Borderless presentation on #f8f9fa, Eyeblue labels, Orange CTA -->
-        <form onsubmit="handleInquirySubmit(event)" class="space-y-8 pt-6">
-          <div class="border-b border-[#38606a]/20 pb-4">
+        <!-- Form: Borderless wrapper on #f8f9fa, crisp white inputs (Option A), Eyeblue labels, Orange CTA -->
+        <form onsubmit="handleInquirySubmit(event)" class="space-y-8 pt-4 max-w-4xl">
+          <div>
             <h3 class="text-sm font-mono uppercase tracking-[0.2em] font-semibold text-[#38606a]">Project Inquiries</h3>
           </div>
           
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
             <div>
               <label class="block text-xs font-mono uppercase tracking-wider text-[#2b4951] font-semibold mb-2">Name *</label>
-              <input type="text" required placeholder="Your full name" class="w-full bg-[#f8f9fa] border border-[#d0d7de] p-3 text-xs text-[#1a1d20] focus:outline-none focus:border-[#38606a] transition-colors">
+              <input type="text" required placeholder="Your full name" class="w-full bg-white border border-[#e2e5e8] p-3.5 text-xs text-[#1a1d20] focus:outline-none focus:border-[#38606a] transition-colors">
             </div>
             <div>
               <label class="block text-xs font-mono uppercase tracking-wider text-[#2b4951] font-semibold mb-2">Email *</label>
-              <input type="email" required placeholder="your.email@domain.com" class="w-full bg-[#f8f9fa] border border-[#d0d7de] p-3 text-xs text-[#1a1d20] focus:outline-none focus:border-[#38606a] transition-colors">
+              <input type="email" required placeholder="your.email@domain.com" class="w-full bg-white border border-[#e2e5e8] p-3.5 text-xs text-[#1a1d20] focus:outline-none focus:border-[#38606a] transition-colors">
             </div>
           </div>
 
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
             <div>
               <label class="block text-xs font-mono uppercase tracking-wider text-[#2b4951] font-semibold mb-2">Site Location</label>
-              <input type="text" placeholder="e.g. Asheville, NC / Blue Ridge Mountains" class="w-full bg-[#f8f9fa] border border-[#d0d7de] p-3 text-xs text-[#1a1d20] focus:outline-none focus:border-[#38606a] transition-colors">
+              <input type="text" placeholder="e.g. Asheville, NC / Blue Ridge Mountains" class="w-full bg-white border border-[#e2e5e8] p-3.5 text-xs text-[#1a1d20] focus:outline-none focus:border-[#38606a] transition-colors">
             </div>
             <div>
               <label class="block text-xs font-mono uppercase tracking-wider text-[#2b4951] font-semibold mb-2">Telephone</label>
-              <input type="tel" placeholder="e.g. +1 (704) 000-0000" class="w-full bg-[#f8f9fa] border border-[#d0d7de] p-3 text-xs text-[#1a1d20] focus:outline-none focus:border-[#38606a] transition-colors">
+              <input type="tel" placeholder="e.g. +1 (704) 000-0000" class="w-full bg-white border border-[#e2e5e8] p-3.5 text-xs text-[#1a1d20] focus:outline-none focus:border-[#38606a] transition-colors">
             </div>
           </div>
 
           <div>
             <label class="block text-xs font-mono uppercase tracking-wider text-[#2b4951] font-semibold mb-2">Project Scope & Program Requirements *</label>
-            <textarea id="contact-scope-textarea" rows="5" required placeholder="Describe your vision, site parameters, approximate square footage, or architectural timeline..." oninput="autoExpandTextarea(this)" class="w-full bg-[#f8f9fa] border border-[#d0d7de] p-4 text-xs text-[#1a1d20] focus:outline-none focus:border-[#38606a] resize-none leading-relaxed transition-colors"></textarea>
+            <textarea id="contact-scope-textarea" rows="5" required placeholder="Describe your vision, site parameters, approximate square footage, or architectural timeline..." oninput="autoExpandTextarea(this)" class="w-full bg-white border border-[#e2e5e8] p-4 text-xs text-[#1a1d20] focus:outline-none focus:border-[#38606a] resize-none leading-relaxed transition-colors"></textarea>
           </div>
 
-          <div class="flex items-center justify-between pt-2">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-2">
             <span class="text-xs text-[#595f65]">Confidentiality guaranteed. Direct architect response within 24 hours.</span>
             <!-- Orange Submit Button -->
-            <button type="submit" class="px-10 py-3.5 bg-[#de602e] hover:bg-[#ad4b24] text-white text-xs font-mono uppercase tracking-widest font-semibold transition-colors shadow-sm">
+            <button type="submit" class="w-full sm:w-auto px-10 py-4 bg-[#de602e] hover:bg-[#ad4b24] text-white text-xs font-mono uppercase tracking-widest font-semibold transition-colors shadow-sm text-center">
               Submit &rarr;
             </button>
           </div>
           
-          <div id="form-success" class="hidden p-4 bg-[#e4f0f2] border border-[#67aec0] text-xs text-[#2b4951]">
+          <div id="form-success" class="hidden p-4 bg-[#e4f0f2] text-xs text-[#2b4951]">
             Thank you. Your message has been sent directly to Aleksandre Karpov.
           </div>
         </form>
@@ -185,13 +306,13 @@
   </main>
 
   
-  <!-- Centered Architectural Footer: Cleaned of legal blurb -->
-  <footer class="w-full bg-[#f8f9fa]  py-16 px-6 md:px-12 lg:px-16">
-    <div class="w-full flex flex-col lg:flex-row items-center justify-between gap-8">
+  <!-- Centered Architectural Footer: Borderless on #f8f9fa -->
+  <footer class="w-full bg-[#f8f9fa]  py-12 md:py-16 px-5 md:px-12 lg:px-16">
+    <div class="w-full flex flex-col lg:flex-row items-center justify-between gap-6 md:gap-8">
       
       <!-- Left: Logo & Studio Identity -->
       <div class="flex items-center gap-4">
-        <img src="assets/official/logo_charcoal.svg" alt="KAD Logo" class="h-10 w-auto">
+        <img src="assets/official/logo_charcoal.svg" alt="KAD Logo" class="h-9 md:h-10 w-auto">
         <div>
           <span class="text-sm font-semibold tracking-[0.2em] uppercase text-[#1a1d20] block">Karpov Design LLC</span>
           <span class="text-xs text-[#595f65] block">Aleksandre Karpov &bull; Charlotte, NC</span>

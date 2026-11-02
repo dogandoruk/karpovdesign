@@ -118,28 +118,61 @@ SHARED_HEAD_TAGS = """
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       background-color: var(--bg-main);
       color: var(--text-main);
+      overflow-x: hidden;
     }
     ::-webkit-scrollbar {
       width: 5px;
       height: 5px;
     }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    @media (hover: none), (max-width: 1023px) {
+      .touch-default-veil {
+        background: linear-gradient(to top, rgba(26, 29, 32, 0.72) 0%, rgba(26, 29, 32, 0.22) 45%, rgba(0, 0, 0, 0) 100%) !important;
+      }
+      .touch-default-overlay {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+      }
+      .touch-default-title {
+        opacity: 1 !important;
+      }
+      .touch-variant-title {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+      }
+      .variant-title-space {
+        min-height: 52px !important;
+        padding-top: 10px !important;
+        padding-bottom: 12px !important;
+      }
+    }
+    .scroll-fade-right {
+      mask-image: linear-gradient(to right, black 88%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to right, black 88%, transparent 100%);
+    }
   </style>
 """
 
-def generate_header(active_nav="works", borderless=False):
+def generate_header(active_nav="works", borderless=True):
     works_cls = "text-[#1a1d20] font-semibold border-b-2 border-[#de602e] pb-0.5" if active_nav == "works" else "text-[#595f65] hover:text-[#1a1d20] transition-colors"
     about_cls = "text-[#1a1d20] font-semibold border-b-2 border-[#de602e] pb-0.5" if active_nav == "about" else "text-[#595f65] hover:text-[#1a1d20] transition-colors"
     contact_cls = "text-[#1a1d20] font-semibold border-b-2 border-[#de602e] pb-0.5" if active_nav == "contact" else "text-[#595f65] hover:text-[#1a1d20] transition-colors"
 
     border_cls = "" if borderless else "border-b border-[#e2e5e8]"
-    template = f"""
-  <!-- Top Navigation: Logo + Stacked Text on the Top Left Corner per Figma Design -->
-  <header class="w-full bg-[#f8f9fa]/95 backdrop-blur-md {border_cls} z-50 sticky top-0 transition-all">
-    <div class="w-full px-6 md:px-12 lg:px-16 flex items-center justify-between min-h-[84px]">
+    template = """
+  <!-- Top Navigation: Logo + Stacked Text on Top Left, Inline Links on Tablet/Desktop, Field Architecture Light Sheet Toggle on Mobile -->
+  <header class="w-full bg-[#f8f9fa]/95 backdrop-blur-md __BORDER_CLS__ z-50 sticky top-0 transition-all">
+    <div class="w-full px-5 md:px-12 lg:px-16 flex items-center justify-between min-h-[72px] md:min-h-[84px]">
       
       <!-- Top Left Corner: Logo Monogram + Stacked Typography -->
-      <a href="index.html" class="flex items-center gap-3.5 group">
-        <img src="assets/official/logo_charcoal.svg" alt="KAD Monogram" class="h-10 md:h-11 w-auto">
+      <a href="index.html" class="flex items-center gap-3 md:gap-3.5 group">
+        <img src="assets/official/logo_charcoal.svg" alt="KAD Monogram" class="h-9 md:h-11 w-auto">
         <div class="flex flex-col text-[11px] font-semibold tracking-[0.2em] uppercase leading-tight text-[#1a1d20]">
           <span>ALEKSANDRE</span>
           <span>KARPOV</span>
@@ -147,28 +180,116 @@ def generate_header(active_nav="works", borderless=False):
         </div>
       </a>
 
-      <!-- Top Right: Navigation Links -->
-      <nav class="flex items-center gap-8 text-xs tracking-[0.2em] uppercase">
+      <!-- Tablet & Desktop Navigation Links (>= 768px) -->
+      <nav class="hidden md:flex items-center gap-8 text-xs tracking-[0.2em] uppercase">
         <a href="index.html#works" class="__WORKS_CLS__">Works</a>
         <a href="about.html" class="__ABOUT_CLS__">About</a>
         <a href="contact.html" class="__CONTACT_CLS__">Contact</a>
       </nav>
 
+      <!-- Mobile Navigation Trigger (< 768px) — Field Architecture Style Borderless 'MENU / CLOSE' -->
+      <button id="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Menu" aria-expanded="false" class="md:hidden inline-flex items-center gap-2.5 px-2 py-2 -mr-2 text-xs font-mono uppercase tracking-[0.22em] text-[#1a1d20] focus:outline-none">
+        <span id="mobile-menu-label" class="font-semibold">Menu</span>
+        <div class="w-5 h-3.5 flex flex-col justify-between items-end">
+          <span id="burger-line-1" class="w-5 h-[1.5px] bg-[#1a1d20] transition-all duration-300 origin-center"></span>
+          <span id="burger-line-2" class="w-3.5 h-[1.5px] bg-[#de602e] transition-all duration-300"></span>
+          <span id="burger-line-3" class="w-5 h-[1.5px] bg-[#1a1d20] transition-all duration-300 origin-center"></span>
+        </div>
+      </button>
+
     </div>
   </header>
-"""
-    return template.replace('__WORKS_CLS__', works_cls).replace('__ABOUT_CLS__', about_cls).replace('__CONTACT_CLS__', contact_cls)
 
-def generate_footer(borderless=False, bg="#ffffff"):
+  <!-- Light Borderless Fullscreen Mobile Navigation Sheet (< 768px) -->
+  <div id="mobile-drawer" class="fixed inset-0 top-[72px] z-40 bg-[#f8f9fa]/98 backdrop-blur-md text-[#1a1d20] hidden flex-col justify-between p-6 overflow-y-auto md:hidden transition-opacity duration-300">
+    <div class="space-y-6 pt-4">
+      <div class="text-xs font-mono uppercase tracking-[0.25em] text-[#67aec0] font-semibold pb-1">
+        Navigation
+      </div>
+      <nav class="flex flex-col space-y-6">
+        <a href="index.html#works" onclick="closeMobileMenu()" class="group flex items-baseline justify-between py-1">
+          <span class="text-2xl font-semibold tracking-[0.15em] uppercase text-[#1a1d20] group-hover:text-[#de602e] transition-colors">Works</span>
+          <span class="text-xs font-mono text-[#38606a] uppercase tracking-widest">21 Projects &rarr;</span>
+        </a>
+        <a href="about.html" onclick="closeMobileMenu()" class="group flex items-baseline justify-between py-1">
+          <span class="text-2xl font-semibold tracking-[0.15em] uppercase text-[#1a1d20] group-hover:text-[#de602e] transition-colors">About</span>
+          <span class="text-xs font-mono text-[#38606a] uppercase tracking-widest">Pedigree &amp; BIM &rarr;</span>
+        </a>
+        <a href="contact.html" onclick="closeMobileMenu()" class="group flex items-baseline justify-between py-1">
+          <span class="text-2xl font-semibold tracking-[0.15em] uppercase text-[#1a1d20] group-hover:text-[#de602e] transition-colors">Contact</span>
+          <span class="text-xs font-mono text-[#38606a] uppercase tracking-widest">Inquiries &rarr;</span>
+        </a>
+      </nav>
+    </div>
+
+    <div class="pt-6 mt-8 space-y-2.5 text-xs font-mono">
+      <div class="flex items-center justify-between">
+        <span class="text-[#67aec0] font-semibold">CHARLOTTE, NC</span>
+        <a href="tel:+17048459596" class="text-[#2b4951] hover:text-[#de602e] font-semibold">+1 (704) 845-9596</a>
+      </div>
+      <div class="flex items-center justify-between">
+        <span class="text-[#67aec0] font-semibold">INTERNATIONAL</span>
+        <a href="tel:+905385907458" class="text-[#2b4951] hover:text-[#de602e] font-semibold">+90 (538) 590-7458</a>
+      </div>
+      <div class="text-[#595f65] pt-1">
+        contact@karpovdesign.com &bull; Karpov Design LLC
+      </div>
+    </div>
+  </div>
+  <script>
+    function toggleMobileMenu() {
+      const drawer = document.getElementById('mobile-drawer');
+      const label = document.getElementById('mobile-menu-label');
+      const l1 = document.getElementById('burger-line-1');
+      const l2 = document.getElementById('burger-line-2');
+      const l3 = document.getElementById('burger-line-3');
+      const btn = document.getElementById('mobile-menu-btn');
+      if (!drawer) return;
+      const isOpen = !drawer.classList.contains('hidden');
+      if (!isOpen) {
+        drawer.classList.remove('hidden');
+        drawer.classList.add('flex');
+        if (label) label.textContent = 'Close';
+        if (btn) btn.setAttribute('aria-expanded', 'true');
+        if (l1) l1.style.transform = 'translateY(6px) rotate(45deg)';
+        if (l2) l2.style.opacity = '0';
+        if (l3) l3.style.transform = 'translateY(-6px) rotate(-45deg)';
+        document.body.style.overflow = 'hidden';
+      } else {
+        closeMobileMenu();
+      }
+    }
+    function closeMobileMenu() {
+      const drawer = document.getElementById('mobile-drawer');
+      const label = document.getElementById('mobile-menu-label');
+      const l1 = document.getElementById('burger-line-1');
+      const l2 = document.getElementById('burger-line-2');
+      const l3 = document.getElementById('burger-line-3');
+      const btn = document.getElementById('mobile-menu-btn');
+      if (!drawer) return;
+      drawer.classList.add('hidden');
+      drawer.classList.remove('flex');
+      if (label) label.textContent = 'Menu';
+      if (btn) btn.setAttribute('aria-expanded', 'false');
+      if (l1) l1.style.transform = '';
+      if (l2) l2.style.opacity = '1';
+      if (l3) l3.style.transform = '';
+      document.body.style.overflow = '';
+    }
+  </script>
+"""
+    return template.replace('__BORDER_CLS__', border_cls).replace('__WORKS_CLS__', works_cls).replace('__ABOUT_CLS__', about_cls).replace('__CONTACT_CLS__', contact_cls)
+
+def generate_footer(borderless=True, bg="#f8f9fa"):
     border_cls = "" if borderless else "border-t border-[#e2e5e8]"
     return f"""
-  <!-- Centered Architectural Footer: Cleaned of legal blurb -->
-  <footer class="w-full bg-[{bg}] {border_cls} py-16 px-6 md:px-12 lg:px-16">
-    <div class="w-full flex flex-col lg:flex-row items-center justify-between gap-8">
+  <!-- Centered Architectural Footer: Borderless on #f8f9fa -->
+  <footer class="w-full bg-[{bg}] {border_cls} py-12 md:py-16 px-5 md:px-12 lg:px-16">
+    <div class="w-full flex flex-col lg:flex-row items-center justify-between gap-6 md:gap-8">
       
       <!-- Left: Logo & Studio Identity -->
       <div class="flex items-center gap-4">
-        <img src="assets/official/logo_charcoal.svg" alt="KAD Logo" class="h-10 w-auto">
+        <img src="assets/official/logo_charcoal.svg" alt="KAD Logo" class="h-9 md:h-10 w-auto">
         <div>
           <span class="text-sm font-semibold tracking-[0.2em] uppercase text-[#1a1d20] block">Karpov Design LLC</span>
           <span class="text-xs text-[#595f65] block">Aleksandre Karpov &bull; Charlotte, NC</span>
@@ -191,8 +312,8 @@ def generate_footer(borderless=False, bg="#ffffff"):
 
 def generate_workflow_section():
     return """
-  <!-- Five-Phase Workflow Section: H2 Left-Aligned within 75% Space, Left 25% Pure Negative Space -->
-  <section class="w-full border-b border-[#e2e5e8] bg-[#ffffff] py-16 px-6 md:px-12 lg:px-16">
+  <!-- Workflow Section: Conceptual Sketch Image + 2 Lorem Ipsum Paragraphs (Directly Below Hero Banner, Borderless on #f8f9fa) -->
+  <section id="workflow" class="w-full bg-[#f8f9fa] pt-12 md:pt-20 pb-8 md:pb-12 px-5 md:px-12 lg:px-16">
     <div class="w-full flex flex-col lg:flex-row items-stretch">
       
       <!-- 25% Left Pure Negative Space -->
@@ -202,67 +323,22 @@ def generate_workflow_section():
       <div class="w-full lg:w-3/4 lg:pl-12">
         
         <!-- H2 Header above section -->
-        <div class="mb-8">
-          <h2 class="text-xl md:text-2xl font-semibold tracking-[0.25em] uppercase text-[#38606a]">Five-Phase Architectural Workflow</h2>
+        <div class="mb-6 md:mb-8">
+          <h2 class="text-lg sm:text-xl md:text-2xl font-semibold tracking-[0.25em] uppercase text-[#38606a]">Workflow</h2>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-          
-          <!-- Phase 1 -->
-          <div class="border border-[#e2e5e8] bg-[#f8f9fa] p-4 flex flex-col justify-between group hover:border-[#1a1d20] transition-colors">
-            <div class="aspect-[4/3] w-full overflow-hidden bg-[#e9ecef] mb-3">
-              <img src="assets/official/projects/hand-study/hand_study02.jpg" alt="Phase 1 Sketch" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-            </div>
-            <div>
-              <span class="text-[10px] font-mono uppercase tracking-widest text-[#de602e] block">01 / Concept</span>
-              <h4 class="text-xs font-semibold uppercase tracking-wider text-[#1a1d20] mt-1">Analog Sketch</h4>
-            </div>
+        <div class="flex flex-col md:flex-row items-start gap-8 lg:gap-12">
+          <div class="w-full md:w-1/2 aspect-[16/10] bg-transparent overflow-hidden shrink-0">
+            <img src="assets/official/projects/travel-sketches/ak_4.jpg" alt="Conceptual Architectural Sketch" class="w-full h-full object-cover">
           </div>
-
-          <!-- Phase 2 -->
-          <div class="border border-[#e2e5e8] bg-[#f8f9fa] p-4 flex flex-col justify-between group hover:border-[#1a1d20] transition-colors">
-            <div class="aspect-[4/3] w-full overflow-hidden bg-[#e9ecef] mb-3">
-              <img src="assets/official/projects/growing-cell/growingcell_1.jpg" alt="Phase 2 Massing" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-            </div>
-            <div>
-              <span class="text-[10px] font-mono uppercase tracking-widest text-[#de602e] block">02 / Form</span>
-              <h4 class="text-xs font-semibold uppercase tracking-wider text-[#1a1d20] mt-1">Massing Study</h4>
-            </div>
+          <div class="w-full md:w-1/2 space-y-4 text-sm md:text-base text-[#595f65] leading-relaxed">
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+            </p>
+            <p>
+              Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+            </p>
           </div>
-
-          <!-- Phase 3 -->
-          <div class="border border-[#e2e5e8] bg-[#f8f9fa] p-4 flex flex-col justify-between group hover:border-[#1a1d20] transition-colors">
-            <div class="aspect-[4/3] w-full overflow-hidden bg-[#e9ecef] mb-3">
-              <img src="assets/official/projects/life-bridge/life_bridge_17.jpg" alt="Phase 3 Technical" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-            </div>
-            <div>
-              <span class="text-[10px] font-mono uppercase tracking-widest text-[#de602e] block">03 / Precision</span>
-              <h4 class="text-xs font-semibold uppercase tracking-wider text-[#1a1d20] mt-1">Technical Plans</h4>
-            </div>
-          </div>
-
-          <!-- Phase 4 -->
-          <div class="border border-[#e2e5e8] bg-[#f8f9fa] p-4 flex flex-col justify-between group hover:border-[#1a1d20] transition-colors">
-            <div class="aspect-[4/3] w-full overflow-hidden bg-[#e9ecef] mb-3">
-              <img src="assets/official/projects/seed-retreat/seed_2.jpg" alt="Phase 4 BIM 3D" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-            </div>
-            <div>
-              <span class="text-[10px] font-mono uppercase tracking-widest text-[#de602e] block">04 / Model</span>
-              <h4 class="text-xs font-semibold uppercase tracking-wider text-[#1a1d20] mt-1">3D BIM Model</h4>
-            </div>
-          </div>
-
-          <!-- Phase 5 -->
-          <div class="border border-[#e2e5e8] bg-[#f8f9fa] p-4 flex flex-col justify-between group hover:border-[#1a1d20] transition-colors">
-            <div class="aspect-[4/3] w-full overflow-hidden bg-[#e9ecef] mb-3">
-              <img src="assets/official/projects/izka-tower/izka_10.jpg" alt="Phase 5 Realized" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-            </div>
-            <div>
-              <span class="text-[10px] font-mono uppercase tracking-widest text-[#de602e] block">05 / Realization</span>
-              <h4 class="text-xs font-semibold uppercase tracking-wider text-[#1a1d20] mt-1">Realized Work</h4>
-            </div>
-          </div>
-
         </div>
 
       </div>
@@ -273,8 +349,8 @@ def generate_workflow_section():
 
 def generate_accolades_section():
     return """
-  <!-- Accolades Section: Left 25% Pure Negative Space -->
-  <section class="w-full border-b border-[#e2e5e8] bg-[#f8f9fa] py-20 px-6 md:px-12 lg:px-16">
+  <!-- Accolades Section: Left 25% Pure Negative Space, Unified Borderless 2-Column Layout -->
+  <section class="w-full bg-[#f8f9fa] py-14 md:py-20 px-5 md:px-12 lg:px-16">
     <div class="w-full flex flex-col lg:flex-row items-stretch">
       
       <!-- 25% Left Pure Negative Space -->
@@ -284,56 +360,56 @@ def generate_accolades_section():
       <div class="w-full lg:w-3/4 lg:pl-12">
         
         <!-- Heading (No extra labels) -->
-        <div class="mb-8">
-          <h2 class="text-xl md:text-2xl font-semibold tracking-[0.25em] uppercase text-[#38606a]">Competitions & Accolades</h2>
+        <div class="mb-6 md:mb-8">
+          <h2 class="text-lg sm:text-xl md:text-2xl font-semibold tracking-[0.25em] uppercase text-[#38606a]">Competitions & Accolades</h2>
         </div>
 
-        <div class="divide-y divide-[#e2e5e8] border-t border-b border-[#e2e5e8]">
+        <div class="space-y-8">
           
           <!-- Item 1 -->
-          <div class="py-6 flex flex-col md:flex-row md:items-baseline justify-between gap-4">
+          <div class="flex flex-col md:flex-row md:items-baseline justify-between gap-2 md:gap-4">
             <div class="md:w-3/4">
               <span class="text-[10px] font-mono uppercase tracking-widest text-[#de602e] font-semibold">1st Place Winner &bull; Invited Competition</span>
               <h3 class="text-base md:text-lg font-semibold text-[#1a1d20] mt-1">Eskişehir Industrial Regeneration (Multi-City)</h3>
               <p class="text-xs text-[#595f65] mt-1 leading-relaxed">51,000 m² municipal depot adaptive reuse into cultural and tech center.</p>
             </div>
-            <div class="md:w-1/4 text-left md:text-right font-mono text-xs text-[#1a1d20]">
+            <div class="md:w-1/4 text-left md:text-right font-mono text-xs text-[#2b4951]">
               <span>2015 &bull; Eskişehir, TR</span>
             </div>
           </div>
 
           <!-- Item 2 -->
-          <div class="py-6 flex flex-col md:flex-row md:items-baseline justify-between gap-4">
+          <div class="flex flex-col md:flex-row md:items-baseline justify-between gap-2 md:gap-4">
             <div class="md:w-3/4">
               <span class="text-[10px] font-mono uppercase tracking-widest text-[#de602e] font-semibold">2nd Place Award &bull; National Competition</span>
               <h3 class="text-base md:text-lg font-semibold text-[#1a1d20] mt-1">Caferağa Community Center & Plaza</h3>
               <p class="text-xs text-[#595f65] mt-1 leading-relaxed">Civic cultural gathering venue, public library, and tiered urban courtyards.</p>
             </div>
-            <div class="md:w-1/4 text-left md:text-right font-mono text-xs text-[#1a1d20]">
+            <div class="md:w-1/4 text-left md:text-right font-mono text-xs text-[#2b4951]">
               <span>2016 &bull; Istanbul, TR</span>
             </div>
           </div>
 
           <!-- Item 3 -->
-          <div class="py-6 flex flex-col md:flex-row md:items-baseline justify-between gap-4">
+          <div class="flex flex-col md:flex-row md:items-baseline justify-between gap-2 md:gap-4">
             <div class="md:w-3/4">
               <span class="text-[10px] font-mono uppercase tracking-widest text-[#de602e] font-semibold">Competition Selection & Finalist</span>
               <h3 class="text-base md:text-lg font-semibold text-[#1a1d20] mt-1">Sivas Unity Bridge & Cultural Crossing</h3>
               <p class="text-xs text-[#595f65] mt-1 leading-relaxed">Inhabited civic bridge weaving public amphitheatres and active promenade.</p>
             </div>
-            <div class="md:w-1/4 text-left md:text-right font-mono text-xs text-[#1a1d20]">
+            <div class="md:w-1/4 text-left md:text-right font-mono text-xs text-[#2b4951]">
               <span>2015 &bull; Sivas, TR</span>
             </div>
           </div>
 
           <!-- Item 4 -->
-          <div class="py-6 flex flex-col md:flex-row md:items-baseline justify-between gap-4">
+          <div class="flex flex-col md:flex-row md:items-baseline justify-between gap-2 md:gap-4">
             <div class="md:w-3/4">
               <span class="text-[10px] font-mono uppercase tracking-widest text-[#de602e] font-semibold">Academic Pedigree & Honors</span>
               <h3 class="text-base md:text-lg font-semibold text-[#1a1d20] mt-1">UNC Charlotte School of Architecture</h3>
               <p class="text-xs text-[#595f65] mt-1 leading-relaxed">Bachelor of Arts in Architecture. Advanced digital lab fellow, Studio X.</p>
             </div>
-            <div class="md:w-1/4 text-left md:text-right font-mono text-xs text-[#1a1d20]">
+            <div class="md:w-1/4 text-left md:text-right font-mono text-xs text-[#2b4951]">
               <span>2018–2021 &bull; USA / SE</span>
             </div>
           </div>
@@ -349,21 +425,21 @@ def generate_accolades_section():
 def generate_landing_contact_section():
     return """
   <!-- Get in Touch CTA Section at Bottom of Landing Page (Seamless #f8f9fa, Borderless) -->
-  <section id="contact-section" class="w-full bg-[#f8f9fa] py-20 px-6 md:px-12 lg:px-16">
+  <section id="contact-section" class="w-full bg-[#f8f9fa] py-16 md:py-20 px-5 md:px-12 lg:px-16">
     <div class="w-full flex flex-col lg:flex-row items-stretch">
       
       <!-- 25% Left Pure Negative Space -->
       <div class="hidden lg:block lg:w-1/4"></div>
 
       <!-- 75% Active Content Space -->
-      <div class="w-full lg:w-3/4 lg:pl-12 flex flex-col sm:flex-row sm:items-center justify-between gap-8 pt-4">
+      <div class="w-full lg:w-3/4 lg:pl-12 flex flex-col sm:flex-row sm:items-center justify-between gap-6 md:gap-8 pt-4">
         <div>
           <h2 class="text-xl md:text-3xl font-semibold tracking-tight text-[#38606a] mb-3">Get in touch</h2>
           <p class="text-sm md:text-base text-[#595f65] max-w-xl leading-relaxed">
             Direct dialogue for architectural commissions, strategic collaborations, and urban consultations.
           </p>
         </div>
-        <a href="contact.html" class="inline-flex items-center justify-center px-10 py-4 bg-[#de602e] hover:bg-[#ad4b24] text-white text-xs font-mono uppercase tracking-[0.2em] font-semibold transition-colors shadow-sm whitespace-nowrap">
+        <a href="contact.html" class="inline-flex items-center justify-center w-full sm:w-auto px-10 py-4 bg-[#de602e] hover:bg-[#ad4b24] text-white text-xs font-mono uppercase tracking-[0.2em] font-semibold transition-colors shadow-sm whitespace-nowrap">
           Get in touch &rarr;
         </a>
       </div>
@@ -374,38 +450,38 @@ def generate_landing_contact_section():
 
 def generate_interactive_modal():
     return """
-  <!-- Project Deep Dive Inspection Modal -->
-  <div id="project-modal" class="fixed inset-0 z-50 bg-[#1a1d20]/80 backdrop-blur-md hidden flex items-center justify-center p-4 md:p-8">
-    <div class="bg-[#ffffff] border border-[#1a1d20] w-full max-w-6xl max-h-[92vh] flex flex-col overflow-hidden shadow-2xl relative">
+  <!-- Project Deep Dive Inspection Modal (Borderless Mobile Bottom Sheet / Tablet Modal) -->
+  <div id="project-modal" class="fixed inset-0 z-50 bg-[#1a1d20]/80 backdrop-blur-md hidden flex items-end sm:items-center justify-center p-0 sm:p-4 md:p-8">
+    <div class="bg-[#f8f9fa] w-full max-w-6xl max-h-[92svh] flex flex-col overflow-hidden shadow-2xl relative">
       
-      <!-- Modal Top Bar -->
-      <div class="flex items-center justify-between border-b border-[#e2e5e8] px-6 py-4 bg-[#f8f9fa]">
+      <!-- Modal Top Bar (Borderless) -->
+      <div class="flex items-center justify-between px-5 md:px-6 py-4 bg-[#f8f9fa] shrink-0">
         <div class="flex items-center gap-3">
           <span id="modal-typology" class="text-[10px] font-mono uppercase tracking-widest px-2 py-0.5 bg-[#1a1d20] text-white">Typology</span>
           <span id="modal-status" class="text-[10px] font-mono uppercase tracking-widest text-[#de602e]">Status</span>
         </div>
-        <button onclick="closeModal()" class="text-[#595f65] hover:text-[#1a1d20] transition-colors p-1" title="Close (Esc)">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        <button onclick="closeModal()" class="text-[#67aec0] hover:text-[#de602e] transition-colors p-1 text-2xl leading-none" title="Close (Esc)">
+          &times;
         </button>
       </div>
 
       <!-- Modal Body -->
-      <div class="flex-1 overflow-y-auto p-6 md:p-8 flex flex-col lg:flex-row gap-8">
+      <div class="flex-1 overflow-y-auto p-5 md:p-8 flex flex-col lg:flex-row gap-6 md:gap-8">
         
         <!-- Left: Image Viewer -->
-        <div class="w-full lg:w-3/5 flex flex-col gap-4">
-          <div class="w-full aspect-[16/10] bg-[#1a1d20] overflow-hidden border border-[#e2e5e8]">
+        <div class="w-full lg:w-3/5 flex flex-col gap-3">
+          <div class="w-full aspect-[16/10] bg-[#1a1d20] overflow-hidden">
             <img id="modal-main-img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E" alt="Project Image" class="w-full h-full object-cover">
           </div>
           <!-- Thumbnails Strip -->
-          <div id="modal-thumbs" class="flex gap-2 overflow-x-auto pb-2"></div>
+          <div id="modal-thumbs" class="flex gap-2 overflow-x-auto pb-2 no-scrollbar"></div>
         </div>
 
         <!-- Right: Architectural Specification -->
         <div class="w-full lg:w-2/5 flex flex-col justify-between">
           <div>
-            <span id="modal-location-year" class="text-xs font-mono text-[#595f65] tracking-wider uppercase block mb-1">Location &bull; Year</span>
-            <h2 id="modal-title" class="text-2xl md:text-3xl font-semibold tracking-tight text-[#1a1d20] mb-3">Project Title</h2>
+            <span id="modal-location-year" class="text-xs font-mono text-[#67aec0] tracking-wider uppercase block mb-1">Location &bull; Year</span>
+            <h2 id="modal-title" class="text-xl sm:text-2xl md:text-3xl font-semibold tracking-tight text-[#1a1d20] mb-3">Project Title</h2>
             <div id="modal-award-box" class="p-3 bg-[#f8f9fa] border-l-2 border-[#de602e] mb-4 hidden">
               <p id="modal-award-text" class="text-xs font-semibold text-[#1a1d20]"></p>
             </div>
@@ -416,12 +492,12 @@ def generate_interactive_modal():
             </a>
           </div>
 
-          <div class="border-t border-[#e2e5e8] pt-4 mt-auto">
+          <div class="pt-4 mt-auto">
             <div class="flex justify-between items-center">
-              <button onclick="navigateModal(-1)" class="text-xs font-mono tracking-wider uppercase text-[#595f65] hover:text-[#1a1d20] transition-colors flex items-center gap-1">
+              <button onclick="navigateModal(-1)" class="py-2 text-xs font-mono tracking-wider uppercase text-[#595f65] hover:text-[#1a1d20] transition-colors flex items-center gap-1">
                 &larr; Prev Project
               </button>
-              <button onclick="navigateModal(1)" class="text-xs font-mono tracking-wider uppercase text-[#595f65] hover:text-[#1a1d20] transition-colors flex items-center gap-1">
+              <button onclick="navigateModal(1)" class="py-2 text-xs font-mono tracking-wider uppercase text-[#595f65] hover:text-[#1a1d20] transition-colors flex items-center gap-1">
                 Next Project &rarr;
               </button>
             </div>
@@ -444,6 +520,23 @@ JS_TEMPLATE = """
     let currentSlide = 0;
     let slideTimer = null;
     let isPaused = false;
+    let mobileFiltersOpen = false;
+
+    function toggleMobileFilters() {
+      mobileFiltersOpen = !mobileFiltersOpen;
+      const secRow = document.getElementById('secondary-filters-row');
+      const chev = document.getElementById('filter-chevron');
+      if (chev) chev.style.transform = mobileFiltersOpen ? 'rotate(180deg)' : '';
+      if (secRow) {
+        if (mobileFiltersOpen) {
+          secRow.classList.remove('hidden');
+          secRow.classList.add('flex');
+        } else {
+          secRow.classList.add('hidden');
+          secRow.classList.remove('flex');
+        }
+      }
+    }
 
     function initHeroSlideshow() {
       const container = document.getElementById('hero-slideshow-container');
@@ -503,7 +596,7 @@ JS_TEMPLATE = """
       HERO_SLIDES.forEach((s, idx) => {
         const dot = document.createElement('button');
         dot.id = `hero-dot-${idx}`;
-        dot.className = `w-3 h-3 rounded-full border border-white transition-all duration-300 ${idx === 0 ? 'bg-[#de602e] border-[#de602e]' : 'bg-transparent'}`;
+        dot.className = `w-2.5 h-2.5 md:w-3 md:h-3 rounded-full border border-white transition-all duration-300 ${idx === 0 ? 'bg-[#de602e] border-[#de602e]' : 'bg-transparent'}`;
         dot.title = s.title;
         dot.onclick = (e) => {
           e.stopPropagation();
@@ -517,7 +610,7 @@ JS_TEMPLATE = """
       HERO_SLIDES.forEach((s, idx) => {
         const dot = document.getElementById(`hero-dot-${idx}`);
         if (dot) {
-          dot.className = `w-3 h-3 rounded-full border border-white transition-all duration-300 ${idx === currentSlide ? 'bg-[#de602e] border-[#de602e]' : 'bg-transparent'}`;
+          dot.className = `w-2.5 h-2.5 md:w-3 md:h-3 rounded-full border border-white transition-all duration-300 ${idx === currentSlide ? 'bg-[#de602e] border-[#de602e]' : 'bg-transparent'}`;
         }
       });
     }
@@ -545,6 +638,14 @@ JS_TEMPLATE = """
       container.innerHTML = '';
 
       const hasActiveFilter = (currentTypology !== 'all') || (currentCompletion !== 'all') || (currentAward !== 'all');
+      const badge = document.getElementById('active-filter-badge');
+      if (badge) {
+        if ((currentCompletion !== 'all') || (currentAward !== 'all') || (currentRecency !== 'newest')) {
+          badge.classList.remove('hidden');
+        } else {
+          badge.classList.add('hidden');
+        }
+      }
 
       const sortComparator = (a, b) => {
         const yearA = parseInt(a.year, 10) || 0;
@@ -555,9 +656,6 @@ JS_TEMPLATE = """
         return (a._origIndex || 0) - (b._origIndex || 0);
       };
 
-      // All 21 cards stay visible at all times:
-      // If a filter is active, matching cards move to the top of the pile, non-matching cards follow below.
-      // When filters are removed ('all'), cards return to default formation (newest at top, oldest at bottom).
       let ordered;
       if (!hasActiveFilter) {
         ordered = [...PROJECTS].sort(sortComparator);
@@ -585,29 +683,29 @@ JS_TEMPLATE = """
         }
 
         if (!IS_VARIANT) {
-          // DEFAULT VERSION (index.html): TITLE ON IMAGE ON HOVER (10% DARKENING VEIL)
+          // DEFAULT VERSION (index.html): TITLE ON IMAGE ON HOVER (10% DARKENING VEIL) + TOUCH VISIBLE ON MOBILE/TABLET
           card.innerHTML = `
             <div class="relative w-full aspect-[4/3] overflow-hidden bg-[#1a1d20]">
               <img src="${p.primary_image}" alt="${p.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
               
-              <!-- Strictly 10% dark veil on hover per user directive -->
-              <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500 ease-out"></div>
+              <!-- Strictly 10% dark veil on hover per user directive; touch gradient on mobile/tablet -->
+              <div class="touch-default-veil absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500 ease-out"></div>
               
-              <!-- Title appears ON THE IMAGE when hovered -->
-              <div class="variant-hover-overlay absolute inset-0 p-6 flex flex-col justify-end opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-500 ease-out">
-                <h3 class="text-base md:text-lg font-semibold text-white leading-tight drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] opacity-0 group-hover:opacity-100 transition-opacity duration-500">${p.title}</h3>
+              <!-- Title appears ON THE IMAGE when hovered (and always on touch screens) -->
+              <div class="touch-default-overlay variant-hover-overlay absolute inset-0 p-5 md:p-6 flex flex-col justify-end opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-500 ease-out">
+                <h3 class="touch-default-title text-base md:text-lg font-semibold text-white leading-tight drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] opacity-0 group-hover:opacity-100 transition-opacity duration-500">${p.title}</h3>
               </div>
             </div>
           `;
         } else {
-          // VARIANT VERSION (variant.html): DEDICATED SPACE BELOW IMAGE (EMPTY INITIALLY, TITLE REVEALS IN THAT SPACE ON HOVER)
+          // VARIANT VERSION (variant.html): DEDICATED SPACE BELOW IMAGE
           card.innerHTML = `
             <div class="relative w-full aspect-[4/3] overflow-hidden bg-[#1a1d20]">
               <img src="${p.primary_image}" alt="${p.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
             </div>
-            <!-- Dedicated space UNDERNEATH image: empty by default, title appears on hover -->
+            <!-- Dedicated space UNDERNEATH image: empty by default on desktop mouse, title appears on hover / touch -->
             <div class="variant-title-space pt-5 pb-6 px-1 min-h-[84px] bg-transparent flex items-start">
-              <h3 class="text-sm md:text-base font-semibold text-[#1a1d20] leading-snug opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300 ease-out">
+              <h3 class="touch-variant-title text-sm md:text-base font-semibold text-[#1a1d20] leading-snug opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300 ease-out">
                 ${p.title}
               </h3>
             </div>
@@ -621,11 +719,11 @@ JS_TEMPLATE = """
     function setTypology(value) {
       currentTypology = value;
       document.querySelectorAll('.filter-typ-btn').forEach(btn => {
-        btn.className = 'filter-typ-btn text-[#767676] hover:text-[#1a1d20] pb-1 transition-colors';
+        btn.className = 'filter-typ-btn text-[#767676] hover:text-[#1a1d20] pb-1.5 transition-colors shrink-0';
       });
       const activeBtn = document.getElementById(`btn-typ-${value.toLowerCase()}`);
       if (activeBtn) {
-        activeBtn.className = 'filter-typ-btn text-[#de602e] font-semibold border-b-2 border-[#de602e] pb-1';
+        activeBtn.className = 'filter-typ-btn text-[#de602e] font-semibold border-b-2 border-[#de602e] pb-1.5 shrink-0';
       }
       renderCards();
     }
@@ -645,8 +743,8 @@ JS_TEMPLATE = """
         const sel = document.getElementById('select-completion');
         if (sel) {
           sel.className = (value !== 'all')
-            ? 'bg-transparent text-sm font-mono uppercase tracking-[0.2em] text-[#de602e] font-semibold border-b-2 border-[#de602e] focus:outline-none cursor-pointer py-1 transition-colors'
-            : 'bg-transparent text-sm font-mono uppercase tracking-[0.2em] text-[#767676] hover:text-[#1a1d20] focus:outline-none cursor-pointer py-1 transition-colors';
+            ? 'bg-transparent text-xs md:text-sm font-mono uppercase tracking-[0.2em] text-[#de602e] font-semibold border-b-2 border-[#de602e] focus:outline-none cursor-pointer py-1 transition-colors'
+            : 'bg-transparent text-xs md:text-sm font-mono uppercase tracking-[0.2em] text-[#767676] hover:text-[#1a1d20] focus:outline-none cursor-pointer py-1 transition-colors';
         }
       }
       renderCards();
@@ -666,8 +764,8 @@ JS_TEMPLATE = """
         const sel = document.getElementById('select-recency');
         if (sel) {
           sel.className = (value !== 'newest')
-            ? 'bg-transparent text-sm font-mono uppercase tracking-[0.2em] text-[#de602e] font-semibold border-b-2 border-[#de602e] focus:outline-none cursor-pointer py-1 transition-colors'
-            : 'bg-transparent text-sm font-mono uppercase tracking-[0.2em] text-[#767676] hover:text-[#1a1d20] focus:outline-none cursor-pointer py-1 transition-colors';
+            ? 'bg-transparent text-xs md:text-sm font-mono uppercase tracking-[0.2em] text-[#de602e] font-semibold border-b-2 border-[#de602e] focus:outline-none cursor-pointer py-1 transition-colors'
+            : 'bg-transparent text-xs md:text-sm font-mono uppercase tracking-[0.2em] text-[#767676] hover:text-[#1a1d20] focus:outline-none cursor-pointer py-1 transition-colors';
         }
       }
       renderCards();
@@ -687,8 +785,8 @@ JS_TEMPLATE = """
         const sel = document.getElementById('select-award');
         if (sel) {
           sel.className = (value !== 'all')
-            ? 'bg-transparent text-sm font-mono uppercase tracking-[0.2em] text-[#de602e] font-semibold border-b-2 border-[#de602e] focus:outline-none cursor-pointer py-1 transition-colors'
-            : 'bg-transparent text-sm font-mono uppercase tracking-[0.2em] text-[#767676] hover:text-[#1a1d20] focus:outline-none cursor-pointer py-1 transition-colors';
+            ? 'bg-transparent text-xs md:text-sm font-mono uppercase tracking-[0.2em] text-[#de602e] font-semibold border-b-2 border-[#de602e] focus:outline-none cursor-pointer py-1 transition-colors'
+            : 'bg-transparent text-xs md:text-sm font-mono uppercase tracking-[0.2em] text-[#767676] hover:text-[#1a1d20] focus:outline-none cursor-pointer py-1 transition-colors';
         }
       }
       renderCards();
@@ -749,24 +847,11 @@ JS_TEMPLATE = """
         p.images.forEach(imgUrl => {
           const t = document.createElement('img');
           t.src = imgUrl;
-          t.className = 'w-16 h-12 object-cover border border-[#e2e5e8] cursor-pointer hover:border-[#1a1d20] transition-colors shrink-0';
+          t.className = 'w-16 h-12 object-cover cursor-pointer opacity-80 hover:opacity-100 transition-opacity shrink-0';
           t.onclick = () => { mainImg.src = imgUrl; };
           thumbs.appendChild(t);
         });
       }
-    }
-
-    function autoExpandTextarea(el) {
-      el.style.height = 'auto';
-      el.style.height = (el.scrollHeight + 4) + 'px';
-    }
-
-    function handleInquirySubmit(e) {
-      e.preventDefault();
-      document.getElementById('form-success').classList.remove('hidden');
-      e.target.reset();
-      const ta = document.getElementById('landing-scope-textarea');
-      if (ta) ta.style.height = 'auto';
     }
 
     window.addEventListener('keydown', e => {
@@ -777,9 +862,19 @@ JS_TEMPLATE = """
       }
     });
 
+    // Touch-swipe support for modal
+    let modalTouchStartX = 0;
     window.addEventListener('DOMContentLoaded', () => {
       initHeroSlideshow();
       renderCards();
+      const pm = document.getElementById('project-modal');
+      if (pm) {
+        pm.addEventListener('touchstart', e => { modalTouchStartX = e.changedTouches[0].screenX; }, { passive: true });
+        pm.addEventListener('touchend', e => {
+          const diff = e.changedTouches[0].screenX - modalTouchStartX;
+          if (Math.abs(diff) > 48) navigateModal(diff < 0 ? 1 : -1);
+        }, { passive: true });
+      }
       if (window.location.hash.startsWith('#project-')) {
         const slug = window.location.hash.replace('#project-', '');
         openModal(slug);
@@ -794,12 +889,12 @@ def generate_landing_page(is_variant=False):
     # Hero: Centered circles on variant only, zero status pills
     dots_markup = """
     <!-- Circular Pagination Dots (Variant Only) -->
-    <div id="hero-dots-container" class="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex items-center gap-3"></div>
+    <div id="hero-dots-container" class="absolute bottom-6 md:bottom-8 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2.5 md:gap-3"></div>
 """ if is_variant else ""
 
     hero_markup = f"""
   <!-- Hero Banner: 5x Enlarged White Vector Line-Art Logo + Multi-Project Slideshow (Click to Pause) -->
-  <section class="relative w-full h-[85dvh] md:h-[90dvh] bg-[#1a1d20] overflow-hidden flex items-center justify-center select-none cursor-pointer">
+  <section class="relative w-full h-[74svh] sm:h-[80svh] md:h-[90dvh] bg-[#1a1d20] overflow-hidden flex items-center justify-center select-none cursor-pointer">
     
     <!-- Slideshow Background Container -->
     <div id="hero-slideshow-container" class="absolute inset-0 w-full h-full">
@@ -811,8 +906,8 @@ def generate_landing_page(is_variant=False):
 
     <!-- Centerpiece: 5x Enlarged White Vector Line-Art Logo + Aleksandre Karpov (No extra subtitles) -->
     <div class="relative z-10 flex flex-col items-center justify-center text-center px-6 pointer-events-none">
-      <img src="assets/official/logo_white.svg" alt="Aleksandre Karpov Logo" class="w-64 sm:w-80 md:w-96 lg:w-[480px] h-auto drop-shadow-2xl">
-      <h1 class="text-xl md:text-2xl lg:text-3xl font-semibold tracking-[0.25em] uppercase text-white mt-6 drop-shadow-md">
+      <img src="assets/official/logo_white.svg" alt="Aleksandre Karpov Logo" class="w-56 sm:w-72 md:w-96 lg:w-[480px] h-auto drop-shadow-2xl">
+      <h1 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold tracking-[0.25em] uppercase text-white mt-5 md:mt-6 drop-shadow-md">
         Aleksandre Karpov
       </h1>
     </div>
@@ -823,20 +918,20 @@ def generate_landing_page(is_variant=False):
 
     if not is_variant:
         filter_bar_markup = """
-  <!-- Default Version Typographic Filters: Type Row + Secondary Filter Row Below (text-sm font-mono uppercase tracking-[0.2em]) -->
-  <div class="w-full bg-[#f8f9fa] pt-8 pb-4 space-y-4">
+  <!-- Default Version Typographic Filters: BIG.dk Horizontal Touch Ribbon on Mobile + Borderless Collapsible Secondary Row -->
+  <div class="w-full bg-[#f8f9fa] pt-5 md:pt-8 pb-3 md:pb-4 space-y-3 md:space-y-4">
     <!-- Row 1: Typology Open Buttons -->
-    <div class="flex flex-wrap items-center gap-6 md:gap-10 text-sm font-mono uppercase tracking-[0.2em] border-b border-[#e2e5e8] pb-3">
-      <button onclick="setTypology('all')" id="btn-typ-all" class="filter-typ-btn text-[#de602e] font-semibold border-b-2 border-[#de602e] pb-1">All</button>
-      <button onclick="setTypology('Residential')" id="btn-typ-residential" class="filter-typ-btn text-[#767676] hover:text-[#1a1d20] pb-1 transition-colors">Residential</button>
-      <button onclick="setTypology('Commercial')" id="btn-typ-commercial" class="filter-typ-btn text-[#767676] hover:text-[#1a1d20] pb-1 transition-colors">Commercial</button>
-      <button onclick="setTypology('Cultural')" id="btn-typ-cultural" class="filter-typ-btn text-[#767676] hover:text-[#1a1d20] pb-1 transition-colors">Cultural</button>
-      <button onclick="setTypology('Conceptual')" id="btn-typ-conceptual" class="filter-typ-btn text-[#767676] hover:text-[#1a1d20] pb-1 transition-colors">Conceptual</button>
-      <button onclick="setTypology('Art')" id="btn-typ-art" class="filter-typ-btn text-[#767676] hover:text-[#1a1d20] pb-1 transition-colors">Art</button>
+    <div class="flex items-center gap-6 md:gap-10 text-xs md:text-sm font-mono uppercase tracking-[0.2em] pb-2 overflow-x-auto no-scrollbar scroll-fade-right whitespace-nowrap">
+      <button onclick="setTypology('all')" id="btn-typ-all" class="filter-typ-btn text-[#de602e] font-semibold border-b-2 border-[#de602e] pb-1.5 shrink-0">All</button>
+      <button onclick="setTypology('Residential')" id="btn-typ-residential" class="filter-typ-btn text-[#767676] hover:text-[#1a1d20] pb-1.5 transition-colors shrink-0">Residential</button>
+      <button onclick="setTypology('Commercial')" id="btn-typ-commercial" class="filter-typ-btn text-[#767676] hover:text-[#1a1d20] pb-1.5 transition-colors shrink-0">Commercial</button>
+      <button onclick="setTypology('Cultural')" id="btn-typ-cultural" class="filter-typ-btn text-[#767676] hover:text-[#1a1d20] pb-1.5 transition-colors shrink-0">Cultural</button>
+      <button onclick="setTypology('Conceptual')" id="btn-typ-conceptual" class="filter-typ-btn text-[#767676] hover:text-[#1a1d20] pb-1.5 transition-colors shrink-0">Conceptual</button>
+      <button onclick="setTypology('Art')" id="btn-typ-art" class="filter-typ-btn text-[#767676] hover:text-[#1a1d20] pb-1.5 transition-colors shrink-0">Art</button>
     </div>
 
     <!-- Row 2: Secondary Filters as Open Buttons Underneath Type Filters -->
-    <div class="flex flex-wrap items-center gap-6 sm:gap-10 text-sm font-mono uppercase tracking-[0.2em] pt-1">
+    <div id="secondary-filters-row" class="hidden md:flex flex-col sm:flex-row sm:flex-wrap items-start sm:items-center gap-4 sm:gap-10 text-xs md:text-sm font-mono uppercase tracking-[0.2em] pt-1">
       <!-- Completion Group: ALL / BUILT / CONCEPT -->
       <div class="flex items-center gap-4 sm:gap-6">
         <button onclick="setCompletion('all')" id="btn-comp-all" class="filter-comp-btn text-[#de602e] font-semibold border-b-2 border-[#de602e] pb-1">All Status</button>
@@ -864,25 +959,25 @@ def generate_landing_page(is_variant=False):
 """
     else:
         filter_bar_markup = """
-  <!-- Variant Version Typographic Filters: Type Row + Right-Aligned Simplistic Dropdowns (text-sm font-mono uppercase tracking-[0.2em]) -->
-  <div class="w-full bg-[#f8f9fa] pt-8 pb-4">
-    <div class="flex flex-col xl:flex-row xl:items-center justify-between gap-6 border-b border-[#e2e5e8] pb-4">
+  <!-- Variant Version Typographic Filters: Type Row + Right-Aligned Simplistic Dropdowns -->
+  <div class="w-full bg-[#f8f9fa] pt-5 md:pt-8 pb-3 md:pb-4">
+    <div class="flex flex-col xl:flex-row xl:items-center justify-between gap-4 md:gap-6 pb-2">
       <!-- Left: Typology Open Buttons -->
-      <div class="flex flex-wrap items-center gap-6 md:gap-10 text-sm font-mono uppercase tracking-[0.2em]">
-        <button onclick="setTypology('all')" id="btn-typ-all" class="filter-typ-btn text-[#de602e] font-semibold border-b-2 border-[#de602e] pb-1">All</button>
-        <button onclick="setTypology('Residential')" id="btn-typ-residential" class="filter-typ-btn text-[#767676] hover:text-[#1a1d20] pb-1 transition-colors">Residential</button>
-        <button onclick="setTypology('Commercial')" id="btn-typ-commercial" class="filter-typ-btn text-[#767676] hover:text-[#1a1d20] pb-1 transition-colors">Commercial</button>
-        <button onclick="setTypology('Cultural')" id="btn-typ-cultural" class="filter-typ-btn text-[#767676] hover:text-[#1a1d20] pb-1 transition-colors">Cultural</button>
-        <button onclick="setTypology('Conceptual')" id="btn-typ-conceptual" class="filter-typ-btn text-[#767676] hover:text-[#1a1d20] pb-1 transition-colors">Conceptual</button>
-        <button onclick="setTypology('Art')" id="btn-typ-art" class="filter-typ-btn text-[#767676] hover:text-[#1a1d20] pb-1 transition-colors">Art</button>
+      <div class="flex items-center gap-6 md:gap-10 text-xs md:text-sm font-mono uppercase tracking-[0.2em] overflow-x-auto no-scrollbar scroll-fade-right whitespace-nowrap pb-1">
+        <button onclick="setTypology('all')" id="btn-typ-all" class="filter-typ-btn text-[#de602e] font-semibold border-b-2 border-[#de602e] pb-1.5 shrink-0">All</button>
+        <button onclick="setTypology('Residential')" id="btn-typ-residential" class="filter-typ-btn text-[#767676] hover:text-[#1a1d20] pb-1.5 transition-colors shrink-0">Residential</button>
+        <button onclick="setTypology('Commercial')" id="btn-typ-commercial" class="filter-typ-btn text-[#767676] hover:text-[#1a1d20] pb-1.5 transition-colors shrink-0">Commercial</button>
+        <button onclick="setTypology('Cultural')" id="btn-typ-cultural" class="filter-typ-btn text-[#767676] hover:text-[#1a1d20] pb-1.5 transition-colors shrink-0">Cultural</button>
+        <button onclick="setTypology('Conceptual')" id="btn-typ-conceptual" class="filter-typ-btn text-[#767676] hover:text-[#1a1d20] pb-1.5 transition-colors shrink-0">Conceptual</button>
+        <button onclick="setTypology('Art')" id="btn-typ-art" class="filter-typ-btn text-[#767676] hover:text-[#1a1d20] pb-1.5 transition-colors shrink-0">Art</button>
       </div>
 
       <!-- Right: Simplistic No-Background Dropdowns (Recency, Completion, Award) -->
-      <div class="flex flex-wrap items-center gap-6 sm:gap-8 text-sm font-mono uppercase tracking-[0.2em]">
+      <div id="secondary-filters-row" class="hidden md:flex flex-wrap items-center gap-6 sm:gap-8 text-xs md:text-sm font-mono uppercase tracking-[0.2em]">
         
         <!-- Recency Dropdown -->
         <div class="relative inline-block">
-          <select id="select-recency" onchange="setRecency(this.value)" class="bg-transparent text-sm font-mono uppercase tracking-[0.2em] text-[#767676] hover:text-[#1a1d20] focus:outline-none cursor-pointer py-1 transition-colors">
+          <select id="select-recency" onchange="setRecency(this.value)" class="bg-transparent text-xs md:text-sm font-mono uppercase tracking-[0.2em] text-[#767676] hover:text-[#1a1d20] focus:outline-none cursor-pointer py-1 transition-colors">
             <option value="newest" class="bg-white text-[#1a1d20]">Newest</option>
             <option value="oldest" class="bg-white text-[#1a1d20]">Oldest</option>
           </select>
@@ -890,7 +985,7 @@ def generate_landing_page(is_variant=False):
 
         <!-- Completion Dropdown (Built / Concept) -->
         <div class="relative inline-block">
-          <select id="select-completion" onchange="setCompletion(this.value)" class="bg-transparent text-sm font-mono uppercase tracking-[0.2em] text-[#767676] hover:text-[#1a1d20] focus:outline-none cursor-pointer py-1 transition-colors">
+          <select id="select-completion" onchange="setCompletion(this.value)" class="bg-transparent text-xs md:text-sm font-mono uppercase tracking-[0.2em] text-[#767676] hover:text-[#1a1d20] focus:outline-none cursor-pointer py-1 transition-colors">
             <option value="all" class="bg-white text-[#1a1d20]">All Status</option>
             <option value="built" class="bg-white text-[#1a1d20]">Built</option>
             <option value="concept" class="bg-white text-[#1a1d20]">Concept</option>
@@ -899,7 +994,7 @@ def generate_landing_page(is_variant=False):
 
         <!-- Award Dropdown -->
         <div class="relative inline-block">
-          <select id="select-award" onchange="setAward(this.value)" class="bg-transparent text-sm font-mono uppercase tracking-[0.2em] text-[#767676] hover:text-[#1a1d20] focus:outline-none cursor-pointer py-1 transition-colors">
+          <select id="select-award" onchange="setAward(this.value)" class="bg-transparent text-xs md:text-sm font-mono uppercase tracking-[0.2em] text-[#767676] hover:text-[#1a1d20] focus:outline-none cursor-pointer py-1 transition-colors">
             <option value="all" class="bg-white text-[#1a1d20]">All Works</option>
             <option value="awarded" class="bg-white text-[#1a1d20]">Awarded</option>
           </select>
@@ -911,8 +1006,8 @@ def generate_landing_page(is_variant=False):
 """
 
     grid_section = f"""
-  <!-- Works Grid Section: 25% Pure Negative Space Desktop + 75% 3-Column Works Grid -->
-  <section id="works" class="w-full bg-[#f8f9fa] py-16 px-6 md:px-12 lg:px-16 border-b border-[#e2e5e8]">
+  <!-- Works Grid Section: 25% Pure Negative Space Desktop + 75% 3-Column Works Grid (Borderless on #f8f9fa) -->
+  <section id="works" class="w-full bg-[#f8f9fa] py-12 md:py-16 px-5 md:px-12 lg:px-16">
     <div class="w-full flex flex-col lg:flex-row items-stretch">
       
       <!-- 25% Left Column: 100% PURE EMPTY NEGATIVE SPACE -->
@@ -921,15 +1016,20 @@ def generate_landing_page(is_variant=False):
       <!-- 75% Active Grid Space -->
       <div class="w-full lg:w-3/4 lg:pl-12">
         
-        <!-- Header: PORTFOLIO in Eyeblue -->
-        <div>
-          <h2 class="text-xl md:text-2xl font-semibold tracking-[0.25em] uppercase text-[#38606a]">PORTFOLIO</h2>
+        <!-- Header: PORTFOLIO in Eyeblue + Mobile Borderless Filter & Sort Trigger -->
+        <div class="flex items-center justify-between">
+          <h2 class="text-lg sm:text-xl md:text-2xl font-semibold tracking-[0.25em] uppercase text-[#38606a]">PORTFOLIO</h2>
+          <button id="mobile-filter-toggle" onclick="toggleMobileFilters()" class="md:hidden inline-flex items-center gap-2 py-1 text-xs font-mono uppercase tracking-[0.18em] text-[#38606a] hover:text-[#de602e] transition-colors">
+            <span>Filter &amp; Sort</span>
+            <span id="active-filter-badge" class="w-2 h-2 rounded-full bg-[#de602e] hidden"></span>
+            <svg id="filter-chevron" class="w-3.5 h-3.5 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="square" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </button>
         </div>
 
         {filter_bar_markup}
 
-        <!-- Generous Spacing between cards (gap-8 md:gap-10) -->
-        <div id="works-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 mt-10">
+        <!-- Generous Spacing between cards (gap-6 md:gap-8 lg:gap-10) -->
+        <div id="works-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 lg:gap-10 mt-6 md:mt-10">
           <!-- Dynamically Rendered Cards -->
         </div>
 
@@ -955,8 +1055,8 @@ def generate_landing_page(is_variant=False):
 
   <main>
     __HERO__
-    __GRID__
     __WORKFLOW__
+    __GRID__
     __ACCOLADES__
     __CONTACT_FORM__
   </main>
@@ -970,13 +1070,13 @@ def generate_landing_page(is_variant=False):
 """
     return page.replace('__SHARED_HEAD__', SHARED_HEAD_TAGS)\
                .replace('__TITLE_SUFFIX__', title_suffix)\
-               .replace('__HEADER__', generate_header("works"))\
+               .replace('__HEADER__', generate_header("works", borderless=True))\
                .replace('__HERO__', hero_markup)\
                .replace('__GRID__', grid_section)\
                .replace('__WORKFLOW__', generate_workflow_section())\
                .replace('__ACCOLADES__', generate_accolades_section())\
                .replace('__CONTACT_FORM__', generate_landing_contact_section())\
-               .replace('__FOOTER__', generate_footer())\
+               .replace('__FOOTER__', generate_footer(borderless=True, bg="#f8f9fa"))\
                .replace('__MODAL__', generate_interactive_modal())\
                .replace('__SCRIPT__', rendered_js)
 
@@ -992,22 +1092,22 @@ def generate_about_page():
   __HEADER__
 
   <!-- Breadcrumb Navigation (Seamless, No Borders) -->
-  <div class="w-full bg-[#f8f9fa] py-4 px-6 md:px-12 lg:px-16">
-    <nav aria-label="Breadcrumb" class="breadcrumb-bar w-full text-sm font-mono uppercase tracking-widest text-[#595f65]">
+  <div class="w-full bg-[#f8f9fa] py-4 px-5 md:px-12 lg:px-16">
+    <nav aria-label="Breadcrumb" class="breadcrumb-bar w-full text-xs md:text-sm font-mono uppercase tracking-widest text-[#595f65]">
       <a href="index.html" class="hover:text-[#1a1d20] transition-colors">Home</a>
       <span class="mx-2">&bull;</span>
       <span class="text-[#1a1d20] font-semibold">About</span>
     </nav>
   </div>
 
-  <main class="w-full bg-[#f8f9fa] py-16 px-6 md:px-12 lg:px-16">
+  <main class="w-full bg-[#f8f9fa] py-12 md:py-16 px-5 md:px-12 lg:px-16">
     <div class="w-full flex flex-col lg:flex-row items-stretch">
       
       <!-- 25% Left Pure Empty Negative Space -->
       <div class="hidden lg:block lg:w-1/4"></div>
 
       <!-- 75% Right Column Content (Pure Typographic, No Box Outlines) -->
-      <div class="w-full lg:w-3/4 lg:pl-12 space-y-16">
+      <div class="w-full lg:w-3/4 lg:pl-12 space-y-14 md:space-y-16">
         
         <!-- Header: Aleksandre Karpov + Subtitle (Degree & Universities, Eyeblue Soft accent) -->
         <div>
@@ -1017,11 +1117,10 @@ def generate_about_page():
           </p>
         </div>
 
-        <!-- Profile Section: Large Portrait + Biography (No borders, No white cards) -->
-        <div class="flex flex-col md:flex-row items-start gap-10 lg:gap-14">
+        <!-- Profile Section: Compact Mobile Portrait (w-56 sm:w-64) + Larger Tablet/Desktop Portrait (md:w-80 lg:w-96) + Biography -->
+        <div class="flex flex-col md:flex-row items-start gap-8 md:gap-10 lg:gap-14">
           
-          <!-- Appropriately Larger Portrait (md:w-80 lg:w-96, ~384px) sitting directly on #f8f9fa -->
-          <div class="w-full md:w-80 lg:w-96 shrink-0 flex flex-col">
+          <div class="w-56 sm:w-64 md:w-80 lg:w-96 shrink-0 flex flex-col">
             <div class="w-full aspect-[4/5] bg-transparent overflow-hidden">
               <img src="assets/official/alex_portrait.png" alt="Aleksandre Karpov" class="w-full h-full object-cover">
             </div>
@@ -1051,7 +1150,7 @@ def generate_about_page():
         </div>
 
         <!-- Academic & Technical Capabilities (No white boxes, No borders, Eyeblue Mid headings, Deep Eyeblue highlights) -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 pt-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 pt-4">
           
           <!-- Academic Foundation -->
           <div class="space-y-4">
@@ -1098,12 +1197,12 @@ def generate_about_page():
         </div>
 
         <!-- Competitions & Accolades (Borderless presentation on #f8f9fa) -->
-        <div class="space-y-8 pt-8">
+        <div class="space-y-8 pt-6">
           <h2 class="text-xl md:text-2xl font-semibold tracking-[0.25em] uppercase text-[#38606a]">Competitions & Accolades</h2>
           
           <div class="space-y-8">
             <!-- Item 1 -->
-            <div class="flex flex-col md:flex-row md:items-baseline justify-between gap-4">
+            <div class="flex flex-col md:flex-row md:items-baseline justify-between gap-2 md:gap-4">
               <div class="md:w-3/4">
                 <span class="text-[10px] font-mono uppercase tracking-widest text-[#de602e] font-semibold">1st Place Winner &bull; Invited Competition</span>
                 <h3 class="text-base md:text-lg font-semibold text-[#1a1d20] mt-1">Eskişehir Industrial Regeneration (Multi-City)</h3>
@@ -1115,7 +1214,7 @@ def generate_about_page():
             </div>
 
             <!-- Item 2 -->
-            <div class="flex flex-col md:flex-row md:items-baseline justify-between gap-4">
+            <div class="flex flex-col md:flex-row md:items-baseline justify-between gap-2 md:gap-4">
               <div class="md:w-3/4">
                 <span class="text-[10px] font-mono uppercase tracking-widest text-[#de602e] font-semibold">2nd Place Award &bull; National Competition</span>
                 <h3 class="text-base md:text-lg font-semibold text-[#1a1d20] mt-1">Caferağa Community Center & Plaza</h3>
@@ -1127,7 +1226,7 @@ def generate_about_page():
             </div>
 
             <!-- Item 3 -->
-            <div class="flex flex-col md:flex-row md:items-baseline justify-between gap-4">
+            <div class="flex flex-col md:flex-row md:items-baseline justify-between gap-2 md:gap-4">
               <div class="md:w-3/4">
                 <span class="text-[10px] font-mono uppercase tracking-widest text-[#de602e] font-semibold">Competition Selection & Finalist</span>
                 <h3 class="text-base md:text-lg font-semibold text-[#1a1d20] mt-1">Sivas Unity Bridge & Cultural Crossing</h3>
@@ -1139,7 +1238,7 @@ def generate_about_page():
             </div>
 
             <!-- Item 4 -->
-            <div class="flex flex-col md:flex-row md:items-baseline justify-between gap-4">
+            <div class="flex flex-col md:flex-row md:items-baseline justify-between gap-2 md:gap-4">
               <div class="md:w-3/4">
                 <span class="text-[10px] font-mono uppercase tracking-widest text-[#de602e] font-semibold">Academic Pedigree & Honors</span>
                 <h3 class="text-base md:text-lg font-semibold text-[#1a1d20] mt-1">UNC Charlotte School of Architecture</h3>
@@ -1179,25 +1278,25 @@ def generate_contact_page():
   __HEADER__
 
   <!-- Breadcrumb Navigation (Seamless #f8f9fa, Borderless) -->
-  <div class="w-full bg-[#f8f9fa] py-4 px-6 md:px-12 lg:px-16">
-    <nav aria-label="Breadcrumb" class="breadcrumb-bar w-full text-sm font-mono uppercase tracking-widest text-[#595f65]">
+  <div class="w-full bg-[#f8f9fa] py-4 px-5 md:px-12 lg:px-16">
+    <nav aria-label="Breadcrumb" class="breadcrumb-bar w-full text-xs md:text-sm font-mono uppercase tracking-widest text-[#595f65]">
       <a href="index.html" class="hover:text-[#1a1d20] transition-colors">Home</a>
       <span class="mx-2">&bull;</span>
       <span class="text-[#1a1d20] font-semibold">Contact</span>
     </nav>
   </div>
 
-  <main class="w-full bg-[#f8f9fa] py-16 px-6 md:px-12 lg:px-16">
+  <main class="w-full bg-[#f8f9fa] py-12 md:py-16 px-5 md:px-12 lg:px-16">
     <div class="w-full flex flex-col lg:flex-row items-stretch">
       
       <!-- 25% Left Pure Empty Negative Space -->
       <div class="hidden lg:block lg:w-1/4"></div>
 
       <!-- 75% Right Active Column -->
-      <div class="w-full lg:w-3/4 lg:pl-12 space-y-16">
+      <div class="w-full lg:w-3/4 lg:pl-12 space-y-14 md:space-y-16">
         
         <!-- Contact Header & Direct Coordinates (Eyeblue Mid H1, Eyeblue Soft Labels, Eyeblue Deep Values) -->
-        <div class="space-y-10">
+        <div class="space-y-8 md:space-y-10">
           <div>
             <h1 class="text-3xl md:text-5xl font-semibold tracking-tight text-[#38606a] mb-4">Get in touch</h1>
             <p class="text-sm md:text-base text-[#595f65] leading-relaxed max-w-2xl">
@@ -1236,48 +1335,48 @@ def generate_contact_page():
           </div>
         </div>
 
-        <!-- Form: Borderless presentation on #f8f9fa, Eyeblue labels, Orange CTA -->
-        <form onsubmit="handleInquirySubmit(event)" class="space-y-8 pt-6">
-          <div class="border-b border-[#38606a]/20 pb-4">
+        <!-- Form: Borderless wrapper on #f8f9fa, crisp white inputs (Option A), Eyeblue labels, Orange CTA -->
+        <form onsubmit="handleInquirySubmit(event)" class="space-y-8 pt-4 max-w-4xl">
+          <div>
             <h3 class="text-sm font-mono uppercase tracking-[0.2em] font-semibold text-[#38606a]">Project Inquiries</h3>
           </div>
           
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
             <div>
               <label class="block text-xs font-mono uppercase tracking-wider text-[#2b4951] font-semibold mb-2">Name *</label>
-              <input type="text" required placeholder="Your full name" class="w-full bg-[#f8f9fa] border border-[#d0d7de] p-3 text-xs text-[#1a1d20] focus:outline-none focus:border-[#38606a] transition-colors">
+              <input type="text" required placeholder="Your full name" class="w-full bg-white border border-[#e2e5e8] p-3.5 text-xs text-[#1a1d20] focus:outline-none focus:border-[#38606a] transition-colors">
             </div>
             <div>
               <label class="block text-xs font-mono uppercase tracking-wider text-[#2b4951] font-semibold mb-2">Email *</label>
-              <input type="email" required placeholder="your.email@domain.com" class="w-full bg-[#f8f9fa] border border-[#d0d7de] p-3 text-xs text-[#1a1d20] focus:outline-none focus:border-[#38606a] transition-colors">
+              <input type="email" required placeholder="your.email@domain.com" class="w-full bg-white border border-[#e2e5e8] p-3.5 text-xs text-[#1a1d20] focus:outline-none focus:border-[#38606a] transition-colors">
             </div>
           </div>
 
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
             <div>
               <label class="block text-xs font-mono uppercase tracking-wider text-[#2b4951] font-semibold mb-2">Site Location</label>
-              <input type="text" placeholder="e.g. Asheville, NC / Blue Ridge Mountains" class="w-full bg-[#f8f9fa] border border-[#d0d7de] p-3 text-xs text-[#1a1d20] focus:outline-none focus:border-[#38606a] transition-colors">
+              <input type="text" placeholder="e.g. Asheville, NC / Blue Ridge Mountains" class="w-full bg-white border border-[#e2e5e8] p-3.5 text-xs text-[#1a1d20] focus:outline-none focus:border-[#38606a] transition-colors">
             </div>
             <div>
               <label class="block text-xs font-mono uppercase tracking-wider text-[#2b4951] font-semibold mb-2">Telephone</label>
-              <input type="tel" placeholder="e.g. +1 (704) 000-0000" class="w-full bg-[#f8f9fa] border border-[#d0d7de] p-3 text-xs text-[#1a1d20] focus:outline-none focus:border-[#38606a] transition-colors">
+              <input type="tel" placeholder="e.g. +1 (704) 000-0000" class="w-full bg-white border border-[#e2e5e8] p-3.5 text-xs text-[#1a1d20] focus:outline-none focus:border-[#38606a] transition-colors">
             </div>
           </div>
 
           <div>
             <label class="block text-xs font-mono uppercase tracking-wider text-[#2b4951] font-semibold mb-2">Project Scope & Program Requirements *</label>
-            <textarea id="contact-scope-textarea" rows="5" required placeholder="Describe your vision, site parameters, approximate square footage, or architectural timeline..." oninput="autoExpandTextarea(this)" class="w-full bg-[#f8f9fa] border border-[#d0d7de] p-4 text-xs text-[#1a1d20] focus:outline-none focus:border-[#38606a] resize-none leading-relaxed transition-colors"></textarea>
+            <textarea id="contact-scope-textarea" rows="5" required placeholder="Describe your vision, site parameters, approximate square footage, or architectural timeline..." oninput="autoExpandTextarea(this)" class="w-full bg-white border border-[#e2e5e8] p-4 text-xs text-[#1a1d20] focus:outline-none focus:border-[#38606a] resize-none leading-relaxed transition-colors"></textarea>
           </div>
 
-          <div class="flex items-center justify-between pt-2">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-2">
             <span class="text-xs text-[#595f65]">Confidentiality guaranteed. Direct architect response within 24 hours.</span>
             <!-- Orange Submit Button -->
-            <button type="submit" class="px-10 py-3.5 bg-[#de602e] hover:bg-[#ad4b24] text-white text-xs font-mono uppercase tracking-widest font-semibold transition-colors shadow-sm">
+            <button type="submit" class="w-full sm:w-auto px-10 py-4 bg-[#de602e] hover:bg-[#ad4b24] text-white text-xs font-mono uppercase tracking-widest font-semibold transition-colors shadow-sm text-center">
               Submit &rarr;
             </button>
           </div>
           
-          <div id="form-success" class="hidden p-4 bg-[#e4f0f2] border border-[#67aec0] text-xs text-[#2b4951]">
+          <div id="form-success" class="hidden p-4 bg-[#e4f0f2] text-xs text-[#2b4951]">
             Thank you. Your message has been sent directly to Aleksandre Karpov.
           </div>
         </form>
@@ -1320,11 +1419,11 @@ def generate_academy_page():
 </head>
 <body class="antialiased bg-[#f8f9fa] text-[#1a1d20]">
 
-  <!-- Dedicated Header for Academy (Unlinked from Main Nav) -->
-  <header class="w-full bg-[#f8f9fa]/95 backdrop-blur-md border-b border-[#e2e5e8] z-50 sticky top-0 transition-all">
-    <div class="w-full px-6 md:px-12 lg:px-16 flex items-center justify-between min-h-[84px]">
+  <!-- Dedicated Header for Academy (Unlinked from Main Nav, Borderless) -->
+  <header class="w-full bg-[#f8f9fa]/95 backdrop-blur-md z-50 sticky top-0 transition-all">
+    <div class="w-full px-5 md:px-12 lg:px-16 flex items-center justify-between min-h-[72px] md:min-h-[84px]">
       <a href="index.html" class="flex items-center gap-3.5">
-        <img src="assets/official/logo_charcoal.svg" alt="KAD Logo" class="h-10 w-auto">
+        <img src="assets/official/logo_charcoal.svg" alt="KAD Logo" class="h-9 md:h-10 w-auto">
         <div class="flex flex-col text-[11px] font-semibold tracking-[0.2em] uppercase leading-tight text-[#1a1d20]">
           <span>ALEKSANDRE</span>
           <span>KARPOV</span>
@@ -1338,15 +1437,15 @@ def generate_academy_page():
   </header>
 
   <!-- Breadcrumb Navigation (Seamless #f8f9fa, Borderless) -->
-  <div class="w-full bg-[#f8f9fa] py-4 px-6 md:px-12 lg:px-16">
-    <nav aria-label="Breadcrumb" class="breadcrumb-bar w-full text-sm font-mono uppercase tracking-widest text-[#595f65]">
+  <div class="w-full bg-[#f8f9fa] py-4 px-5 md:px-12 lg:px-16">
+    <nav aria-label="Breadcrumb" class="breadcrumb-bar w-full text-xs md:text-sm font-mono uppercase tracking-widest text-[#595f65]">
       <a href="index.html" class="hover:text-[#1a1d20] transition-colors">Home</a>
       <span class="mx-2">&bull;</span>
       <span class="text-[#1a1d20] font-semibold">Academy (Private Syllabus)</span>
     </nav>
   </div>
 
-  <main class="w-full bg-[#f8f9fa] py-16 px-6 md:px-12 lg:px-16">
+  <main class="w-full bg-[#f8f9fa] py-12 md:py-16 px-5 md:px-12 lg:px-16">
     <div class="w-full flex flex-col lg:flex-row items-stretch">
       
       <!-- 25% Left Pure Empty Negative Space -->
@@ -1356,7 +1455,7 @@ def generate_academy_page():
       <div class="w-full lg:w-3/4 lg:pl-12 space-y-16">
       
       <!-- Centerpiece Masterclass Player -->
-      <div class="border border-[#1a1d20] bg-white p-6 md:p-10 card-frame">
+      <div class="bg-transparent">
         <div class="flex flex-col lg:flex-row gap-8 items-start">
           <div class="w-full lg:w-2/3 aspect-video bg-[#1a1d20] relative overflow-hidden">
             <img src="assets/official/projects/izka-tower/izka_10.jpg" alt="Masterclass Video" class="w-full h-full object-cover opacity-70">
@@ -1369,14 +1468,14 @@ def generate_academy_page():
 
           <div class="w-full lg:w-1/3 flex flex-col justify-between">
             <div>
-              <h2 class="text-xl md:text-2xl font-semibold text-[#1a1d20] mb-3">Tectonic Synthesis: From Watercolor Intuition to BIM Execution</h2>
+              <h2 class="text-xl md:text-2xl font-semibold text-[#38606a] mb-3">Tectonic Synthesis: From Watercolor Intuition to BIM Execution</h2>
               <p class="text-xs md:text-sm text-[#595f65] leading-relaxed mb-4">
                 Aleksandre Karpov breaks down the complete workflow of bridging analog artistic gesture with rigorous Revit parametric families, daylight simulation, and constructible documentation.
               </p>
             </div>
-            <div class="border-t border-[#e2e5e8] pt-4">
-              <span class="text-xs font-mono text-[#595f65] block mb-2">Lecturer: Aleksandre Karpov &bull; UNCC Studio Fellow</span>
-              <button class="w-full py-2.5 bg-[#1a1d20] hover:bg-[#de602e] text-white text-xs font-mono uppercase tracking-widest transition-colors font-semibold">
+            <div class="pt-4">
+              <span class="text-xs font-mono text-[#67aec0] block mb-2">Lecturer: Aleksandre Karpov &bull; UNCC Studio Fellow</span>
+              <button class="w-full py-3 bg-[#1a1d20] hover:bg-[#de602e] text-white text-xs font-mono uppercase tracking-widest transition-colors font-semibold">
                 Access Full Studio Lecture &rarr;
               </button>
             </div>
@@ -1386,34 +1485,34 @@ def generate_academy_page():
 
       <!-- 3 Video Tutorial Modules -->
       <div>
-        <h3 class="text-lg font-semibold uppercase tracking-wider text-[#1a1d20] mb-6">Technical Video Modules</h3>
+        <h3 class="text-lg font-semibold uppercase tracking-wider text-[#38606a] mb-6">Technical Video Modules</h3>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div class="bg-white border border-[#e2e5e8] card-frame overflow-hidden">
-            <div class="aspect-video bg-[#1a1d20] overflow-hidden">
+          <div class="bg-transparent overflow-hidden">
+            <div class="aspect-video bg-[#1a1d20] overflow-hidden mb-3">
               <img src="assets/official/projects/seed-retreat/seed_8.jpg" alt="Tutorial 1" class="w-full h-full object-cover">
             </div>
-            <div class="p-5">
-              <h4 class="text-sm font-semibold text-[#1a1d20] mb-2">Mass-Timber Envelope Systems</h4>
+            <div>
+              <h4 class="text-sm font-semibold text-[#1a1d20] mb-1.5">Mass-Timber Envelope Systems</h4>
               <p class="text-xs text-[#595f65] leading-relaxed">Passive ventilation, cross-laminated timber thermal mass, and envelope integration.</p>
             </div>
           </div>
 
-          <div class="bg-white border border-[#e2e5e8] card-frame overflow-hidden">
-            <div class="aspect-video bg-[#1a1d20] overflow-hidden">
+          <div class="bg-transparent overflow-hidden">
+            <div class="aspect-video bg-[#1a1d20] overflow-hidden mb-3">
               <img src="assets/official/projects/multi-city/multi_city_15.jpg" alt="Tutorial 2" class="w-full h-full object-cover">
             </div>
-            <div class="p-5">
-              <h4 class="text-sm font-semibold text-[#1a1d20] mb-2">Adaptive Reuse & Structural BIM</h4>
+            <div>
+              <h4 class="text-sm font-semibold text-[#1a1d20] mb-1.5">Adaptive Reuse & Structural BIM</h4>
               <p class="text-xs text-[#595f65] leading-relaxed">Laser scanning registration, point-cloud integration, and historic masonry rehabilitation.</p>
             </div>
           </div>
 
-          <div class="bg-white border border-[#e2e5e8] card-frame overflow-hidden">
-            <div class="aspect-video bg-[#1a1d20] overflow-hidden">
+          <div class="bg-transparent overflow-hidden">
+            <div class="aspect-video bg-[#1a1d20] overflow-hidden mb-3">
               <img src="assets/official/projects/travel-sketches/ak_10.jpg" alt="Tutorial 3" class="w-full h-full object-cover">
             </div>
-            <div class="p-5">
-              <h4 class="text-sm font-semibold text-[#1a1d20] mb-2">Plein-Air Spatial Perception</h4>
+            <div>
+              <h4 class="text-sm font-semibold text-[#1a1d20] mb-1.5">Plein-Air Spatial Perception</h4>
               <p class="text-xs text-[#595f65] leading-relaxed">Translating atmospheric perspective and wash depth into physical spatial sequences.</p>
             </div>
           </div>
@@ -1421,25 +1520,25 @@ def generate_academy_page():
       </div>
 
       <!-- Downloadable BIM Resources -->
-      <div class="border-t border-[#e2e5e8] pt-12">
-        <h3 class="text-lg font-semibold uppercase tracking-wider text-[#1a1d20] mb-6">Computational Resources & Templates</h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div class="p-6 bg-white border border-[#e2e5e8] flex items-center justify-between">
+      <div class="pt-6">
+        <h3 class="text-lg font-semibold uppercase tracking-wider text-[#38606a] mb-6">Computational Resources & Templates</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
-              <h4 class="text-sm font-semibold text-[#1a1d20] mt-0.5">Parametric Louver & Shading Family Pack</h4>
+              <h4 class="text-sm font-semibold text-[#2b4951] mt-0.5">Parametric Louver & Shading Family Pack</h4>
               <span class="text-xs text-[#595f65]">Dynamo + Revit Adaptive Components (.rfa)</span>
             </div>
-            <a href="#" class="px-4 py-2 border border-[#1a1d20] hover:bg-[#de602e] hover:border-[#de602e] hover:text-white text-xs font-mono uppercase tracking-wider transition-colors">
+            <a href="#" class="px-4 py-2.5 bg-[#1a1d20] text-white hover:bg-[#de602e] text-xs font-mono uppercase tracking-wider transition-colors text-center shrink-0">
               Download .ZIP
             </a>
           </div>
 
-          <div class="p-6 bg-white border border-[#e2e5e8] flex items-center justify-between">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
-              <h4 class="text-sm font-semibold text-[#1a1d20] mt-0.5">Architectural Line-Weight & Graphic Standard</h4>
+              <h4 class="text-sm font-semibold text-[#2b4951] mt-0.5">Architectural Line-Weight & Graphic Standard</h4>
               <span class="text-xs text-[#595f65]">UNCC / Karpov Design Pen Weights & Layouts (.ctb / .pdf)</span>
             </div>
-            <a href="#" class="px-4 py-2 border border-[#1a1d20] hover:bg-[#de602e] hover:border-[#de602e] hover:text-white text-xs font-mono uppercase tracking-wider transition-colors">
+            <a href="#" class="px-4 py-2.5 bg-[#1a1d20] text-white hover:bg-[#de602e] text-xs font-mono uppercase tracking-wider transition-colors text-center shrink-0">
               Download .PDF
             </a>
           </div>
@@ -1462,12 +1561,11 @@ def generate_academy_page():
 </html>
 """
     return page.replace('__SHARED_HEAD__', SHARED_HEAD_TAGS)\
-               .replace('__FOOTER__', generate_footer())
+               .replace('__FOOTER__', generate_footer(borderless=True, bg="#f8f9fa"))
 
 def generate_project_page(p, prev_p, next_p):
     best_hero = get_best_hero_image(p)
     status_label = "Built Commission" if p.get('status') == 'Completion' else "Concept / Exploration"
-    status_badge = "Built" if p.get('status') == 'Completion' else "Concept"
     
     award_markup = ""
     if p.get('award') and p.get('awardText'):
@@ -1479,15 +1577,15 @@ def generate_project_page(p, prev_p, next_p):
 """
 
     images = p.get('images', [])
-    images_json = json.dumps(images).replace('</script>', '<\/script>')
+    images_json = json.dumps(images).replace('</script>', '<\\/script>')
     gallery_html = ""
     for idx, img_path in enumerate(images):
         gallery_html += f"""
             <div onclick="openLightbox({idx})" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20] border border-[#e2e5e8]">
+              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
                 <img src="{img_path}" alt="{p['title']} — Plate {idx+1}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-center justify-center">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white/90 text-[#1a1d20] text-xs font-mono uppercase tracking-widest px-3 py-1.5 shadow-md">Enlarge</span>
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
+                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
                 </div>
               </div>
             </div>
@@ -1504,26 +1602,26 @@ __SHARED_HEAD__
 __HEADER__
 
   <!-- Breadcrumb Navigation (Seamless #f8f9fa, Borderless) -->
-  <div class="w-full bg-[#f8f9fa] py-4 px-6 md:px-12 lg:px-16">
-    <nav aria-label="Breadcrumb" class="breadcrumb-bar w-full text-sm font-mono uppercase tracking-widest text-[#595f65]">
-      <a href="index.html" class="hover:text-[#1a1d20] transition-colors">Home</a>
-      <span class="mx-2">&bull;</span>
-      <a href="index.html#works" class="hover:text-[#1a1d20] transition-colors">Works</a>
-      <span class="mx-2">&bull;</span>
-      <span class="text-[#1a1d20] font-semibold">{p['title']}</span>
+  <div class="w-full bg-[#f8f9fa] py-4 px-5 md:px-12 lg:px-16">
+    <nav aria-label="Breadcrumb" class="breadcrumb-bar w-full text-xs md:text-sm font-mono uppercase tracking-widest text-[#595f65] flex items-center overflow-x-auto no-scrollbar whitespace-nowrap">
+      <a href="index.html" class="hover:text-[#1a1d20] transition-colors shrink-0">Home</a>
+      <span class="mx-2 shrink-0">&bull;</span>
+      <a href="index.html#works" class="hover:text-[#1a1d20] transition-colors shrink-0">Works</a>
+      <span class="mx-2 shrink-0">&bull;</span>
+      <span class="text-[#1a1d20] font-semibold truncate">{p['title']}</span>
     </nav>
   </div>
 
   <main>
     <!-- Dedicated Hero Banner: Highest Resolution Render -->
-    <section id="project-hero-banner" class="relative w-full h-[60vh] md:h-[75vh] bg-[#1a1d20] overflow-hidden flex items-end">
+    <section id="project-hero-banner" class="relative w-full h-[52svh] sm:h-[60vh] md:h-[75vh] bg-[#1a1d20] overflow-hidden flex items-end">
       <img src="{best_hero}" alt="{p['title']}" class="absolute inset-0 w-full h-full object-cover">
       <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-black/20"></div>
 
       <!-- Hero Title & Key Meta -->
-      <div class="relative z-10 w-full px-6 md:px-12 lg:px-16 pb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
+      <div class="relative z-10 w-full px-5 md:px-12 lg:px-16 pb-8 md:pb-12 flex flex-col md:flex-row md:items-end justify-between gap-4 md:gap-6">
         <div>
-          <h1 class="text-3xl md:text-5xl font-semibold tracking-tight text-white drop-shadow-md">{p['title']}</h1>
+          <h1 class="text-2xl sm:text-3xl md:text-5xl font-semibold tracking-tight text-white drop-shadow-md">{p['title']}</h1>
         </div>
         <div class="text-xs md:text-sm font-mono text-white/90 uppercase tracking-widest">
           <span>{p['location']} &bull; {p['year']}</span>
@@ -1531,8 +1629,8 @@ __HEADER__
       </div>
     </section>
 
-    <!-- Main Content: Strict 25% Left Pure Negative Space -->
-    <section class="w-full bg-[#f8f9fa] py-16 px-6 md:px-12 lg:px-16 border-b border-[#e2e5e8]">
+    <!-- Main Content: Strict 25% Left Pure Negative Space (Borderless on #f8f9fa) -->
+    <section class="w-full bg-[#f8f9fa] py-12 md:py-16 px-5 md:px-12 lg:px-16">
       <div class="w-full flex flex-col lg:flex-row items-stretch">
         
         <!-- 25% Left Pure Empty Negative Space -->
@@ -1543,17 +1641,17 @@ __HEADER__
           
           <!-- Narrative & Brief -->
           <div class="space-y-6 max-w-4xl">
-            <div class="border-b border-[#e2e5e8] pb-6">
+            <div class="pb-2">
               <span class="text-xs font-mono uppercase tracking-[0.25em] text-[#67aec0] font-semibold block mb-3">Project Brief & Spatial Strategy</span>
-              <p class="text-base md:text-lg text-[#1a1d20] leading-relaxed">
+              <p class="text-sm sm:text-base md:text-lg text-[#1a1d20] leading-relaxed">
                 {p['description']}
               </p>
             </div>
 
             {award_markup}
 
-            <!-- Specifications Table (Eyeblue Soft Labels, Eyeblue Deep Values) -->
-            <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 py-4 border-b border-[#e2e5e8] text-xs font-mono">
+            <!-- Specifications Table (Eyeblue Soft Labels, Eyeblue Deep Values, Borderless) -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 py-4 text-xs font-mono">
               <div>
                 <span class="text-[10px] font-mono uppercase tracking-widest text-[#67aec0] font-semibold block">Typology</span>
                 <span class="text-sm font-semibold text-[#2b4951] block mt-1 uppercase">{p['typology']}</span>
@@ -1573,20 +1671,20 @@ __HEADER__
             </div>
           </div>
 
-          <!-- Large Images Gallery: Laid out in same clean grid as homepage -->
+          <!-- Large Images Gallery: Borderless Plates -->
           <div>
-            <h2 class="text-xl font-semibold tracking-[0.25em] uppercase text-[#38606a] mb-8">Visual Documentation & Plates</h2>
-            <div id="project-gallery" class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
+            <h2 class="text-lg md:text-xl font-semibold tracking-[0.25em] uppercase text-[#38606a] mb-6 md:mb-8">Visual Documentation & Plates</h2>
+            <div id="project-gallery" class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
               {gallery_html}
             </div>
           </div>
 
-          <!-- Previous / Next Commission Navigation -->
-          <div class="border-t border-[#e2e5e8] pt-10 flex items-center justify-between text-xs font-mono uppercase tracking-widest">
-            <a href="project-{prev_p['id']}.html" class="text-[#595f65] hover:text-[#de602e] transition-colors flex items-center gap-2">
+          <!-- Previous / Next Commission Navigation (Borderless, Stacked on Mobile) -->
+          <div class="pt-8 md:pt-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-xs font-mono uppercase tracking-widest">
+            <a href="project-{prev_p['id']}.html" class="py-1 text-[#595f65] hover:text-[#de602e] transition-colors flex items-center gap-2">
               &larr; Prev: {prev_p['title']}
             </a>
-            <a href="project-{next_p['id']}.html" class="text-[#595f65] hover:text-[#de602e] transition-colors flex items-center gap-2">
+            <a href="project-{next_p['id']}.html" class="py-1 text-[#595f65] hover:text-[#de602e] transition-colors flex items-center sm:justify-end gap-2 sm:text-right">
               Next: {next_p['title']} &rarr;
             </a>
           </div>
@@ -1597,26 +1695,26 @@ __HEADER__
     </section>
   </main>
 
-  <!-- Near-Fullscreen Image Lightbox Modal -->
-  <div id="image-lightbox" class="fixed inset-0 z-50 bg-[#1a1d20]/95 backdrop-blur-md hidden flex flex-col items-center justify-between p-4 md:p-6 cursor-pointer" onclick="handleLightboxClick(event)">
+  <!-- Near-Fullscreen Image Lightbox Modal (Borderless Controls + Touch Swipe) -->
+  <div id="image-lightbox" class="fixed inset-0 z-50 bg-[#1a1d20]/95 backdrop-blur-md hidden flex flex-col items-center justify-between p-4 md:p-6 cursor-pointer select-none" onclick="handleLightboxClick(event)">
     
     <!-- Top Left: Authentic Eyeblue (#67aec0) "X" Button Without Any Borders per user directive -->
-    <button onclick="closeLightbox()" class="fixed top-4 left-6 z-60 text-[#67aec0] hover:text-[#38606a] text-3xl font-bold bg-transparent border-none p-2 cursor-pointer transition-colors focus:outline-none" title="Close (Esc)" aria-label="Close popup">✕</button>
+    <button onclick="closeLightbox()" class="fixed top-4 left-6 z-60 text-[#67aec0] hover:text-[#de602e] text-3xl font-bold bg-transparent border-none p-2 cursor-pointer transition-colors focus:outline-none" title="Close (Esc)" aria-label="Close popup">✕</button>
 
     <!-- Top Bar: Counter -->
     <div class="w-full flex items-center justify-end text-white/80 pt-2 pointer-events-none">
-      <span id="lightbox-counter" class="text-xs font-mono uppercase tracking-widest">Plate 1 of {len(images)}</span>
+      <span id="lightbox-counter" class="text-xs font-mono uppercase tracking-widest bg-[#2b4951]/80 px-3 py-1.5 text-[#e4f0f2]">Plate 1 of {len(images)}</span>
     </div>
 
-    <!-- Center Image Container & Flank Arrows -->
+    <!-- Center Image Container & Borderless Flank Arrows -->
     <div class="relative w-full flex-1 flex items-center justify-center my-2 select-none">
-      <button onclick="navigateLightbox(-1); event.stopPropagation();" class="absolute left-2 md:left-6 z-10 text-white/80 hover:text-white bg-black/50 hover:bg-black/80 p-3 md:p-4 rounded-full transition-colors text-xl font-mono focus:outline-none" title="Previous (Left Arrow)">&#8592;</button>
-      <img id="lightbox-img" src="" alt="Enlarged Project Plate" class="max-w-[92vw] max-h-[82vh] object-contain drop-shadow-2xl transition-all duration-300 cursor-default" onclick="event.stopPropagation()">
-      <button onclick="navigateLightbox(1); event.stopPropagation();" class="absolute right-2 md:right-6 z-10 text-white/80 hover:text-white bg-black/50 hover:bg-black/80 p-3 md:p-4 rounded-full transition-colors text-xl font-mono focus:outline-none" title="Next (Right Arrow)">&#8594;</button>
+      <button onclick="navigateLightbox(-1); event.stopPropagation();" class="absolute left-1 md:left-6 z-10 w-10 h-10 md:w-12 md:h-12 text-white bg-[#1a1d20]/70 hover:bg-[#de602e] flex items-center justify-center transition-colors text-lg font-mono focus:outline-none" title="Previous (Left Arrow)">&#8592;</button>
+      <img id="lightbox-img" src="" alt="Enlarged Project Plate" class="max-w-[94vw] max-h-[82vh] object-contain drop-shadow-2xl transition-all duration-300 cursor-default" onclick="event.stopPropagation()">
+      <button onclick="navigateLightbox(1); event.stopPropagation();" class="absolute right-1 md:right-6 z-10 w-10 h-10 md:w-12 md:h-12 text-white bg-[#1a1d20]/70 hover:bg-[#de602e] flex items-center justify-center transition-colors text-lg font-mono focus:outline-none" title="Next (Right Arrow)">&#8594;</button>
     </div>
 
     <!-- Bottom Caption -->
-    <div class="w-full text-center text-xs font-mono uppercase tracking-widest text-white/60 pb-2 pointer-events-none">
+    <div class="w-full text-center text-xs font-mono uppercase tracking-widest text-white/75 pb-2 pointer-events-none">
       <span>{p['title']} &bull; Visual Documentation</span>
     </div>
   </div>
@@ -1659,7 +1757,6 @@ __HEADER__
     }}
 
     function handleLightboxClick(e) {{
-      // If clicked on the image itself or an arrow button, do not close
       if (e.target.closest('#lightbox-img') || e.target.closest('button')) {{
         return;
       }}
@@ -1674,6 +1771,23 @@ __HEADER__
         if (e.key === 'ArrowRight') navigateLightbox(1);
       }}
     }});
+
+    // Touch-swipe support for lightbox on mobile & tablet
+    let lbTouchStartX = 0;
+    window.addEventListener('DOMContentLoaded', () => {{
+      const lb = document.getElementById('image-lightbox');
+      if (lb) {{
+        lb.addEventListener('touchstart', (e) => {{
+          lbTouchStartX = e.changedTouches[0].screenX;
+        }}, {{ passive: true }});
+        lb.addEventListener('touchend', (e) => {{
+          const diff = e.changedTouches[0].screenX - lbTouchStartX;
+          if (Math.abs(diff) > 42) {{
+            navigateLightbox(diff < 0 ? 1 : -1);
+          }}
+        }}, {{ passive: true }});
+      }}
+    }});
   </script>
 
 __FOOTER__
@@ -1682,8 +1796,8 @@ __FOOTER__
 </html>
 """
     return template.replace('__SHARED_HEAD__', SHARED_HEAD_TAGS)\
-                   .replace('__HEADER__', generate_header("works"))\
-                   .replace('__FOOTER__', generate_footer())
+                   .replace('__HEADER__', generate_header("works", borderless=True))\
+                   .replace('__FOOTER__', generate_footer(borderless=True, bg="#f8f9fa"))
 
 def main():
     print("Building Version 1 (index.html): Default title appears on image on hover, clicks navigate to project pages...")
@@ -1720,7 +1834,7 @@ def main():
             f.write(generate_project_page(p, prev_p, next_p))
     print(f"Saved {len(projects_data)} individual project pages!")
 
-    print("All site pages built successfully with zero extraneous labels!")
+    print("All site pages built successfully with borderless desktop & mobile/tablet renditions!")
 
 if __name__ == '__main__':
     main()
