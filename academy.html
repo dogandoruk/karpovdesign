@@ -21,7 +21,18 @@
       --text-main: #1a1d20;
       --text-muted: #595f65;
       --border-line: #e2e5e8;
-      --accent: #de602e;
+      
+      /* Eyeblue palette */
+      --eyeblue-deep: #2b4951;
+      --eyeblue-mid: #38606a;
+      --eyeblue-soft: #67aec0;
+      --eyeblue-pale: #e4f0f2;
+
+      /* Hairberry orange palette */
+      --hairberry-rich: #ad4b24;
+      --hairberry-vibrant: #de602e;
+      --hairberry-bright: #f36a34;
+      --hairberry-peach: #f19f55;
     }
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -53,12 +64,11 @@
     ::-webkit-scrollbar-thumb {
       background: #adb5bd;
     }
-    /* Mobile touch fallback for variant overlay */
     @media (hover: none) {
       .variant-hover-overlay {
         opacity: 0.95 !important;
         transform: translateY(0) !important;
-        background: linear-gradient(to top, rgba(15, 18, 22, 0.85) 0%, rgba(15, 18, 22, 0.40) 60%, transparent 100%) !important;
+        background: linear-gradient(to top, rgba(15, 18, 22, 0.85) 0%, rgba(15, 18, 22, 0.30) 60%, transparent 100%) !important;
       }
     }
   </style>
@@ -69,15 +79,16 @@
 
   <!-- Dedicated Header for Academy (Unlinked from Main Nav) -->
   <header class="w-full bg-[#f8f9fa]/95 backdrop-blur-md border-b border-[#e2e5e8] z-50 sticky top-0 transition-all">
-    <div class="max-w-[1920px] mx-auto px-6 md:px-12 lg:px-16 flex items-center justify-between min-h-[80px]">
-      <a href="index.html" class="flex items-center gap-3">
-        <img src="assets/official/logo_charcoal.svg" alt="KAD Logo" class="h-8 w-auto">
-        <div>
-          <span class="text-sm font-semibold tracking-[0.2em] uppercase text-[#1a1d20] block">Aleksandre Karpov</span>
-          <span class="text-[10px] tracking-[0.18em] uppercase text-[#595f65] block">Academy &bull; Educational Division</span>
+    <div class="max-w-[1920px] mx-auto px-6 md:px-12 lg:px-16 flex items-center justify-between min-h-[84px]">
+      <a href="index.html" class="flex items-center gap-3.5">
+        <img src="assets/official/logo_charcoal.svg" alt="KAD Logo" class="h-10 w-auto">
+        <div class="flex flex-col text-[11px] font-semibold tracking-[0.2em] uppercase leading-tight text-[#1a1d20]">
+          <span>ALEKSANDRE</span>
+          <span>KARPOV</span>
+          <span class="text-[9px] tracking-[0.22em] text-[#595f65] font-normal">ACADEMY</span>
         </div>
       </a>
-      <a href="index.html" class="text-xs font-mono uppercase tracking-widest text-[#595f65] hover:text-[#1a1d20] transition-colors">
+      <a href="index.html" class="text-xs font-mono uppercase tracking-widest text-[#595f65] hover:text-[#de602e] transition-colors">
         &larr; Return to Practice
       </a>
     </div>
@@ -112,7 +123,7 @@
 
           <div class="w-full lg:w-1/3 flex flex-col justify-between">
             <div>
-              <span class="text-[10px] font-mono uppercase tracking-widest text-[#de602e] block mb-1">Featured Masterclass</span>
+              <span class="text-xs font-mono uppercase tracking-widest text-[#38606a] font-semibold block mb-1">Featured Masterclass</span>
               <h2 class="text-xl md:text-2xl font-semibold text-[#1a1d20] mb-3">Tectonic Synthesis: From Watercolor Intuition to BIM Execution</h2>
               <p class="text-xs md:text-sm text-[#595f65] leading-relaxed mb-4">
                 Aleksandre Karpov breaks down the complete workflow of bridging analog artistic gesture with rigorous Revit parametric families, daylight simulation, and constructible documentation.
@@ -120,7 +131,7 @@
             </div>
             <div class="border-t border-[#e2e5e8] pt-4">
               <span class="text-xs font-mono text-[#595f65] block mb-2">Lecturer: Aleksandre Karpov &bull; UNCC Studio Fellow</span>
-              <button class="w-full py-2.5 bg-[#1a1d20] hover:bg-[#de602e] text-white text-xs font-mono uppercase tracking-widest transition-colors">
+              <button class="w-full py-2.5 bg-[#1a1d20] hover:bg-[#de602e] text-white text-xs font-mono uppercase tracking-widest transition-colors font-semibold">
                 Access Full Studio Lecture &rarr;
               </button>
             </div>
@@ -177,7 +188,7 @@
               <h4 class="text-sm font-semibold text-[#1a1d20] mt-0.5">Parametric Louver & Shading Family Pack</h4>
               <span class="text-xs text-[#595f65]">Dynamo + Revit Adaptive Components (.rfa)</span>
             </div>
-            <a href="#" class="px-4 py-2 border border-[#1a1d20] hover:bg-[#1a1d20] hover:text-white text-xs font-mono uppercase tracking-wider transition-colors">
+            <a href="#" class="px-4 py-2 border border-[#1a1d20] hover:bg-[#de602e] hover:border-[#de602e] hover:text-white text-xs font-mono uppercase tracking-wider transition-colors">
               Download .ZIP
             </a>
           </div>
@@ -188,7 +199,7 @@
               <h4 class="text-sm font-semibold text-[#1a1d20] mt-0.5">Architectural Line-Weight & Graphic Standard</h4>
               <span class="text-xs text-[#595f65]">UNCC / Karpov Design Pen Weights & Layouts (.ctb / .pdf)</span>
             </div>
-            <a href="#" class="px-4 py-2 border border-[#1a1d20] hover:bg-[#1a1d20] hover:text-white text-xs font-mono uppercase tracking-wider transition-colors">
+            <a href="#" class="px-4 py-2 border border-[#1a1d20] hover:bg-[#de602e] hover:border-[#de602e] hover:text-white text-xs font-mono uppercase tracking-wider transition-colors">
               Download .PDF
             </a>
           </div>
@@ -199,39 +210,27 @@
   </main>
 
   
-  <!-- Centered Architectural Footer -->
+  <!-- Centered Architectural Footer: Cleaned of legal blurb -->
   <footer class="w-full bg-[#ffffff] border-t border-[#e2e5e8] py-16 px-6 md:px-12 lg:px-16">
-    <div class="max-w-[1920px] mx-auto flex flex-col lg:flex-row items-start">
+    <div class="max-w-[1920px] mx-auto flex flex-col lg:flex-row items-center justify-between gap-8">
       
-      <!-- 25% Left Margin on Desktop -->
-      <div class="hidden lg:block lg:w-1/4 pr-8">
-        <p class="text-xs uppercase tracking-[0.2em] font-mono text-[#595f65]">Studio & Practice</p>
-        <p class="text-xs text-[#595f65] mt-2">North Carolina &bull; Aegean Basin</p>
+      <!-- Left: Logo & Studio Identity -->
+      <div class="flex items-center gap-4">
+        <img src="assets/official/logo_charcoal.svg" alt="KAD Logo" class="h-10 w-auto">
+        <div>
+          <span class="text-sm font-semibold tracking-[0.2em] uppercase text-[#1a1d20] block">Karpov Design LLC</span>
+          <span class="text-xs text-[#595f65] block">Aleksandre Karpov &bull; Charlotte, NC</span>
+        </div>
       </div>
 
-      <!-- 75% Active Right Content -->
-      <div class="w-full lg:w-3/4 lg:pl-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
-        <div>
-          <div class="flex items-center gap-4 mb-3">
-            <img src="assets/official/logo_charcoal.svg" alt="KAD Logo" class="h-9 w-auto">
-            <div>
-              <span class="text-sm font-semibold tracking-[0.2em] uppercase text-[#1a1d20] block">Karpov Design LLC</span>
-              <span class="text-xs text-[#595f65] block">Aleksandre Karpov &bull; Charlotte, NC</span>
-            </div>
-          </div>
-          <p class="text-xs text-[#595f65] max-w-xl leading-relaxed">
-            Architectural design, computational BIM coordination, and analog spatial research. Compliant with NC General Statutes for residential design and international architectural commissions.
-          </p>
+      <!-- Right: Links & Copyright -->
+      <div class="flex flex-col items-center lg:items-end gap-3 text-xs text-[#595f65]">
+        <div class="flex gap-8 tracking-[0.2em] uppercase font-medium">
+          <a href="index.html#works" class="hover:text-[#de602e] transition-colors">Works</a>
+          <a href="about.html" class="hover:text-[#de602e] transition-colors">About</a>
+          <a href="contact.html" class="hover:text-[#de602e] transition-colors">Contact</a>
         </div>
-
-        <div class="flex flex-col items-start md:items-end gap-2 text-xs text-[#595f65]">
-          <div class="flex gap-6 tracking-[0.15em] uppercase">
-            <a href="index.html#works" class="hover:text-[#1a1d20] transition-colors">Works</a>
-            <a href="about.html" class="hover:text-[#1a1d20] transition-colors">About</a>
-            <a href="contact.html" class="hover:text-[#1a1d20] transition-colors">Contact</a>
-          </div>
-          <span class="font-mono text-[11px] text-[#767676] mt-2">&copy; 2026 Karpov Design LLC. All rights reserved.</span>
-        </div>
+        <span class="font-mono text-[11px] text-[#767676]">&copy; 2026 Karpov Design LLC. All rights reserved.</span>
       </div>
 
     </div>
