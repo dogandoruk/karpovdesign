@@ -52,7 +52,7 @@
 
   <!-- Top Navigation: Logo + Stacked Text on the Top Left Corner per Figma Design -->
   <header class="w-full bg-[#f8f9fa]/95 backdrop-blur-md border-b border-[#e2e5e8] z-50 sticky top-0 transition-all">
-    <div class="max-w-[1920px] mx-auto px-6 md:px-12 lg:px-16 flex items-center justify-between min-h-[84px]">
+    <div class="w-full px-6 md:px-12 lg:px-16 flex items-center justify-between min-h-[84px]">
       
       <!-- Top Left Corner: Logo Monogram + Stacked Typography -->
       <a href="index.html" class="flex items-center gap-3.5 group">
@@ -75,9 +75,9 @@
   </header>
 
 
-  <!-- Breadcrumb Navigation (text-sm font-mono uppercase tracking-widest) -->
-  <div class="w-full bg-white border-b border-[#e2e5e8] py-4 px-6 md:px-12 lg:px-16">
-    <nav aria-label="Breadcrumb" class="breadcrumb-bar max-w-[1920px] mx-auto text-sm font-mono uppercase tracking-widest text-[#595f65]">
+  <!-- Breadcrumb Navigation (Seamless #f8f9fa, Borderless) -->
+  <div class="w-full bg-[#f8f9fa] py-4 px-6 md:px-12 lg:px-16">
+    <nav aria-label="Breadcrumb" class="breadcrumb-bar w-full text-sm font-mono uppercase tracking-widest text-[#595f65]">
       <a href="index.html" class="hover:text-[#1a1d20] transition-colors">Home</a>
       <span class="mx-2">&bull;</span>
       <a href="index.html#works" class="hover:text-[#1a1d20] transition-colors">Works</a>
@@ -93,7 +93,7 @@
       <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-black/20"></div>
 
       <!-- Hero Title & Key Meta -->
-      <div class="relative z-10 max-w-[1920px] mx-auto w-full px-6 md:px-12 lg:px-16 pb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
+      <div class="relative z-10 w-full px-6 md:px-12 lg:px-16 pb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
         <div>
           <h1 class="text-3xl md:text-5xl font-semibold tracking-tight text-white drop-shadow-md">Flowing Garden Estate & Terraces</h1>
         </div>
@@ -105,7 +105,7 @@
 
     <!-- Main Content: Strict 25% Left Pure Negative Space -->
     <section class="w-full bg-[#f8f9fa] py-16 px-6 md:px-12 lg:px-16 border-b border-[#e2e5e8]">
-      <div class="max-w-[1920px] mx-auto flex flex-col lg:flex-row items-stretch">
+      <div class="w-full flex flex-col lg:flex-row items-stretch">
         
         <!-- 25% Left Pure Empty Negative Space -->
         <div class="hidden lg:block lg:w-1/4"></div>
@@ -116,7 +116,7 @@
           <!-- Narrative & Brief -->
           <div class="space-y-6 max-w-4xl">
             <div class="border-b border-[#e2e5e8] pb-6">
-              <span class="text-xs font-mono uppercase tracking-[0.25em] text-[#38606a] font-semibold block mb-3">Project Brief & Spatial Strategy</span>
+              <span class="text-xs font-mono uppercase tracking-[0.25em] text-[#67aec0] font-semibold block mb-3">Project Brief & Spatial Strategy</span>
               <p class="text-base md:text-lg text-[#1a1d20] leading-relaxed">
                 Stepped residential volumes intertwined with continuous rainwater bioretention bioswales and native botanical gardens.
               </p>
@@ -124,23 +124,23 @@
 
             
 
-            <!-- Specifications Table -->
+            <!-- Specifications Table (Eyeblue Soft Labels, Eyeblue Deep Values) -->
             <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 py-4 border-b border-[#e2e5e8] text-xs font-mono">
               <div>
-                <span class="text-[#767676] uppercase tracking-wider block">Typology</span>
-                <span class="text-[#1a1d20] font-semibold block mt-1 uppercase">Residential</span>
+                <span class="text-[10px] font-mono uppercase tracking-widest text-[#67aec0] font-semibold block">Typology</span>
+                <span class="text-sm font-semibold text-[#2b4951] block mt-1 uppercase">Residential</span>
               </div>
               <div>
-                <span class="text-[#767676] uppercase tracking-wider block">Status</span>
-                <span class="text-[#1a1d20] font-semibold block mt-1 uppercase">Concept / Exploration</span>
+                <span class="text-[10px] font-mono uppercase tracking-widest text-[#67aec0] font-semibold block">Status</span>
+                <span class="text-sm font-semibold text-[#2b4951] block mt-1 uppercase">Concept / Exploration</span>
               </div>
               <div>
-                <span class="text-[#767676] uppercase tracking-wider block">Location</span>
-                <span class="text-[#1a1d20] font-semibold block mt-1">North Carolina Foothills, USA</span>
+                <span class="text-[10px] font-mono uppercase tracking-widest text-[#67aec0] font-semibold block">Location</span>
+                <span class="text-sm font-semibold text-[#2b4951] block mt-1">North Carolina Foothills, USA</span>
               </div>
               <div>
-                <span class="text-[#767676] uppercase tracking-wider block">Year</span>
-                <span class="text-[#1a1d20] font-semibold block mt-1">2019</span>
+                <span class="text-[10px] font-mono uppercase tracking-widest text-[#67aec0] font-semibold block">Year</span>
+                <span class="text-sm font-semibold text-[#2b4951] block mt-1">2019</span>
               </div>
             </div>
           </div>
@@ -212,7 +212,7 @@
     <button onclick="closeLightbox()" class="fixed top-4 left-6 z-60 text-[#67aec0] hover:text-[#38606a] text-3xl font-bold bg-transparent border-none p-2 cursor-pointer transition-colors focus:outline-none" title="Close (Esc)" aria-label="Close popup">✕</button>
 
     <!-- Top Bar: Counter -->
-    <div class="w-full max-w-[1920px] flex items-center justify-end text-white/80 pt-2 pointer-events-none">
+    <div class="w-full flex items-center justify-end text-white/80 pt-2 pointer-events-none">
       <span id="lightbox-counter" class="text-xs font-mono uppercase tracking-widest">Plate 1 of 4</span>
     </div>
 
@@ -224,7 +224,7 @@
     </div>
 
     <!-- Bottom Caption -->
-    <div class="w-full max-w-[1920px] text-center text-xs font-mono uppercase tracking-widest text-white/60 pb-2 pointer-events-none">
+    <div class="w-full text-center text-xs font-mono uppercase tracking-widest text-white/60 pb-2 pointer-events-none">
       <span>Flowing Garden Estate & Terraces &bull; Visual Documentation</span>
     </div>
   </div>
@@ -287,7 +287,7 @@
 
   <!-- Centered Architectural Footer: Cleaned of legal blurb -->
   <footer class="w-full bg-[#ffffff] border-t border-[#e2e5e8] py-16 px-6 md:px-12 lg:px-16">
-    <div class="max-w-[1920px] mx-auto flex flex-col lg:flex-row items-center justify-between gap-8">
+    <div class="w-full flex flex-col lg:flex-row items-center justify-between gap-8">
       
       <!-- Left: Logo & Studio Identity -->
       <div class="flex items-center gap-4">

@@ -135,7 +135,7 @@ def generate_header(active_nav="works", borderless=False):
     template = f"""
   <!-- Top Navigation: Logo + Stacked Text on the Top Left Corner per Figma Design -->
   <header class="w-full bg-[#f8f9fa]/95 backdrop-blur-md {border_cls} z-50 sticky top-0 transition-all">
-    <div class="max-w-[1920px] mx-auto px-6 md:px-12 lg:px-16 flex items-center justify-between min-h-[84px]">
+    <div class="w-full px-6 md:px-12 lg:px-16 flex items-center justify-between min-h-[84px]">
       
       <!-- Top Left Corner: Logo Monogram + Stacked Typography -->
       <a href="index.html" class="flex items-center gap-3.5 group">
@@ -164,7 +164,7 @@ def generate_footer(borderless=False, bg="#ffffff"):
     return f"""
   <!-- Centered Architectural Footer: Cleaned of legal blurb -->
   <footer class="w-full bg-[{bg}] {border_cls} py-16 px-6 md:px-12 lg:px-16">
-    <div class="max-w-[1920px] mx-auto flex flex-col lg:flex-row items-center justify-between gap-8">
+    <div class="w-full flex flex-col lg:flex-row items-center justify-between gap-8">
       
       <!-- Left: Logo & Studio Identity -->
       <div class="flex items-center gap-4">
@@ -193,7 +193,7 @@ def generate_workflow_section():
     return """
   <!-- Five-Phase Workflow Section: H2 Left-Aligned within 75% Space, Left 25% Pure Negative Space -->
   <section class="w-full border-b border-[#e2e5e8] bg-[#ffffff] py-16 px-6 md:px-12 lg:px-16">
-    <div class="max-w-[1920px] mx-auto flex flex-col lg:flex-row items-stretch">
+    <div class="w-full flex flex-col lg:flex-row items-stretch">
       
       <!-- 25% Left Pure Negative Space -->
       <div class="hidden lg:block lg:w-1/4"></div>
@@ -275,7 +275,7 @@ def generate_accolades_section():
     return """
   <!-- Accolades Section: Left 25% Pure Negative Space -->
   <section class="w-full border-b border-[#e2e5e8] bg-[#f8f9fa] py-20 px-6 md:px-12 lg:px-16">
-    <div class="max-w-[1920px] mx-auto flex flex-col lg:flex-row items-stretch">
+    <div class="w-full flex flex-col lg:flex-row items-stretch">
       
       <!-- 25% Left Pure Negative Space -->
       <div class="hidden lg:block lg:w-1/4"></div>
@@ -348,18 +348,18 @@ def generate_accolades_section():
 
 def generate_landing_contact_section():
     return """
-  <!-- Get in Touch CTA Section at Bottom of Landing Page (25% Left Pure Negative Space) -->
-  <section id="contact-section" class="w-full bg-[#f8f9fa] py-20 px-6 md:px-12 lg:px-16 border-t border-[#e2e5e8]">
-    <div class="max-w-[1920px] mx-auto flex flex-col lg:flex-row items-stretch">
+  <!-- Get in Touch CTA Section at Bottom of Landing Page (Seamless #f8f9fa, Borderless) -->
+  <section id="contact-section" class="w-full bg-[#f8f9fa] py-20 px-6 md:px-12 lg:px-16">
+    <div class="w-full flex flex-col lg:flex-row items-stretch">
       
       <!-- 25% Left Pure Negative Space -->
       <div class="hidden lg:block lg:w-1/4"></div>
 
-      <!-- 75% Active Container -->
-      <div class="w-full lg:w-3/4 lg:pl-12 flex flex-col sm:flex-row sm:items-center justify-between gap-8 bg-white border border-[#e2e5e8] p-8 md:p-12">
+      <!-- 75% Active Content Space -->
+      <div class="w-full lg:w-3/4 lg:pl-12 flex flex-col sm:flex-row sm:items-center justify-between gap-8 pt-4">
         <div>
-          <h2 class="text-xl md:text-2xl font-semibold tracking-[0.25em] uppercase text-[#38606a] mb-3">Get in touch</h2>
-          <p class="text-sm text-[#595f65] max-w-xl leading-relaxed">
+          <h2 class="text-xl md:text-3xl font-semibold tracking-tight text-[#38606a] mb-3">Get in touch</h2>
+          <p class="text-sm md:text-base text-[#595f65] max-w-xl leading-relaxed">
             Direct dialogue for architectural commissions, strategic collaborations, and urban consultations.
           </p>
         </div>
@@ -913,7 +913,7 @@ def generate_landing_page(is_variant=False):
     grid_section = f"""
   <!-- Works Grid Section: 25% Pure Negative Space Desktop + 75% 3-Column Works Grid -->
   <section id="works" class="w-full bg-[#f8f9fa] py-16 px-6 md:px-12 lg:px-16 border-b border-[#e2e5e8]">
-    <div class="max-w-[1920px] mx-auto flex flex-col lg:flex-row items-stretch">
+    <div class="w-full flex flex-col lg:flex-row items-stretch">
       
       <!-- 25% Left Column: 100% PURE EMPTY NEGATIVE SPACE -->
       <div class="hidden lg:block lg:w-1/4"></div>
@@ -993,7 +993,7 @@ def generate_about_page():
 
   <!-- Breadcrumb Navigation (Seamless, No Borders) -->
   <div class="w-full bg-[#f8f9fa] py-4 px-6 md:px-12 lg:px-16">
-    <nav aria-label="Breadcrumb" class="breadcrumb-bar max-w-[1920px] mx-auto text-sm font-mono uppercase tracking-widest text-[#595f65]">
+    <nav aria-label="Breadcrumb" class="breadcrumb-bar w-full text-sm font-mono uppercase tracking-widest text-[#595f65]">
       <a href="index.html" class="hover:text-[#1a1d20] transition-colors">Home</a>
       <span class="mx-2">&bull;</span>
       <span class="text-[#1a1d20] font-semibold">About</span>
@@ -1001,7 +1001,7 @@ def generate_about_page():
   </div>
 
   <main class="w-full bg-[#f8f9fa] py-16 px-6 md:px-12 lg:px-16">
-    <div class="max-w-[1920px] mx-auto flex flex-col lg:flex-row items-stretch">
+    <div class="w-full flex flex-col lg:flex-row items-stretch">
       
       <!-- 25% Left Pure Empty Negative Space -->
       <div class="hidden lg:block lg:w-1/4"></div>
@@ -1180,7 +1180,7 @@ def generate_contact_page():
 
   <!-- Breadcrumb Navigation (Seamless #f8f9fa, Borderless) -->
   <div class="w-full bg-[#f8f9fa] py-4 px-6 md:px-12 lg:px-16">
-    <nav aria-label="Breadcrumb" class="breadcrumb-bar max-w-[1920px] mx-auto text-sm font-mono uppercase tracking-widest text-[#595f65]">
+    <nav aria-label="Breadcrumb" class="breadcrumb-bar w-full text-sm font-mono uppercase tracking-widest text-[#595f65]">
       <a href="index.html" class="hover:text-[#1a1d20] transition-colors">Home</a>
       <span class="mx-2">&bull;</span>
       <span class="text-[#1a1d20] font-semibold">Contact</span>
@@ -1188,7 +1188,7 @@ def generate_contact_page():
   </div>
 
   <main class="w-full bg-[#f8f9fa] py-16 px-6 md:px-12 lg:px-16">
-    <div class="max-w-[1920px] mx-auto flex flex-col lg:flex-row items-stretch">
+    <div class="w-full flex flex-col lg:flex-row items-stretch">
       
       <!-- 25% Left Pure Empty Negative Space -->
       <div class="hidden lg:block lg:w-1/4"></div>
@@ -1322,7 +1322,7 @@ def generate_academy_page():
 
   <!-- Dedicated Header for Academy (Unlinked from Main Nav) -->
   <header class="w-full bg-[#f8f9fa]/95 backdrop-blur-md border-b border-[#e2e5e8] z-50 sticky top-0 transition-all">
-    <div class="max-w-[1920px] mx-auto px-6 md:px-12 lg:px-16 flex items-center justify-between min-h-[84px]">
+    <div class="w-full px-6 md:px-12 lg:px-16 flex items-center justify-between min-h-[84px]">
       <a href="index.html" class="flex items-center gap-3.5">
         <img src="assets/official/logo_charcoal.svg" alt="KAD Logo" class="h-10 w-auto">
         <div class="flex flex-col text-[11px] font-semibold tracking-[0.2em] uppercase leading-tight text-[#1a1d20]">
@@ -1337,9 +1337,9 @@ def generate_academy_page():
     </div>
   </header>
 
-  <!-- Breadcrumb Navigation (text-sm font-mono uppercase tracking-widest) -->
-  <div class="w-full bg-white border-b border-[#e2e5e8] py-4 px-6 md:px-12 lg:px-16">
-    <nav aria-label="Breadcrumb" class="breadcrumb-bar max-w-[1920px] mx-auto text-sm font-mono uppercase tracking-widest text-[#595f65]">
+  <!-- Breadcrumb Navigation (Seamless #f8f9fa, Borderless) -->
+  <div class="w-full bg-[#f8f9fa] py-4 px-6 md:px-12 lg:px-16">
+    <nav aria-label="Breadcrumb" class="breadcrumb-bar w-full text-sm font-mono uppercase tracking-widest text-[#595f65]">
       <a href="index.html" class="hover:text-[#1a1d20] transition-colors">Home</a>
       <span class="mx-2">&bull;</span>
       <span class="text-[#1a1d20] font-semibold">Academy (Private Syllabus)</span>
@@ -1347,7 +1347,7 @@ def generate_academy_page():
   </div>
 
   <main class="w-full bg-[#f8f9fa] py-16 px-6 md:px-12 lg:px-16">
-    <div class="max-w-[1920px] mx-auto flex flex-col lg:flex-row items-stretch">
+    <div class="w-full flex flex-col lg:flex-row items-stretch">
       
       <!-- 25% Left Pure Empty Negative Space -->
       <div class="hidden lg:block lg:w-1/4"></div>
@@ -1503,9 +1503,9 @@ __SHARED_HEAD__
 
 __HEADER__
 
-  <!-- Breadcrumb Navigation (text-sm font-mono uppercase tracking-widest) -->
-  <div class="w-full bg-white border-b border-[#e2e5e8] py-4 px-6 md:px-12 lg:px-16">
-    <nav aria-label="Breadcrumb" class="breadcrumb-bar max-w-[1920px] mx-auto text-sm font-mono uppercase tracking-widest text-[#595f65]">
+  <!-- Breadcrumb Navigation (Seamless #f8f9fa, Borderless) -->
+  <div class="w-full bg-[#f8f9fa] py-4 px-6 md:px-12 lg:px-16">
+    <nav aria-label="Breadcrumb" class="breadcrumb-bar w-full text-sm font-mono uppercase tracking-widest text-[#595f65]">
       <a href="index.html" class="hover:text-[#1a1d20] transition-colors">Home</a>
       <span class="mx-2">&bull;</span>
       <a href="index.html#works" class="hover:text-[#1a1d20] transition-colors">Works</a>
@@ -1521,7 +1521,7 @@ __HEADER__
       <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-black/20"></div>
 
       <!-- Hero Title & Key Meta -->
-      <div class="relative z-10 max-w-[1920px] mx-auto w-full px-6 md:px-12 lg:px-16 pb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
+      <div class="relative z-10 w-full px-6 md:px-12 lg:px-16 pb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
         <div>
           <h1 class="text-3xl md:text-5xl font-semibold tracking-tight text-white drop-shadow-md">{p['title']}</h1>
         </div>
@@ -1533,7 +1533,7 @@ __HEADER__
 
     <!-- Main Content: Strict 25% Left Pure Negative Space -->
     <section class="w-full bg-[#f8f9fa] py-16 px-6 md:px-12 lg:px-16 border-b border-[#e2e5e8]">
-      <div class="max-w-[1920px] mx-auto flex flex-col lg:flex-row items-stretch">
+      <div class="w-full flex flex-col lg:flex-row items-stretch">
         
         <!-- 25% Left Pure Empty Negative Space -->
         <div class="hidden lg:block lg:w-1/4"></div>
@@ -1544,7 +1544,7 @@ __HEADER__
           <!-- Narrative & Brief -->
           <div class="space-y-6 max-w-4xl">
             <div class="border-b border-[#e2e5e8] pb-6">
-              <span class="text-xs font-mono uppercase tracking-[0.25em] text-[#38606a] font-semibold block mb-3">Project Brief & Spatial Strategy</span>
+              <span class="text-xs font-mono uppercase tracking-[0.25em] text-[#67aec0] font-semibold block mb-3">Project Brief & Spatial Strategy</span>
               <p class="text-base md:text-lg text-[#1a1d20] leading-relaxed">
                 {p['description']}
               </p>
@@ -1552,23 +1552,23 @@ __HEADER__
 
             {award_markup}
 
-            <!-- Specifications Table -->
+            <!-- Specifications Table (Eyeblue Soft Labels, Eyeblue Deep Values) -->
             <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 py-4 border-b border-[#e2e5e8] text-xs font-mono">
               <div>
-                <span class="text-[#767676] uppercase tracking-wider block">Typology</span>
-                <span class="text-[#1a1d20] font-semibold block mt-1 uppercase">{p['typology']}</span>
+                <span class="text-[10px] font-mono uppercase tracking-widest text-[#67aec0] font-semibold block">Typology</span>
+                <span class="text-sm font-semibold text-[#2b4951] block mt-1 uppercase">{p['typology']}</span>
               </div>
               <div>
-                <span class="text-[#767676] uppercase tracking-wider block">Status</span>
-                <span class="text-[#1a1d20] font-semibold block mt-1 uppercase">{status_label}</span>
+                <span class="text-[10px] font-mono uppercase tracking-widest text-[#67aec0] font-semibold block">Status</span>
+                <span class="text-sm font-semibold text-[#2b4951] block mt-1 uppercase">{status_label}</span>
               </div>
               <div>
-                <span class="text-[#767676] uppercase tracking-wider block">Location</span>
-                <span class="text-[#1a1d20] font-semibold block mt-1">{p['location']}</span>
+                <span class="text-[10px] font-mono uppercase tracking-widest text-[#67aec0] font-semibold block">Location</span>
+                <span class="text-sm font-semibold text-[#2b4951] block mt-1">{p['location']}</span>
               </div>
               <div>
-                <span class="text-[#767676] uppercase tracking-wider block">Year</span>
-                <span class="text-[#1a1d20] font-semibold block mt-1">{p['year']}</span>
+                <span class="text-[10px] font-mono uppercase tracking-widest text-[#67aec0] font-semibold block">Year</span>
+                <span class="text-sm font-semibold text-[#2b4951] block mt-1">{p['year']}</span>
               </div>
             </div>
           </div>
@@ -1604,7 +1604,7 @@ __HEADER__
     <button onclick="closeLightbox()" class="fixed top-4 left-6 z-60 text-[#67aec0] hover:text-[#38606a] text-3xl font-bold bg-transparent border-none p-2 cursor-pointer transition-colors focus:outline-none" title="Close (Esc)" aria-label="Close popup">✕</button>
 
     <!-- Top Bar: Counter -->
-    <div class="w-full max-w-[1920px] flex items-center justify-end text-white/80 pt-2 pointer-events-none">
+    <div class="w-full flex items-center justify-end text-white/80 pt-2 pointer-events-none">
       <span id="lightbox-counter" class="text-xs font-mono uppercase tracking-widest">Plate 1 of {len(images)}</span>
     </div>
 
@@ -1616,7 +1616,7 @@ __HEADER__
     </div>
 
     <!-- Bottom Caption -->
-    <div class="w-full max-w-[1920px] text-center text-xs font-mono uppercase tracking-widest text-white/60 pb-2 pointer-events-none">
+    <div class="w-full text-center text-xs font-mono uppercase tracking-widest text-white/60 pb-2 pointer-events-none">
       <span>{p['title']} &bull; Visual Documentation</span>
     </div>
   </div>
