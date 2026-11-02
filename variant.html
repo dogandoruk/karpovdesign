@@ -445,7 +445,7 @@
         <!-- Left: Image Viewer -->
         <div class="w-full lg:w-3/5 flex flex-col gap-4">
           <div class="w-full aspect-[16/10] bg-[#1a1d20] overflow-hidden border border-[#e2e5e8]">
-            <img id="modal-main-img" src="" alt="Project Image" class="w-full h-full object-cover">
+            <img id="modal-main-img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E" alt="Project Image" class="w-full h-full object-cover">
           </div>
           <!-- Thumbnails Strip -->
           <div id="modal-thumbs" class="flex gap-2 overflow-x-auto pb-2"></div>
@@ -556,7 +556,7 @@
       HERO_SLIDES.forEach((s, idx) => {
         const dot = document.createElement('button');
         dot.id = `hero-dot-${idx}`;
-        dot.className = `w-2.5 h-2.5 border border-white transition-all duration-300 ${idx === 0 ? 'bg-[#de602e] border-[#de602e]' : 'bg-transparent'}`;
+        dot.className = `w-2.5 h-2.5 rounded-full border border-white transition-all duration-300 ${idx === 0 ? 'bg-[#de602e] border-[#de602e]' : 'bg-transparent'}`;
         dot.title = s.title;
         dot.onclick = (e) => {
           e.stopPropagation();
@@ -570,7 +570,7 @@
       HERO_SLIDES.forEach((s, idx) => {
         const dot = document.getElementById(`hero-dot-${idx}`);
         if (dot) {
-          dot.className = `w-2.5 h-2.5 border border-white transition-all duration-300 ${idx === currentSlide ? 'bg-[#de602e] border-[#de602e]' : 'bg-transparent'}`;
+          dot.className = `w-2.5 h-2.5 rounded-full border border-white transition-all duration-300 ${idx === currentSlide ? 'bg-[#de602e] border-[#de602e]' : 'bg-transparent'}`;
         }
       });
     }
