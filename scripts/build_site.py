@@ -326,36 +326,38 @@ def generate_workflow_section(is_variant=False):
       <!-- 25% Left Pure Negative Space -->
       <div class="hidden lg:block lg:w-1/4"></div>
 
-      <!-- 75% Active Content Space -->
+      <!-- 75% Active Content Space with 15% Right Margin (Active width: 60% of page) -->
       <div class="w-full lg:w-3/4 lg:pl-12">
-        
-        <!-- H2 Header above section -->
-        <div class="mb-6 md:mb-8">
-          <h2 class="text-lg sm:text-xl md:text-2xl font-semibold tracking-[0.25em] uppercase text-[#38606a]">Workflow</h2>
-        </div>
-
-        <!-- 50/50 Side-by-Side: Conceptual Sketch (Natural 4:3, Click to Enlarge) & 2 Lorem Ipsum Paragraphs -->
-        <div class="flex flex-col md:flex-row items-center gap-8 lg:gap-12">
+        <div class="w-full lg:max-w-[82%]">
           
-          <div onclick="openWorkflowLightbox()" class="group cursor-pointer w-full md:w-1/2 aspect-[4/3] bg-transparent overflow-hidden shrink-0 relative" title="Click to view full size">
-            <img src="assets/official/projects/travel-sketches/ak_4.jpg" 
-                 alt="Conceptual Architectural Sketch" 
-                 class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500 ease-out">
-            <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-3 pointer-events-none">
-              <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/80 text-[#67aec0] text-[10px] font-mono uppercase tracking-[0.2em] px-2.5 py-1">Enlarge</span>
+          <!-- H2 Header above section -->
+          <div class="mb-6 md:mb-8">
+            <h2 class="text-lg sm:text-xl md:text-2xl font-semibold tracking-[0.25em] uppercase text-[#38606a]">Workflow</h2>
+          </div>
+
+          <!-- 50/50 Side-by-Side: Conceptual Sketch (Natural 4:3, Click to Enlarge) & 2 Lorem Ipsum Paragraphs -->
+          <div class="flex flex-col md:flex-row items-center gap-8 lg:gap-12">
+            
+            <div onclick="openWorkflowLightbox()" class="group cursor-pointer w-full md:w-1/2 aspect-[4/3] bg-transparent overflow-hidden shrink-0 relative" title="Click to view full size">
+              <img src="assets/official/projects/travel-sketches/ak_4.jpg" 
+                   alt="Conceptual Architectural Sketch" 
+                   class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500 ease-out">
+              <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-3 pointer-events-none">
+                <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/80 text-[#67aec0] text-[10px] font-mono uppercase tracking-[0.2em] px-2.5 py-1">Enlarge</span>
+              </div>
+            </div>
+
+            <div class="w-full md:w-1/2 space-y-4 text-sm md:text-base text-[#595f65] leading-relaxed">
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+              </p>
+              <p>
+                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+              </p>
             </div>
           </div>
 
-          <div class="w-full md:w-1/2 space-y-4 text-sm md:text-base text-[#595f65] leading-relaxed">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-            </p>
-            <p>
-              Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
-            </p>
-          </div>
         </div>
-
       </div>
 
     </div>
@@ -398,66 +400,68 @@ def generate_accolades_section(is_variant=False):
       <!-- 25% Left Pure Negative Space -->
       <div class="hidden lg:block lg:w-1/4"></div>
 
-      <!-- 75% Active Content Space -->
+      <!-- 75% Active Content Space with 15% Right Margin Buffer -->
       <div class="w-full lg:w-3/4 lg:pl-12">
-        
-        <!-- Heading (No extra labels) -->
-        <div class="mb-6 md:mb-8">
-          <h2 class="text-lg sm:text-xl md:text-2xl font-semibold tracking-[0.25em] uppercase text-[#38606a]">Competitions & Accolades</h2>
-        </div>
-
-        <div class="space-y-8">
+        <div class="w-full lg:max-w-[82%]">
           
-          <!-- Item 1 -->
-          <div class="flex flex-col md:flex-row md:items-baseline justify-between gap-2 md:gap-4">
-            <div class="md:w-3/4">
-              <span class="text-[10px] font-mono uppercase tracking-widest text-[#de602e] font-semibold">1st Place Winner &bull; Invited Competition</span>
-              <h3 class="text-base md:text-lg font-semibold text-[#1a1d20] mt-1">Eskişehir Industrial Regeneration (Multi-City)</h3>
-              <p class="text-xs text-[#595f65] mt-1 leading-relaxed">51,000 m² municipal depot adaptive reuse into cultural and tech center.</p>
-            </div>
-            <div class="md:w-1/4 text-left md:text-right font-mono text-xs text-[#2b4951]">
-              <span>2015 &bull; Eskişehir, TR</span>
-            </div>
+          <!-- Heading (No extra labels) -->
+          <div class="mb-6 md:mb-8">
+            <h2 class="text-lg sm:text-xl md:text-2xl font-semibold tracking-[0.25em] uppercase text-[#38606a]">Competitions & Accolades</h2>
           </div>
 
-          <!-- Item 2 -->
-          <div class="flex flex-col md:flex-row md:items-baseline justify-between gap-2 md:gap-4">
-            <div class="md:w-3/4">
-              <span class="text-[10px] font-mono uppercase tracking-widest text-[#de602e] font-semibold">2nd Place Award &bull; National Competition</span>
-              <h3 class="text-base md:text-lg font-semibold text-[#1a1d20] mt-1">Caferağa Community Center & Plaza</h3>
-              <p class="text-xs text-[#595f65] mt-1 leading-relaxed">Civic cultural gathering venue, public library, and tiered urban courtyards.</p>
+          <div class="space-y-8">
+            
+            <!-- Item 1 -->
+            <div class="flex flex-col md:flex-row md:items-baseline justify-between gap-2 md:gap-4">
+              <div class="md:w-3/4">
+                <span class="text-[10px] font-mono uppercase tracking-widest text-[#de602e] font-semibold">1st Place Winner &bull; Invited Competition</span>
+                <h3 class="text-base md:text-lg font-semibold text-[#1a1d20] mt-1">Eskişehir Industrial Regeneration (Multi-City)</h3>
+                <p class="text-xs text-[#595f65] mt-1 leading-relaxed">51,000 m² municipal depot adaptive reuse into cultural and tech center.</p>
+              </div>
+              <div class="md:w-1/4 text-left md:text-right font-mono text-xs text-[#2b4951]">
+                <span>2015 &bull; Eskişehir, TR</span>
+              </div>
             </div>
-            <div class="md:w-1/4 text-left md:text-right font-mono text-xs text-[#2b4951]">
-              <span>2016 &bull; Istanbul, TR</span>
-            </div>
-          </div>
 
-          <!-- Item 3 -->
-          <div class="flex flex-col md:flex-row md:items-baseline justify-between gap-2 md:gap-4">
-            <div class="md:w-3/4">
-              <span class="text-[10px] font-mono uppercase tracking-widest text-[#de602e] font-semibold">Competition Selection & Finalist</span>
-              <h3 class="text-base md:text-lg font-semibold text-[#1a1d20] mt-1">Sivas Unity Bridge & Cultural Crossing</h3>
-              <p class="text-xs text-[#595f65] mt-1 leading-relaxed">Inhabited civic bridge weaving public amphitheatres and active promenade.</p>
+            <!-- Item 2 -->
+            <div class="flex flex-col md:flex-row md:items-baseline justify-between gap-2 md:gap-4">
+              <div class="md:w-3/4">
+                <span class="text-[10px] font-mono uppercase tracking-widest text-[#de602e] font-semibold">2nd Place Award &bull; National Competition</span>
+                <h3 class="text-base md:text-lg font-semibold text-[#1a1d20] mt-1">Caferağa Community Center & Plaza</h3>
+                <p class="text-xs text-[#595f65] mt-1 leading-relaxed">Civic cultural gathering venue, public library, and tiered urban courtyards.</p>
+              </div>
+              <div class="md:w-1/4 text-left md:text-right font-mono text-xs text-[#2b4951]">
+                <span>2016 &bull; Istanbul, TR</span>
+              </div>
             </div>
-            <div class="md:w-1/4 text-left md:text-right font-mono text-xs text-[#2b4951]">
-              <span>2015 &bull; Sivas, TR</span>
-            </div>
-          </div>
 
-          <!-- Item 4 -->
-          <div class="flex flex-col md:flex-row md:items-baseline justify-between gap-2 md:gap-4">
-            <div class="md:w-3/4">
-              <span class="text-[10px] font-mono uppercase tracking-widest text-[#de602e] font-semibold">Academic Pedigree & Honors</span>
-              <h3 class="text-base md:text-lg font-semibold text-[#1a1d20] mt-1">UNC Charlotte School of Architecture</h3>
-              <p class="text-xs text-[#595f65] mt-1 leading-relaxed">Bachelor of Arts in Architecture. Advanced digital lab fellow, Studio X.</p>
+            <!-- Item 3 -->
+            <div class="flex flex-col md:flex-row md:items-baseline justify-between gap-2 md:gap-4">
+              <div class="md:w-3/4">
+                <span class="text-[10px] font-mono uppercase tracking-widest text-[#de602e] font-semibold">Competition Selection & Finalist</span>
+                <h3 class="text-base md:text-lg font-semibold text-[#1a1d20] mt-1">Sivas Unity Bridge & Cultural Crossing</h3>
+                <p class="text-xs text-[#595f65] mt-1 leading-relaxed">Inhabited civic bridge weaving public amphitheatres and active promenade.</p>
+              </div>
+              <div class="md:w-1/4 text-left md:text-right font-mono text-xs text-[#2b4951]">
+                <span>2015 &bull; Sivas, TR</span>
+              </div>
             </div>
-            <div class="md:w-1/4 text-left md:text-right font-mono text-xs text-[#2b4951]">
-              <span>2018–2021 &bull; USA / SE</span>
+
+            <!-- Item 4 -->
+            <div class="flex flex-col md:flex-row md:items-baseline justify-between gap-2 md:gap-4">
+              <div class="md:w-3/4">
+                <span class="text-[10px] font-mono uppercase tracking-widest text-[#de602e] font-semibold">Academic Pedigree & Honors</span>
+                <h3 class="text-base md:text-lg font-semibold text-[#1a1d20] mt-1">UNC Charlotte School of Architecture</h3>
+                <p class="text-xs text-[#595f65] mt-1 leading-relaxed">Bachelor of Arts in Architecture. Advanced digital lab fellow, Studio X.</p>
+              </div>
+              <div class="md:w-1/4 text-left md:text-right font-mono text-xs text-[#2b4951]">
+                <span>2018–2021 &bull; USA / SE</span>
+              </div>
             </div>
+
           </div>
 
         </div>
-
       </div>
 
     </div>
@@ -474,17 +478,19 @@ def generate_landing_contact_section(is_variant=False):
       <!-- 25% Left Pure Negative Space -->
       <div class="hidden lg:block lg:w-1/4"></div>
 
-      <!-- 75% Active Content Space -->
-      <div class="w-full lg:w-3/4 lg:pl-12 flex flex-col sm:flex-row sm:items-center justify-between gap-6 md:gap-8 pt-4">
-        <div>
-          <h2 class="text-xl md:text-3xl font-semibold tracking-tight text-[#38606a] mb-3">Get in touch</h2>
-          <p class="text-sm md:text-base text-[#595f65] max-w-xl leading-relaxed">
-            Direct dialogue for architectural commissions, strategic collaborations, and urban consultations.
-          </p>
+      <!-- 75% Active Content Space with 15% Right Margin Buffer -->
+      <div class="w-full lg:w-3/4 lg:pl-12">
+        <div class="w-full lg:max-w-[82%] flex flex-col sm:flex-row sm:items-center justify-between gap-6 md:gap-8 pt-4">
+          <div>
+            <h2 class="text-xl md:text-3xl font-semibold tracking-tight text-[#38606a] mb-3">Get in touch</h2>
+            <p class="text-sm md:text-base text-[#595f65] max-w-xl leading-relaxed">
+              Direct dialogue for architectural commissions, strategic collaborations, and urban consultations.
+            </p>
+          </div>
+          <a href="contact.html" class="inline-flex items-center justify-center w-full sm:w-auto px-10 py-4 bg-[#de602e] hover:bg-[#ad4b24] text-white text-xs font-mono uppercase tracking-[0.2em] font-semibold transition-colors shadow-sm whitespace-nowrap">
+            Get in touch &rarr;
+          </a>
         </div>
-        <a href="contact.html" class="inline-flex items-center justify-center w-full sm:w-auto px-10 py-4 bg-[#de602e] hover:bg-[#ad4b24] text-white text-xs font-mono uppercase tracking-[0.2em] font-semibold transition-colors shadow-sm whitespace-nowrap">
-          Get in touch &rarr;
-        </a>
       </div>
 
     </div>
@@ -1060,26 +1066,28 @@ def generate_landing_page(is_variant=False):
       <!-- 25% Left Column: 100% PURE EMPTY NEGATIVE SPACE -->
       <div class="hidden lg:block lg:w-1/4"></div>
 
-      <!-- 75% Active Grid Space -->
+      <!-- 75% Active Grid Space with 15% Right Margin Buffer (Active corridor: 60% of page) -->
       <div class="w-full lg:w-3/4 lg:pl-12">
-        
-        <!-- Header: PORTFOLIO in Eyeblue + Mobile Borderless Filter & Sort Trigger -->
-        <div class="flex items-center justify-between">
-          <h2 class="text-lg sm:text-xl md:text-2xl font-semibold tracking-[0.25em] uppercase text-[#38606a]">PORTFOLIO</h2>
-          <button id="mobile-filter-toggle" onclick="toggleMobileFilters()" class="md:hidden inline-flex items-center gap-2 py-1 text-xs font-mono uppercase tracking-[0.18em] text-[#38606a] hover:text-[#de602e] transition-colors">
-            <span>Filter &amp; Sort</span>
-            <span id="active-filter-badge" class="w-2 h-2 rounded-full bg-[#de602e] hidden"></span>
-            <svg id="filter-chevron" class="w-3.5 h-3.5 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="square" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-          </button>
+        <div class="w-full lg:max-w-[82%]">
+          
+          <!-- Header: PORTFOLIO in Eyeblue + Mobile Borderless Filter & Sort Trigger -->
+          <div class="flex items-center justify-between">
+            <h2 class="text-lg sm:text-xl md:text-2xl font-semibold tracking-[0.25em] uppercase text-[#38606a]">PORTFOLIO</h2>
+            <button id="mobile-filter-toggle" onclick="toggleMobileFilters()" class="md:hidden inline-flex items-center gap-2 py-1 text-xs font-mono uppercase tracking-[0.18em] text-[#38606a] hover:text-[#de602e] transition-colors">
+              <span>Filter &amp; Sort</span>
+              <span id="active-filter-badge" class="w-2 h-2 rounded-full bg-[#de602e] hidden"></span>
+              <svg id="filter-chevron" class="w-3.5 h-3.5 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="square" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+          </div>
+
+          {filter_bar_markup}
+
+          <!-- Generous Spacing between cards (gap-6 md:gap-8 lg:gap-10) -->
+          <div id="works-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 lg:gap-10 mt-6 md:mt-10">
+            <!-- Dynamically Rendered Cards -->
+          </div>
+
         </div>
-
-        {filter_bar_markup}
-
-        <!-- Generous Spacing between cards (gap-6 md:gap-8 lg:gap-10) -->
-        <div id="works-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 lg:gap-10 mt-6 md:mt-10">
-          <!-- Dynamically Rendered Cards -->
-        </div>
-
       </div>
 
     </div>
@@ -1153,8 +1161,9 @@ def generate_about_page():
       <!-- 25% Left Pure Empty Negative Space -->
       <div class="hidden lg:block lg:w-1/4"></div>
 
-      <!-- 75% Right Column Content (Pure Typographic, No Box Outlines) -->
-      <div class="w-full lg:w-3/4 lg:pl-12 space-y-14 md:space-y-16">
+      <!-- 75% Right Column Content (Pure Typographic, No Box Outlines) with 15% Right Margin Buffer -->
+      <div class="w-full lg:w-3/4 lg:pl-12">
+        <div class="w-full lg:max-w-[82%] space-y-14 md:space-y-16">
         
         <!-- Header: Aleksandre Karpov + Subtitle (Degree & Universities, Eyeblue Soft accent) -->
         <div>
@@ -1299,6 +1308,7 @@ def generate_about_page():
           </div>
         </div>
 
+        </div>
       </div>
 
     </div>
@@ -1339,8 +1349,9 @@ def generate_contact_page():
       <!-- 25% Left Pure Empty Negative Space -->
       <div class="hidden lg:block lg:w-1/4"></div>
 
-      <!-- 75% Right Active Column -->
-      <div class="w-full lg:w-3/4 lg:pl-12 space-y-14 md:space-y-16">
+      <!-- 75% Right Active Column with 15% Right Margin Buffer -->
+      <div class="w-full lg:w-3/4 lg:pl-12">
+        <div class="w-full lg:max-w-[82%] space-y-14 md:space-y-16">
         
         <!-- Contact Header & Direct Coordinates (Eyeblue Mid H1, Eyeblue Soft Labels, Eyeblue Deep Values) -->
         <div class="space-y-8 md:space-y-10">
@@ -1428,6 +1439,7 @@ def generate_contact_page():
           </div>
         </form>
 
+        </div>
       </div>
 
     </div>
@@ -1498,8 +1510,9 @@ def generate_academy_page():
       <!-- 25% Left Pure Empty Negative Space -->
       <div class="hidden lg:block lg:w-1/4"></div>
 
-      <!-- 75% Right Active Column -->
-      <div class="w-full lg:w-3/4 lg:pl-12 space-y-16">
+      <!-- 75% Right Active Column with 15% Right Margin Buffer -->
+      <div class="w-full lg:w-3/4 lg:pl-12">
+        <div class="w-full lg:max-w-[82%] space-y-16">
       
       <!-- Centerpiece Masterclass Player -->
       <div class="bg-transparent">
@@ -1593,6 +1606,7 @@ def generate_academy_page():
       </div>
 
       </div>
+      </div>
     </div>
   </main>
 
@@ -1683,8 +1697,9 @@ __HEADER__
         <!-- 25% Left Pure Empty Negative Space -->
         <div class="hidden lg:block lg:w-1/4"></div>
 
-        <!-- 75% Right Active Column -->
-        <div class="w-full lg:w-3/4 lg:pl-12 space-y-12">
+        <!-- 75% Right Active Column with 15% Right Margin Buffer -->
+        <div class="w-full lg:w-3/4 lg:pl-12">
+          <div class="w-full lg:max-w-[82%] space-y-12">
           
           <!-- Narrative & Brief -->
           <div class="space-y-6 max-w-4xl">
@@ -1736,6 +1751,7 @@ __HEADER__
             </a>
           </div>
 
+        </div>
         </div>
 
       </div>
