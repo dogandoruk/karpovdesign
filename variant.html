@@ -577,6 +577,7 @@
     }
 
     // --- Works Grid Logic ---
+    PROJECTS.forEach((p, idx) => { p._origIndex = idx; });
     let currentTypology = 'all';
     let currentCompletion = 'all';
     let currentRecency = 'newest';
@@ -584,32 +585,53 @@
     let currentModalIndex = 0;
     let activeOrderedList = [...PROJECTS];
 
+    function isMatch(p) {
+      const matchType = (currentTypology === 'all') || (p.typology.toLowerCase() === currentTypology.toLowerCase());
+      const matchCompletion = (currentCompletion === 'all') ||
+        (currentCompletion === 'built' && p.status === 'Completion') ||
+        (currentCompletion === 'concept' && p.status !== 'Completion');
+      const matchAward = (currentAward === 'all') || (p.award === true);
+      return matchType && matchCompletion && matchAward;
+    }
+
     function renderCards() {
       const container = document.getElementById('works-grid');
       container.innerHTML = '';
 
-      // 1. Filter across all active dimensions
-      const filtered = PROJECTS.filter(p => {
-        const matchType = (currentTypology === 'all') || (p.typology.toLowerCase() === currentTypology.toLowerCase());
-        const matchCompletion = (currentCompletion === 'all') ||
-          (currentCompletion === 'built' && p.status === 'Completion') ||
-          (currentCompletion === 'concept' && p.status !== 'Completion');
-        const matchAward = (currentAward === 'all') || (p.award === true);
-        return matchType && matchCompletion && matchAward;
-      });
+      const hasActiveFilter = (currentTypology !== 'all') || (currentCompletion !== 'all') || (currentAward !== 'all');
 
-      // 2. Sort by Recency
-      filtered.sort((a, b) => {
+      const sortComparator = (a, b) => {
         const yearA = parseInt(a.year, 10) || 0;
         const yearB = parseInt(b.year, 10) || 0;
-        return currentRecency === 'newest' ? (yearB - yearA) : (yearA - yearB);
-      });
+        if (yearA !== yearB) {
+          return currentRecency === 'newest' ? (yearB - yearA) : (yearA - yearB);
+        }
+        return (a._origIndex || 0) - (b._origIndex || 0);
+      };
 
-      activeOrderedList = filtered;
+      // All 21 cards stay visible at all times:
+      // If a filter is active, matching cards move to the top of the pile, non-matching cards follow below.
+      // When filters are removed ('all'), cards return to default formation (newest at top, oldest at bottom).
+      let ordered;
+      if (!hasActiveFilter) {
+        ordered = [...PROJECTS].sort(sortComparator);
+      } else {
+        const matching = PROJECTS.filter(p => isMatch(p)).sort(sortComparator);
+        const nonMatching = PROJECTS.filter(p => !isMatch(p)).sort(sortComparator);
+        ordered = [...matching, ...nonMatching];
+      }
+
+      activeOrderedList = ordered;
 
       activeOrderedList.forEach((p, index) => {
         const card = document.createElement('div');
         card.className = 'group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden';
+        card.dataset.projectId = p.id;
+        card.dataset.typology = p.typology;
+        card.dataset.status = p.status;
+        card.dataset.year = p.year;
+        card.dataset.award = p.award ? 'true' : 'false';
+        card.dataset.isMatch = isMatch(p) ? 'true' : 'false';
         if (!IS_VARIANT) {
           card.onclick = () => { window.location.href = `project-${p.id}.html`; };
         } else {
