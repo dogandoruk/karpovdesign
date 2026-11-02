@@ -292,13 +292,10 @@ def generate_accolades_section():
           
           <!-- Item 1 -->
           <div class="py-6 flex flex-col md:flex-row md:items-baseline justify-between gap-4">
-            <div class="md:w-1/2">
-              <span class="text-[10px] font-mono uppercase tracking-widest text-[#de602e]">1st Place Winner &bull; Invited Competition</span>
+            <div class="md:w-3/4">
+              <span class="text-[10px] font-mono uppercase tracking-widest text-[#de602e] font-semibold">1st Place Winner &bull; Invited Competition</span>
               <h3 class="text-base md:text-lg font-semibold text-[#1a1d20] mt-1">Eskişehir Industrial Regeneration (Multi-City)</h3>
-              <p class="text-xs text-[#595f65] mt-1">51,000 m² municipal depot adaptive reuse into cultural and tech center.</p>
-            </div>
-            <div class="md:w-1/4 text-xs text-[#595f65]">
-              <span>Two-Phase International Jury Selection</span>
+              <p class="text-xs text-[#595f65] mt-1 leading-relaxed">51,000 m² municipal depot adaptive reuse into cultural and tech center.</p>
             </div>
             <div class="md:w-1/4 text-left md:text-right font-mono text-xs text-[#1a1d20]">
               <span>2015 &bull; Eskişehir, TR</span>
@@ -307,13 +304,10 @@ def generate_accolades_section():
 
           <!-- Item 2 -->
           <div class="py-6 flex flex-col md:flex-row md:items-baseline justify-between gap-4">
-            <div class="md:w-1/2">
-              <span class="text-[10px] font-mono uppercase tracking-widest text-[#de602e]">2nd Place Award &bull; National Competition</span>
+            <div class="md:w-3/4">
+              <span class="text-[10px] font-mono uppercase tracking-widest text-[#de602e] font-semibold">2nd Place Award &bull; National Competition</span>
               <h3 class="text-base md:text-lg font-semibold text-[#1a1d20] mt-1">Caferağa Community Center & Plaza</h3>
-              <p class="text-xs text-[#595f65] mt-1">Civic cultural gathering venue, public library, and tiered urban courtyards.</p>
-            </div>
-            <div class="md:w-1/4 text-xs text-[#595f65]">
-              <span>Kadıköy Municipality Civic Council</span>
+              <p class="text-xs text-[#595f65] mt-1 leading-relaxed">Civic cultural gathering venue, public library, and tiered urban courtyards.</p>
             </div>
             <div class="md:w-1/4 text-left md:text-right font-mono text-xs text-[#1a1d20]">
               <span>2016 &bull; Istanbul, TR</span>
@@ -322,13 +316,10 @@ def generate_accolades_section():
 
           <!-- Item 3 -->
           <div class="py-6 flex flex-col md:flex-row md:items-baseline justify-between gap-4">
-            <div class="md:w-1/2">
-              <span class="text-[10px] font-mono uppercase tracking-widest text-[#de602e]">Competition Selection & Finalist</span>
+            <div class="md:w-3/4">
+              <span class="text-[10px] font-mono uppercase tracking-widest text-[#de602e] font-semibold">Competition Selection & Finalist</span>
               <h3 class="text-base md:text-lg font-semibold text-[#1a1d20] mt-1">Sivas Unity Bridge & Cultural Crossing</h3>
-              <p class="text-xs text-[#595f65] mt-1">Inhabited civic bridge weaving public amphitheatres and active promenade.</p>
-            </div>
-            <div class="md:w-1/4 text-xs text-[#595f65]">
-              <span>Sivas Kızılırmak River Commission</span>
+              <p class="text-xs text-[#595f65] mt-1 leading-relaxed">Inhabited civic bridge weaving public amphitheatres and active promenade.</p>
             </div>
             <div class="md:w-1/4 text-left md:text-right font-mono text-xs text-[#1a1d20]">
               <span>2015 &bull; Sivas, TR</span>
@@ -337,13 +328,10 @@ def generate_accolades_section():
 
           <!-- Item 4 -->
           <div class="py-6 flex flex-col md:flex-row md:items-baseline justify-between gap-4">
-            <div class="md:w-1/2">
-              <span class="text-[10px] font-mono uppercase tracking-widest text-[#de602e]">Academic Pedigree & Honors</span>
+            <div class="md:w-3/4">
+              <span class="text-[10px] font-mono uppercase tracking-widest text-[#de602e] font-semibold">Academic Pedigree & Honors</span>
               <h3 class="text-base md:text-lg font-semibold text-[#1a1d20] mt-1">UNC Charlotte School of Architecture</h3>
-              <p class="text-xs text-[#595f65] mt-1">Bachelor of Arts in Architecture. Advanced digital lab fellow, Studio X.</p>
-            </div>
-            <div class="md:w-1/4 text-xs text-[#595f65]">
-              <span>Lund University Architecture Fellowship (Sweden)</span>
+              <p class="text-xs text-[#595f65] mt-1 leading-relaxed">Bachelor of Arts in Architecture. Advanced digital lab fellow, Studio X.</p>
             </div>
             <div class="md:w-1/4 text-left md:text-right font-mono text-xs text-[#1a1d20]">
               <span>2018–2021 &bull; USA / SE</span>
@@ -1025,7 +1013,7 @@ def generate_about_page():
         <div>
           <h1 class="text-3xl md:text-5xl font-semibold tracking-tight text-[#1a1d20]">Aleksandre Karpov</h1>
           <p class="text-xs font-mono uppercase tracking-wider text-[#67aec0] font-semibold mt-3">
-            B.A. in Architecture &bull; UNC Charlotte &bull; Lund University (Sweden)
+            B.A. in Architecture &bull; Lund University (Sweden)
           </p>
         </div>
 
@@ -1116,13 +1104,10 @@ def generate_about_page():
           <div class="space-y-8">
             <!-- Item 1 -->
             <div class="flex flex-col md:flex-row md:items-baseline justify-between gap-4">
-              <div class="md:w-1/2">
+              <div class="md:w-3/4">
                 <span class="text-[10px] font-mono uppercase tracking-widest text-[#de602e] font-semibold">1st Place Winner &bull; Invited Competition</span>
                 <h3 class="text-base md:text-lg font-semibold text-[#1a1d20] mt-1">Eskişehir Industrial Regeneration (Multi-City)</h3>
                 <p class="text-xs text-[#595f65] mt-1 leading-relaxed">51,000 m² municipal depot adaptive reuse into cultural and tech center.</p>
-              </div>
-              <div class="md:w-1/4 text-xs text-[#595f65]">
-                <span>Two-Phase International Jury Selection</span>
               </div>
               <div class="md:w-1/4 text-left md:text-right font-mono text-xs text-[#2b4951]">
                 <span>2015 &bull; Eskişehir, TR</span>
@@ -1131,13 +1116,10 @@ def generate_about_page():
 
             <!-- Item 2 -->
             <div class="flex flex-col md:flex-row md:items-baseline justify-between gap-4">
-              <div class="md:w-1/2">
+              <div class="md:w-3/4">
                 <span class="text-[10px] font-mono uppercase tracking-widest text-[#de602e] font-semibold">2nd Place Award &bull; National Competition</span>
                 <h3 class="text-base md:text-lg font-semibold text-[#1a1d20] mt-1">Caferağa Community Center & Plaza</h3>
                 <p class="text-xs text-[#595f65] mt-1 leading-relaxed">Civic cultural gathering venue, public library, and tiered urban courtyards.</p>
-              </div>
-              <div class="md:w-1/4 text-xs text-[#595f65]">
-                <span>Kadıköy Municipality Civic Council</span>
               </div>
               <div class="md:w-1/4 text-left md:text-right font-mono text-xs text-[#2b4951]">
                 <span>2016 &bull; Istanbul, TR</span>
@@ -1146,13 +1128,10 @@ def generate_about_page():
 
             <!-- Item 3 -->
             <div class="flex flex-col md:flex-row md:items-baseline justify-between gap-4">
-              <div class="md:w-1/2">
+              <div class="md:w-3/4">
                 <span class="text-[10px] font-mono uppercase tracking-widest text-[#de602e] font-semibold">Competition Selection & Finalist</span>
                 <h3 class="text-base md:text-lg font-semibold text-[#1a1d20] mt-1">Sivas Unity Bridge & Cultural Crossing</h3>
                 <p class="text-xs text-[#595f65] mt-1 leading-relaxed">Inhabited civic bridge weaving public amphitheatres and active promenade.</p>
-              </div>
-              <div class="md:w-1/4 text-xs text-[#595f65]">
-                <span>Sivas Kızılırmak River Commission</span>
               </div>
               <div class="md:w-1/4 text-left md:text-right font-mono text-xs text-[#2b4951]">
                 <span>2015 &bull; Sivas, TR</span>
@@ -1161,13 +1140,10 @@ def generate_about_page():
 
             <!-- Item 4 -->
             <div class="flex flex-col md:flex-row md:items-baseline justify-between gap-4">
-              <div class="md:w-1/2">
+              <div class="md:w-3/4">
                 <span class="text-[10px] font-mono uppercase tracking-widest text-[#de602e] font-semibold">Academic Pedigree & Honors</span>
                 <h3 class="text-base md:text-lg font-semibold text-[#1a1d20] mt-1">UNC Charlotte School of Architecture</h3>
                 <p class="text-xs text-[#595f65] mt-1 leading-relaxed">Bachelor of Arts in Architecture. Advanced digital lab fellow, Studio X.</p>
-              </div>
-              <div class="md:w-1/4 text-xs text-[#595f65]">
-                <span>Lund University Architecture Fellowship (Sweden)</span>
               </div>
               <div class="md:w-1/4 text-left md:text-right font-mono text-xs text-[#2b4951]">
                 <span>2018–2021 &bull; USA / SE</span>
@@ -1202,8 +1178,8 @@ def generate_contact_page():
 
   __HEADER__
 
-  <!-- Breadcrumb Navigation (text-sm font-mono uppercase tracking-widest) -->
-  <div class="w-full bg-white border-b border-[#e2e5e8] py-4 px-6 md:px-12 lg:px-16">
+  <!-- Breadcrumb Navigation (Seamless #f8f9fa, Borderless) -->
+  <div class="w-full bg-[#f8f9fa] py-4 px-6 md:px-12 lg:px-16">
     <nav aria-label="Breadcrumb" class="breadcrumb-bar max-w-[1920px] mx-auto text-sm font-mono uppercase tracking-widest text-[#595f65]">
       <a href="index.html" class="hover:text-[#1a1d20] transition-colors">Home</a>
       <span class="mx-2">&bull;</span>
@@ -1218,88 +1194,90 @@ def generate_contact_page():
       <div class="hidden lg:block lg:w-1/4"></div>
 
       <!-- 75% Right Active Column -->
-      <div class="w-full lg:w-3/4 lg:pl-12 space-y-12">
+      <div class="w-full lg:w-3/4 lg:pl-12 space-y-16">
         
-        <!-- Contact Header & Direct Coordinates (Alex portrait migrated to About page) -->
-        <div class="space-y-6">
+        <!-- Contact Header & Direct Coordinates (Eyeblue Mid H1, Eyeblue Soft Labels, Eyeblue Deep Values) -->
+        <div class="space-y-10">
           <div>
-            <h1 class="text-3xl md:text-4xl font-semibold tracking-tight text-[#1a1d20] mb-2">Get in touch</h1>
-            <p class="text-sm text-[#595f65] leading-relaxed max-w-xl">
+            <h1 class="text-3xl md:text-5xl font-semibold tracking-tight text-[#38606a] mb-4">Get in touch</h1>
+            <p class="text-sm md:text-base text-[#595f65] leading-relaxed max-w-2xl">
               For residential design commissions, computational BIM consulting, or competition collaborations, reach out directly.
             </p>
           </div>
 
-          <!-- Direct Coordinates Grid -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 border-t border-b border-[#e2e5e8] py-6">
+          <!-- Direct Coordinates Grid (Borderless, Seamless #f8f9fa) -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 pt-4">
             <div>
-              <span class="text-[10px] font-mono uppercase tracking-widest text-[#595f65] block">United States Direct</span>
-              <a href="tel:+17048459596" class="text-sm font-semibold text-[#1a1d20] hover:text-[#de602e] transition-colors mt-1 block">
+              <span class="text-[10px] font-mono uppercase tracking-widest text-[#67aec0] font-semibold block">United States Direct</span>
+              <a href="tel:+17048459596" class="text-base font-semibold text-[#2b4951] hover:text-[#de602e] transition-colors mt-1.5 block">
                 +1 (704) 845-9596
               </a>
-              <span class="text-xs text-[#767676] block mt-0.5">Charlotte, NC</span>
+              <span class="text-xs text-[#767676] block mt-1">Charlotte, NC</span>
             </div>
             <div>
-              <span class="text-[10px] font-mono uppercase tracking-widest text-[#595f65] block">International Line</span>
-              <a href="tel:+905385907458" class="text-sm font-semibold text-[#1a1d20] hover:text-[#de602e] transition-colors mt-1 block">
+              <span class="text-[10px] font-mono uppercase tracking-widest text-[#67aec0] font-semibold block">International Line</span>
+              <a href="tel:+905385907458" class="text-base font-semibold text-[#2b4951] hover:text-[#de602e] transition-colors mt-1.5 block">
                 +90 (538) 590-7458
               </a>
-              <span class="text-xs text-[#767676] block mt-0.5">European Projects</span>
+              <span class="text-xs text-[#767676] block mt-1">European Projects</span>
             </div>
             <div>
-              <span class="text-[10px] font-mono uppercase tracking-widest text-[#595f65] block">Electronic Mail</span>
-              <a href="mailto:contact@karpovdesign.com" class="text-sm font-semibold text-[#1a1d20] hover:text-[#de602e] transition-colors mt-1 block">
+              <span class="text-[10px] font-mono uppercase tracking-widest text-[#67aec0] font-semibold block">Electronic Mail</span>
+              <a href="mailto:contact@karpovdesign.com" class="text-base font-semibold text-[#2b4951] hover:text-[#de602e] transition-colors mt-1.5 block">
                 contact@karpovdesign.com
               </a>
-              <span class="text-xs text-[#767676] block mt-0.5">Direct Inbox</span>
+              <span class="text-xs text-[#767676] block mt-1">Direct Studio Inbox</span>
             </div>
             <div>
-              <span class="text-[10px] font-mono uppercase tracking-widest text-[#595f65] block">Studio Location</span>
-              <span class="text-sm font-semibold text-[#1a1d20] mt-1 block">Charlotte, NC 28223</span>
-              <span class="text-xs text-[#767676] block mt-0.5">By Appointment Only</span>
+              <span class="text-[10px] font-mono uppercase tracking-widest text-[#67aec0] font-semibold block">Studio Location</span>
+              <span class="text-base font-semibold text-[#2b4951] mt-1.5 block">Charlotte, NC 28223</span>
+              <span class="text-xs text-[#767676] block mt-1">By Appointment Only</span>
             </div>
           </div>
         </div>
 
-        <!-- Form: 'Get in touch', zero labels on textarea, orange submit button -->
-        <form onsubmit="handleInquirySubmit(event)" class="space-y-6 bg-white border border-[#e2e5e8] p-8 md:p-10">
-          <h3 class="text-base font-semibold uppercase tracking-wider text-[#1a1d20]">Get in touch</h3>
+        <!-- Form: Borderless presentation on #f8f9fa, Eyeblue labels, Orange CTA -->
+        <form onsubmit="handleInquirySubmit(event)" class="space-y-8 pt-6">
+          <div class="border-b border-[#38606a]/20 pb-4">
+            <h3 class="text-sm font-mono uppercase tracking-[0.2em] font-semibold text-[#38606a]">Project Inquiries</h3>
+          </div>
           
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
             <div>
-              <label class="block text-xs font-mono uppercase tracking-wider text-[#1a1d20] mb-2">Name *</label>
-              <input type="text" required placeholder="Your full name" class="w-full bg-[#f8f9fa] border border-[#e2e5e8] p-3 text-xs text-[#1a1d20] focus:outline-none focus:border-[#de602e]">
+              <label class="block text-xs font-mono uppercase tracking-wider text-[#2b4951] font-semibold mb-2">Name *</label>
+              <input type="text" required placeholder="Your full name" class="w-full bg-[#f8f9fa] border border-[#d0d7de] p-3 text-xs text-[#1a1d20] focus:outline-none focus:border-[#38606a] transition-colors">
             </div>
             <div>
-              <label class="block text-xs font-mono uppercase tracking-wider text-[#1a1d20] mb-2">Email *</label>
-              <input type="email" required placeholder="your.email@domain.com" class="w-full bg-[#f8f9fa] border border-[#e2e5e8] p-3 text-xs text-[#1a1d20] focus:outline-none focus:border-[#de602e]">
+              <label class="block text-xs font-mono uppercase tracking-wider text-[#2b4951] font-semibold mb-2">Email *</label>
+              <input type="email" required placeholder="your.email@domain.com" class="w-full bg-[#f8f9fa] border border-[#d0d7de] p-3 text-xs text-[#1a1d20] focus:outline-none focus:border-[#38606a] transition-colors">
             </div>
           </div>
 
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
             <div>
-              <label class="block text-xs font-mono uppercase tracking-wider text-[#1a1d20] mb-2">Site Location</label>
-              <input type="text" placeholder="e.g. Asheville, NC" class="w-full bg-[#f8f9fa] border border-[#e2e5e8] p-3 text-xs text-[#1a1d20] focus:outline-none focus:border-[#de602e]">
+              <label class="block text-xs font-mono uppercase tracking-wider text-[#2b4951] font-semibold mb-2">Site Location</label>
+              <input type="text" placeholder="e.g. Asheville, NC / Blue Ridge Mountains" class="w-full bg-[#f8f9fa] border border-[#d0d7de] p-3 text-xs text-[#1a1d20] focus:outline-none focus:border-[#38606a] transition-colors">
             </div>
             <div>
-              <label class="block text-xs font-mono uppercase tracking-wider text-[#1a1d20] mb-2">Telephone</label>
-              <input type="tel" placeholder="e.g. +1 (704) 000-0000" class="w-full bg-[#f8f9fa] border border-[#e2e5e8] p-3 text-xs text-[#1a1d20] focus:outline-none focus:border-[#de602e]">
+              <label class="block text-xs font-mono uppercase tracking-wider text-[#2b4951] font-semibold mb-2">Telephone</label>
+              <input type="tel" placeholder="e.g. +1 (704) 000-0000" class="w-full bg-[#f8f9fa] border border-[#d0d7de] p-3 text-xs text-[#1a1d20] focus:outline-none focus:border-[#38606a] transition-colors">
             </div>
           </div>
 
           <div>
-            <label class="block text-xs font-mono uppercase tracking-wider text-[#1a1d20] mb-2">Project Scope & Program Requirements *</label>
-            <textarea id="contact-scope-textarea" rows="6" required placeholder="Describe your vision, site parameters, program requirements..." oninput="autoExpandTextarea(this)" class="w-full bg-[#f8f9fa] border border-[#e2e5e8] p-4 text-xs text-[#1a1d20] focus:outline-none focus:border-[#de602e] resize-none leading-relaxed"></textarea>
+            <label class="block text-xs font-mono uppercase tracking-wider text-[#2b4951] font-semibold mb-2">Project Scope & Program Requirements *</label>
+            <textarea id="contact-scope-textarea" rows="5" required placeholder="Describe your vision, site parameters, approximate square footage, or architectural timeline..." oninput="autoExpandTextarea(this)" class="w-full bg-[#f8f9fa] border border-[#d0d7de] p-4 text-xs text-[#1a1d20] focus:outline-none focus:border-[#38606a] resize-none leading-relaxed transition-colors"></textarea>
           </div>
 
           <div class="flex items-center justify-between pt-2">
-            <span class="text-[11px] text-[#595f65]">Confidentiality guaranteed.</span>
+            <span class="text-xs text-[#595f65]">Confidentiality guaranteed. Direct architect response within 24 hours.</span>
             <!-- Orange Submit Button -->
-            <button type="submit" class="px-10 py-3 bg-[#de602e] hover:bg-[#ad4b24] text-white text-xs font-mono uppercase tracking-widest font-semibold transition-colors shadow-sm">
+            <button type="submit" class="px-10 py-3.5 bg-[#de602e] hover:bg-[#ad4b24] text-white text-xs font-mono uppercase tracking-widest font-semibold transition-colors shadow-sm">
               Submit &rarr;
             </button>
           </div>
           
-          <div id="form-success" class="hidden p-4 bg-[#e4f0f2] border border-[#38606a] text-xs text-[#2b4951]">
+          <div id="form-success" class="hidden p-4 bg-[#e4f0f2] border border-[#67aec0] text-xs text-[#2b4951]">
             Thank you. Your message has been sent directly to Aleksandre Karpov.
           </div>
         </form>
@@ -1330,8 +1308,8 @@ def generate_contact_page():
 </html>
 """
     return page.replace('__SHARED_HEAD__', SHARED_HEAD_TAGS)\
-               .replace('__HEADER__', generate_header("contact"))\
-               .replace('__FOOTER__', generate_footer())
+               .replace('__HEADER__', generate_header("contact", borderless=True))\
+               .replace('__FOOTER__', generate_footer(borderless=True, bg="#f8f9fa"))
 
 def generate_academy_page():
     page = """<!DOCTYPE html>
