@@ -101,33 +101,9 @@ SHARED_HEAD_TAGS = """
       background-color: var(--bg-main);
       color: var(--text-main);
     }
-    .card-frame {
-      border: 1px solid transparent;
-      transition: border-color 0.3s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .card-frame:hover {
-      border-color: #1a1d20;
-    }
     ::-webkit-scrollbar {
       width: 5px;
       height: 5px;
-    }
-    ::-webkit-scrollbar-track {
-      background: #f1f3f5;
-    }
-    ::-webkit-scrollbar-thumb {
-      background: #adb5bd;
-    }
-    @media (hover: none) {
-      .variant-hover-overlay {
-        opacity: 0.95 !important;
-        transform: translateY(0) !important;
-        background: linear-gradient(to top, rgba(15, 18, 22, 0.85) 0%, rgba(15, 18, 22, 0.30) 60%, transparent 100%) !important;
-      }
-      .variant-title-space h3 {
-        opacity: 1 !important;
-        transform: translateY(0) !important;
-      }
     }
   </style>
 """
@@ -597,7 +573,7 @@ JS_TEMPLATE = """
         const card = document.createElement('div');
         
         const dimClass = hasActiveFilter && !isMatched ? 'opacity-40 hover:opacity-100 transition-opacity' : '';
-        card.className = `group cursor-pointer bg-white card-frame flex flex-col justify-between overflow-hidden ${dimClass}`;
+        card.className = `group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden ${dimClass}`;
         card.onclick = () => openModal(p.id);
 
         if (!IS_VARIANT) {
@@ -611,7 +587,7 @@ JS_TEMPLATE = """
               
               <!-- Title appears ON THE IMAGE when hovered -->
               <div class="variant-hover-overlay absolute inset-0 p-6 flex flex-col justify-end opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-500 ease-out">
-                <h3 class="text-base md:text-lg font-semibold text-white leading-tight drop-shadow-sm">${p.title}</h3>
+                <h3 class="text-base md:text-lg font-semibold text-white leading-tight drop-shadow-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500">${p.title}</h3>
               </div>
             </div>
           `;
@@ -622,8 +598,8 @@ JS_TEMPLATE = """
               <img src="${p.primary_image}" alt="${p.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
             </div>
             <!-- Dedicated space UNDERNEATH image: empty by default, title appears on hover -->
-            <div class="variant-title-space p-4 min-h-[64px] bg-white border-t border-[#e2e5e8] flex items-center">
-              <h3 class="text-sm md:text-base font-semibold text-[#1a1d20] leading-snug opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-all duration-300">
+            <div class="variant-title-space pt-5 pb-6 px-1 min-h-[84px] bg-transparent flex items-start">
+              <h3 class="text-sm md:text-base font-semibold text-[#1a1d20] leading-snug opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300 ease-out">
                 ${p.title}
               </h3>
             </div>
