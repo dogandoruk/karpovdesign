@@ -155,33 +155,48 @@
             <h2 class="text-xl font-semibold tracking-[0.25em] uppercase text-[#38606a] mb-8">Visual Documentation & Plates</h2>
             <div id="project-gallery" class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
               
-            <div class="group bg-transparent flex flex-col justify-start overflow-hidden">
+            <div onclick="openLightbox(0)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
               <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20] border border-[#e2e5e8]">
                 <img src="assets/official/projects/life-bridge/life_bridge_10.jpg" alt="Sivas Unity Bridge & Cultural Crossing — Plate 1" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-center justify-center">
+                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white/90 text-[#1a1d20] text-xs font-mono uppercase tracking-widest px-3 py-1.5 shadow-md">Enlarge</span>
+                </div>
               </div>
             </div>
 
-            <div class="group bg-transparent flex flex-col justify-start overflow-hidden">
+            <div onclick="openLightbox(1)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
               <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20] border border-[#e2e5e8]">
                 <img src="assets/official/projects/life-bridge/life_bridge_17.jpg" alt="Sivas Unity Bridge & Cultural Crossing — Plate 2" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-center justify-center">
+                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white/90 text-[#1a1d20] text-xs font-mono uppercase tracking-widest px-3 py-1.5 shadow-md">Enlarge</span>
+                </div>
               </div>
             </div>
 
-            <div class="group bg-transparent flex flex-col justify-start overflow-hidden">
+            <div onclick="openLightbox(2)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
               <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20] border border-[#e2e5e8]">
                 <img src="assets/official/projects/life-bridge/life_bridge_7.jpg" alt="Sivas Unity Bridge & Cultural Crossing — Plate 3" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-center justify-center">
+                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white/90 text-[#1a1d20] text-xs font-mono uppercase tracking-widest px-3 py-1.5 shadow-md">Enlarge</span>
+                </div>
               </div>
             </div>
 
-            <div class="group bg-transparent flex flex-col justify-start overflow-hidden">
+            <div onclick="openLightbox(3)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
               <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20] border border-[#e2e5e8]">
                 <img src="assets/official/projects/life-bridge/life_bridge_8.jpg" alt="Sivas Unity Bridge & Cultural Crossing — Plate 4" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-center justify-center">
+                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white/90 text-[#1a1d20] text-xs font-mono uppercase tracking-widest px-3 py-1.5 shadow-md">Enlarge</span>
+                </div>
               </div>
             </div>
 
-            <div class="group bg-transparent flex flex-col justify-start overflow-hidden">
+            <div onclick="openLightbox(4)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
               <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20] border border-[#e2e5e8]">
                 <img src="assets/official/projects/life-bridge/life_bridge_9.jpg" alt="Sivas Unity Bridge & Cultural Crossing — Plate 5" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-center justify-center">
+                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white/90 text-[#1a1d20] text-xs font-mono uppercase tracking-widest px-3 py-1.5 shadow-md">Enlarge</span>
+                </div>
               </div>
             </div>
 
@@ -203,6 +218,83 @@
       </div>
     </section>
   </main>
+
+  <!-- Near-Fullscreen Image Lightbox Modal -->
+  <div id="image-lightbox" class="fixed inset-0 z-50 bg-[#1a1d20]/95 backdrop-blur-md hidden flex flex-col items-center justify-between p-4 md:p-6" onclick="handleLightboxBackdrop(event)">
+    
+    <!-- Top Left: Blue "X" Button Without Any Borders per user directive -->
+    <button onclick="closeLightbox()" class="fixed top-4 left-6 z-60 text-blue-500 hover:text-blue-400 text-3xl font-bold bg-transparent border-none p-2 cursor-pointer transition-colors focus:outline-none" title="Close (Esc)" aria-label="Close popup">✕</button>
+
+    <!-- Top Bar: Counter -->
+    <div class="w-full max-w-[1920px] flex items-center justify-end text-white/80 pt-2">
+      <span id="lightbox-counter" class="text-xs font-mono uppercase tracking-widest">Plate 1 of 5</span>
+    </div>
+
+    <!-- Center Image Container & Flank Arrows -->
+    <div class="relative w-full flex-1 flex items-center justify-center my-2 select-none" onclick="event.stopPropagation()">
+      <button onclick="navigateLightbox(-1)" class="absolute left-2 md:left-6 z-10 text-white/80 hover:text-white bg-black/50 hover:bg-black/80 p-3 md:p-4 rounded-full transition-colors text-xl font-mono focus:outline-none" title="Previous (Left Arrow)">&#8592;</button>
+      <img id="lightbox-img" src="" alt="Enlarged Project Plate" class="max-w-[92vw] max-h-[82vh] object-contain drop-shadow-2xl transition-all duration-300">
+      <button onclick="navigateLightbox(1)" class="absolute right-2 md:right-6 z-10 text-white/80 hover:text-white bg-black/50 hover:bg-black/80 p-3 md:p-4 rounded-full transition-colors text-xl font-mono focus:outline-none" title="Next (Right Arrow)">&#8594;</button>
+    </div>
+
+    <!-- Bottom Caption -->
+    <div class="w-full max-w-[1920px] text-center text-xs font-mono uppercase tracking-widest text-white/60 pb-2">
+      <span>Sivas Unity Bridge & Cultural Crossing &bull; Visual Documentation</span>
+    </div>
+  </div>
+
+  <script>
+    const GALLERY_IMAGES = ["assets/official/projects/life-bridge/life_bridge_10.jpg", "assets/official/projects/life-bridge/life_bridge_17.jpg", "assets/official/projects/life-bridge/life_bridge_7.jpg", "assets/official/projects/life-bridge/life_bridge_8.jpg", "assets/official/projects/life-bridge/life_bridge_9.jpg"];
+    let currentLightboxIndex = 0;
+
+    function openLightbox(idx) {
+      if (!GALLERY_IMAGES || GALLERY_IMAGES.length === 0) return;
+      currentLightboxIndex = (idx + GALLERY_IMAGES.length) % GALLERY_IMAGES.length;
+      updateLightbox();
+      const lb = document.getElementById('image-lightbox');
+      lb.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      const lb = document.getElementById('image-lightbox');
+      lb.classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    function navigateLightbox(direction) {
+      if (!GALLERY_IMAGES || GALLERY_IMAGES.length === 0) return;
+      currentLightboxIndex = (currentLightboxIndex + direction + GALLERY_IMAGES.length) % GALLERY_IMAGES.length;
+      updateLightbox();
+    }
+
+    function updateLightbox() {
+      const img = document.getElementById('lightbox-img');
+      const counter = document.getElementById('lightbox-counter');
+      if (img && GALLERY_IMAGES[currentLightboxIndex]) {
+        img.src = GALLERY_IMAGES[currentLightboxIndex];
+        img.alt = "Sivas Unity Bridge & Cultural Crossing — Plate " + (currentLightboxIndex + 1);
+      }
+      if (counter) {
+        counter.textContent = `Plate ${currentLightboxIndex + 1} of ${GALLERY_IMAGES.length}`;
+      }
+    }
+
+    function handleLightboxBackdrop(e) {
+      if (e.target.id === 'image-lightbox') {
+        closeLightbox();
+      }
+    }
+
+    window.addEventListener('keydown', (e) => {
+      const lb = document.getElementById('image-lightbox');
+      if (lb && !lb.classList.contains('hidden')) {
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowLeft') navigateLightbox(-1);
+        if (e.key === 'ArrowRight') navigateLightbox(1);
+      }
+    });
+  </script>
 
 
   <!-- Centered Architectural Footer: Cleaned of legal blurb -->
