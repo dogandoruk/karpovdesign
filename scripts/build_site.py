@@ -313,7 +313,7 @@ def generate_footer(borderless=True, bg="#f8f9fa"):
 def generate_workflow_section():
     return """
   <!-- Workflow Section: Conceptual Sketch Image + 2 Lorem Ipsum Paragraphs (Directly Below Hero Banner, Borderless on #f8f9fa) -->
-  <section id="workflow" class="w-full bg-[#f8f9fa] pt-12 md:pt-20 pb-8 md:pb-12 px-5 md:px-12 lg:px-16">
+  <section id="workflow" class="w-full bg-[#f8f9fa] pt-12 md:pt-20 pb-10 md:pb-14 px-5 md:px-12 lg:px-16">
     <div class="w-full flex flex-col lg:flex-row items-stretch">
       
       <!-- 25% Left Pure Negative Space -->
@@ -327,10 +327,18 @@ def generate_workflow_section():
           <h2 class="text-lg sm:text-xl md:text-2xl font-semibold tracking-[0.25em] uppercase text-[#38606a]">Workflow</h2>
         </div>
 
-        <div class="flex flex-col md:flex-row items-start gap-8 lg:gap-12">
-          <div class="w-full md:w-1/2 aspect-[16/10] bg-transparent overflow-hidden shrink-0">
-            <img src="assets/official/projects/travel-sketches/ak_4.jpg" alt="Conceptual Architectural Sketch" class="w-full h-full object-cover">
+        <!-- 50/50 Side-by-Side: Conceptual Sketch (Natural 4:3, Click to Enlarge) & 2 Lorem Ipsum Paragraphs -->
+        <div class="flex flex-col md:flex-row items-center gap-8 lg:gap-12">
+          
+          <div onclick="openWorkflowLightbox()" class="group cursor-pointer w-full md:w-1/2 aspect-[4/3] bg-transparent overflow-hidden shrink-0 relative" title="Click to view full size">
+            <img src="assets/official/projects/travel-sketches/ak_4.jpg" 
+                 alt="Conceptual Architectural Sketch" 
+                 class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500 ease-out">
+            <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-3 pointer-events-none">
+              <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/80 text-[#67aec0] text-[10px] font-mono uppercase tracking-[0.2em] px-2.5 py-1">Enlarge</span>
+            </div>
           </div>
+
           <div class="w-full md:w-1/2 space-y-4 text-sm md:text-base text-[#595f65] leading-relaxed">
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
@@ -345,6 +353,32 @@ def generate_workflow_section():
 
     </div>
   </section>
+
+  <!-- Full-Size Image Lightbox Modal for Workflow Sketch -->
+  <div id="workflow-lightbox" class="fixed inset-0 z-50 bg-[#1a1d20]/85 backdrop-blur-md hidden flex items-center justify-center p-4 sm:p-6 md:p-10 cursor-pointer" onclick="closeWorkflowLightbox()">
+    <div class="relative max-w-5xl max-h-[90vh] flex items-center justify-center cursor-default" onclick="event.stopPropagation()">
+      <!-- Authentic Eyeblue X Button on top-left corner of the container -->
+      <button onclick="closeWorkflowLightbox()" class="absolute top-3 left-3 z-30 text-[#67aec0] hover:text-[#de602e] text-2xl md:text-3xl font-bold bg-[#1a1d20]/80 hover:bg-[#1a1d20] w-10 h-10 flex items-center justify-center transition-colors focus:outline-none cursor-pointer" title="Close (Esc)" aria-label="Close popup">✕</button>
+      <img src="assets/official/projects/travel-sketches/ak_4.jpg" alt="Conceptual Architectural Sketch — Full View" class="max-w-[94vw] max-h-[85vh] object-contain drop-shadow-2xl">
+    </div>
+  </div>
+
+  <script>
+    function openWorkflowLightbox() {
+      const lb = document.getElementById('workflow-lightbox');
+      if (lb) {
+        lb.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+    function closeWorkflowLightbox() {
+      const lb = document.getElementById('workflow-lightbox');
+      if (lb && !lb.classList.contains('hidden')) {
+        lb.classList.add('hidden');
+        document.body.style.overflow = '';
+      }
+    }
+  </script>
 """
 
 def generate_accolades_section():
@@ -855,7 +889,10 @@ JS_TEMPLATE = """
     }
 
     window.addEventListener('keydown', e => {
-      if (e.key === 'Escape') closeModal();
+      if (e.key === 'Escape') {
+        closeModal();
+        if (typeof closeWorkflowLightbox === 'function') closeWorkflowLightbox();
+      }
       if (!document.getElementById('project-modal').classList.contains('hidden')) {
         if (e.key === 'ArrowLeft') navigateModal(-1);
         if (e.key === 'ArrowRight') navigateModal(1);
