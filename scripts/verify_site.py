@@ -2,7 +2,12 @@ import os
 import re
 import json
 
-html_files = ['index.html', 'variant.html', 'about.html', 'contact.html', 'academy.html']
+import os
+import re
+import json
+import glob
+
+html_files = ['index.html', 'variant.html', 'about.html', 'contact.html', 'academy.html'] + sorted(glob.glob('project-*.html'))
 errors = []
 
 for hf in html_files:
@@ -32,6 +37,15 @@ for hf in html_files:
         if not os.path.exists(clean_l):
             errors.append(f"Broken link in {hf}: {l}")
 
+    # Check internal <a> hrefs
+    a_hrefs = re.findall(r'<a[^>]+href=["\']([^"\']+)["\']', html_no_scripts)
+    for href in a_hrefs:
+        if href.startswith(('http', 'mailto:', 'tel:', '#', 'javascript:')):
+            continue
+        clean_href = href.split('?')[0].split('#')[0]
+        if clean_href and not os.path.exists(clean_href):
+            errors.append(f"Broken a href in {hf}: {href}")
+
 # Check all images in projects.json
 with open('assets/official/projects.json', 'r', encoding='utf-8') as f:
     projects = json.load(f)
@@ -50,4 +64,4 @@ if errors:
     for e in errors:
         print(" -", e)
 else:
-    print("ALL 5 PAGES AND ALL 21 PROJECTS VERIFIED WITH ZERO BROKEN ASSETS OR 404 LINKS!")
+    print(f"ALL {len(html_files)} PAGES AND ALL {len(projects)} PROJECTS VERIFIED WITH ZERO BROKEN ASSETS OR 404 LINKS!")

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="assets/official/logo_charcoal.svg">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    if (!window.tailwind) {
+      document.write('<script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"><\/script>');
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-main: #f8f9fa;
+      --bg-surface: #ffffff;
+      --text-main: #1a1d20;
+      --text-muted: #595f65;
+      --border-line: #e2e5e8;
+      
+      /* Eyeblue palette */
+      --eyeblue-deep: #2b4951;
+      --eyeblue-mid: #38606a;
+      --eyeblue-soft: #67aec0;
+      --eyeblue-pale: #e4f0f2;
+
+      /* Hairberry orange palette */
+      --hairberry-rich: #ad4b24;
+      --hairberry-vibrant: #de602e;
+      --hairberry-bright: #f36a34;
+      --hairberry-peach: #f19f55;
+    }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg-main);
+      color: var(--text-main);
+    }
+    ::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+  </style>
+
+  <title>Folding Edge Sky Garden Pavilion — Aleksandre Karpov &bull; Karpov Design LLC</title>
+</head>
+<body class="antialiased bg-[#f8f9fa] text-[#1a1d20]">
+
+
+  <!-- Top Navigation: Logo + Stacked Text on the Top Left Corner per Figma Design -->
+  <header class="w-full bg-[#f8f9fa]/95 backdrop-blur-md border-b border-[#e2e5e8] z-50 sticky top-0 transition-all">
+    <div class="max-w-[1920px] mx-auto px-6 md:px-12 lg:px-16 flex items-center justify-between min-h-[84px]">
+      
+      <!-- Top Left Corner: Logo Monogram + Stacked Typography -->
+      <a href="index.html" class="flex items-center gap-3.5 group">
+        <img src="assets/official/logo_charcoal.svg" alt="KAD Monogram" class="h-10 md:h-11 w-auto">
+        <div class="flex flex-col text-[11px] font-semibold tracking-[0.2em] uppercase leading-tight text-[#1a1d20]">
+          <span>ALEKSANDRE</span>
+          <span>KARPOV</span>
+          <span class="text-[9px] tracking-[0.22em] text-[#595f65] font-normal">DESIGN LLC</span>
+        </div>
+      </a>
+
+      <!-- Top Right: Navigation Links -->
+      <nav class="flex items-center gap-8 text-xs tracking-[0.2em] uppercase">
+        <a href="index.html#works" class="text-[#1a1d20] font-semibold border-b-2 border-[#de602e] pb-0.5">Works</a>
+        <a href="about.html" class="text-[#595f65] hover:text-[#1a1d20] transition-colors">About</a>
+        <a href="contact.html" class="text-[#595f65] hover:text-[#1a1d20] transition-colors">Contact</a>
+      </nav>
+
+    </div>
+  </header>
+
+
+  <!-- Breadcrumb Navigation (text-sm font-mono uppercase tracking-widest) -->
+  <div class="w-full bg-white border-b border-[#e2e5e8] py-4 px-6 md:px-12 lg:px-16">
+    <nav aria-label="Breadcrumb" class="breadcrumb-bar max-w-[1920px] mx-auto text-sm font-mono uppercase tracking-widest text-[#595f65]">
+      <a href="index.html" class="hover:text-[#1a1d20] transition-colors">Home</a>
+      <span class="mx-2">&bull;</span>
+      <a href="index.html#works" class="hover:text-[#1a1d20] transition-colors">Works</a>
+      <span class="mx-2">&bull;</span>
+      <span class="text-[#1a1d20] font-semibold">Folding Edge Sky Garden Pavilion</span>
+    </nav>
+  </div>
+
+  <main>
+    <!-- Dedicated Hero Banner: Highest Resolution Render -->
+    <section id="project-hero-banner" class="relative w-full h-[60vh] md:h-[75vh] bg-[#1a1d20] overflow-hidden flex items-end">
+      <img src="assets/official/projects/folding-edge/folding_edge_11.jpg" alt="Folding Edge Sky Garden Pavilion" class="absolute inset-0 w-full h-full object-cover">
+      <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-black/20"></div>
+
+      <!-- Hero Title & Key Meta -->
+      <div class="relative z-10 max-w-[1920px] mx-auto w-full px-6 md:px-12 lg:px-16 pb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
+        <div>
+          <div class="flex items-center gap-3 mb-3">
+            <span class="text-xs font-mono uppercase tracking-widest px-2.5 py-1 bg-white text-[#1a1d20] font-semibold">Cultural</span>
+            <span class="text-xs font-mono uppercase tracking-widest px-2.5 py-1 bg-[#de602e] text-white font-semibold">Concept</span>
+          </div>
+          <h1 class="text-3xl md:text-5xl font-semibold tracking-tight text-white drop-shadow-md">Folding Edge Sky Garden Pavilion</h1>
+        </div>
+        <div class="text-xs md:text-sm font-mono text-white/90 uppercase tracking-widest">
+          <span>UNCC Architectural Labs, USA &bull; 2019</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Content: Strict 25% Left Pure Negative Space -->
+    <section class="w-full bg-[#f8f9fa] py-16 px-6 md:px-12 lg:px-16 border-b border-[#e2e5e8]">
+      <div class="max-w-[1920px] mx-auto flex flex-col lg:flex-row items-stretch">
+        
+        <!-- 25% Left Pure Empty Negative Space -->
+        <div class="hidden lg:block lg:w-1/4"></div>
+
+        <!-- 75% Right Active Column -->
+        <div class="w-full lg:w-3/4 lg:pl-12 space-y-12">
+          
+          <!-- Narrative & Brief -->
+          <div class="space-y-6 max-w-4xl">
+            <div class="border-b border-[#e2e5e8] pb-6">
+              <span class="text-xs font-mono uppercase tracking-[0.25em] text-[#38606a] font-semibold block mb-3">Project Brief & Spatial Strategy</span>
+              <p class="text-base md:text-lg text-[#1a1d20] leading-relaxed">
+                Origami-inspired origami geometric envelope engineered with self-supporting folded steel plates, creating dramatic cantilevered sky observation terraces.
+              </p>
+            </div>
+
+            
+
+            <!-- Specifications Table -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 py-4 border-b border-[#e2e5e8] text-xs font-mono">
+              <div>
+                <span class="text-[#767676] uppercase tracking-wider block">Typology</span>
+                <span class="text-[#1a1d20] font-semibold block mt-1 uppercase">Cultural</span>
+              </div>
+              <div>
+                <span class="text-[#767676] uppercase tracking-wider block">Status</span>
+                <span class="text-[#1a1d20] font-semibold block mt-1 uppercase">Concept / Exploration</span>
+              </div>
+              <div>
+                <span class="text-[#767676] uppercase tracking-wider block">Location</span>
+                <span class="text-[#1a1d20] font-semibold block mt-1">UNCC Architectural Labs, USA</span>
+              </div>
+              <div>
+                <span class="text-[#767676] uppercase tracking-wider block">Year</span>
+                <span class="text-[#1a1d20] font-semibold block mt-1">2019</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Large Images Gallery: Laid out in same clean grid as homepage -->
+          <div>
+            <h2 class="text-xl font-semibold tracking-[0.25em] uppercase text-[#38606a] mb-8">Visual Documentation & Plates</h2>
+            <div id="project-gallery" class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
+              
+            <div class="group bg-transparent flex flex-col justify-start overflow-hidden">
+              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20] border border-[#e2e5e8]">
+                <img src="assets/official/projects/folding-edge/folding_edge_11.jpg" alt="Folding Edge Sky Garden Pavilion — Plate 1" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+              </div>
+            </div>
+
+            <div class="group bg-transparent flex flex-col justify-start overflow-hidden">
+              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20] border border-[#e2e5e8]">
+                <img src="assets/official/projects/folding-edge/folding_edge_14.jpg" alt="Folding Edge Sky Garden Pavilion — Plate 2" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+              </div>
+            </div>
+
+            <div class="group bg-transparent flex flex-col justify-start overflow-hidden">
+              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20] border border-[#e2e5e8]">
+                <img src="assets/official/projects/folding-edge/folding_edge_2.jpg" alt="Folding Edge Sky Garden Pavilion — Plate 3" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+              </div>
+            </div>
+
+            <div class="group bg-transparent flex flex-col justify-start overflow-hidden">
+              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20] border border-[#e2e5e8]">
+                <img src="assets/official/projects/folding-edge/folding_edge_5.jpg" alt="Folding Edge Sky Garden Pavilion — Plate 4" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+              </div>
+            </div>
+
+            <div class="group bg-transparent flex flex-col justify-start overflow-hidden">
+              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20] border border-[#e2e5e8]">
+                <img src="assets/official/projects/folding-edge/folding_edge_9.jpg" alt="Folding Edge Sky Garden Pavilion — Plate 5" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+              </div>
+            </div>
+
+            </div>
+          </div>
+
+          <!-- Previous / Next Commission Navigation -->
+          <div class="border-t border-[#e2e5e8] pt-10 flex items-center justify-between text-xs font-mono uppercase tracking-widest">
+            <a href="project-hand-study.html" class="text-[#595f65] hover:text-[#de602e] transition-colors flex items-center gap-2">
+              &larr; Prev: Analog Charcoal & Structural Drafting Studies
+            </a>
+            <a href="project-community-plaza.html" class="text-[#595f65] hover:text-[#de602e] transition-colors flex items-center gap-2">
+              Next: Caferağa Community Center & Public Plaza &rarr;
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+
+  <!-- Centered Architectural Footer: Cleaned of legal blurb -->
+  <footer class="w-full bg-[#ffffff] border-t border-[#e2e5e8] py-16 px-6 md:px-12 lg:px-16">
+    <div class="max-w-[1920px] mx-auto flex flex-col lg:flex-row items-center justify-between gap-8">
+      
+      <!-- Left: Logo & Studio Identity -->
+      <div class="flex items-center gap-4">
+        <img src="assets/official/logo_charcoal.svg" alt="KAD Logo" class="h-10 w-auto">
+        <div>
+          <span class="text-sm font-semibold tracking-[0.2em] uppercase text-[#1a1d20] block">Karpov Design LLC</span>
+          <span class="text-xs text-[#595f65] block">Aleksandre Karpov &bull; Charlotte, NC</span>
+        </div>
+      </div>
+
+      <!-- Right: Links & Copyright -->
+      <div class="flex flex-col items-center lg:items-end gap-3 text-xs text-[#595f65]">
+        <div class="flex gap-8 tracking-[0.2em] uppercase font-medium">
+          <a href="index.html#works" class="hover:text-[#de602e] transition-colors">Works</a>
+          <a href="about.html" class="hover:text-[#de602e] transition-colors">About</a>
+          <a href="contact.html" class="hover:text-[#de602e] transition-colors">Contact</a>
+        </div>
+        <span class="font-mono text-[11px] text-[#767676]">&copy; 2026 Karpov Design LLC. All rights reserved.</span>
+      </div>
+
+    </div>
+  </footer>
+
+
+</body>
+</html>

@@ -1,11 +1,29 @@
 import os
 import json
+from PIL import Image
 
 def load_projects():
     with open('assets/official/projects.json', 'r', encoding='utf-8') as f:
         return json.load(f)
 
+def get_best_hero_image(p):
+    best = p.get('primary_image')
+    max_px = 0
+    for img in p.get('images', []):
+        if os.path.exists(img):
+            try:
+                with Image.open(img) as im:
+                    px = im.width * im.height
+                    if px > max_px:
+                        max_px = px
+                        best = img
+            except Exception:
+                pass
+    return best
+
 projects_data = load_projects()
+for p in projects_data:
+    p['best_hero_image'] = get_best_hero_image(p)
 projects_json_str = json.dumps(projects_data).replace('</script>', '<\\/script>')
 
 # Curate distinct high-resolution hero slides (1 per project)
@@ -436,7 +454,11 @@ def generate_interactive_modal():
             <div id="modal-award-box" class="p-3 bg-[#f8f9fa] border-l-2 border-[#de602e] mb-4 hidden">
               <p id="modal-award-text" class="text-xs font-semibold text-[#1a1d20]"></p>
             </div>
-            <p id="modal-description" class="text-xs md:text-sm text-[#595f65] leading-relaxed mb-6"></p>
+            <p id="modal-description" class="text-xs md:text-sm text-[#595f65] leading-relaxed mb-4"></p>
+            <a id="modal-project-link" href="#" class="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[#de602e] hover:text-[#1a1d20] font-semibold transition-colors mb-6">
+              <span>View Full Project Page</span>
+              <span>&rarr;</span>
+            </a>
           </div>
 
           <div class="border-t border-[#e2e5e8] pt-4 mt-auto">
@@ -579,7 +601,11 @@ JS_TEMPLATE = """
       activeOrderedList.forEach((p, index) => {
         const card = document.createElement('div');
         card.className = 'group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden';
-        card.onclick = () => openModal(p.id);
+        if (!IS_VARIANT) {
+          card.onclick = () => { window.location.href = `project-${p.id}.html`; };
+        } else {
+          card.onclick = () => openModal(p.id);
+        }
 
         if (!IS_VARIANT) {
           // DEFAULT VERSION (index.html): TITLE ON IMAGE ON HOVER (10% DARKENING VEIL)
@@ -730,6 +756,11 @@ JS_TEMPLATE = """
         awardText.textContent = p.awardText;
       } else {
         awardBox.classList.add('hidden');
+      }
+
+      const pageLink = document.getElementById('modal-project-link');
+      if (pageLink) {
+        pageLink.href = `project-${p.id}.html`;
       }
 
       const mainImg = document.getElementById('modal-main-img');
@@ -984,12 +1015,12 @@ def generate_about_page():
   __HEADER__
 
   <!-- Breadcrumb Navigation -->
-  <div class="w-full bg-white border-b border-[#e2e5e8] py-3 px-6 md:px-12 lg:px-16">
-    <div class="max-w-[1920px] mx-auto text-xs font-mono uppercase tracking-widest text-[#595f65]">
-      <a href="index.html" class="hover:text-[#1a1d20]">Home</a>
+  <div class="w-full bg-white border-b border-[#e2e5e8] py-4 px-6 md:px-12 lg:px-16">
+    <nav aria-label="Breadcrumb" class="breadcrumb-bar max-w-[1920px] mx-auto text-sm font-mono uppercase tracking-widest text-[#595f65]">
+      <a href="index.html" class="hover:text-[#1a1d20] transition-colors">Home</a>
       <span class="mx-2">&bull;</span>
       <span class="text-[#1a1d20] font-semibold">About</span>
-    </div>
+    </nav>
   </div>
 
   <main class="w-full bg-[#f8f9fa] py-20 px-6 md:px-12 lg:px-16">
@@ -1074,115 +1105,122 @@ def generate_contact_page():
 
   __HEADER__
 
-  <!-- Breadcrumb Navigation -->
-  <div class="w-full bg-white border-b border-[#e2e5e8] py-3 px-6 md:px-12 lg:px-16">
-    <div class="max-w-[1920px] mx-auto text-xs font-mono uppercase tracking-widest text-[#595f65]">
-      <a href="index.html" class="hover:text-[#1a1d20]">Home</a>
+  <!-- Breadcrumb Navigation (text-sm font-mono uppercase tracking-widest) -->
+  <div class="w-full bg-white border-b border-[#e2e5e8] py-4 px-6 md:px-12 lg:px-16">
+    <nav aria-label="Breadcrumb" class="breadcrumb-bar max-w-[1920px] mx-auto text-sm font-mono uppercase tracking-widest text-[#595f65]">
+      <a href="index.html" class="hover:text-[#1a1d20] transition-colors">Home</a>
       <span class="mx-2">&bull;</span>
       <span class="text-[#1a1d20] font-semibold">Contact</span>
-    </div>
+    </nav>
   </div>
 
   <main class="w-full bg-[#f8f9fa] py-16 px-6 md:px-12 lg:px-16">
-    <div class="max-w-[1920px] mx-auto">
+    <div class="max-w-[1920px] mx-auto flex flex-col lg:flex-row items-stretch">
       
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+      <!-- 25% Left Pure Empty Negative Space -->
+      <div class="hidden lg:block lg:w-1/4"></div>
+
+      <!-- 75% Right Active Column -->
+      <div class="w-full lg:w-3/4 lg:pl-12 space-y-12">
         
-        <!-- Left Column: Alex's Portrait (40% Viewport on Large Screens, zero rounded corners) -->
-        <div class="lg:col-span-5 flex flex-col">
-          <div class="w-full aspect-[4/5] bg-[#1a1d20] border border-[#1a1d20] overflow-hidden">
-            <img src="assets/official/alex_portrait.png" alt="Aleksandre Karpov" class="w-full h-full object-cover">
-          </div>
-          <div class="mt-4 p-4 bg-white border border-[#e2e5e8]">
-            <span class="text-sm font-semibold tracking-wider uppercase text-[#1a1d20] block">Aleksandre Karpov</span>
-            <span class="text-xs font-mono text-[#595f65] uppercase tracking-widest block mt-0.5">Karpov Design LLC &bull; Charlotte, NC</span>
-          </div>
-        </div>
-
-        <!-- Right Column: Direct Coordinates & Dynamic Inquiry Form -->
-        <div class="lg:col-span-7 space-y-10">
+        <!-- Portrait & Contact Details Row -->
+        <div class="flex flex-col md:flex-row gap-8 items-start">
           
-          <div>
-            <h1 class="text-3xl md:text-4xl font-semibold tracking-tight text-[#1a1d20] mb-4">Get in touch</h1>
-            <p class="text-sm text-[#595f65] leading-relaxed max-w-xl">
-              For residential design commissions, computational BIM consulting, or competition collaborations, reach out directly.
-            </p>
-          </div>
-
-          <!-- Direct Coordinates Grid -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 border-t border-b border-[#e2e5e8] py-6">
-            <div>
-              <span class="text-[10px] font-mono uppercase tracking-widest text-[#595f65] block">United States Direct</span>
-              <a href="tel:+17048459596" class="text-sm font-semibold text-[#1a1d20] hover:text-[#de602e] transition-colors mt-1 block">
-                +1 (704) 845-9596
-              </a>
-              <span class="text-xs text-[#767676]">Charlotte, North Carolina</span>
+          <!-- Scaled down portrait (consistent with 1/4 space layout) -->
+          <div class="w-44 sm:w-52 shrink-0 flex flex-col">
+            <div class="w-full aspect-[4/5] bg-[#1a1d20] border border-[#1a1d20] overflow-hidden">
+              <img src="assets/official/alex_portrait.png" alt="Aleksandre Karpov" class="w-full h-full object-cover">
             </div>
-            <div>
-              <span class="text-[10px] font-mono uppercase tracking-widest text-[#595f65] block">International Line</span>
-              <a href="tel:+905385907458" class="text-sm font-semibold text-[#1a1d20] hover:text-[#de602e] transition-colors mt-1 block">
-                +90 (538) 590-7458
-              </a>
-              <span class="text-xs text-[#767676]">Aegean Basin / European Projects</span>
-            </div>
-            <div>
-              <span class="text-[10px] font-mono uppercase tracking-widest text-[#595f65] block">Electronic Mail</span>
-              <a href="mailto:contact@karpovdesign.com" class="text-sm font-semibold text-[#1a1d20] hover:text-[#de602e] transition-colors mt-1 block">
-                contact@karpovdesign.com
-              </a>
-            </div>
-            <div>
-              <span class="text-[10px] font-mono uppercase tracking-widest text-[#595f65] block">Studio Location</span>
-              <span class="text-sm font-semibold text-[#1a1d20] mt-1 block">Charlotte, NC 28223</span>
-              <span class="text-xs text-[#767676]">By Appointment Only</span>
+            <div class="mt-3 p-3 bg-white border border-[#e2e5e8]">
+              <span class="text-xs font-semibold tracking-wider uppercase text-[#1a1d20] block">Aleksandre Karpov</span>
+              <span class="text-[10px] font-mono text-[#595f65] uppercase tracking-widest block mt-0.5">Karpov Design LLC &bull; Charlotte, NC</span>
             </div>
           </div>
 
-          <!-- Form: 'Get in touch', zero labels on textarea, orange submit button -->
-          <form onsubmit="handleInquirySubmit(event)" class="space-y-6 bg-white border border-[#e2e5e8] p-8">
-            <h3 class="text-base font-semibold uppercase tracking-wider text-[#1a1d20]">Get in touch</h3>
-            
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              <div>
-                <label class="block text-xs font-mono uppercase tracking-wider text-[#1a1d20] mb-2">Name *</label>
-                <input type="text" required placeholder="Your full name" class="w-full bg-[#f8f9fa] border border-[#e2e5e8] p-3 text-xs text-[#1a1d20] focus:outline-none focus:border-[#de602e]">
-              </div>
-              <div>
-                <label class="block text-xs font-mono uppercase tracking-wider text-[#1a1d20] mb-2">Email *</label>
-                <input type="email" required placeholder="your.email@domain.com" class="w-full bg-[#f8f9fa] border border-[#e2e5e8] p-3 text-xs text-[#1a1d20] focus:outline-none focus:border-[#de602e]">
-              </div>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              <div>
-                <label class="block text-xs font-mono uppercase tracking-wider text-[#1a1d20] mb-2">Site Location</label>
-                <input type="text" placeholder="e.g. Asheville, NC" class="w-full bg-[#f8f9fa] border border-[#e2e5e8] p-3 text-xs text-[#1a1d20] focus:outline-none focus:border-[#de602e]">
-              </div>
-              <div>
-                <label class="block text-xs font-mono uppercase tracking-wider text-[#1a1d20] mb-2">Telephone</label>
-                <input type="tel" placeholder="e.g. +1 (704) 000-0000" class="w-full bg-[#f8f9fa] border border-[#e2e5e8] p-3 text-xs text-[#1a1d20] focus:outline-none focus:border-[#de602e]">
-              </div>
-            </div>
-
+          <!-- Direct Coordinates & Bio -->
+          <div class="flex-1 space-y-6">
             <div>
-              <label class="block text-xs font-mono uppercase tracking-wider text-[#1a1d20] mb-2">Project Scope & Program Requirements *</label>
-              <textarea id="contact-scope-textarea" rows="6" required placeholder="Describe your vision, site parameters, program requirements..." oninput="autoExpandTextarea(this)" class="w-full bg-[#f8f9fa] border border-[#e2e5e8] p-4 text-xs text-[#1a1d20] focus:outline-none focus:border-[#de602e] resize-none leading-relaxed"></textarea>
+              <h1 class="text-3xl md:text-4xl font-semibold tracking-tight text-[#1a1d20] mb-2">Get in touch</h1>
+              <p class="text-sm text-[#595f65] leading-relaxed max-w-xl">
+                For residential design commissions, computational BIM consulting, or competition collaborations, reach out directly.
+              </p>
             </div>
 
-            <div class="flex items-center justify-between pt-2">
-              <span class="text-[11px] text-[#595f65]">Confidentiality guaranteed.</span>
-              <!-- Orange Submit Button -->
-              <button type="submit" class="px-10 py-3 bg-[#de602e] hover:bg-[#ad4b24] text-white text-xs font-mono uppercase tracking-widest font-semibold transition-colors shadow-sm">
-                Submit &rarr;
-              </button>
+            <!-- Direct Coordinates Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 border-t border-b border-[#e2e5e8] py-4">
+              <div>
+                <span class="text-[10px] font-mono uppercase tracking-widest text-[#595f65] block">United States Direct</span>
+                <a href="tel:+17048459596" class="text-sm font-semibold text-[#1a1d20] hover:text-[#de602e] transition-colors mt-1 block">
+                  +1 (704) 845-9596
+                </a>
+                <span class="text-xs text-[#767676]">Charlotte, North Carolina</span>
+              </div>
+              <div>
+                <span class="text-[10px] font-mono uppercase tracking-widest text-[#595f65] block">International Line</span>
+                <a href="tel:+905385907458" class="text-sm font-semibold text-[#1a1d20] hover:text-[#de602e] transition-colors mt-1 block">
+                  +90 (538) 590-7458
+                </a>
+                <span class="text-xs text-[#767676]">Aegean Basin / European Projects</span>
+              </div>
+              <div>
+                <span class="text-[10px] font-mono uppercase tracking-widest text-[#595f65] block">Electronic Mail</span>
+                <a href="mailto:contact@karpovdesign.com" class="text-sm font-semibold text-[#1a1d20] hover:text-[#de602e] transition-colors mt-1 block">
+                  contact@karpovdesign.com
+                </a>
+              </div>
+              <div>
+                <span class="text-[10px] font-mono uppercase tracking-widest text-[#595f65] block">Studio Location</span>
+                <span class="text-sm font-semibold text-[#1a1d20] mt-1 block">Charlotte, NC 28223</span>
+                <span class="text-xs text-[#767676]">By Appointment Only</span>
+              </div>
             </div>
-            
-            <div id="form-success" class="hidden p-4 bg-[#e4f0f2] border border-[#38606a] text-xs text-[#2b4951]">
-              Thank you. Your message has been sent directly to Aleksandre Karpov.
-            </div>
-          </form>
+          </div>
 
         </div>
+
+        <!-- Form: 'Get in touch', zero labels on textarea, orange submit button -->
+        <form onsubmit="handleInquirySubmit(event)" class="space-y-6 bg-white border border-[#e2e5e8] p-8 md:p-10">
+          <h3 class="text-base font-semibold uppercase tracking-wider text-[#1a1d20]">Get in touch</h3>
+          
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div>
+              <label class="block text-xs font-mono uppercase tracking-wider text-[#1a1d20] mb-2">Name *</label>
+              <input type="text" required placeholder="Your full name" class="w-full bg-[#f8f9fa] border border-[#e2e5e8] p-3 text-xs text-[#1a1d20] focus:outline-none focus:border-[#de602e]">
+            </div>
+            <div>
+              <label class="block text-xs font-mono uppercase tracking-wider text-[#1a1d20] mb-2">Email *</label>
+              <input type="email" required placeholder="your.email@domain.com" class="w-full bg-[#f8f9fa] border border-[#e2e5e8] p-3 text-xs text-[#1a1d20] focus:outline-none focus:border-[#de602e]">
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div>
+              <label class="block text-xs font-mono uppercase tracking-wider text-[#1a1d20] mb-2">Site Location</label>
+              <input type="text" placeholder="e.g. Asheville, NC" class="w-full bg-[#f8f9fa] border border-[#e2e5e8] p-3 text-xs text-[#1a1d20] focus:outline-none focus:border-[#de602e]">
+            </div>
+            <div>
+              <label class="block text-xs font-mono uppercase tracking-wider text-[#1a1d20] mb-2">Telephone</label>
+              <input type="tel" placeholder="e.g. +1 (704) 000-0000" class="w-full bg-[#f8f9fa] border border-[#e2e5e8] p-3 text-xs text-[#1a1d20] focus:outline-none focus:border-[#de602e]">
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-mono uppercase tracking-wider text-[#1a1d20] mb-2">Project Scope & Program Requirements *</label>
+            <textarea id="contact-scope-textarea" rows="6" required placeholder="Describe your vision, site parameters, program requirements..." oninput="autoExpandTextarea(this)" class="w-full bg-[#f8f9fa] border border-[#e2e5e8] p-4 text-xs text-[#1a1d20] focus:outline-none focus:border-[#de602e] resize-none leading-relaxed"></textarea>
+          </div>
+
+          <div class="flex items-center justify-between pt-2">
+            <span class="text-[11px] text-[#595f65]">Confidentiality guaranteed.</span>
+            <!-- Orange Submit Button -->
+            <button type="submit" class="px-10 py-3 bg-[#de602e] hover:bg-[#ad4b24] text-white text-xs font-mono uppercase tracking-widest font-semibold transition-colors shadow-sm">
+              Submit &rarr;
+            </button>
+          </div>
+          
+          <div id="form-success" class="hidden p-4 bg-[#e4f0f2] border border-[#38606a] text-xs text-[#2b4951]">
+            Thank you. Your message has been sent directly to Aleksandre Karpov.
+          </div>
+        </form>
 
       </div>
 
@@ -1239,17 +1277,23 @@ def generate_academy_page():
     </div>
   </header>
 
-  <!-- Breadcrumb Navigation -->
-  <div class="w-full bg-white border-b border-[#e2e5e8] py-3 px-6 md:px-12 lg:px-16">
-    <div class="max-w-[1920px] mx-auto text-xs font-mono uppercase tracking-widest text-[#595f65]">
-      <a href="index.html" class="hover:text-[#1a1d20]">Home</a>
+  <!-- Breadcrumb Navigation (text-sm font-mono uppercase tracking-widest) -->
+  <div class="w-full bg-white border-b border-[#e2e5e8] py-4 px-6 md:px-12 lg:px-16">
+    <nav aria-label="Breadcrumb" class="breadcrumb-bar max-w-[1920px] mx-auto text-sm font-mono uppercase tracking-widest text-[#595f65]">
+      <a href="index.html" class="hover:text-[#1a1d20] transition-colors">Home</a>
       <span class="mx-2">&bull;</span>
       <span class="text-[#1a1d20] font-semibold">Academy (Private Syllabus)</span>
-    </div>
+    </nav>
   </div>
 
   <main class="w-full bg-[#f8f9fa] py-16 px-6 md:px-12 lg:px-16">
-    <div class="max-w-[1920px] mx-auto space-y-16">
+    <div class="max-w-[1920px] mx-auto flex flex-col lg:flex-row items-stretch">
+      
+      <!-- 25% Left Pure Empty Negative Space -->
+      <div class="hidden lg:block lg:w-1/4"></div>
+
+      <!-- 75% Right Active Column -->
+      <div class="w-full lg:w-3/4 lg:pl-12 space-y-16">
       
       <!-- Centerpiece Masterclass Player -->
       <div class="border border-[#1a1d20] bg-white p-6 md:p-10 card-frame">
@@ -1342,6 +1386,7 @@ def generate_academy_page():
         </div>
       </div>
 
+      </div>
     </div>
   </main>
 
@@ -1359,13 +1404,155 @@ def generate_academy_page():
     return page.replace('__SHARED_HEAD__', SHARED_HEAD_TAGS)\
                .replace('__FOOTER__', generate_footer())
 
+def generate_project_page(p, prev_p, next_p):
+    best_hero = get_best_hero_image(p)
+    status_label = "Built Commission" if p.get('status') == 'Completion' else "Concept / Exploration"
+    status_badge = "Built" if p.get('status') == 'Completion' else "Concept"
+    
+    award_markup = ""
+    if p.get('award') and p.get('awardText'):
+        award_markup = f"""
+            <div class="p-4 bg-[#f8f9fa] border-l-2 border-[#de602e]">
+              <span class="text-[10px] font-mono uppercase tracking-widest text-[#de602e] block">Award / Selection</span>
+              <p class="text-xs md:text-sm font-semibold text-[#1a1d20] mt-1">{p['awardText']}</p>
+            </div>
+"""
+
+    images = p.get('images', [])
+    gallery_html = ""
+    for idx, img_path in enumerate(images):
+        gallery_html += f"""
+            <div class="group bg-transparent flex flex-col justify-start overflow-hidden">
+              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20] border border-[#e2e5e8]">
+                <img src="{img_path}" alt="{p['title']} — Plate {idx+1}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+              </div>
+            </div>
+"""
+
+    template = f"""<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+__SHARED_HEAD__
+  <title>{p['title']} — Aleksandre Karpov &bull; Karpov Design LLC</title>
+</head>
+<body class="antialiased bg-[#f8f9fa] text-[#1a1d20]">
+
+__HEADER__
+
+  <!-- Breadcrumb Navigation (text-sm font-mono uppercase tracking-widest) -->
+  <div class="w-full bg-white border-b border-[#e2e5e8] py-4 px-6 md:px-12 lg:px-16">
+    <nav aria-label="Breadcrumb" class="breadcrumb-bar max-w-[1920px] mx-auto text-sm font-mono uppercase tracking-widest text-[#595f65]">
+      <a href="index.html" class="hover:text-[#1a1d20] transition-colors">Home</a>
+      <span class="mx-2">&bull;</span>
+      <a href="index.html#works" class="hover:text-[#1a1d20] transition-colors">Works</a>
+      <span class="mx-2">&bull;</span>
+      <span class="text-[#1a1d20] font-semibold">{p['title']}</span>
+    </nav>
+  </div>
+
+  <main>
+    <!-- Dedicated Hero Banner: Highest Resolution Render -->
+    <section id="project-hero-banner" class="relative w-full h-[60vh] md:h-[75vh] bg-[#1a1d20] overflow-hidden flex items-end">
+      <img src="{best_hero}" alt="{p['title']}" class="absolute inset-0 w-full h-full object-cover">
+      <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-black/20"></div>
+
+      <!-- Hero Title & Key Meta -->
+      <div class="relative z-10 max-w-[1920px] mx-auto w-full px-6 md:px-12 lg:px-16 pb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
+        <div>
+          <div class="flex items-center gap-3 mb-3">
+            <span class="text-xs font-mono uppercase tracking-widest px-2.5 py-1 bg-white text-[#1a1d20] font-semibold">{p['typology']}</span>
+            <span class="text-xs font-mono uppercase tracking-widest px-2.5 py-1 bg-[#de602e] text-white font-semibold">{status_badge}</span>
+          </div>
+          <h1 class="text-3xl md:text-5xl font-semibold tracking-tight text-white drop-shadow-md">{p['title']}</h1>
+        </div>
+        <div class="text-xs md:text-sm font-mono text-white/90 uppercase tracking-widest">
+          <span>{p['location']} &bull; {p['year']}</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Content: Strict 25% Left Pure Negative Space -->
+    <section class="w-full bg-[#f8f9fa] py-16 px-6 md:px-12 lg:px-16 border-b border-[#e2e5e8]">
+      <div class="max-w-[1920px] mx-auto flex flex-col lg:flex-row items-stretch">
+        
+        <!-- 25% Left Pure Empty Negative Space -->
+        <div class="hidden lg:block lg:w-1/4"></div>
+
+        <!-- 75% Right Active Column -->
+        <div class="w-full lg:w-3/4 lg:pl-12 space-y-12">
+          
+          <!-- Narrative & Brief -->
+          <div class="space-y-6 max-w-4xl">
+            <div class="border-b border-[#e2e5e8] pb-6">
+              <span class="text-xs font-mono uppercase tracking-[0.25em] text-[#38606a] font-semibold block mb-3">Project Brief & Spatial Strategy</span>
+              <p class="text-base md:text-lg text-[#1a1d20] leading-relaxed">
+                {p['description']}
+              </p>
+            </div>
+
+            {award_markup}
+
+            <!-- Specifications Table -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 py-4 border-b border-[#e2e5e8] text-xs font-mono">
+              <div>
+                <span class="text-[#767676] uppercase tracking-wider block">Typology</span>
+                <span class="text-[#1a1d20] font-semibold block mt-1 uppercase">{p['typology']}</span>
+              </div>
+              <div>
+                <span class="text-[#767676] uppercase tracking-wider block">Status</span>
+                <span class="text-[#1a1d20] font-semibold block mt-1 uppercase">{status_label}</span>
+              </div>
+              <div>
+                <span class="text-[#767676] uppercase tracking-wider block">Location</span>
+                <span class="text-[#1a1d20] font-semibold block mt-1">{p['location']}</span>
+              </div>
+              <div>
+                <span class="text-[#767676] uppercase tracking-wider block">Year</span>
+                <span class="text-[#1a1d20] font-semibold block mt-1">{p['year']}</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Large Images Gallery: Laid out in same clean grid as homepage -->
+          <div>
+            <h2 class="text-xl font-semibold tracking-[0.25em] uppercase text-[#38606a] mb-8">Visual Documentation & Plates</h2>
+            <div id="project-gallery" class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
+              {gallery_html}
+            </div>
+          </div>
+
+          <!-- Previous / Next Commission Navigation -->
+          <div class="border-t border-[#e2e5e8] pt-10 flex items-center justify-between text-xs font-mono uppercase tracking-widest">
+            <a href="project-{prev_p['id']}.html" class="text-[#595f65] hover:text-[#de602e] transition-colors flex items-center gap-2">
+              &larr; Prev: {prev_p['title']}
+            </a>
+            <a href="project-{next_p['id']}.html" class="text-[#595f65] hover:text-[#de602e] transition-colors flex items-center gap-2">
+              Next: {next_p['title']} &rarr;
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+__FOOTER__
+
+</body>
+</html>
+"""
+    return template.replace('__SHARED_HEAD__', SHARED_HEAD_TAGS)\
+                   .replace('__HEADER__', generate_header("works"))\
+                   .replace('__FOOTER__', generate_footer())
+
 def main():
-    print("Building Version 1 (index.html): Default title appears on image on hover...")
+    print("Building Version 1 (index.html): Default title appears on image on hover, clicks navigate to project pages...")
     with open('index.html', 'w', encoding='utf-8') as f:
         f.write(generate_landing_page(is_variant=False))
     print("Saved index.html")
 
-    print("Building Version 2 (variant.html): Variant title appears in space below image on hover...")
+    print("Building Version 2 (variant.html): Variant title appears in space below image on hover, clicks open pop-up modal...")
     with open('variant.html', 'w', encoding='utf-8') as f:
         f.write(generate_landing_page(is_variant=True))
     print("Saved variant.html")
@@ -1384,6 +1571,15 @@ def main():
     with open('academy.html', 'w', encoding='utf-8') as f:
         f.write(generate_academy_page())
     print("Saved academy.html")
+
+    print("Building 21 individual project pages...")
+    for idx, p in enumerate(projects_data):
+        prev_p = projects_data[(idx - 1 + len(projects_data)) % len(projects_data)]
+        next_p = projects_data[(idx + 1) % len(projects_data)]
+        fname = f"project-{p['id']}.html"
+        with open(fname, 'w', encoding='utf-8') as f:
+            f.write(generate_project_page(p, prev_p, next_p))
+    print(f"Saved {len(projects_data)} individual project pages!")
 
     print("All site pages built successfully with zero extraneous labels!")
 
