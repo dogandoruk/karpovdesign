@@ -152,10 +152,6 @@ SHARED_HEAD_TAGS = """
         padding-bottom: 12px !important;
       }
     }
-    .scroll-fade-right {
-      mask-image: linear-gradient(to right, black 88%, transparent 100%);
-      -webkit-mask-image: linear-gradient(to right, black 88%, transparent 100%);
-    }
   </style>
 """
 
@@ -931,12 +927,22 @@ JS_TEMPLATE = """
         const slug = window.location.hash.replace('#project-', '');
         openModal(slug);
       }
+
+      // Freeze animated logo on its completed last frame once playback duration finishes
+      const lastFrame = new Image();
+      lastFrame.src = 'assets/official/kad_logo_white_last_frame.png';
+      setTimeout(() => {
+        const logoImg = document.getElementById('hero-logo-img');
+        if (logoImg) logoImg.src = lastFrame.src;
+      }, __ANIM_DURATION__);
     });
   </script>
 """
 
 def generate_landing_page(is_variant=False):
     title_suffix = "Works Archive (Default)" if not is_variant else "Works Archive (Variant)"
+    hero_logo_src = "assets/official/kad_logo_white_animated_default.gif" if not is_variant else "assets/official/kad_logo_white_animated_variant.gif"
+    anim_duration = "4000" if not is_variant else "2000"
     
     # Hero: Centered circles on variant only, zero status pills
     dots_markup = """
@@ -945,7 +951,7 @@ def generate_landing_page(is_variant=False):
 """ if is_variant else ""
 
     hero_markup = f"""
-  <!-- Hero Banner: 5x Enlarged White Vector Line-Art Logo + Multi-Project Slideshow (Click to Pause) -->
+  <!-- Hero Banner: Animated White Line-Art Logo (Freezes on last frame) + Multi-Project Slideshow (Click to Pause) -->
   <section class="relative w-full h-[74svh] sm:h-[80svh] md:h-[90dvh] bg-[#1a1d20] overflow-hidden flex items-center justify-center select-none cursor-pointer">
     
     <!-- Slideshow Background Container -->
@@ -956,9 +962,9 @@ def generate_landing_page(is_variant=False):
     <!-- Dark Scrim Veil -->
     <div class="absolute inset-0 bg-black/45 z-5 pointer-events-none"></div>
 
-    <!-- Centerpiece: 5x Enlarged White Vector Line-Art Logo + Aleksandre Karpov (No extra subtitles) -->
+    <!-- Centerpiece: White Line-Art Logo Animation (Monumental 5x Size) + Aleksandre Karpov -->
     <div class="relative z-10 flex flex-col items-center justify-center text-center px-6 pointer-events-none">
-      <img src="assets/official/logo_white.svg" alt="Aleksandre Karpov Logo" class="w-56 sm:w-72 md:w-96 lg:w-[480px] h-auto drop-shadow-2xl">
+      <img id="hero-logo-img" src="{hero_logo_src}" alt="Aleksandre Karpov Logo" class="w-56 sm:w-72 md:w-96 lg:w-[480px] h-auto drop-shadow-2xl">
       <h1 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold tracking-[0.25em] uppercase text-white mt-5 md:mt-6 drop-shadow-md">
         Aleksandre Karpov
       </h1>
@@ -970,10 +976,10 @@ def generate_landing_page(is_variant=False):
 
     if not is_variant:
         filter_bar_markup = """
-  <!-- Default Version Typographic Filters: BIG.dk Horizontal Touch Ribbon on Mobile + Borderless Collapsible Secondary Row -->
+  <!-- Default Version Typographic Filters: BIG.dk Horizontal Touch Ribbon on Mobile + Borderless Collapsible Secondary Row (No Fade Mask) -->
   <div class="w-full bg-[#f8f9fa] pt-5 md:pt-8 pb-3 md:pb-4 space-y-3 md:space-y-4">
     <!-- Row 1: Typology Open Buttons -->
-    <div class="flex items-center gap-6 md:gap-10 text-xs md:text-sm font-mono uppercase tracking-[0.2em] pb-2 overflow-x-auto no-scrollbar scroll-fade-right whitespace-nowrap">
+    <div class="flex items-center gap-6 md:gap-10 text-xs md:text-sm font-mono uppercase tracking-[0.2em] pb-2 overflow-x-auto no-scrollbar whitespace-nowrap">
       <button onclick="setTypology('all')" id="btn-typ-all" class="filter-typ-btn text-[#de602e] font-semibold border-b-2 border-[#de602e] pb-1.5 shrink-0">All</button>
       <button onclick="setTypology('Residential')" id="btn-typ-residential" class="filter-typ-btn text-[#767676] hover:text-[#1a1d20] pb-1.5 transition-colors shrink-0">Residential</button>
       <button onclick="setTypology('Commercial')" id="btn-typ-commercial" class="filter-typ-btn text-[#767676] hover:text-[#1a1d20] pb-1.5 transition-colors shrink-0">Commercial</button>
@@ -1014,8 +1020,8 @@ def generate_landing_page(is_variant=False):
   <!-- Variant Version Typographic Filters: Type Row + Right-Aligned Simplistic Dropdowns -->
   <div class="w-full bg-[#f8f9fa] pt-5 md:pt-8 pb-3 md:pb-4">
     <div class="flex flex-col xl:flex-row xl:items-center justify-between gap-4 md:gap-6 pb-2">
-      <!-- Left: Typology Open Buttons -->
-      <div class="flex items-center gap-6 md:gap-10 text-xs md:text-sm font-mono uppercase tracking-[0.2em] overflow-x-auto no-scrollbar scroll-fade-right whitespace-nowrap pb-1">
+      <!-- Left: Typology Open Buttons (No Fade Mask) -->
+      <div class="flex items-center gap-6 md:gap-10 text-xs md:text-sm font-mono uppercase tracking-[0.2em] overflow-x-auto no-scrollbar whitespace-nowrap pb-1">
         <button onclick="setTypology('all')" id="btn-typ-all" class="filter-typ-btn text-[#de602e] font-semibold border-b-2 border-[#de602e] pb-1.5 shrink-0">All</button>
         <button onclick="setTypology('Residential')" id="btn-typ-residential" class="filter-typ-btn text-[#767676] hover:text-[#1a1d20] pb-1.5 transition-colors shrink-0">Residential</button>
         <button onclick="setTypology('Commercial')" id="btn-typ-commercial" class="filter-typ-btn text-[#767676] hover:text-[#1a1d20] pb-1.5 transition-colors shrink-0">Commercial</button>
@@ -1096,7 +1102,8 @@ def generate_landing_page(is_variant=False):
 
     rendered_js = JS_TEMPLATE.replace('__PROJECTS_JSON__', projects_json_str)\
                              .replace('__HERO_SLIDES_JSON__', hero_slides_json_str)\
-                             .replace('__IS_VARIANT__', 'true' if is_variant else 'false')
+                             .replace('__IS_VARIANT__', 'true' if is_variant else 'false')\
+                             .replace('__ANIM_DURATION__', anim_duration)
 
     page = """<!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
