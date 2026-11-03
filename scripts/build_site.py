@@ -927,15 +927,44 @@ JS_TEMPLATE = """
         const slug = window.location.hash.replace('#project-', '');
         openModal(slug);
       }
-
-      // Freeze animated logo on its completed last frame once playback duration finishes
-      const lastFrame = new Image();
-      lastFrame.src = 'assets/official/kad_logo_white_last_frame.png';
-      setTimeout(() => {
-        const logoImg = document.getElementById('hero-logo-img');
-        if (logoImg) logoImg.src = lastFrame.src;
-      }, __ANIM_DURATION__);
+      initLogoAnimation();
     });
+
+    // High-Fidelity Canvas Spritesheet Player: Plays once from frame 0 to 59 and freezes permanently on the last frame
+    function initLogoAnimation() {
+      const canvas = document.getElementById('hero-logo-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const sheet = new Image();
+      sheet.src = 'assets/official/kad_logo_spritesheet.png';
+
+      const totalFrames = 60;
+      const cols = 8;
+      const fw = 400, fh = 520;
+      const duration = __ANIM_DURATION__;
+
+      sheet.onload = () => {
+        let startTime = null;
+
+        function step(now) {
+          if (!startTime) startTime = now;
+          const elapsed = now - startTime;
+          const progress = Math.min(1, elapsed / duration);
+          const frameIdx = Math.min(totalFrames - 1, Math.floor(progress * totalFrames));
+
+          const col = frameIdx % cols;
+          const row = Math.floor(frameIdx / cols);
+
+          ctx.clearRect(0, 0, fw, fh);
+          ctx.drawImage(sheet, col * fw, row * fh, fw, fh, 0, 0, fw, fh);
+
+          if (progress < 1) {
+            requestAnimationFrame(step);
+          }
+        }
+        requestAnimationFrame(step);
+      };
+    }
   </script>
 """
 
@@ -964,7 +993,7 @@ def generate_landing_page(is_variant=False):
 
     <!-- Centerpiece: White Line-Art Logo Animation (Monumental 5x Size) + Aleksandre Karpov -->
     <div class="relative z-10 flex flex-col items-center justify-center text-center px-6 pointer-events-none">
-      <img id="hero-logo-img" src="{hero_logo_src}" alt="Aleksandre Karpov Logo" class="w-56 sm:w-72 md:w-96 lg:w-[480px] h-auto drop-shadow-2xl">
+      <canvas id="hero-logo-canvas" width="400" height="520" class="w-56 sm:w-72 md:w-96 lg:w-[480px] h-auto drop-shadow-2xl"></canvas>
       <h1 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold tracking-[0.25em] uppercase text-white mt-5 md:mt-6 drop-shadow-md">
         Aleksandre Karpov
       </h1>
