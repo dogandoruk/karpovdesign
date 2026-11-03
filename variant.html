@@ -13,7 +13,11 @@
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
+  <style>
+    .font-raleway {
+      font-family: 'Raleway', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+    }
   <style>
     :root {
       --bg-main: #f8f9fa;
@@ -86,7 +90,7 @@
       <!-- Top Left Corner: Logo Monogram + Stacked Typography -->
       <a href="index.html" class="flex items-center gap-3 md:gap-3.5 group">
         <img src="assets/official/logo_charcoal.svg" alt="KAD Monogram" class="h-9 md:h-11 w-auto">
-        <div class="flex flex-col text-[11px] font-semibold tracking-[0.2em] uppercase leading-tight text-[#1a1d20]">
+        <div class="flex flex-col text-[11px] font-semibold tracking-[0.2em] uppercase leading-tight text-[#1a1d20] ">
           <span>ALEKSANDRE</span>
           <span>KARPOV</span>
           <span class="text-[9px] tracking-[0.22em] text-[#595f65] font-normal">DESIGN LLC</span>
@@ -94,10 +98,10 @@
       </a>
 
       <!-- Tablet & Desktop Navigation Links (>= 768px) -->
-      <nav class="hidden md:flex items-center gap-8 text-xs tracking-[0.2em] uppercase">
-        <a href="index.html#works" class="text-[#1a1d20] font-semibold border-b-2 border-[#de602e] pb-0.5">Works</a>
-        <a href="about.html" class="text-[#595f65] hover:text-[#1a1d20] transition-colors">About</a>
-        <a href="contact.html" class="text-[#595f65] hover:text-[#1a1d20] transition-colors">Contact</a>
+      <nav class="hidden md:flex items-center gap-8 text-xs tracking-[0.2em] uppercase ">
+        <a href="index.html#works" class="text-[#1a1d20] font-semibold border-b-2 border-[#de602e] pb-0.5 ">Works</a>
+        <a href="about.html" class="text-[#595f65] hover:text-[#1a1d20] transition-colors ">About</a>
+        <a href="contact.html" class="text-[#595f65] hover:text-[#1a1d20] transition-colors ">Contact</a>
       </nav>
 
       <!-- Mobile Navigation Trigger (< 768px) — Field Architecture Style Borderless 'MENU / CLOSE' -->
@@ -121,15 +125,15 @@
       </div>
       <nav class="flex flex-col space-y-6">
         <a href="index.html#works" onclick="closeMobileMenu()" class="group flex items-baseline justify-between py-1">
-          <span class="text-2xl font-semibold tracking-[0.15em] uppercase text-[#1a1d20] group-hover:text-[#de602e] transition-colors">Works</span>
+          <span class="text-2xl font-semibold tracking-[0.15em] uppercase text-[#1a1d20] group-hover:text-[#de602e] transition-colors ">Works</span>
           <span class="text-xs font-mono text-[#38606a] uppercase tracking-widest">21 Projects &rarr;</span>
         </a>
         <a href="about.html" onclick="closeMobileMenu()" class="group flex items-baseline justify-between py-1">
-          <span class="text-2xl font-semibold tracking-[0.15em] uppercase text-[#1a1d20] group-hover:text-[#de602e] transition-colors">About</span>
+          <span class="text-2xl font-semibold tracking-[0.15em] uppercase text-[#1a1d20] group-hover:text-[#de602e] transition-colors ">About</span>
           <span class="text-xs font-mono text-[#38606a] uppercase tracking-widest">Pedigree &amp; BIM &rarr;</span>
         </a>
         <a href="contact.html" onclick="closeMobileMenu()" class="group flex items-baseline justify-between py-1">
-          <span class="text-2xl font-semibold tracking-[0.15em] uppercase text-[#1a1d20] group-hover:text-[#de602e] transition-colors">Contact</span>
+          <span class="text-2xl font-semibold tracking-[0.15em] uppercase text-[#1a1d20] group-hover:text-[#de602e] transition-colors ">Contact</span>
           <span class="text-xs font-mono text-[#38606a] uppercase tracking-widest">Inquiries &rarr;</span>
         </a>
       </nav>
@@ -208,7 +212,7 @@
     <!-- Centerpiece: White Line-Art Logo Animation (Monumental 5x Size) + Aleksandre Karpov -->
     <div class="relative z-10 flex flex-col items-center justify-center text-center px-6 pointer-events-none">
       <canvas id="hero-logo-canvas" width="400" height="520" class="w-56 sm:w-72 md:w-96 lg:w-[480px] h-auto drop-shadow-2xl"></canvas>
-      <h1 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold tracking-[0.25em] uppercase text-white mt-5 md:mt-6 drop-shadow-md">
+      <h1 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold tracking-[0.25em] uppercase text-white mt-5 md:mt-6 drop-shadow-md ">
         Aleksandre Karpov
       </h1>
     </div>
@@ -220,25 +224,23 @@
   </section>
 
     
-  <!-- Workflow Section: Conceptual Sketch Image + 2 Lorem Ipsum Paragraphs (Directly Below Hero Banner, Borderless on #f8f9fa) -->
+  <!-- Workflow Section: Conceptual Sketch Image + 2 Lorem Ipsum Paragraphs -->
   <section id="workflow" class="w-full bg-[#f8f9fa] pt-12 md:pt-20 pb-10 md:pb-14 px-5 md:px-12 lg:px-16">
+
     <div class="w-full flex flex-col lg:flex-row items-stretch">
-      
       <!-- 25% Left Pure Negative Space -->
       <div class="hidden lg:block lg:w-1/4"></div>
 
       <!-- 75% Active Content Space with 15% Right Margin (Active width: 60% of page) -->
       <div class="w-full lg:w-3/4 lg:pl-12">
         <div class="w-full lg:max-w-[82%]">
-          
           <!-- H2 Header above section -->
           <div class="mb-6 md:mb-8">
-            <h2 class="text-lg sm:text-xl md:text-2xl font-semibold tracking-[0.25em] uppercase text-[#38606a]">Workflow</h2>
+            <h2 class="text-lg sm:text-xl md:text-2xl font-semibold tracking-[0.25em] uppercase text-[#38606a] ">Workflow</h2>
           </div>
 
-          <!-- 50/50 Side-by-Side: Conceptual Sketch (Natural 4:3, Click to Enlarge) & 2 Lorem Ipsum Paragraphs -->
+          <!-- 50/50 Side-by-Side: Conceptual Sketch & 2 Lorem Ipsum Paragraphs -->
           <div class="flex flex-col md:flex-row items-center gap-8 lg:gap-12">
-            
             <div onclick="openWorkflowLightbox()" class="group cursor-pointer w-full md:w-1/2 aspect-[4/3] bg-transparent overflow-hidden shrink-0 relative" title="Click to view full size">
               <img src="assets/official/projects/travel-sketches/ak_4.jpg" 
                    alt="Conceptual Architectural Sketch" 
@@ -257,17 +259,14 @@
               </p>
             </div>
           </div>
-
         </div>
       </div>
-
     </div>
   </section>
 
   <!-- Full-Size Image Lightbox Modal for Workflow Sketch -->
   <div id="workflow-lightbox" class="fixed inset-0 z-50 bg-[#1a1d20]/85 backdrop-blur-md hidden flex items-center justify-center p-4 sm:p-6 md:p-10 cursor-pointer" onclick="closeWorkflowLightbox()">
     <div class="relative max-w-5xl max-h-[90vh] flex items-center justify-center cursor-default" onclick="event.stopPropagation()">
-      <!-- Authentic Eyeblue X Button on top-left corner of the container -->
       <button onclick="closeWorkflowLightbox()" class="absolute top-3 left-3 z-30 text-[#67aec0] hover:text-[#de602e] text-2xl md:text-3xl font-bold bg-[#1a1d20]/80 hover:bg-[#1a1d20] w-10 h-10 flex items-center justify-center transition-colors focus:outline-none cursor-pointer" title="Close (Esc)" aria-label="Close popup">✕</button>
       <img src="assets/official/projects/travel-sketches/ak_4.jpg" alt="Conceptual Architectural Sketch — Full View" class="max-w-[94vw] max-h-[85vh] object-contain drop-shadow-2xl">
     </div>
@@ -304,11 +303,11 @@
           
           <!-- Header: PORTFOLIO in Eyeblue + Mobile Borderless Filter & Sort Trigger -->
           <div class="flex items-center justify-between">
-            <h2 class="text-lg sm:text-xl md:text-2xl font-semibold tracking-[0.25em] uppercase text-[#38606a]">PORTFOLIO</h2>
+            <h2 class="text-lg sm:text-xl md:text-2xl font-semibold tracking-[0.25em] uppercase text-[#38606a] ">PORTFOLIO</h2>
             <button id="mobile-filter-toggle" onclick="toggleMobileFilters()" class="md:hidden inline-flex items-center gap-2 py-1 text-xs font-mono uppercase tracking-[0.18em] text-[#38606a] hover:text-[#de602e] transition-colors">
               <span>Filter &amp; Sort</span>
               <span id="active-filter-badge" class="w-2 h-2 rounded-full bg-[#de602e] hidden"></span>
-              <svg id="filter-chevron" class="w-3.5 h-3.5 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="square" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+              <svg id="filter-chevron" class="w-3.5 h-3.5 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
             </button>
           </div>
 
@@ -328,8 +327,6 @@
 
       <!-- Right: Simplistic No-Background Dropdowns (Recency, Completion, Award) -->
       <div id="secondary-filters-row" class="hidden md:flex flex-wrap items-center gap-6 sm:gap-8 text-xs md:text-sm font-mono uppercase tracking-[0.2em]">
-        
-        <!-- Recency Dropdown -->
         <div class="relative inline-block">
           <select id="select-recency" onchange="setRecency(this.value)" class="bg-transparent text-xs md:text-sm font-mono uppercase tracking-[0.2em] text-[#767676] hover:text-[#1a1d20] focus:outline-none cursor-pointer py-1 transition-colors">
             <option value="newest" class="bg-white text-[#1a1d20]">Newest</option>
@@ -337,7 +334,6 @@
           </select>
         </div>
 
-        <!-- Completion Dropdown (Built / Concept) -->
         <div class="relative inline-block">
           <select id="select-completion" onchange="setCompletion(this.value)" class="bg-transparent text-xs md:text-sm font-mono uppercase tracking-[0.2em] text-[#767676] hover:text-[#1a1d20] focus:outline-none cursor-pointer py-1 transition-colors">
             <option value="all" class="bg-white text-[#1a1d20]">All Status</option>
@@ -346,14 +342,12 @@
           </select>
         </div>
 
-        <!-- Award Dropdown -->
         <div class="relative inline-block">
           <select id="select-award" onchange="setAward(this.value)" class="bg-transparent text-xs md:text-sm font-mono uppercase tracking-[0.2em] text-[#767676] hover:text-[#1a1d20] focus:outline-none cursor-pointer py-1 transition-colors">
             <option value="all" class="bg-white text-[#1a1d20]">All Works</option>
             <option value="awarded" class="bg-white text-[#1a1d20]">Awarded</option>
           </select>
         </div>
-
       </div>
     </div>
   </div>
@@ -371,29 +365,27 @@
   </section>
 
     
-  <!-- Accolades Section: Left 25% Pure Negative Space, Unified Borderless 2-Column Layout -->
+  <!-- Accolades Section -->
   <section class="w-full bg-[#f8f9fa] py-14 md:py-20 px-5 md:px-12 lg:px-16">
+
     <div class="w-full flex flex-col lg:flex-row items-stretch">
-      
       <!-- 25% Left Pure Negative Space -->
       <div class="hidden lg:block lg:w-1/4"></div>
 
       <!-- 75% Active Content Space with 15% Right Margin Buffer -->
       <div class="w-full lg:w-3/4 lg:pl-12">
         <div class="w-full lg:max-w-[82%]">
-          
-          <!-- Heading (No extra labels) -->
+          <!-- Heading -->
           <div class="mb-6 md:mb-8">
-            <h2 class="text-lg sm:text-xl md:text-2xl font-semibold tracking-[0.25em] uppercase text-[#38606a]">Competitions & Accolades</h2>
+            <h2 class="text-lg sm:text-xl md:text-2xl font-semibold tracking-[0.25em] uppercase text-[#38606a] ">Competitions & Accolades</h2>
           </div>
-
           <div class="space-y-8">
-            
+
             <!-- Item 1 -->
             <div class="flex flex-col md:flex-row md:items-baseline justify-between gap-2 md:gap-4">
               <div class="md:w-3/4">
                 <span class="text-[10px] font-mono uppercase tracking-widest text-[#de602e] font-semibold">1st Place Winner &bull; Invited Competition</span>
-                <h3 class="text-base md:text-lg font-semibold text-[#1a1d20] mt-1">Eskişehir Industrial Regeneration (Multi-City)</h3>
+                <h3 class="text-base md:text-lg font-semibold text-[#1a1d20] mt-1 ">Eskişehir Industrial Regeneration (Multi-City)</h3>
                 <p class="text-xs text-[#595f65] mt-1 leading-relaxed">51,000 m² municipal depot adaptive reuse into cultural and tech center.</p>
               </div>
               <div class="md:w-1/4 text-left md:text-right font-mono text-xs text-[#2b4951]">
@@ -405,7 +397,7 @@
             <div class="flex flex-col md:flex-row md:items-baseline justify-between gap-2 md:gap-4">
               <div class="md:w-3/4">
                 <span class="text-[10px] font-mono uppercase tracking-widest text-[#de602e] font-semibold">2nd Place Award &bull; National Competition</span>
-                <h3 class="text-base md:text-lg font-semibold text-[#1a1d20] mt-1">Caferağa Community Center & Plaza</h3>
+                <h3 class="text-base md:text-lg font-semibold text-[#1a1d20] mt-1 ">Caferağa Community Center & Plaza</h3>
                 <p class="text-xs text-[#595f65] mt-1 leading-relaxed">Civic cultural gathering venue, public library, and tiered urban courtyards.</p>
               </div>
               <div class="md:w-1/4 text-left md:text-right font-mono text-xs text-[#2b4951]">
@@ -417,7 +409,7 @@
             <div class="flex flex-col md:flex-row md:items-baseline justify-between gap-2 md:gap-4">
               <div class="md:w-3/4">
                 <span class="text-[10px] font-mono uppercase tracking-widest text-[#de602e] font-semibold">Competition Selection & Finalist</span>
-                <h3 class="text-base md:text-lg font-semibold text-[#1a1d20] mt-1">Sivas Unity Bridge & Cultural Crossing</h3>
+                <h3 class="text-base md:text-lg font-semibold text-[#1a1d20] mt-1 ">Sivas Unity Bridge & Cultural Crossing</h3>
                 <p class="text-xs text-[#595f65] mt-1 leading-relaxed">Inhabited civic bridge weaving public amphitheatres and active promenade.</p>
               </div>
               <div class="md:w-1/4 text-left md:text-right font-mono text-xs text-[#2b4951]">
@@ -429,45 +421,43 @@
             <div class="flex flex-col md:flex-row md:items-baseline justify-between gap-2 md:gap-4">
               <div class="md:w-3/4">
                 <span class="text-[10px] font-mono uppercase tracking-widest text-[#de602e] font-semibold">Academic Pedigree & Honors</span>
-                <h3 class="text-base md:text-lg font-semibold text-[#1a1d20] mt-1">UNC Charlotte School of Architecture</h3>
+                <h3 class="text-base md:text-lg font-semibold text-[#1a1d20] mt-1 ">UNC Charlotte School of Architecture</h3>
                 <p class="text-xs text-[#595f65] mt-1 leading-relaxed">Bachelor of Arts in Architecture. Advanced digital lab fellow, Studio X.</p>
               </div>
               <div class="md:w-1/4 text-left md:text-right font-mono text-xs text-[#2b4951]">
                 <span>2018–2021 &bull; USA / SE</span>
               </div>
             </div>
-
           </div>
-
         </div>
       </div>
-
     </div>
   </section>
 
     
   <!-- Get in Touch CTA Section at Bottom of Landing Page (Seamless #f8f9fa, Borderless) -->
-  <section id="contact-section" class="w-full bg-[#f8f9fa] py-16 md:py-20 px-5 md:px-12 lg:px-16">
+  <section class="w-full bg-[#f8f9fa] py-16 md:py-24 px-5 md:px-12 lg:px-16">
+
     <div class="w-full flex flex-col lg:flex-row items-stretch">
-      
-      <!-- 25% Left Pure Negative Space -->
+      <!-- 25% Left Column: Pure Empty Negative Space -->
       <div class="hidden lg:block lg:w-1/4"></div>
 
-      <!-- 75% Active Content Space with 15% Right Margin Buffer -->
+      <!-- 75% Active Area with 15% Right Buffer (Aligns directly with works grid) -->
       <div class="w-full lg:w-3/4 lg:pl-12">
-        <div class="w-full lg:max-w-[82%] flex flex-col sm:flex-row sm:items-center justify-between gap-6 md:gap-8 pt-4">
-          <div>
-            <h2 class="text-xl md:text-3xl font-semibold tracking-tight text-[#38606a] mb-3">Get in touch</h2>
-            <p class="text-sm md:text-base text-[#595f65] max-w-xl leading-relaxed">
-              Direct dialogue for architectural commissions, strategic collaborations, and urban consultations.
-            </p>
+        <div class="w-full lg:max-w-[82%]">
+          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 py-10 px-6 sm:px-10 bg-white/70 backdrop-blur-sm border border-[#e2e5e8]">
+            <div>
+              <span class="text-[10px] font-mono uppercase tracking-[0.25em] text-[#67aec0] font-semibold block mb-1">Direct Commission &bull; Inquiries</span>
+              <h2 class="text-xl sm:text-2xl font-semibold tracking-[0.18em] uppercase text-[#1a1d20] ">Start a Conversation</h2>
+              <p class="text-xs sm:text-sm text-[#595f65] mt-1.5">Bespoke residential & cultural architectural commissions across North Carolina and internationally.</p>
+            </div>
+            <a href="contact.html" class="inline-flex items-center gap-3 px-6 py-3.5 bg-[#1a1d20] hover:bg-[#de602e] text-white text-xs font-mono uppercase tracking-[0.2em] font-medium transition-colors shrink-0 group">
+              <span>Get in touch</span>
+              <span class="group-hover:translate-x-1 transition-transform">&rarr;</span>
+            </a>
           </div>
-          <a href="contact.html" class="inline-flex items-center justify-center w-full sm:w-auto px-10 py-4 bg-[#de602e] hover:bg-[#ad4b24] text-white text-xs font-mono uppercase tracking-[0.2em] font-semibold transition-colors shadow-sm whitespace-nowrap">
-            Get in touch &rarr;
-          </a>
         </div>
       </div>
-
     </div>
   </section>
 
@@ -482,14 +472,14 @@
       <div class="flex items-center gap-4">
         <img src="assets/official/logo_charcoal.svg" alt="KAD Logo" class="h-9 md:h-10 w-auto">
         <div>
-          <span class="text-sm font-semibold tracking-[0.2em] uppercase text-[#1a1d20] block">Karpov Design LLC</span>
+          <span class="text-sm font-semibold tracking-[0.2em] uppercase text-[#1a1d20] block ">Karpov Design LLC</span>
           <span class="text-xs text-[#595f65] block">Aleksandre Karpov &bull; Charlotte, NC</span>
         </div>
       </div>
 
       <!-- Right: Links & Copyright -->
       <div class="flex flex-col items-center lg:items-end gap-3 text-xs text-[#595f65]">
-        <div class="flex gap-8 tracking-[0.2em] uppercase font-medium">
+        <div class="flex gap-8 tracking-[0.2em] uppercase font-medium ">
           <a href="index.html#works" class="hover:text-[#de602e] transition-colors">Works</a>
           <a href="about.html" class="hover:text-[#de602e] transition-colors">About</a>
           <a href="contact.html" class="hover:text-[#de602e] transition-colors">Contact</a>
@@ -743,7 +733,7 @@
               
               <!-- Title appears ON THE IMAGE when hovered (and always on touch screens) -->
               <div class="touch-default-overlay variant-hover-overlay absolute inset-0 p-5 md:p-6 flex flex-col justify-end opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-500 ease-out">
-                <h3 class="touch-default-title text-base md:text-lg font-semibold text-white leading-tight drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] opacity-0 group-hover:opacity-100 transition-opacity duration-500">${p.title}</h3>
+                <h3 class="touch-default-title text-base md:text-lg font-semibold text-white leading-tight drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] opacity-0 group-hover:opacity-100 transition-opacity duration-500 ">${p.title}</h3>
               </div>
             </div>
           `;
