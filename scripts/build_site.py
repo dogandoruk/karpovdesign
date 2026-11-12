@@ -497,7 +497,7 @@ def generate_accolades_section(is_variant=False, layout_mode="default", font_mod
       </div>
       <div class="space-y-8">
         <!-- Item 1 -->
-        <div class="flex flex-col md:flex-row md:items-start justify-between gap-2 md:gap-8 pb-8 border-b border-[#e2e5e8]">
+        <div class="flex flex-col md:flex-row md:items-start justify-between gap-2 md:gap-8 pb-6">
           <div class="md:w-1/4">
             <span class="text-xs font-mono uppercase tracking-[0.2em] text-[#de602e] font-semibold">Finalist Award</span>
           </div>
@@ -511,7 +511,7 @@ def generate_accolades_section(is_variant=False, layout_mode="default", font_mod
         </div>
 
         <!-- Item 2 -->
-        <div class="flex flex-col md:flex-row md:items-start justify-between gap-2 md:gap-8 pb-8 border-b border-[#e2e5e8]">
+        <div class="flex flex-col md:flex-row md:items-start justify-between gap-2 md:gap-8 pb-6">
           <div class="md:w-1/4">
             <span class="text-xs font-mono uppercase tracking-[0.2em] text-[#de602e] font-semibold">Honor Studio Award</span>
           </div>
@@ -548,17 +548,19 @@ def generate_landing_contact_section(is_variant=False, layout_mode="default", fo
     
     return f"""
   <!-- Get in Touch CTA Section -->
-  <section class="w-full bg-[#f8f9fa] py-16 md:py-24">
+  <section class="w-full bg-[#f8f9fa] py-14 md:py-20">
     <div class="field-content-rail">
-      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 py-8">
-        <div>
+      <div class="flex flex-col items-start gap-5 py-6">
+        <div class="max-w-2xl">
           <h2 class="text-xl sm:text-2xl font-semibold tracking-[0.18em] uppercase text-[#1a1d20] {h2_font}">Start a Conversation</h2>
-          <p class="text-xs sm:text-sm text-[#595f65] mt-1.5">Bespoke residential & cultural architectural commissions across North Carolina and internationally.</p>
+          <p class="text-xs sm:text-sm text-[#595f65] mt-2 leading-relaxed">Bespoke residential &amp; cultural architectural commissions across North Carolina and internationally.</p>
         </div>
-        <a href="{contact_url}" class="inline-flex items-center gap-3 px-6 py-3.5 bg-[#1a1d20] hover:bg-[#de602e] text-white text-xs font-mono uppercase tracking-[0.2em] font-medium transition-colors shrink-0 group">
-          <span>Get in touch</span>
-          <span class="group-hover:translate-x-1 transition-transform">&rarr;</span>
-        </a>
+        <div class="pt-1">
+          <a href="{contact_url}" class="inline-flex items-center gap-2 text-xs md:text-sm font-mono uppercase tracking-[0.2em] text-[#1a1d20] hover:text-[#de602e] transition-colors group">
+            <span>Get in touch</span>
+            <span class="group-hover:translate-x-1.5 transition-transform duration-300">&rarr;</span>
+          </a>
+        </div>
       </div>
     </div>
   </section>
@@ -1323,7 +1325,7 @@ def generate_about_page():
 <html lang="en" class="scroll-smooth">
 <head>
 __SHARED_HEAD__
-  <title>Aleksandre Karpov — About & Pedigree &bull; Karpov Design LLC</title>
+  <title>Aleksandre Karpov — About &bull; Karpov Design LLC</title>
 </head>
 <body class="antialiased bg-[#f8f9fa] text-[#1a1d20]">
 
@@ -1332,41 +1334,48 @@ __HEADER__
   <main class="w-full bg-[#f8f9fa] py-14 md:py-20">
     <div class="field-content-rail">
       
-      <div class="space-y-16 max-w-4xl">
+      <div class="space-y-12 max-w-5xl">
         
-        <!-- Studio Narrative -->
+        <!-- Header -->
         <div>
-          <h1 class="text-2xl sm:text-3xl md:text-5xl font-semibold tracking-tight text-[#1a1d20] mb-8 font-raleway">
-            Design at the Edge of Landscape and Computation
+          <h1 class="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-[#1a1d20] font-raleway">
+            Aleksandre Karpov
           </h1>
-          <div class="space-y-6 text-base md:text-lg text-[#595f65] leading-relaxed">
-            <p>
-              Aleksandre Karpov Design LLC is an architectural practice based in North Carolina, operating at the intersection of rigorous tectonic thinking, vernacular materiality, and computational form-finding.
-            </p>
-            <p>
-              Each project is approached not as an isolated sculptural object, but as a responsive ecological and spatial field. From private mountain retreats in the Blue Ridge to urban community infrastructure, our methodology privileges environmental resilience, atmospheric lighting, and high-precision construction detailing.
-            </p>
-          </div>
+          <p class="text-xs font-mono uppercase tracking-wider text-[#67aec0] font-semibold mt-3">
+            B.A. in Architecture &bull; Lund University (Sweden)
+          </p>
         </div>
 
-        <!-- Pedigree & Credentials (Completely Borderless) -->
-        <div class="pt-6">
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-            <div>
-              <h3 class="text-lg font-semibold text-[#1a1d20]">UNCC School of Architecture</h3>
-              <p class="text-xs text-[#595f65] mt-1 font-mono">Bachelor of Arts in Architecture (B.A. Arch)</p>
-              <p class="text-xs text-[#595f65] mt-2 leading-relaxed">
-                Focus on digital fabrication, computational form generation, and high-performance building skins.
-              </p>
+        <!-- Profile Section: Side-by-Side Portrait & Bio (Completely Borderless) -->
+        <div class="flex flex-col md:flex-row items-start gap-10 lg:gap-14">
+          
+          <!-- Portrait sitting directly on #f8f9fa, zero borders, zero white cards -->
+          <div class="w-full md:w-80 lg:w-96 shrink-0 flex flex-col">
+            <div class="w-full aspect-[4/5] bg-transparent overflow-hidden">
+              <img src="assets/official/alex_portrait.png" alt="Aleksandre Karpov" class="w-full h-full object-cover">
             </div>
-            <div>
-              <h3 class="text-lg font-semibold text-[#1a1d20]">Karpov Design LLC</h3>
-              <p class="text-xs text-[#595f65] mt-1 font-mono">North Carolina, USA</p>
-              <p class="text-xs text-[#595f65] mt-2 leading-relaxed">
-                Full-service architectural design consulting, digital visualization, and master planning commissions.
-              </p>
+            <div class="mt-4">
+              <span class="text-sm font-semibold tracking-wider uppercase text-[#1a1d20] block font-raleway">Aleksandre Karpov</span>
+              <span class="text-xs font-mono text-[#67aec0] uppercase tracking-widest block mt-1">Principal &bull; Karpov Design LLC</span>
             </div>
           </div>
+
+          <!-- Bio Narrative (Authentic text from d13ccec) -->
+          <div class="flex-1 space-y-6">
+            <h2 class="text-xl md:text-2xl lg:text-3xl font-semibold text-[#38606a] tracking-tight leading-snug font-raleway">
+              Dual Mastery: Analog Fine Art &amp; Computational BIM
+            </h2>
+            <p class="text-sm md:text-base text-[#595f65] leading-relaxed">
+              Aleksandre Karpov operates at the convergence of tactile architectural draftsmanship and advanced digital building information modeling. Raised with a rigorous foundation in classical drawing, watercolor plein-air representation, and structural sculpture, he approaches each project with visceral sensitivity to materials, topography, and natural light.
+            </p>
+            <p class="text-sm md:text-base text-[#595f65] leading-relaxed">
+              Parallel to this analog mastery, Aleksandre possesses extensive experience in computational building coordination, parametric modeling, and Revit/BIM management. He has led technical documentation across international commercial towers, complex mixed-use industrial regenerations, and bespoke mountain residences.
+            </p>
+            <p class="text-sm md:text-base text-[#595f65] leading-relaxed">
+              As principal of <span class="text-[#2b4951] font-semibold">Karpov Design LLC</span>, he provides complete residential design commissions and architectural consultation.
+            </p>
+          </div>
+
         </div>
 
       </div>
@@ -1398,42 +1407,69 @@ __HEADER__
   <main class="w-full bg-[#f8f9fa] py-14 md:py-20">
     <div class="field-content-rail">
       
-      <div class="max-w-3xl space-y-12">
-        <div>
-          <h1 class="text-2xl sm:text-3xl md:text-5xl font-semibold tracking-tight text-[#1a1d20] mb-6 font-raleway">
-            Start a Commission
-          </h1>
-          <p class="text-base text-[#595f65] leading-relaxed">
-            Karpov Design accepts select architectural commissions, master plans, and computational design consultations. Submit your project requirements below.
-          </p>
+      <div class="max-w-4xl space-y-12">
+        
+        <!-- Heading & Direct Coordinates (Authentic from d13ccec) -->
+        <div class="space-y-8">
+          <div>
+            <h1 class="text-3xl md:text-5xl font-semibold tracking-tight text-[#38606a] mb-4 font-raleway">Get in touch</h1>
+            <p class="text-sm md:text-base text-[#595f65] leading-relaxed max-w-2xl">
+              For residential design commissions, computational BIM consulting, or competition collaborations, reach out directly.
+            </p>
+          </div>
+
+          <!-- Direct Coordinates Grid (Borderless, Plain Charlotte NC) -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 pt-2">
+            <div>
+              <span class="text-[10px] font-mono uppercase tracking-widest text-[#67aec0] font-semibold block">United States Direct</span>
+              <a href="tel:+17048459596" class="text-base font-semibold text-[#2b4951] hover:text-[#de602e] transition-colors mt-1.5 block">
+                +1 (704) 845-9596
+              </a>
+            </div>
+            <div>
+              <span class="text-[10px] font-mono uppercase tracking-widest text-[#67aec0] font-semibold block">International Line</span>
+              <a href="tel:+905385907458" class="text-base font-semibold text-[#2b4951] hover:text-[#de602e] transition-colors mt-1.5 block">
+                +90 (538) 590-7458
+              </a>
+            </div>
+            <div>
+              <span class="text-[10px] font-mono uppercase tracking-widest text-[#67aec0] font-semibold block">Electronic Mail</span>
+              <a href="mailto:contact@karpovdesign.com" class="text-base font-semibold text-[#2b4951] hover:text-[#de602e] transition-colors mt-1.5 block">
+                contact@karpovdesign.com
+              </a>
+            </div>
+            <div>
+              <span class="text-[10px] font-mono uppercase tracking-widest text-[#67aec0] font-semibold block">Studio Location</span>
+              <span class="text-base font-semibold text-[#2b4951] mt-1.5 block">Charlotte, NC</span>
+            </div>
+          </div>
         </div>
 
-        <form id="contact-form" onsubmit="event.preventDefault(); alert('Inquiry recorded. The studio will respond within 24 business hours.');" class="space-y-8">
+        <!-- Streamlined 3-Field Mandatory Form (Underline inputs, borderless) -->
+        <form id="contact-form" onsubmit="event.preventDefault(); alert('Inquiry recorded. Direct architect response within 24 business hours.');" class="space-y-8 pt-4">
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
             <div>
-              <label class="block text-xs font-mono uppercase tracking-widest text-[#595f65] mb-2">Full Name *</label>
-              <input type="text" required class="w-full py-2.5 bg-transparent border-b border-[#e2e5e8] text-sm text-[#1a1d20] focus:outline-none focus:border-[#de602e] transition-colors rounded-none placeholder:text-[#595f65]/50">
+              <label class="block text-xs font-mono uppercase tracking-wider text-[#2b4951] font-semibold mb-2">Name *</label>
+              <input type="text" required placeholder="Your full name" class="w-full py-2.5 bg-transparent border-b border-[#e2e5e8] text-sm text-[#1a1d20] focus:outline-none focus:border-[#de602e] transition-colors rounded-none placeholder:text-[#595f65]/50">
             </div>
             <div>
-              <label class="block text-xs font-mono uppercase tracking-widest text-[#595f65] mb-2">Email Address *</label>
-              <input type="email" required class="w-full py-2.5 bg-transparent border-b border-[#e2e5e8] text-sm text-[#1a1d20] focus:outline-none focus:border-[#de602e] transition-colors rounded-none placeholder:text-[#595f65]/50">
+              <label class="block text-xs font-mono uppercase tracking-wider text-[#2b4951] font-semibold mb-2">Email *</label>
+              <input type="email" required placeholder="your.email@domain.com" class="w-full py-2.5 bg-transparent border-b border-[#e2e5e8] text-sm text-[#1a1d20] focus:outline-none focus:border-[#de602e] transition-colors rounded-none placeholder:text-[#595f65]/50">
             </div>
           </div>
           <div>
-            <label class="block text-xs font-mono uppercase tracking-widest text-[#595f65] mb-2">Project Typology &amp; Location</label>
-            <input type="text" placeholder="e.g. Residential Retreat, Asheville NC" class="w-full py-2.5 bg-transparent border-b border-[#e2e5e8] text-sm text-[#1a1d20] focus:outline-none focus:border-[#de602e] transition-colors rounded-none placeholder:text-[#595f65]/50">
+            <label class="block text-xs font-mono uppercase tracking-wider text-[#2b4951] font-semibold mb-2">Project Scope &amp; Program Requirements *</label>
+            <textarea id="contact-scope-textarea" rows="5" required placeholder="Describe your vision, site parameters, approximate square footage, or architectural timeline..." class="w-full py-2.5 bg-transparent border-b border-[#e2e5e8] text-sm text-[#1a1d20] focus:outline-none focus:border-[#de602e] transition-colors rounded-none placeholder:text-[#595f65]/50 resize-y"></textarea>
           </div>
-          <div>
-            <label class="block text-xs font-mono uppercase tracking-widest text-[#595f65] mb-2">Project Brief / Narrative *</label>
-            <textarea rows="4" required class="w-full py-2.5 bg-transparent border-b border-[#e2e5e8] text-sm text-[#1a1d20] focus:outline-none focus:border-[#de602e] transition-colors rounded-none placeholder:text-[#595f65]/50 resize-y"></textarea>
-          </div>
-          <div class="pt-4">
-            <button type="submit" class="inline-flex items-center gap-2.5 text-xs md:text-sm font-mono uppercase tracking-[0.2em] text-[#1a1d20] hover:text-[#de602e] bg-transparent border-none py-2 transition-colors group">
+          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-2">
+            <span class="text-xs text-[#595f65]">Confidentiality guaranteed. Direct architect response within 24 business hours.</span>
+            <button type="submit" class="inline-flex items-center gap-2 text-xs md:text-sm font-mono uppercase tracking-[0.2em] text-[#1a1d20] hover:text-[#de602e] bg-transparent border-none py-2 transition-colors group">
               <span>Submit Inquiry</span>
               <span class="group-hover:translate-x-1.5 transition-transform duration-300">&rarr;</span>
             </button>
           </div>
         </form>
+
       </div>
 
     </div>
