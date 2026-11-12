@@ -1,6 +1,7 @@
 # Master site build script for Karpov Design LLC
 # Incorporating Field Architecture Model (25% left negative space, 70% content rail, clamp(32px, 5vw, 64px) right edge)
-# Global dropdown filters, 20% reduced card gap, contrast-favoring cover images, Hero Variants A & B, All 21 projects in Hero Slideshow
+# Global dropdown filters, 20% reduced card gap, contrast-favoring cover images, Hero Variants A & B
+# Enlarged Header Logo Size Selector (Options 1, 2, 3), 1.5s Hero logo fade timing, curated alternating hero slideshow sequence
 
 import os
 import json
@@ -32,14 +33,50 @@ def get_best_hero_image(p):
 for p in projects_data:
     p['best_hero_image'] = get_best_hero_image(p)
 
-# All 21 projects in Hero Slideshow (1 high-contrast cover image per project)
+# Curated Alternating Hero Slideshow Sequence (Dark & Moody Rhythm based on luminosity)
+# Alternating deep darks (lum 24-80) with architectural midtones (lum 99-127)
+CURATED_PROJECT_ORDER = [
+    "beer-code",          # Lum 24.7 (Deep dark interior brewery)
+    "multi-city",         # Lum 99.8 (Industrial architectural midtone)
+    "tent-hill",          # Lum 26.8 (Dark dramatic night silhouette)
+    "seed-retreat",       # Lum 113.8 (Blue Ridge dusk retreat)
+    "travel-sketches",    # Lum 32.7 (Rich Mediterranean watercolor study)
+    "summer-island",      # Lum 127.3 (Aegean coastal twilight resort)
+    "hand-study",         # Lum 35.2 (Graphite tectonic study)
+    "life-bridge",        # Lum 105.4 (Sivas river twilight civic bridge)
+    "chrono-orb",         # Lum 79.5 (Moody kinetic spherical pavilion)
+    "izka-tower",         # Lum 134.9 (Izmir glass headquarters dusk)
+    "eternity-ring",      # Lum 96.5 (Sculptural circular installation)
+    "growing-cell",       # Lum 111.0 (Parametric cellular pavilion)
+    "valley-of-life",     # Lum 135.4 (Beylikdüzü urban ecological corridor)
+    "pijp-park",          # Lum 121.8 (Amsterdam cultural community center)
+    "outside-in",         # Lum 118.3 (Residential courtyard residence)
+    "flowing-garden",     # Lum 116.8 (Terraced residential landscape)
+    "natures-gateway",    # Lum 119.9 (Parametric wooden gateway)
+    "community-plaza",    # Lum 121.3 (Caferağa public civic square)
+    "flex-tower",         # Lum 146.2 (Adaptive commercial highrise)
+    "modular-house",      # Lum 150.7 (Prefabricated timber module)
+    "folding-edge"        # Lum 152.4 (Geometric sky pavilion)
+]
+
+projects_map = {p['id']: p for p in projects_data}
 HERO_SLIDES = []
+for p_id in CURATED_PROJECT_ORDER:
+    if p_id in projects_map:
+        p = projects_map[p_id]
+        HERO_SLIDES.append({
+            "id": p["id"],
+            "title": p["title"],
+            "image": p.get("primary_image")
+        })
+# Fallback for any project not in curated list
 for p in projects_data:
-    HERO_SLIDES.append({
-        "id": p["id"],
-        "title": p["title"],
-        "image": p.get("primary_image")
-    })
+    if p['id'] not in CURATED_PROJECT_ORDER:
+        HERO_SLIDES.append({
+            "id": p["id"],
+            "title": p["title"],
+            "image": p.get("primary_image")
+        })
 
 hero_slides_json_str = json.dumps(HERO_SLIDES).replace('</script>', '<\\/script>')
 
@@ -231,6 +268,37 @@ SHARED_HEAD_TAGS = """
       font-weight: 600;
     }
 
+    /* Header Logo Scale Tier Classes */
+    /* Option 1: Medium-Large (h-14 sm:h-16 md:h-18) */
+    .logo-tier-1 #header-logo-img {
+      height: 3.75rem; /* 60px */
+    }
+    @media (min-width: 768px) {
+      .logo-tier-1 #header-logo-img { height: 4.25rem; } /* 68px */
+      .logo-tier-1 #header-logo-text { font-size: 11.5px; }
+      .logo-tier-1 #header-logo-sub { font-size: 9.5px; }
+    }
+
+    /* Option 2: Large (Default - h-18 sm:h-20 md:h-22) */
+    .logo-tier-2 #header-logo-img {
+      height: 4.5rem; /* 72px */
+    }
+    @media (min-width: 768px) {
+      .logo-tier-2 #header-logo-img { height: 5.25rem; } /* 84px */
+      .logo-tier-2 #header-logo-text { font-size: 13px; }
+      .logo-tier-2 #header-logo-sub { font-size: 10px; }
+    }
+
+    /* Option 3: Maximum Impact (h-22 sm:h-24 md:h-28 - Fills full expanded header boundary) */
+    .logo-tier-3 #header-logo-img {
+      height: 5.25rem; /* 84px on mobile to avoid overflow */
+    }
+    @media (min-width: 768px) {
+      .logo-tier-3 #header-logo-img { height: 6.25rem; } /* 100px on desktop */
+      .logo-tier-3 #header-logo-text { font-size: 14px; }
+      .logo-tier-3 #header-logo-sub { font-size: 11px; }
+    }
+
     ::-webkit-scrollbar {
       width: 5px;
       height: 5px;
@@ -260,36 +328,60 @@ def generate_header(active_nav="works", borderless=True, is_variant=False, layou
     border_cls = "" if borderless else "border-b border-[#e2e5e8]"
 
     return f"""
-  <!-- Top Navigation: Header Logo Aligns Flush to Content Left Inset Boundary -->
-  <header class="w-full bg-[#f8f9fa]/95 backdrop-blur-md {border_cls} z-50 sticky top-0 transition-all">
-    <div class="field-header-container flex items-center justify-between min-h-[72px] md:min-h-[84px]">
+  <!-- Top Navigation: Expanded Header Height (min-h-[100px] md:min-h-[128px]) + Logo Aligns Flush to Content Left Inset Boundary -->
+  <header id="main-site-header" class="w-full bg-[#f8f9fa]/95 backdrop-blur-md {border_cls} z-50 sticky top-0 transition-all logo-tier-2">
+    <div class="field-header-container flex items-center justify-between min-h-[96px] md:min-h-[128px] py-2 md:py-3">
       
       <!-- Top Left: Logo Monogram + Stacked Typography Flush to Baseline -->
-      <a href="{home_url}" class="flex items-center gap-3 md:gap-3.5 group">
-        <img src="{logo_src}" alt="KAD Monogram" class="h-9 md:h-11 w-auto">
-        <div class="flex flex-col text-[11px] font-semibold tracking-[0.2em] uppercase leading-tight text-[#1a1d20] {brand_font}">
+      <a href="{home_url}" class="flex items-center gap-3.5 md:gap-4 group">
+        <img id="header-logo-img" src="{logo_src}" alt="KAD Monogram" class="w-auto transition-all duration-300">
+        <div id="header-logo-text" class="flex flex-col text-[12px] md:text-[13px] font-semibold tracking-[0.2em] uppercase leading-tight text-[#1a1d20] {brand_font} transition-all duration-300">
           <span>ALEKSANDRE</span>
           <span>KARPOV</span>
-          <span class="text-[9px] tracking-[0.22em] text-[#595f65] font-normal">DESIGN LLC</span>
+          <span id="header-logo-sub" class="text-[9.5px] md:text-[10px] tracking-[0.22em] text-[#595f65] font-normal">DESIGN LLC</span>
         </div>
       </a>
 
-      <!-- Tablet & Desktop Navigation Links (>= 768px) -->
-      <nav class="hidden md:flex items-center gap-8 text-xs tracking-[0.2em] uppercase {brand_font}">
-        <a href="{works_url}" class="{works_cls}">Works</a>
-        <a href="{about_url}" class="{about_cls}">About</a>
-        <a href="{contact_url}" class="{contact_cls}">Contact</a>
-      </nav>
+      <!-- Right Area: Navigation Links & Architectural Logo Size Comparison Selector -->
+      <div class="hidden md:flex items-center gap-8">
+        
+        <!-- Live Logo Size Selector (Selection Exercise: Option 1, Option 2, Option 3) -->
+        <div class="flex items-center gap-1.5 px-2.5 py-1 bg-white border border-[#e2e5e8] text-[11px] font-mono text-[#595f65]">
+          <span class="text-[#767676] uppercase tracking-wider text-[10px] mr-1">Logo:</span>
+          <button onclick="setLogoTier(1)" id="tier-btn-1" class="px-2 py-0.5 transition-colors hover:text-[#1a1d20]">1</button>
+          <span class="text-[#e2e5e8]">|</span>
+          <button onclick="setLogoTier(2)" id="tier-btn-2" class="px-2 py-0.5 transition-colors font-bold text-[#de602e] border-b border-[#de602e]">2</button>
+          <span class="text-[#e2e5e8]">|</span>
+          <button onclick="setLogoTier(3)" id="tier-btn-3" class="px-2 py-0.5 transition-colors hover:text-[#1a1d20]">3</button>
+        </div>
+
+        <!-- Tablet & Desktop Navigation Links (>= 768px) -->
+        <nav class="flex items-center gap-8 text-xs tracking-[0.2em] uppercase {brand_font}">
+          <a href="{works_url}" class="{works_cls}">Works</a>
+          <a href="{about_url}" class="{about_cls}">About</a>
+          <a href="{contact_url}" class="{contact_cls}">Contact</a>
+        </nav>
+
+      </div>
 
       <!-- Mobile Navigation Trigger (< 768px) -->
-      <button id="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Menu" aria-expanded="false" class="md:hidden inline-flex items-center gap-2.5 px-2 py-2 -mr-2 text-xs font-mono uppercase tracking-[0.22em] text-[#1a1d20] focus:outline-none">
-        <span id="mobile-menu-label" class="font-semibold">Menu</span>
-        <div class="w-5 h-3.5 flex flex-col justify-between items-end">
-          <span id="burger-line-1" class="w-5 h-[1.5px] bg-[#1a1d20] transition-all duration-300 origin-right"></span>
-          <span id="burger-line-2" class="w-3.5 h-[1.5px] bg-[#1a1d20] transition-all duration-300"></span>
-          <span id="burger-line-3" class="w-5 h-[1.5px] bg-[#1a1d20] transition-all duration-300 origin-right"></span>
+      <div class="flex items-center gap-3 md:hidden">
+        <!-- Mobile Logo Size Toggle -->
+        <div class="flex items-center gap-1 px-1.5 py-0.5 bg-white border border-[#e2e5e8] text-[10px] font-mono text-[#595f65]">
+          <button onclick="setLogoTier(1)" id="m-tier-btn-1" class="px-1">1</button>
+          <button onclick="setLogoTier(2)" id="m-tier-btn-2" class="px-1 text-[#de602e] font-bold">2</button>
+          <button onclick="setLogoTier(3)" id="m-tier-btn-3" class="px-1">3</button>
         </div>
-      </button>
+
+        <button id="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Menu" aria-expanded="false" class="inline-flex items-center gap-2 px-2 py-2 text-xs font-mono uppercase tracking-[0.22em] text-[#1a1d20] focus:outline-none">
+          <span id="mobile-menu-label" class="font-semibold">Menu</span>
+          <div class="w-5 h-3.5 flex flex-col justify-between items-end">
+            <span id="burger-line-1" class="w-5 h-[1.5px] bg-[#1a1d20] transition-all duration-300 origin-right"></span>
+            <span id="burger-line-2" class="w-3.5 h-[1.5px] bg-[#1a1d20] transition-all duration-300"></span>
+            <span id="burger-line-3" class="w-5 h-[1.5px] bg-[#1a1d20] transition-all duration-300 origin-right"></span>
+          </div>
+        </button>
+      </div>
 
     </div>
 
@@ -306,6 +398,42 @@ def generate_header(active_nav="works", borderless=True, is_variant=False, layou
       </div>
     </div>
   </header>
+
+  <script>
+    // Header Logo Size Tier Selector Logic (Persisted across pages via localStorage)
+    function setLogoTier(tier) {{
+      const header = document.getElementById('main-site-header');
+      if (!header) return;
+      header.classList.remove('logo-tier-1', 'logo-tier-2', 'logo-tier-3');
+      header.classList.add(`logo-tier-${{tier}}`);
+      localStorage.setItem('kad_logo_tier', tier);
+
+      // Update button active state
+      for (let i = 1; i <= 3; i++) {{
+        const b = document.getElementById(`tier-btn-${{i}}`);
+        const mb = document.getElementById(`m-tier-btn-${{i}}`);
+        if (b) {{
+          if (i === tier) {{
+            b.className = 'px-2 py-0.5 transition-colors font-bold text-[#de602e] border-b border-[#de602e]';
+          }} else {{
+            b.className = 'px-2 py-0.5 transition-colors hover:text-[#1a1d20]';
+          }}
+        }}
+        if (mb) {{
+          if (i === tier) {{
+            mb.className = 'px-1 text-[#de602e] font-bold';
+          }} else {{
+            mb.className = 'px-1 text-[#595f65]';
+          }}
+        }}
+      }}
+    }}
+
+    (function() {{
+      const savedTier = parseInt(localStorage.getItem('kad_logo_tier'), 10) || 2;
+      setLogoTier(savedTier);
+    }})();
+  </script>
 """
 
 def generate_footer(borderless=True, bg="#f8f9fa", is_variant=False, layout_mode="default", font_mode="raleway", base_path=""):
@@ -984,13 +1112,13 @@ JS_TEMPLATE = """
           if (progress < 1) {
             requestAnimationFrame(step);
           } else {
-            // Once animation completes, fade out hero logo after 1 second per user specification
+            // Once animation completes, fade out hero logo after 1.5 seconds per user specification
             const logoWrapper = document.getElementById('hero-logo-wrapper');
             if (logoWrapper) {
               setTimeout(() => {
                 logoWrapper.style.transition = 'opacity 1s ease-out';
                 logoWrapper.style.opacity = '0';
-              }, 1000);
+              }, 1500);
             }
           }
         }
@@ -1027,12 +1155,12 @@ def generate_landing_page(variant_mode="default"):
     title_font_cls = "font-raleway" if font_mode == "raleway" else ""
 
     # Hero Logo Placement:
-    # Variant A (Default): Centered logo fading out after 1s
+    # Variant A (Default): Centered logo fading out after 1.5s
     # Variant B (Variant): Left-aligned logo matching Content Left Inset Boundary
     if not is_variant:
         # Default: Centerpiece
         hero_logo_markup = f"""
-    <!-- Centerpiece: White Line-Art Logo Animation (Fades out after 1s) -->
+    <!-- Centerpiece: White Line-Art Logo Animation (Fades out after 1.5s) -->
     <div id="hero-logo-wrapper" class="relative z-10 flex flex-col items-center justify-center text-center px-6 pointer-events-none transition-opacity duration-1000">
       <canvas id="hero-logo-canvas" width="400" height="520" class="w-52 sm:w-64 md:w-80 lg:w-[420px] h-auto drop-shadow-2xl"></canvas>
       <h1 class="text-base sm:text-lg md:text-xl lg:text-2xl font-semibold tracking-[0.25em] uppercase text-white mt-4 md:mt-5 drop-shadow-md {h1_font}">
