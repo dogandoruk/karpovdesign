@@ -79,6 +79,39 @@ for p in projects_data:
 
 hero_slides_json_str = json.dumps(HERO_SLIDES).replace('</script>', '<\\/script>')
 
+def generate_json_ld_schema():
+    items = []
+    for idx, p in enumerate(projects_data):
+        items.append({
+            "@type": "ListItem",
+            "position": idx + 1,
+            "item": {
+                "@type": "VisualArtwork",
+                "name": p.get("title"),
+                "image": f"https://dogandoruk.github.io/karpovdesign/{p.get('primary_image')}",
+                "creator": {
+                    "@type": "Person",
+                    "name": "Aleksandre Karpov"
+                },
+                "artform": p.get("typology"),
+                "dateCreated": str(p.get("year")),
+                "contentLocation": p.get("location"),
+                "url": f"https://dogandoruk.github.io/karpovdesign/project-{p.get('id')}.html",
+                "description": p.get("description")
+            }
+        })
+    schema = {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "name": "Aleksandre Karpov Design LLC Architectural Portfolio",
+        "description": "Selected architectural commissions, computational forms, and tectonic studies.",
+        "itemListElement": items
+    }
+    return json.dumps(schema, indent=2)
+
+JSON_LD_SCHEMA_TAG = f'<script type="application/ld+json">\n{generate_json_ld_schema()}\n</script>'
+
+
 SHARED_HEAD_TAGS = """
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -92,6 +125,7 @@ SHARED_HEAD_TAGS = """
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
+  {JSON_LD_SCHEMA_TAG}
   <style>
     .font-raleway {
       font-family: 'Raleway', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
@@ -276,6 +310,14 @@ SHARED_HEAD_TAGS = """
     @media (min-width: 768px) {
       #header-logo-img {
         height: 84px;
+      }
+    }
+
+    
+    @media (hover: none), (max-width: 1023px) {
+      .touch-variant-title {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
       }
     }
 
@@ -508,9 +550,8 @@ def generate_landing_contact_section(is_variant=False, layout_mode="default", fo
   <!-- Get in Touch CTA Section -->
   <section class="w-full bg-[#f8f9fa] py-16 md:py-24">
     <div class="field-content-rail">
-      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 py-10 px-6 sm:px-10 bg-white/70 backdrop-blur-sm border border-[#e2e5e8]">
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 py-8">
         <div>
-          <span class="text-[10px] font-mono uppercase tracking-[0.25em] text-[#67aec0] font-semibold block mb-1">Direct Commission &bull; Inquiries</span>
           <h2 class="text-xl sm:text-2xl font-semibold tracking-[0.18em] uppercase text-[#1a1d20] {h2_font}">Start a Conversation</h2>
           <p class="text-xs sm:text-sm text-[#595f65] mt-1.5">Bespoke residential & cultural architectural commissions across North Carolina and internationally.</p>
         </div>
@@ -745,13 +786,13 @@ JS_TEMPLATE = """
 
       activeOrderedList.forEach((p, index) => {
         const card = document.createElement('div');
-        // Core decision: crisp stroke, no drop shadow, title always visible beneath card
         const isMatched = isMatch(p);
-        card.className = `group cursor-pointer bg-white border border-[#e2e5e8] flex flex-col justify-start overflow-hidden transition-opacity duration-300 ${isMatched ? 'opacity-100' : 'opacity-40 hover:opacity-80'}`;
+        card.className = `group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden transition-opacity duration-300 ${isMatched ? 'opacity-100' : 'opacity-40 hover:opacity-80'}`;
         card.dataset.projectId = p.id;
         card.dataset.typology = p.typology;
         card.dataset.status = p.status;
         card.dataset.year = p.year;
+        card.dataset.location = p.location;
         card.dataset.isMatch = isMatched ? 'true' : 'false';
 
         if (!IS_VARIANT) {
@@ -760,30 +801,18 @@ JS_TEMPLATE = """
           card.onclick = () => openModal(p.id);
         }
 
-        const statusTag = p.status === 'Completion' ? 'Built' : 'Concept';
+        const titleMinH = IS_VARIANT ? 'min-h-[48px]' : 'min-h-[52px] md:min-h-[64px]';
 
-        // Project details visible UNDER the cardThumbnail permanently
+        // Historical Variant Standard (commit 128202d): dedicated space beneath image, title appears on hover/touch
         card.innerHTML = `
           <div class="relative w-full aspect-[4/3] overflow-hidden bg-[#1a1d20]">
             <img src="${p.primary_image}" alt="${p.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-            <div class="absolute top-3 right-3 bg-[#1a1d20]/80 text-[#e4f0f2] text-[9px] font-mono uppercase tracking-[0.18em] px-2 py-0.5 pointer-events-none">
-              ${statusTag}
-            </div>
           </div>
-          <!-- Visible Card Details Beneath Thumbnail -->
-          <div class="p-4 bg-white flex flex-col justify-between flex-1 border-t border-[#e2e5e8]/60">
-            <div>
-              <div class="flex items-center justify-between text-[10px] font-mono uppercase tracking-widest text-[#67aec0] mb-1">
-                <span>${p.typology}</span>
-                <span>${p.year}</span>
-              </div>
-              <h3 class="text-sm font-semibold text-[#1a1d20] leading-snug group-hover:text-[#de602e] transition-colors __TITLE_FONT_CLS__">
-                ${p.title}
-              </h3>
-            </div>
-            <div class="mt-2 text-[11px] text-[#595f65] truncate font-mono">
-              ${p.location}
-            </div>
+          <!-- Dedicated space UNDERNEATH image: empty by default on desktop mouse, title appears on hover / touch -->
+          <div class="variant-title-space pt-4 pb-5 px-1 ${titleMinH} bg-transparent flex items-start">
+            <h3 class="touch-variant-title text-sm md:text-base font-semibold text-[#1a1d20] leading-snug opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-all duration-300 ease-out __TITLE_FONT_CLS__">
+              ${p.title}
+            </h3>
           </div>
         `;
 
@@ -1078,14 +1107,11 @@ def generate_landing_page(variant_mode="default"):
     # Variant A (Default): Centered logo fading out after 1.5s
     # Variant B (Variant): Left-aligned logo matching Content Left Inset Boundary
     if not is_variant:
-        # Default: Centerpiece
+        # Default: Centerpiece - Centered Dead-Center Across Entire Viewport (50vw & 50vh)
         hero_logo_markup = f"""
-    <!-- Centerpiece: White Line-Art Logo Animation (Fades out after 1.5s) -->
-    <div id="hero-logo-wrapper" class="relative z-10 flex flex-col items-center justify-center text-center px-6 pointer-events-none transition-opacity duration-1000">
+    <!-- Centerpiece: White Line-Art Logo Animation (Fades out after 1.5s, centered across entire viewport) -->
+    <div id="hero-logo-wrapper" class="relative z-10 flex items-center justify-center pointer-events-none transition-opacity duration-1000">
       <canvas id="hero-logo-canvas" width="400" height="520" class="w-52 sm:w-64 md:w-80 lg:w-[420px] h-auto drop-shadow-2xl"></canvas>
-      <h1 class="text-base sm:text-lg md:text-xl lg:text-2xl font-semibold tracking-[0.25em] uppercase text-white mt-4 md:mt-5 drop-shadow-md {h1_font}">
-        Aleksandre Karpov
-      </h1>
     </div>
 """
     else:
@@ -1095,9 +1121,6 @@ def generate_landing_page(variant_mode="default"):
     <div class="relative z-10 w-full field-content-rail flex flex-col items-start justify-center pointer-events-none">
       <div id="hero-logo-wrapper" class="flex flex-col items-start text-left transition-opacity duration-1000">
         <canvas id="hero-logo-canvas" width="400" height="520" class="w-48 sm:w-56 md:w-72 lg:w-[380px] h-auto drop-shadow-2xl"></canvas>
-        <h1 class="text-base sm:text-lg md:text-xl lg:text-2xl font-semibold tracking-[0.25em] uppercase text-white mt-4 md:mt-5 drop-shadow-md {h1_font}">
-          Aleksandre Karpov
-        </h1>
       </div>
     </div>
 """
@@ -1248,7 +1271,7 @@ def generate_landing_page(variant_mode="default"):
       {filter_bar_markup}
 
       <!-- Project Cards Grid: 20% Reduced Vertical Row Gap (gap-y-6 md:gap-y-7 gap-x-6 md:gap-x-8) -->
-      <div id="works-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 md:gap-x-8 gap-y-6 md:gap-y-7 mt-6 md:mt-8">
+      <div id="works-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mt-6 md:mt-8">
         <!-- Dynamically Rendered Cards with Details Visible Underneath -->
       </div>
 
@@ -1290,7 +1313,7 @@ __FOOTER__
 </body>
 </html>
 """
-    page = page.replace('__SHARED_HEAD__', SHARED_HEAD_TAGS)
+    page = page.replace('__SHARED_HEAD__', SHARED_HEAD_TAGS.replace('{JSON_LD_SCHEMA_TAG}', JSON_LD_SCHEMA_TAG))
     page = page.replace('__HEADER__', generate_header(active_nav="works", borderless=True, is_variant=is_variant, font_mode=font_mode))
     page = page.replace('__FOOTER__', generate_footer(borderless=True, bg="#f8f9fa", is_variant=is_variant, font_mode=font_mode))
     return page
@@ -1306,27 +1329,17 @@ __SHARED_HEAD__
 
 __HEADER__
 
-  <!-- Breadcrumb Navigation -->
-  <div class="w-full bg-[#f8f9fa] py-4">
-    <nav aria-label="Breadcrumb" class="field-content-rail text-xs md:text-sm font-mono uppercase tracking-widest text-[#595f65]">
-      <a href="index.html" class="hover:text-[#1a1d20] transition-colors">Home</a>
-      <span class="mx-2">&bull;</span>
-      <span class="text-[#1a1d20] font-semibold">About</span>
-    </nav>
-  </div>
-
-  <main class="w-full bg-[#f8f9fa] py-12 md:py-16">
+  <main class="w-full bg-[#f8f9fa] py-14 md:py-20">
     <div class="field-content-rail">
       
-      <div class="space-y-16">
+      <div class="space-y-16 max-w-4xl">
         
         <!-- Studio Narrative -->
         <div>
-          <span class="text-xs font-mono uppercase tracking-[0.25em] text-[#67aec0] font-semibold block mb-3">Architectural Practice &bull; Philosophy</span>
           <h1 class="text-2xl sm:text-3xl md:text-5xl font-semibold tracking-tight text-[#1a1d20] mb-8 font-raleway">
             Design at the Edge of Landscape and Computation
           </h1>
-          <div class="space-y-6 text-base md:text-lg text-[#595f65] leading-relaxed max-w-4xl">
+          <div class="space-y-6 text-base md:text-lg text-[#595f65] leading-relaxed">
             <p>
               Aleksandre Karpov Design LLC is an architectural practice based in North Carolina, operating at the intersection of rigorous tectonic thinking, vernacular materiality, and computational form-finding.
             </p>
@@ -1336,20 +1349,17 @@ __HEADER__
           </div>
         </div>
 
-        <!-- Pedigree & Credentials -->
-        <div class="pt-8 border-t border-[#e2e5e8]">
-          <span class="text-xs font-mono uppercase tracking-[0.25em] text-[#67aec0] font-semibold block mb-6">Pedigree &bull; Academic Foundation</span>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div class="p-6 bg-white border border-[#e2e5e8]">
-              <span class="text-[11px] font-mono uppercase tracking-widest text-[#de602e] block mb-2">Education</span>
+        <!-- Pedigree & Credentials (Completely Borderless) -->
+        <div class="pt-6">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+            <div>
               <h3 class="text-lg font-semibold text-[#1a1d20]">UNCC School of Architecture</h3>
               <p class="text-xs text-[#595f65] mt-1 font-mono">Bachelor of Arts in Architecture (B.A. Arch)</p>
               <p class="text-xs text-[#595f65] mt-2 leading-relaxed">
                 Focus on digital fabrication, computational form generation, and high-performance building skins.
               </p>
             </div>
-            <div class="p-6 bg-white border border-[#e2e5e8]">
-              <span class="text-[11px] font-mono uppercase tracking-widest text-[#de602e] block mb-2">Accreditation & Practice</span>
+            <div>
               <h3 class="text-lg font-semibold text-[#1a1d20]">Karpov Design LLC</h3>
               <p class="text-xs text-[#595f65] mt-1 font-mono">North Carolina, USA</p>
               <p class="text-xs text-[#595f65] mt-2 leading-relaxed">
@@ -1369,7 +1379,7 @@ __FOOTER__
 </body>
 </html>
 """
-    page = page.replace('__SHARED_HEAD__', SHARED_HEAD_TAGS)
+    page = page.replace('__SHARED_HEAD__', SHARED_HEAD_TAGS.replace('{JSON_LD_SCHEMA_TAG}', JSON_LD_SCHEMA_TAG))
     page = page.replace('__HEADER__', generate_header(active_nav="about", borderless=True, font_mode="raleway"))
     page = page.replace('__FOOTER__', generate_footer(borderless=True, bg="#f8f9fa", font_mode="raleway"))
     return page
@@ -1385,21 +1395,11 @@ __SHARED_HEAD__
 
 __HEADER__
 
-  <!-- Breadcrumb Navigation -->
-  <div class="w-full bg-[#f8f9fa] py-4">
-    <nav aria-label="Breadcrumb" class="field-content-rail text-xs md:text-sm font-mono uppercase tracking-widest text-[#595f65]">
-      <a href="index.html" class="hover:text-[#1a1d20] transition-colors">Home</a>
-      <span class="mx-2">&bull;</span>
-      <span class="text-[#1a1d20] font-semibold">Contact</span>
-    </nav>
-  </div>
-
-  <main class="w-full bg-[#f8f9fa] py-12 md:py-16">
+  <main class="w-full bg-[#f8f9fa] py-14 md:py-20">
     <div class="field-content-rail">
       
-      <div class="max-w-4xl space-y-12">
+      <div class="max-w-3xl space-y-12">
         <div>
-          <span class="text-xs font-mono uppercase tracking-[0.25em] text-[#67aec0] font-semibold block mb-3">Direct Inquiry &bull; Commissions</span>
           <h1 class="text-2xl sm:text-3xl md:text-5xl font-semibold tracking-tight text-[#1a1d20] mb-6 font-raleway">
             Start a Commission
           </h1>
@@ -1408,28 +1408,31 @@ __HEADER__
           </p>
         </div>
 
-        <form id="contact-form" onsubmit="event.preventDefault(); alert('Inquiry recorded. The studio will respond within 24 business hours.');" class="space-y-6 bg-white p-8 border border-[#e2e5e8]">
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <form id="contact-form" onsubmit="event.preventDefault(); alert('Inquiry recorded. The studio will respond within 24 business hours.');" class="space-y-8">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
             <div>
-              <label class="block text-xs font-mono uppercase tracking-widest text-[#1a1d20] mb-2">Full Name *</label>
-              <input type="text" required class="w-full px-4 py-3 bg-[#f8f9fa] border border-[#e2e5e8] text-sm text-[#1a1d20] focus:outline-none focus:border-[#de602e]">
+              <label class="block text-xs font-mono uppercase tracking-widest text-[#595f65] mb-2">Full Name *</label>
+              <input type="text" required class="w-full py-2.5 bg-transparent border-b border-[#e2e5e8] text-sm text-[#1a1d20] focus:outline-none focus:border-[#de602e] transition-colors rounded-none placeholder:text-[#595f65]/50">
             </div>
             <div>
-              <label class="block text-xs font-mono uppercase tracking-widest text-[#1a1d20] mb-2">Email Address *</label>
-              <input type="email" required class="w-full px-4 py-3 bg-[#f8f9fa] border border-[#e2e5e8] text-sm text-[#1a1d20] focus:outline-none focus:border-[#de602e]">
+              <label class="block text-xs font-mono uppercase tracking-widest text-[#595f65] mb-2">Email Address *</label>
+              <input type="email" required class="w-full py-2.5 bg-transparent border-b border-[#e2e5e8] text-sm text-[#1a1d20] focus:outline-none focus:border-[#de602e] transition-colors rounded-none placeholder:text-[#595f65]/50">
             </div>
           </div>
           <div>
-            <label class="block text-xs font-mono uppercase tracking-widest text-[#1a1d20] mb-2">Project Typology &amp; Location</label>
-            <input type="text" placeholder="e.g. Residential Retreat, Asheville NC" class="w-full px-4 py-3 bg-[#f8f9fa] border border-[#e2e5e8] text-sm text-[#1a1d20] focus:outline-none focus:border-[#de602e]">
+            <label class="block text-xs font-mono uppercase tracking-widest text-[#595f65] mb-2">Project Typology &amp; Location</label>
+            <input type="text" placeholder="e.g. Residential Retreat, Asheville NC" class="w-full py-2.5 bg-transparent border-b border-[#e2e5e8] text-sm text-[#1a1d20] focus:outline-none focus:border-[#de602e] transition-colors rounded-none placeholder:text-[#595f65]/50">
           </div>
           <div>
-            <label class="block text-xs font-mono uppercase tracking-widest text-[#1a1d20] mb-2">Project Brief / Narrative *</label>
-            <textarea rows="5" required class="w-full px-4 py-3 bg-[#f8f9fa] border border-[#e2e5e8] text-sm text-[#1a1d20] focus:outline-none focus:border-[#de602e]"></textarea>
+            <label class="block text-xs font-mono uppercase tracking-widest text-[#595f65] mb-2">Project Brief / Narrative *</label>
+            <textarea rows="4" required class="w-full py-2.5 bg-transparent border-b border-[#e2e5e8] text-sm text-[#1a1d20] focus:outline-none focus:border-[#de602e] transition-colors rounded-none placeholder:text-[#595f65]/50 resize-y"></textarea>
           </div>
-          <button type="submit" class="px-8 py-4 bg-[#1a1d20] hover:bg-[#de602e] text-white text-xs font-mono uppercase tracking-[0.2em] font-medium transition-colors">
-            Submit Inquiry &rarr;
-          </button>
+          <div class="pt-4">
+            <button type="submit" class="inline-flex items-center gap-2.5 text-xs md:text-sm font-mono uppercase tracking-[0.2em] text-[#1a1d20] hover:text-[#de602e] bg-transparent border-none py-2 transition-colors group">
+              <span>Submit Inquiry</span>
+              <span class="group-hover:translate-x-1.5 transition-transform duration-300">&rarr;</span>
+            </button>
+          </div>
         </form>
       </div>
 
@@ -1441,7 +1444,7 @@ __FOOTER__
 </body>
 </html>
 """
-    page = page.replace('__SHARED_HEAD__', SHARED_HEAD_TAGS)
+    page = page.replace('__SHARED_HEAD__', SHARED_HEAD_TAGS.replace('{JSON_LD_SCHEMA_TAG}', JSON_LD_SCHEMA_TAG))
     page = page.replace('__HEADER__', generate_header(active_nav="contact", borderless=True, font_mode="raleway"))
     page = page.replace('__FOOTER__', generate_footer(borderless=True, bg="#f8f9fa", font_mode="raleway"))
     return page
@@ -1457,21 +1460,11 @@ __SHARED_HEAD__
 
 __HEADER__
 
-  <!-- Breadcrumb Navigation -->
-  <div class="w-full bg-[#f8f9fa] py-4">
-    <nav aria-label="Breadcrumb" class="field-content-rail text-xs md:text-sm font-mono uppercase tracking-widest text-[#595f65]">
-      <a href="index.html" class="hover:text-[#1a1d20] transition-colors">Home</a>
-      <span class="mx-2">&bull;</span>
-      <span class="text-[#1a1d20] font-semibold">Academy</span>
-    </nav>
-  </div>
-
-  <main class="w-full bg-[#f8f9fa] py-12 md:py-16">
+  <main class="w-full bg-[#f8f9fa] py-14 md:py-20">
     <div class="field-content-rail">
       
       <div class="max-w-4xl space-y-12">
         <div>
-          <span class="text-xs font-mono uppercase tracking-[0.25em] text-[#67aec0] font-semibold block mb-3">Pedagogy &bull; Advanced Computation</span>
           <h1 class="text-2xl sm:text-3xl md:text-5xl font-semibold tracking-tight text-[#1a1d20] mb-6 font-raleway">
             Architectural Academy
           </h1>
@@ -1480,8 +1473,8 @@ __HEADER__
           </p>
         </div>
 
-        <div class="p-8 bg-white border border-[#e2e5e8] space-y-6">
-          <div class="flex items-center justify-between pb-4 border-b border-[#e2e5e8]">
+        <div class="space-y-6">
+          <div class="flex items-center justify-between pb-2">
             <h3 class="text-lg font-semibold text-[#1a1d20]">Algorithmic Massing &amp; Solar Optimization</h3>
             <span class="text-xs font-mono text-[#de602e] uppercase tracking-widest">Grasshopper &bull; Python</span>
           </div>
@@ -1499,7 +1492,7 @@ __FOOTER__
 </body>
 </html>
 """
-    page = page.replace('__SHARED_HEAD__', SHARED_HEAD_TAGS)
+    page = page.replace('__SHARED_HEAD__', SHARED_HEAD_TAGS.replace('{JSON_LD_SCHEMA_TAG}', JSON_LD_SCHEMA_TAG))
     page = page.replace('__HEADER__', generate_header(active_nav="", borderless=True, font_mode="raleway"))
     page = page.replace('__FOOTER__', generate_footer(borderless=True, bg="#f8f9fa", font_mode="raleway"))
     return page
@@ -1522,7 +1515,7 @@ def generate_project_page(p, prev_p, next_p):
     gallery_html = ""
     for idx, img_path in enumerate(images):
         gallery_html += f"""
-            <div onclick="openLightbox({idx})" class="group cursor-pointer bg-white border border-[#e2e5e8] flex flex-col justify-start overflow-hidden">
+            <div onclick="openLightbox({idx})" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
               <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
                 <img src="{img_path}" alt="{p['title']} — Plate {idx+1}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
                 <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
@@ -1694,7 +1687,7 @@ __FOOTER__
 </body>
 </html>
 """
-    template = template.replace('__SHARED_HEAD__', SHARED_HEAD_TAGS)
+    template = template.replace('__SHARED_HEAD__', SHARED_HEAD_TAGS.replace('{JSON_LD_SCHEMA_TAG}', JSON_LD_SCHEMA_TAG))
     template = template.replace('__HEADER__', generate_header(active_nav="works", borderless=True, font_mode="raleway"))
     template = template.replace('__FOOTER__', generate_footer(borderless=True, bg="#f8f9fa", font_mode="raleway"))
     return template
@@ -1743,6 +1736,7 @@ def generate_field_summer_island_page(base_path="../../"):
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
+  {JSON_LD_SCHEMA_TAG}
   <title>Summer Island Coastal Resort &amp; Villas — Field Architecture Rendition &bull; Karpov Design LLC</title>
   <style>
     .font-raleway {{
