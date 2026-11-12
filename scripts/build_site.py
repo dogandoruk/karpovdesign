@@ -1,6 +1,6 @@
 # Master site build script for Karpov Design LLC
 # Incorporating Field Architecture Model (25% left negative space, 70% content rail, clamp(32px, 5vw, 64px) right edge)
-# Global dropdown filters, 20% reduced card gap, contrast-favoring cover images, Hero Variants A & B
+# Global dropdown filters, 20% reduced card gap, contrast-favoring cover images, Hero Variants A & B, All 21 projects in Hero Slideshow
 
 import os
 import json
@@ -32,59 +32,15 @@ def get_best_hero_image(p):
 for p in projects_data:
     p['best_hero_image'] = get_best_hero_image(p)
 
-# Curate high-contrast hero slides from official assets
-HERO_SLIDES = [
-    {
-        "id": "beer-code",
-        "title": "Beer Code Gastropub & Brewery",
-        "image": "assets/official/projects/beer-code/beer_1.jpg"
-    },
-    {
-        "id": "tent-hill",
-        "title": "Tent Hill Residence",
-        "image": "assets/official/projects/tent-hill/tent_hill_3.jpg"
-    },
-    {
-        "id": "seed-retreat",
-        "title": "SEED Artists Getaway",
-        "image": "assets/official/projects/seed-retreat/updated_visuals_seed_1_f.jpg"
-    },
-    {
-        "id": "izka-tower",
-        "title": "İZKA Corporate Headquarters",
-        "image": "assets/official/projects/izka-tower/izka_10.jpg"
-    },
-    {
-        "id": "multi-city",
-        "title": "Eskişehir Industrial Regeneration",
-        "image": "assets/official/projects/multi-city/multi_city_24.jpg"
-    },
-    {
-        "id": "summer-island",
-        "title": "Summer Island Coastal Resort",
-        "image": "assets/official/projects/summer-island/summer_island_17.jpg"
-    },
-    {
-        "id": "pijp-park",
-        "title": "De Pijp Community Center & Park",
-        "image": "assets/official/projects/pijp-park/pijp_park_4.jpg"
-    },
-    {
-        "id": "valley-of-life",
-        "title": "Beylikdüzü Valley of Life",
-        "image": "assets/official/projects/valley-of-life/valey_of_life_10.jpg"
-    },
-    {
-        "id": "life-bridge",
-        "title": "Sivas Unity Bridge",
-        "image": "assets/official/projects/life-bridge/life_bridge_16.jpg"
-    },
-    {
-        "id": "outside-in",
-        "title": "Outside-In Residence",
-        "image": "assets/official/projects/outside-in/outside_in_12.jpg"
-    }
-]
+# All 21 projects in Hero Slideshow (1 high-contrast cover image per project)
+HERO_SLIDES = []
+for p in projects_data:
+    HERO_SLIDES.append({
+        "id": p["id"],
+        "title": p["title"],
+        "image": p.get("primary_image")
+    })
+
 hero_slides_json_str = json.dumps(HERO_SLIDES).replace('</script>', '<\\/script>')
 
 SHARED_HEAD_TAGS = """
@@ -1599,10 +1555,10 @@ __HEADER__
           </div>
         </div>
 
-        <!-- Large Images Gallery -->
+        <!-- Large Images Gallery: Consistent 20% Reduced Vertical Row Gap (gap-y-6 md:gap-y-7 gap-x-6 md:gap-x-8) -->
         <div>
           <h2 class="text-lg md:text-xl font-semibold tracking-[0.25em] uppercase text-[#38606a] mb-6 md:mb-8 font-raleway">Visual Documentation &amp; Plates</h2>
-          <div id="project-gallery" class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+          <div id="project-gallery" class="grid grid-cols-1 md:grid-cols-2 gap-x-6 md:gap-x-8 gap-y-6 md:gap-y-7">
             {gallery_html}
           </div>
         </div>
@@ -1695,6 +1651,410 @@ __FOOTER__
     template = template.replace('__FOOTER__', generate_footer(borderless=True, bg="#f8f9fa", font_mode="raleway"))
     return template
 
+def generate_field_summer_island_page(base_path="../../"):
+    summer_island = next((p for p in projects_data if p['id'] == 'summer-island'), None)
+    if not summer_island:
+        return ""
+    
+    images = summer_island.get('images', [])
+    full_images = [f"{base_path}{img}" for img in images]
+    images_json = json.dumps(full_images).replace('</script>', '<\\/script>')
+
+    hero_img = full_images[0] if full_images else ""
+    split_1 = full_images[1] if len(full_images) > 1 else hero_img
+    split_2 = full_images[2] if len(full_images) > 2 else hero_img
+    horiz_1 = full_images[3] if len(full_images) > 3 else hero_img
+    horiz_2 = full_images[4] if len(full_images) > 4 else hero_img
+    horiz_3 = full_images[5] if len(full_images) > 5 else hero_img
+    horiz_4 = full_images[6] if len(full_images) > 6 else hero_img
+    pair_1  = full_images[7] if len(full_images) > 7 else hero_img
+    pair_2  = full_images[8] if len(full_images) > 8 else hero_img
+    master_plate = full_images[9] if len(full_images) > 9 else hero_img
+
+    header_html = generate_header(active_nav="works", borderless=True, font_mode="raleway", base_path=base_path)
+    footer_html = generate_footer(borderless=True, bg="#f8f9fa", font_mode="raleway", base_path=base_path)
+
+    standard_url = f"{base_path}project-summer-island.html"
+    home_url = f"{base_path}index.html"
+    works_url = f"{base_path}index.html#works"
+    prev_url = f"{base_path}project-hand-study.html"
+    next_url = f"{base_path}project-tent-hill.html"
+
+    return f"""<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="{base_path}assets/official/logo_charcoal.svg">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    if (!window.tailwind) {{
+      document.write('<script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"><\\/script>');
+    }}
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
+  <title>Summer Island Coastal Resort &amp; Villas — Field Architecture Rendition &bull; Karpov Design LLC</title>
+  <style>
+    .font-raleway {{
+      font-family: 'Raleway', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+    }}
+    :root {{
+      --field-left-offset: 25vw;
+      --field-right-gutter: clamp(32px, 5vw, 64px);
+    }}
+    @media (max-width: 1023px) {{
+      :root {{
+        --field-left-offset: clamp(20px, 5vw, 40px);
+        --field-right-gutter: clamp(20px, 5vw, 40px);
+      }}
+    }}
+    body {{
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: #f8f9fa;
+      color: #1a1d20;
+      overflow-x: hidden;
+    }}
+    .field-header-container {{
+      padding-left: var(--field-left-offset);
+      padding-right: var(--field-right-gutter);
+      width: 100%;
+    }}
+    .field-content-rail {{
+      padding-left: var(--field-left-offset);
+      padding-right: var(--field-right-gutter);
+      width: 100%;
+    }}
+    .no-scrollbar::-webkit-scrollbar {{
+      display: none;
+    }}
+    .no-scrollbar {{
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }}
+    @media (min-width: 1024px) {{
+      .field-horizontal-pin {{
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        width: 100%;
+        overflow: hidden;
+      }}
+    }}
+  </style>
+</head>
+<body class="antialiased bg-[#f8f9fa] text-[#1a1d20]">
+
+  {header_html}
+
+  <!-- Breadcrumb Navigation with Rendition Switcher -->
+  <div class="w-full bg-[#f8f9fa] py-4 border-b border-[#e2e5e8]/60">
+    <nav aria-label="Breadcrumb" class="field-content-rail text-xs md:text-sm font-mono uppercase tracking-widest text-[#595f65] flex items-center justify-between overflow-x-auto no-scrollbar whitespace-nowrap">
+      <div class="flex items-center">
+        <a href="{home_url}" class="hover:text-[#1a1d20] transition-colors shrink-0">Home</a>
+        <span class="mx-2 shrink-0">&bull;</span>
+        <a href="{works_url}" class="hover:text-[#1a1d20] transition-colors shrink-0">Works</a>
+        <span class="mx-2 shrink-0">&bull;</span>
+        <span class="text-[#1a1d20] font-semibold truncate font-raleway tracking-wider">Summer Island</span>
+      </div>
+      <div class="ml-auto flex items-center gap-2 pl-4 shrink-0 text-[11px] font-mono">
+        <span class="text-[#767676] uppercase tracking-wider hidden sm:inline">Layout:</span>
+        <a href="{standard_url}" class="px-2 py-0.5 text-[#595f65] hover:text-[#1a1d20] transition-colors">Standard</a>
+        <span class="px-2 py-0.5 text-[#de602e] font-semibold border-b border-[#de602e]">Field Architecture</span>
+      </div>
+    </nav>
+  </div>
+
+  <main>
+    <!-- ACT 1: Monumental Full-Bleed Hero Plate -->
+    <section class="relative w-full h-[75vh] md:h-[90vh] bg-[#1a1d20] overflow-hidden flex items-end">
+      <img src="{hero_img}" alt="Summer Island Coastal Resort" class="absolute inset-0 w-full h-full object-cover">
+      <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/10"></div>
+      <div class="relative z-10 field-content-rail pb-10 md:pb-16 text-white">
+        <span class="text-xs font-mono uppercase tracking-[0.3em] text-[#67aec0] block mb-2">01 / Master Territory</span>
+        <h1 class="text-3xl sm:text-4xl md:text-6xl font-semibold tracking-tight text-white font-raleway leading-none">
+          Summer Island Coastal Resort
+        </h1>
+      </div>
+    </section>
+
+    <!-- ACT 2: Sticky Split Narrative -->
+    <section class="w-full bg-[#f8f9fa] py-16 md:py-24">
+      <div class="field-content-rail flex flex-col lg:flex-row items-start gap-12 lg:gap-16">
+        <div class="w-full lg:w-5/12 lg:sticky lg:top-28 space-y-6">
+          <span class="text-xs font-mono uppercase tracking-[0.25em] text-[#67aec0] font-semibold block">02 / Narrative &bull; Spatial Logic</span>
+          <h2 class="text-2xl sm:text-3xl font-semibold tracking-tight text-[#1a1d20] font-raleway">
+            A Resilient Tectonic Reef Along the Aegean Shore
+          </h2>
+          <p class="text-sm sm:text-base text-[#595f65] leading-relaxed">
+            {summer_island.get('description', '')}
+          </p>
+          <div class="pt-6 border-t border-[#e2e5e8] space-y-3 font-mono text-xs text-[#595f65]">
+            <div class="flex justify-between py-1 border-b border-[#e2e5e8]/50">
+              <span class="text-[#67aec0] uppercase tracking-wider">Typology</span>
+              <span class="text-[#1a1d20] font-semibold">{summer_island.get('typology', '')}</span>
+            </div>
+            <div class="flex justify-between py-1 border-b border-[#e2e5e8]/50">
+              <span class="text-[#67aec0] uppercase tracking-wider">Location</span>
+              <span class="text-[#1a1d20] font-semibold">{summer_island.get('location', '')}</span>
+            </div>
+            <div class="flex justify-between py-1 border-b border-[#e2e5e8]/50">
+              <span class="text-[#67aec0] uppercase tracking-wider">Year</span>
+              <span class="text-[#1a1d20] font-semibold">{summer_island.get('year', '')}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="w-full lg:w-7/12 space-y-10">
+          <div onclick="openLightbox(1)" class="group cursor-pointer bg-white border border-[#e2e5e8] overflow-hidden">
+            <div class="relative w-full aspect-[4/3] overflow-hidden bg-[#1a1d20]">
+              <img src="{split_1}" alt="Summer Island Plate 2" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+            </div>
+            <div class="p-4 bg-white border-t border-[#e2e5e8]/60 flex items-center justify-between text-xs font-mono text-[#595f65]">
+              <span class="uppercase tracking-wider">Plate 02 &bull; Exterior Villa Envelope</span>
+              <span class="text-[#67aec0] group-hover:text-[#de602e] transition-colors">Enlarge &rarr;</span>
+            </div>
+          </div>
+          <div onclick="openLightbox(2)" class="group cursor-pointer bg-white border border-[#e2e5e8] overflow-hidden">
+            <div class="relative w-full aspect-[4/3] overflow-hidden bg-[#1a1d20]">
+              <img src="{split_2}" alt="Summer Island Plate 3" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+            </div>
+            <div class="p-4 bg-white border-t border-[#e2e5e8]/60 flex items-center justify-between text-xs font-mono text-[#595f65]">
+              <span class="uppercase tracking-wider">Plate 03 &bull; Shaded Aegean Courtyard</span>
+              <span class="text-[#67aec0] group-hover:text-[#de602e] transition-colors">Enlarge &rarr;</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ACT 3: Horizontal Scroll Filmstrip (250vh Pin) -->
+    <section id="field-horizontal-section" class="relative w-full h-[180vh] lg:h-[260vh] bg-[#1a1d20] text-white">
+      <div class="field-horizontal-pin flex flex-col justify-between py-8 md:py-12">
+        <div class="field-content-rail flex items-center justify-between z-10 shrink-0">
+          <div class="flex items-center gap-4">
+            <span class="text-xs font-mono uppercase tracking-[0.25em] text-[#67aec0]">03 / Tectonic Sequence</span>
+            <span class="text-[#595f65] hidden sm:inline">&bull;</span>
+            <span class="text-xs font-mono text-white/70 hidden sm:inline">Scroll to Scrub Photographic Plates</span>
+          </div>
+          <div class="flex items-center gap-3 font-mono text-xs">
+            <span id="horizontal-counter" class="text-[#67aec0]">01 / 04</span>
+            <div class="w-20 sm:w-28 h-0.5 bg-white/20 overflow-hidden">
+              <div id="horizontal-progress" class="h-full bg-[#de602e] transition-all duration-100" style="width: 25%;"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="w-full overflow-hidden flex-1 flex items-center my-4">
+          <div id="horizontal-track" class="flex gap-6 md:gap-10 pl-[var(--field-left-offset)] pr-[var(--field-right-gutter)] transition-transform duration-75 ease-out select-none">
+            <div onclick="openLightbox(3)" class="w-[78vw] sm:w-[62vw] lg:w-[48vw] shrink-0 group cursor-pointer bg-black/40 border border-white/10 overflow-hidden">
+              <div class="relative w-full aspect-[16/10] overflow-hidden">
+                <img src="{horiz_1}" alt="Plate 04" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+              </div>
+              <div class="p-4 flex items-center justify-between text-xs font-mono text-white/70">
+                <span>04 &bull; Arrival Pavilion</span>
+                <span class="text-[#67aec0] group-hover:text-[#de602e] transition-colors">Enlarge &rarr;</span>
+              </div>
+            </div>
+            <div onclick="openLightbox(4)" class="w-[78vw] sm:w-[62vw] lg:w-[48vw] shrink-0 group cursor-pointer bg-black/40 border border-white/10 overflow-hidden">
+              <div class="relative w-full aspect-[16/10] overflow-hidden">
+                <img src="{horiz_2}" alt="Plate 05" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+              </div>
+              <div class="p-4 flex items-center justify-between text-xs font-mono text-white/70">
+                <span>05 &bull; Infinity Horizon Basin</span>
+                <span class="text-[#67aec0] group-hover:text-[#de602e] transition-colors">Enlarge &rarr;</span>
+              </div>
+            </div>
+            <div onclick="openLightbox(5)" class="w-[78vw] sm:w-[62vw] lg:w-[48vw] shrink-0 group cursor-pointer bg-black/40 border border-white/10 overflow-hidden">
+              <div class="relative w-full aspect-[16/10] overflow-hidden">
+                <img src="{horiz_3}" alt="Plate 06" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+              </div>
+              <div class="p-4 flex items-center justify-between text-xs font-mono text-white/70">
+                <span>06 &bull; Coastal Villa Terraces</span>
+                <span class="text-[#67aec0] group-hover:text-[#de602e] transition-colors">Enlarge &rarr;</span>
+              </div>
+            </div>
+            <div onclick="openLightbox(6)" class="w-[78vw] sm:w-[62vw] lg:w-[48vw] shrink-0 group cursor-pointer bg-black/40 border border-white/10 overflow-hidden">
+              <div class="relative w-full aspect-[16/10] overflow-hidden">
+                <img src="{horiz_4}" alt="Plate 07" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+              </div>
+              <div class="p-4 flex items-center justify-between text-xs font-mono text-white/70">
+                <span>07 &bull; Shaded Promenade Corridor</span>
+                <span class="text-[#67aec0] group-hover:text-[#de602e] transition-colors">Enlarge &rarr;</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="field-content-rail z-10 text-xs font-mono text-white/50 shrink-0">
+          <span>Field Architecture Sequence &bull; Karpov Design LLC</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ACT 4: Comparative Pair Plates -->
+    <section class="w-full bg-[#f8f9fa] py-16 md:py-24">
+      <div class="field-content-rail space-y-10">
+        <div>
+          <span class="text-xs font-mono uppercase tracking-[0.25em] text-[#67aec0] font-semibold block mb-2">04 / Material Dialogue</span>
+          <h2 class="text-2xl sm:text-3xl font-semibold tracking-tight text-[#1a1d20] font-raleway">
+            Sunken Courtyards &amp; Shaded Colonnades
+          </h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 md:gap-x-8 gap-y-6 md:gap-y-7">
+          <div onclick="openLightbox(7)" class="group cursor-pointer bg-white border border-[#e2e5e8] overflow-hidden">
+            <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
+              <img src="{pair_1}" alt="Summer Island Plate 8" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+            </div>
+            <div class="p-4 bg-white border-t border-[#e2e5e8]/60 flex items-center justify-between text-xs font-mono text-[#595f65]">
+              <span>Plate 08 &bull; Perimeter Screen Detail</span>
+              <span class="text-[#67aec0] group-hover:text-[#de602e] transition-colors">Enlarge &rarr;</span>
+            </div>
+          </div>
+          <div onclick="openLightbox(8)" class="group cursor-pointer bg-white border border-[#e2e5e8] overflow-hidden">
+            <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
+              <img src="{pair_2}" alt="Summer Island Plate 9" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+            </div>
+            <div class="p-4 bg-white border-t border-[#e2e5e8]/60 flex items-center justify-between text-xs font-mono text-[#595f65]">
+              <span>Plate 09 &bull; Timber Sunshade Pergola</span>
+              <span class="text-[#67aec0] group-hover:text-[#de602e] transition-colors">Enlarge &rarr;</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ACT 5: Full-Width Master Plate -->
+    <section class="relative w-full aspect-[16/9] md:aspect-[21/9] bg-[#1a1d20] overflow-hidden">
+      <img src="{master_plate}" alt="Summer Island Master Elevation" class="w-full h-full object-cover">
+      <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent flex items-end">
+        <div class="field-content-rail pb-8 md:pb-12 text-white flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4">
+          <div>
+            <span class="text-xs font-mono uppercase tracking-[0.25em] text-[#67aec0] block mb-1">05 / Masterplate</span>
+            <h3 class="text-xl sm:text-2xl md:text-3xl font-semibold font-raleway">Complete Coastal Master Plan</h3>
+          </div>
+          <button onclick="openLightbox(9)" class="px-5 py-2.5 bg-white/20 hover:bg-[#de602e] backdrop-blur-sm text-white text-xs font-mono uppercase tracking-widest transition-colors">
+            View Full-Res Master &rarr;
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Project Navigation Bar -->
+    <div class="w-full bg-[#f8f9fa] py-8 border-t border-[#e2e5e8]">
+      <div class="field-content-rail flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-xs font-mono uppercase tracking-widest">
+        <a href="{prev_url}" class="py-1 text-[#595f65] hover:text-[#de602e] transition-colors flex items-center gap-2">
+          &larr; Prev Project: Hand Study
+        </a>
+        <a href="{next_url}" class="py-1 text-[#595f65] hover:text-[#de602e] transition-colors flex items-center sm:justify-end gap-2 sm:text-right">
+          Next Project: Tent Hill &rarr;
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <!-- Full-Size Image Lightbox Modal with top-left X close button -->
+  <div id="image-lightbox" class="fixed inset-0 z-50 bg-[#1a1d20]/90 backdrop-blur-md hidden flex items-center justify-center p-4 sm:p-6 md:p-10 cursor-pointer" onclick="handleLightboxClick(event)">
+    <div class="relative max-w-6xl max-h-[92vh] flex flex-col items-center justify-center cursor-default" onclick="event.stopPropagation()">
+      <button onclick="closeLightbox()" class="absolute top-3 left-3 z-30 text-[#67aec0] hover:text-[#de602e] text-2xl md:text-3xl font-bold bg-[#1a1d20]/80 hover:bg-[#1a1d20] w-10 h-10 flex items-center justify-center transition-colors focus:outline-none cursor-pointer" title="Close (Esc)" aria-label="Close popup">✕</button>
+      <button onclick="navigateLightbox(-1)" class="absolute left-3 top-1/2 -translate-y-1/2 z-20 text-white/80 hover:text-white text-3xl md:text-4xl p-3 bg-black/40 hover:bg-black/70 transition-colors focus:outline-none" aria-label="Previous image">&lsaquo;</button>
+      <button onclick="navigateLightbox(1)" class="absolute right-3 top-1/2 -translate-y-1/2 z-20 text-white/80 hover:text-white text-3xl md:text-4xl p-3 bg-black/40 hover:bg-black/70 transition-colors focus:outline-none" aria-label="Next image">&rsaquo;</button>
+      <img id="lightbox-img" src="" alt="Project View" class="max-w-[94vw] max-h-[82vh] object-contain drop-shadow-2xl">
+      <div id="lightbox-counter" class="mt-3 text-xs font-mono text-white/70 uppercase tracking-widest">Plate 1 of 10</div>
+    </div>
+  </div>
+
+  <script>
+    const GALLERY_IMAGES = {images_json};
+    let currentLightboxIndex = 0;
+
+    function openLightbox(idx) {{
+      currentLightboxIndex = idx;
+      updateLightboxContent();
+      const lb = document.getElementById('image-lightbox');
+      if (lb) {{
+        lb.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      }}
+    }}
+
+    function closeLightbox() {{
+      const lb = document.getElementById('image-lightbox');
+      if (lb && !lb.classList.contains('hidden')) {{
+        lb.classList.add('hidden');
+        document.body.style.overflow = '';
+      }}
+    }}
+
+    function navigateLightbox(dir) {{
+      currentLightboxIndex = (currentLightboxIndex + dir + GALLERY_IMAGES.length) % GALLERY_IMAGES.length;
+      updateLightboxContent();
+    }}
+
+    function updateLightboxContent() {{
+      const img = document.getElementById('lightbox-img');
+      const counter = document.getElementById('lightbox-counter');
+      if (img && GALLERY_IMAGES[currentLightboxIndex]) {{
+        img.src = GALLERY_IMAGES[currentLightboxIndex];
+        img.alt = "Summer Island — Plate " + (currentLightboxIndex + 1);
+      }}
+      if (counter) {{
+        counter.textContent = `Plate ${{currentLightboxIndex + 1}} of ${{GALLERY_IMAGES.length}}`;
+      }}
+    }}
+
+    function handleLightboxClick(e) {{
+      if (e.target.closest('#lightbox-img') || e.target.closest('button')) return;
+      closeLightbox();
+    }}
+
+    window.addEventListener('keydown', (e) => {{
+      const lb = document.getElementById('image-lightbox');
+      if (lb && !lb.classList.contains('hidden')) {{
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowLeft') navigateLightbox(-1);
+        if (e.key === 'ArrowRight') navigateLightbox(1);
+      }}
+    }});
+
+    // Scroll-Linked Horizontal Scrubbing for Desktop (Field Architecture SKHorizontalScroll)
+    function onFieldScroll() {{
+      const section = document.getElementById('field-horizontal-section');
+      const track = document.getElementById('horizontal-track');
+      const bar = document.getElementById('horizontal-progress');
+      const counter = document.getElementById('horizontal-counter');
+      if (!section || !track) return;
+      if (window.innerWidth < 1024) {{
+        track.style.transform = '';
+        return;
+      }}
+      const rect = section.getBoundingClientRect();
+      const totalScroll = section.offsetHeight - window.innerHeight;
+      if (totalScroll <= 0) return;
+      
+      let progress = -rect.top / totalScroll;
+      progress = Math.max(0, Math.min(1, progress));
+      
+      const maxTranslate = track.scrollWidth - window.innerWidth + 96;
+      track.style.transform = `translate3d(-${{progress * maxTranslate}}px, 0, 0)`;
+      if (bar) bar.style.width = `${{progress * 100}}%`;
+      
+      const plateIdx = Math.min(4, Math.floor(progress * 4) + 1);
+      if (counter) counter.textContent = `0${{plateIdx}} / 04`;
+    }}
+
+    window.addEventListener('scroll', onFieldScroll, {{ passive: true }});
+    window.addEventListener('resize', onFieldScroll, {{ passive: true }});
+    onFieldScroll();
+  </script>
+
+  {footer_html}
+
+</body>
+</html>
+"""
+
 def main():
     print("Building Version 1 (index.html): Centered Hero Logo, Custom Dropdowns, Field Architecture...")
     with open('index.html', 'w', encoding='utf-8') as f:
@@ -1734,6 +2094,14 @@ def main():
         with open(fname, 'w', encoding='utf-8') as f:
             f.write(generate_project_page(p, prev_p, next_p))
     print(f"Saved {len(projects_data)} individual project pages!")
+
+    print("Building Field Architecture Summer Island Variant at project-summer-island/variant/index.html...")
+    os.makedirs('project-summer-island/variant', exist_ok=True)
+    with open('project-summer-island/variant/index.html', 'w', encoding='utf-8') as f:
+        f.write(generate_field_summer_island_page())
+    with open('project-summer-island-variant.html', 'w', encoding='utf-8') as f:
+        f.write(generate_field_summer_island_page(base_path=""))
+    print("Saved project-summer-island/variant/index.html and project-summer-island-variant.html!")
 
     print("Site compilation finished successfully.")
 
