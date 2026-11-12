@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
-  
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/svg+xml" href="assets/official/logo_charcoal.svg">
@@ -18,7 +18,6 @@
     .font-raleway {
       font-family: 'Raleway', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
     }
-  <style>
     :root {
       --bg-main: #f8f9fa;
       --bg-surface: #ffffff;
@@ -37,13 +36,159 @@
       --hairberry-vibrant: #de602e;
       --hairberry-bright: #f36a34;
       --hairberry-peach: #f19f55;
+
+      /* Field Architecture Spacing Model:
+         Desktop: 25% Left Negative Offset, 70% Asymmetric Content Rail, Right edge clamped between 32px and 64px
+         Tablet/Mobile (< 1024px): 5% - 90% - 5% (min 20px padding)
+      */
+      --field-left-offset: 25vw;
+      --field-right-gutter: clamp(32px, 5vw, 64px);
     }
+    @media (max-width: 1023px) {
+      :root {
+        --field-left-offset: clamp(20px, 5vw, 40px);
+        --field-right-gutter: clamp(20px, 5vw, 40px);
+      }
+    }
+
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       background-color: var(--bg-main);
       color: var(--text-main);
       overflow-x: hidden;
     }
+
+    /* Asymmetric Field Layout Containers */
+    .field-header-container {
+      padding-left: var(--field-left-offset);
+      padding-right: var(--field-right-gutter);
+      width: 100%;
+    }
+    .field-content-rail {
+      padding-left: var(--field-left-offset);
+      padding-right: var(--field-right-gutter);
+      width: 100%;
+    }
+
+    /* Ambient Ken-Burns Animation for Hero Slides */
+    @keyframes kenBurnsSubtle {
+      0% {
+        transform: scale(1.0) translate(0, 0);
+      }
+      50% {
+        transform: scale(1.05) translate(-1%, -0.5%);
+      }
+      100% {
+        transform: scale(1.0) translate(0, 0);
+      }
+    }
+    .ambient-motion {
+      animation: kenBurnsSubtle 16s ease-in-out infinite alternate;
+      will-change: transform;
+    }
+    .paused-motion {
+      animation-play-state: paused !important;
+    }
+
+    /* Custom Sleek Dropdown Styling (Default Page) */
+    .custom-dropdown-container {
+      position: relative;
+    }
+    .custom-dropdown-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      padding: 0.5rem 0.85rem;
+      background: #ffffff;
+      border: 1px solid #e2e5e8;
+      font-family: monospace;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #1a1d20;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+    .custom-dropdown-btn:hover {
+      border-color: #38606a;
+    }
+    .custom-dropdown-btn.active-filter {
+      border-color: #de602e;
+      color: #de602e;
+      font-weight: 600;
+    }
+    .custom-dropdown-menu {
+      position: absolute;
+      top: calc(100% + 4px);
+      left: 0;
+      min-width: 100%;
+      background: #ffffff;
+      border: 1px solid #e2e5e8;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
+      z-index: 40;
+      display: none;
+      flex-direction: column;
+      padding: 0.25rem 0;
+    }
+    .custom-dropdown-menu.open {
+      display: flex;
+    }
+    .custom-dropdown-item {
+      padding: 0.5rem 0.85rem;
+      font-family: monospace;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #595f65;
+      text-align: left;
+      transition: all 0.15s ease;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .custom-dropdown-item:hover {
+      background: #f8f9fa;
+      color: #1a1d20;
+    }
+    .custom-dropdown-item.selected {
+      color: #de602e;
+      font-weight: 600;
+      background: #fff5f2;
+    }
+
+    /* Native Dropdown Styling (Variant Page) */
+    .native-architectural-select {
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      background-color: #ffffff;
+      border: 1px solid #e2e5e8;
+      padding: 0.5rem 2rem 0.5rem 0.85rem;
+      font-family: monospace;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #1a1d20;
+      cursor: pointer;
+      outline: none;
+      transition: all 0.2s ease;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23595f65'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0.65rem center;
+      background-size: 0.85rem;
+    }
+    .native-architectural-select:hover {
+      border-color: #38606a;
+    }
+    .native-architectural-select:focus {
+      border-color: #de602e;
+    }
+    .native-architectural-select.active-filter {
+      border-color: #de602e;
+      color: #de602e;
+      font-weight: 600;
+    }
+
     ::-webkit-scrollbar {
       width: 5px;
       height: 5px;
@@ -55,39 +200,18 @@
       -ms-overflow-style: none;
       scrollbar-width: none;
     }
-    @media (hover: none), (max-width: 1023px) {
-      .touch-default-veil {
-        background: linear-gradient(to top, rgba(26, 29, 32, 0.72) 0%, rgba(26, 29, 32, 0.22) 45%, rgba(0, 0, 0, 0) 100%) !important;
-      }
-      .touch-default-overlay {
-        opacity: 1 !important;
-        transform: translateY(0) !important;
-      }
-      .touch-default-title {
-        opacity: 1 !important;
-      }
-      .touch-variant-title {
-        opacity: 1 !important;
-        transform: translateY(0) !important;
-      }
-      .variant-title-space {
-        min-height: 52px !important;
-        padding-top: 10px !important;
-        padding-bottom: 12px !important;
-      }
-    }
   </style>
 
-  <title>Contact & Inquiries &bull; Aleksandre Karpov &bull; Karpov Design LLC</title>
+  <title>Contact & Inquiries — Aleksandre Karpov &bull; Karpov Design LLC</title>
 </head>
 <body class="antialiased bg-[#f8f9fa] text-[#1a1d20]">
 
-  
-  <!-- Top Navigation: Logo + Stacked Text on Top Left, Inline Links on Tablet/Desktop, Field Architecture Light Sheet Toggle on Mobile -->
+
+  <!-- Top Navigation: Header Logo Aligns Flush to Content Left Inset Boundary -->
   <header class="w-full bg-[#f8f9fa]/95 backdrop-blur-md  z-50 sticky top-0 transition-all">
-    <div class="max-w-[1920px] mx-auto px-5 md:px-12 lg:px-16 flex items-center justify-between min-h-[72px] md:min-h-[84px]">
+    <div class="field-header-container flex items-center justify-between min-h-[72px] md:min-h-[84px]">
       
-      <!-- Top Left Corner: Logo Monogram + Stacked Typography -->
+      <!-- Top Left: Logo Monogram + Stacked Typography Flush to Baseline -->
       <a href="index.html" class="flex items-center gap-3 md:gap-3.5 group">
         <img src="assets/official/logo_charcoal.svg" alt="KAD Monogram" class="h-9 md:h-11 w-auto">
         <div class="flex flex-col text-[11px] font-semibold tracking-[0.2em] uppercase leading-tight text-[#1a1d20] font-raleway">
@@ -104,251 +228,114 @@
         <a href="contact.html" class="text-[#1a1d20] font-semibold border-b-2 border-[#de602e] pb-0.5 font-raleway">Contact</a>
       </nav>
 
-      <!-- Mobile Navigation Trigger (< 768px) — Field Architecture Style Borderless 'MENU / CLOSE' -->
+      <!-- Mobile Navigation Trigger (< 768px) -->
       <button id="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Menu" aria-expanded="false" class="md:hidden inline-flex items-center gap-2.5 px-2 py-2 -mr-2 text-xs font-mono uppercase tracking-[0.22em] text-[#1a1d20] focus:outline-none">
         <span id="mobile-menu-label" class="font-semibold">Menu</span>
         <div class="w-5 h-3.5 flex flex-col justify-between items-end">
-          <span id="burger-line-1" class="w-5 h-[1.5px] bg-[#1a1d20] transition-all duration-300 origin-center"></span>
-          <span id="burger-line-2" class="w-3.5 h-[1.5px] bg-[#de602e] transition-all duration-300"></span>
-          <span id="burger-line-3" class="w-5 h-[1.5px] bg-[#1a1d20] transition-all duration-300 origin-center"></span>
+          <span id="burger-line-1" class="w-5 h-[1.5px] bg-[#1a1d20] transition-all duration-300 origin-right"></span>
+          <span id="burger-line-2" class="w-3.5 h-[1.5px] bg-[#1a1d20] transition-all duration-300"></span>
+          <span id="burger-line-3" class="w-5 h-[1.5px] bg-[#1a1d20] transition-all duration-300 origin-right"></span>
         </div>
       </button>
 
     </div>
+
+    <!-- Mobile Full-Bleed Navigation Sheet (< 768px) -->
+    <div id="mobile-nav-menu" class="hidden md:hidden w-full bg-[#f8f9fa] border-b border-[#e2e5e8] px-6 py-8 transition-all">
+      <nav class="flex flex-col gap-6 text-sm font-mono uppercase tracking-[0.22em]">
+        <a href="index.html#works" onclick="closeMobileMenu()" class="text-[#595f65] hover:text-[#1a1d20] transition-colors font-raleway pb-2 border-b border-[#e2e5e8]">01 / Works</a>
+        <a href="about.html" onclick="closeMobileMenu()" class="text-[#595f65] hover:text-[#1a1d20] transition-colors font-raleway pb-2 border-b border-[#e2e5e8]">02 / About</a>
+        <a href="contact.html" onclick="closeMobileMenu()" class="text-[#1a1d20] font-semibold border-b-2 border-[#de602e] pb-0.5 font-raleway pb-2 border-b border-[#e2e5e8]">03 / Contact</a>
+      </nav>
+      <div class="mt-8 pt-6 border-t border-[#e2e5e8] flex flex-col gap-2 text-[11px] font-mono text-[#595f65]">
+        <span>Aleksandre Karpov Design LLC</span>
+        <span>Asheville &bull; Charlotte &bull; International</span>
+      </div>
+    </div>
   </header>
 
-  <!-- Light Borderless Fullscreen Mobile Navigation Sheet (< 768px) -->
-  <div id="mobile-drawer" class="fixed inset-0 top-[72px] z-40 bg-[#f8f9fa]/98 backdrop-blur-md text-[#1a1d20] hidden flex-col justify-between p-6 overflow-y-auto md:hidden transition-opacity duration-300">
-    <div class="space-y-6 pt-4">
-      <div class="text-xs font-mono uppercase tracking-[0.25em] text-[#67aec0] font-semibold pb-1">
-        Navigation
-      </div>
-      <nav class="flex flex-col space-y-6">
-        <a href="index.html#works" onclick="closeMobileMenu()" class="group flex items-baseline justify-between py-1">
-          <span class="text-2xl font-semibold tracking-[0.15em] uppercase text-[#1a1d20] group-hover:text-[#de602e] transition-colors font-raleway">Works</span>
-          <span class="text-xs font-mono text-[#38606a] uppercase tracking-widest">21 Projects &rarr;</span>
-        </a>
-        <a href="about.html" onclick="closeMobileMenu()" class="group flex items-baseline justify-between py-1">
-          <span class="text-2xl font-semibold tracking-[0.15em] uppercase text-[#1a1d20] group-hover:text-[#de602e] transition-colors font-raleway">About</span>
-          <span class="text-xs font-mono text-[#38606a] uppercase tracking-widest">Pedigree &amp; BIM &rarr;</span>
-        </a>
-        <a href="contact.html" onclick="closeMobileMenu()" class="group flex items-baseline justify-between py-1">
-          <span class="text-2xl font-semibold tracking-[0.15em] uppercase text-[#1a1d20] group-hover:text-[#de602e] transition-colors font-raleway">Contact</span>
-          <span class="text-xs font-mono text-[#38606a] uppercase tracking-widest">Inquiries &rarr;</span>
-        </a>
-      </nav>
-    </div>
 
-    <div class="pt-6 mt-8 space-y-2.5 text-xs font-mono">
-      <div class="flex items-center justify-between">
-        <span class="text-[#67aec0] font-semibold">CHARLOTTE, NC</span>
-        <a href="tel:+17048459596" class="text-[#2b4951] hover:text-[#de602e] font-semibold">+1 (704) 845-9596</a>
-      </div>
-      <div class="flex items-center justify-between">
-        <span class="text-[#67aec0] font-semibold">INTERNATIONAL</span>
-        <a href="tel:+905385907458" class="text-[#2b4951] hover:text-[#de602e] font-semibold">+90 (538) 590-7458</a>
-      </div>
-      <div class="text-[#595f65] pt-1">
-        contact@karpovdesign.com &bull; Karpov Design LLC
-      </div>
-    </div>
-  </div>
-  <script>
-    function toggleMobileMenu() {
-      const drawer = document.getElementById('mobile-drawer');
-      const label = document.getElementById('mobile-menu-label');
-      const l1 = document.getElementById('burger-line-1');
-      const l2 = document.getElementById('burger-line-2');
-      const l3 = document.getElementById('burger-line-3');
-      const btn = document.getElementById('mobile-menu-btn');
-      if (!drawer) return;
-      const isOpen = !drawer.classList.contains('hidden');
-      if (!isOpen) {
-        drawer.classList.remove('hidden');
-        drawer.classList.add('flex');
-        if (label) label.textContent = 'Close';
-        if (btn) btn.setAttribute('aria-expanded', 'true');
-        if (l1) l1.style.transform = 'translateY(6px) rotate(45deg)';
-        if (l2) l2.style.opacity = '0';
-        if (l3) l3.style.transform = 'translateY(-6px) rotate(-45deg)';
-        document.body.style.overflow = 'hidden';
-      } else {
-        closeMobileMenu();
-      }
-    }
-    function closeMobileMenu() {
-      const drawer = document.getElementById('mobile-drawer');
-      const label = document.getElementById('mobile-menu-label');
-      const l1 = document.getElementById('burger-line-1');
-      const l2 = document.getElementById('burger-line-2');
-      const l3 = document.getElementById('burger-line-3');
-      const btn = document.getElementById('mobile-menu-btn');
-      if (!drawer) return;
-      drawer.classList.add('hidden');
-      drawer.classList.remove('flex');
-      if (label) label.textContent = 'Menu';
-      if (btn) btn.setAttribute('aria-expanded', 'false');
-      if (l1) l1.style.transform = '';
-      if (l2) l2.style.opacity = '1';
-      if (l3) l3.style.transform = '';
-      document.body.style.overflow = '';
-    }
-  </script>
-
-
-  <!-- Breadcrumb Navigation (Seamless #f8f9fa, Borderless) -->
-  <div class="w-full bg-[#f8f9fa] py-4 px-5 md:px-12 lg:px-16">
-    <nav aria-label="Breadcrumb" class="breadcrumb-bar max-w-[1920px] mx-auto text-xs md:text-sm font-mono uppercase tracking-widest text-[#595f65]">
+  <!-- Breadcrumb Navigation -->
+  <div class="w-full bg-[#f8f9fa] py-4">
+    <nav aria-label="Breadcrumb" class="field-content-rail text-xs md:text-sm font-mono uppercase tracking-widest text-[#595f65]">
       <a href="index.html" class="hover:text-[#1a1d20] transition-colors">Home</a>
       <span class="mx-2">&bull;</span>
       <span class="text-[#1a1d20] font-semibold">Contact</span>
     </nav>
   </div>
 
-  <main class="w-full bg-[#f8f9fa] py-12 md:py-16 px-5 md:px-12 lg:px-16">
-    <div class="max-w-[1920px] mx-auto flex flex-col lg:flex-row items-stretch">
+  <main class="w-full bg-[#f8f9fa] py-12 md:py-16">
+    <div class="field-content-rail">
       
-      <!-- 25% Left Pure Empty Negative Space -->
-      <div class="hidden lg:block lg:w-1/4"></div>
-
-      <!-- 75% Right Active Column with 15% Right Margin Buffer -->
-      <div class="w-full lg:w-3/4 lg:pl-12">
-        <div class="w-full lg:max-w-[82%] space-y-14 md:space-y-16">
-        
-        <!-- Contact Header & Direct Coordinates (Eyeblue Mid H1, Eyeblue Soft Labels, Eyeblue Deep Values) -->
-        <div class="space-y-8 md:space-y-10">
-          <div>
-            <h1 class="text-3xl md:text-5xl font-semibold tracking-tight text-[#38606a] mb-4">Get in touch</h1>
-            <p class="text-sm md:text-base text-[#595f65] leading-relaxed max-w-2xl">
-              For residential design commissions, computational BIM consulting, or competition collaborations, reach out directly.
-            </p>
-          </div>
-
-          <!-- Direct Coordinates Grid (Borderless, Seamless #f8f9fa) -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 pt-4">
-            <div>
-              <span class="text-[10px] font-mono uppercase tracking-widest text-[#67aec0] font-semibold block">United States Direct</span>
-              <a href="tel:+17048459596" class="text-base font-semibold text-[#2b4951] hover:text-[#de602e] transition-colors mt-1.5 block">
-                +1 (704) 845-9596
-              </a>
-              <span class="text-xs text-[#767676] block mt-1">Charlotte, NC</span>
-            </div>
-            <div>
-              <span class="text-[10px] font-mono uppercase tracking-widest text-[#67aec0] font-semibold block">International Line</span>
-              <a href="tel:+905385907458" class="text-base font-semibold text-[#2b4951] hover:text-[#de602e] transition-colors mt-1.5 block">
-                +90 (538) 590-7458
-              </a>
-              <span class="text-xs text-[#767676] block mt-1">European Projects</span>
-            </div>
-            <div>
-              <span class="text-[10px] font-mono uppercase tracking-widest text-[#67aec0] font-semibold block">Electronic Mail</span>
-              <a href="mailto:contact@karpovdesign.com" class="text-base font-semibold text-[#2b4951] hover:text-[#de602e] transition-colors mt-1.5 block">
-                contact@karpovdesign.com
-              </a>
-              <span class="text-xs text-[#767676] block mt-1">Direct Studio Inbox</span>
-            </div>
-            <div>
-              <span class="text-[10px] font-mono uppercase tracking-widest text-[#67aec0] font-semibold block">Studio Location</span>
-              <span class="text-base font-semibold text-[#2b4951] mt-1.5 block">Charlotte, NC 28223</span>
-              <span class="text-xs text-[#767676] block mt-1">By Appointment Only</span>
-            </div>
-          </div>
+      <div class="max-w-4xl space-y-12">
+        <div>
+          <span class="text-xs font-mono uppercase tracking-[0.25em] text-[#67aec0] font-semibold block mb-3">Direct Inquiry &bull; Commissions</span>
+          <h1 class="text-2xl sm:text-3xl md:text-5xl font-semibold tracking-tight text-[#1a1d20] mb-6 font-raleway">
+            Start a Commission
+          </h1>
+          <p class="text-base text-[#595f65] leading-relaxed">
+            Karpov Design accepts select architectural commissions, master plans, and computational design consultations. Submit your project requirements below.
+          </p>
         </div>
 
-        <!-- Form: Borderless wrapper on #f8f9fa, crisp white inputs (Option A), Eyeblue labels, Orange CTA -->
-        <form onsubmit="handleInquirySubmit(event)" class="space-y-8 pt-4 max-w-4xl">
+        <form id="contact-form" onsubmit="event.preventDefault(); alert('Inquiry recorded. The studio will respond within 24 business hours.');" class="space-y-6 bg-white p-8 border border-[#e2e5e8]">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div>
+              <label class="block text-xs font-mono uppercase tracking-widest text-[#1a1d20] mb-2">Full Name *</label>
+              <input type="text" required class="w-full px-4 py-3 bg-[#f8f9fa] border border-[#e2e5e8] text-sm text-[#1a1d20] focus:outline-none focus:border-[#de602e]">
+            </div>
+            <div>
+              <label class="block text-xs font-mono uppercase tracking-widest text-[#1a1d20] mb-2">Email Address *</label>
+              <input type="email" required class="w-full px-4 py-3 bg-[#f8f9fa] border border-[#e2e5e8] text-sm text-[#1a1d20] focus:outline-none focus:border-[#de602e]">
+            </div>
+          </div>
           <div>
-            <h3 class="text-sm font-mono uppercase tracking-[0.2em] font-semibold text-[#38606a]">Project Inquiries</h3>
+            <label class="block text-xs font-mono uppercase tracking-widest text-[#1a1d20] mb-2">Project Typology &amp; Location</label>
+            <input type="text" placeholder="e.g. Residential Retreat, Asheville NC" class="w-full px-4 py-3 bg-[#f8f9fa] border border-[#e2e5e8] text-sm text-[#1a1d20] focus:outline-none focus:border-[#de602e]">
           </div>
-          
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
-            <div>
-              <label class="block text-xs font-mono uppercase tracking-wider text-[#2b4951] font-semibold mb-2">Name *</label>
-              <input type="text" required placeholder="Your full name" class="w-full bg-white border border-[#e2e5e8] p-3.5 text-xs text-[#1a1d20] focus:outline-none focus:border-[#38606a] transition-colors">
-            </div>
-            <div>
-              <label class="block text-xs font-mono uppercase tracking-wider text-[#2b4951] font-semibold mb-2">Email *</label>
-              <input type="email" required placeholder="your.email@domain.com" class="w-full bg-white border border-[#e2e5e8] p-3.5 text-xs text-[#1a1d20] focus:outline-none focus:border-[#38606a] transition-colors">
-            </div>
-          </div>
-
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
-            <div>
-              <label class="block text-xs font-mono uppercase tracking-wider text-[#2b4951] font-semibold mb-2">Site Location</label>
-              <input type="text" placeholder="e.g. Asheville, NC / Blue Ridge Mountains" class="w-full bg-white border border-[#e2e5e8] p-3.5 text-xs text-[#1a1d20] focus:outline-none focus:border-[#38606a] transition-colors">
-            </div>
-            <div>
-              <label class="block text-xs font-mono uppercase tracking-wider text-[#2b4951] font-semibold mb-2">Telephone</label>
-              <input type="tel" placeholder="e.g. +1 (704) 000-0000" class="w-full bg-white border border-[#e2e5e8] p-3.5 text-xs text-[#1a1d20] focus:outline-none focus:border-[#38606a] transition-colors">
-            </div>
-          </div>
-
           <div>
-            <label class="block text-xs font-mono uppercase tracking-wider text-[#2b4951] font-semibold mb-2">Project Scope & Program Requirements *</label>
-            <textarea id="contact-scope-textarea" rows="5" required placeholder="Describe your vision, site parameters, approximate square footage, or architectural timeline..." oninput="autoExpandTextarea(this)" class="w-full bg-white border border-[#e2e5e8] p-4 text-xs text-[#1a1d20] focus:outline-none focus:border-[#38606a] resize-none leading-relaxed transition-colors"></textarea>
+            <label class="block text-xs font-mono uppercase tracking-widest text-[#1a1d20] mb-2">Project Brief / Narrative *</label>
+            <textarea rows="5" required class="w-full px-4 py-3 bg-[#f8f9fa] border border-[#e2e5e8] text-sm text-[#1a1d20] focus:outline-none focus:border-[#de602e]"></textarea>
           </div>
-
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-2">
-            <span class="text-xs text-[#595f65]">Confidentiality guaranteed. Direct architect response within 24 hours.</span>
-            <!-- Orange Submit Button -->
-            <button type="submit" class="w-full sm:w-auto px-10 py-4 bg-[#de602e] hover:bg-[#ad4b24] text-white text-xs font-mono uppercase tracking-widest font-semibold transition-colors shadow-sm text-center">
-              Submit &rarr;
-            </button>
-          </div>
-          
-          <div id="form-success" class="hidden p-4 bg-[#e4f0f2] text-xs text-[#2b4951]">
-            Thank you. Your message has been sent directly to Aleksandre Karpov.
-          </div>
+          <button type="submit" class="px-8 py-4 bg-[#1a1d20] hover:bg-[#de602e] text-white text-xs font-mono uppercase tracking-[0.2em] font-medium transition-colors">
+            Submit Inquiry &rarr;
+          </button>
         </form>
-
-        </div>
       </div>
 
     </div>
   </main>
 
-  
-  <!-- Centered Architectural Footer: Borderless on #f8f9fa -->
-  <footer class="w-full bg-[#f8f9fa]  py-12 md:py-16 px-5 md:px-12 lg:px-16">
-    <div class="max-w-[1920px] mx-auto flex flex-col lg:flex-row items-center justify-between gap-6 md:gap-8">
+
+  <!-- Footer: Field Architecture Layout Alignment -->
+  <footer class="w-full bg-[#f8f9fa]  py-12 md:py-16">
+    <div class="field-content-rail flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
       
-      <!-- Left: Logo & Studio Identity -->
-      <div class="flex items-center gap-4">
-        <img src="assets/official/logo_charcoal.svg" alt="KAD Logo" class="h-9 md:h-10 w-auto">
-        <div>
-          <span class="text-sm font-semibold tracking-[0.2em] uppercase text-[#1a1d20] block font-raleway">Karpov Design LLC</span>
-          <span class="text-xs text-[#595f65] block">Aleksandre Karpov &bull; Charlotte, NC</span>
+      <!-- Studio Monogram & Identity -->
+      <div class="flex items-center gap-3">
+        <img src="assets/official/logo_charcoal.svg" alt="KAD Monogram" class="h-8 w-auto opacity-90">
+        <div class="flex flex-col text-[10px] font-semibold tracking-[0.2em] uppercase leading-tight text-[#1a1d20] font-raleway">
+          <span>ALEKSANDRE KARPOV DESIGN</span>
+          <span class="text-[9px] tracking-[0.2em] text-[#595f65] font-normal">&copy; 2026 &bull; All Rights Reserved</span>
         </div>
       </div>
 
-      <!-- Right: Links & Copyright -->
-      <div class="flex flex-col items-center lg:items-end gap-3 text-xs text-[#595f65]">
-        <div class="flex gap-8 tracking-[0.2em] uppercase font-medium font-raleway">
-          <a href="index.html#works" class="hover:text-[#de602e] transition-colors">Works</a>
-          <a href="about.html" class="hover:text-[#de602e] transition-colors">About</a>
-          <a href="contact.html" class="hover:text-[#de602e] transition-colors">Contact</a>
-        </div>
-        <span class="font-mono text-[11px] text-[#767676]">&copy; 2026 Karpov Design LLC. All rights reserved.</span>
-      </div>
+      <!-- Footer Quick Navigation -->
+      <nav class="flex flex-wrap items-center gap-6 md:gap-8 text-xs font-mono uppercase tracking-widest text-[#595f65]">
+        <a href="index.html#works" class="hover:text-[#de602e] transition-colors">Works</a>
+        <a href="about.html" class="hover:text-[#de602e] transition-colors">About</a>
+        <a href="contact.html" class="hover:text-[#de602e] transition-colors">Contact</a>
+        <a href="academy.html" class="hover:text-[#de602e] transition-colors text-[#38606a]">Academy</a>
+      </nav>
+
+      <!-- Back to top trigger -->
+      <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="text-xs font-mono uppercase tracking-widest text-[#595f65] hover:text-[#1a1d20] transition-colors">
+        Back to Top &uarr;
+      </button>
 
     </div>
   </footer>
 
-
-  <script>
-    function autoExpandTextarea(el) {
-      el.style.height = 'auto';
-      el.style.height = (el.scrollHeight + 4) + 'px';
-    }
-
-    function handleInquirySubmit(e) {
-      e.preventDefault();
-      document.getElementById('form-success').classList.remove('hidden');
-      e.target.reset();
-      const ta = document.getElementById('contact-scope-textarea');
-      if (ta) ta.style.height = 'auto';
-    }
-  </script>
 
 </body>
 </html>

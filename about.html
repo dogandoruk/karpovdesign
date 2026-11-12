@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
-  
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/svg+xml" href="assets/official/logo_charcoal.svg">
@@ -18,7 +18,6 @@
     .font-raleway {
       font-family: 'Raleway', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
     }
-  <style>
     :root {
       --bg-main: #f8f9fa;
       --bg-surface: #ffffff;
@@ -37,13 +36,159 @@
       --hairberry-vibrant: #de602e;
       --hairberry-bright: #f36a34;
       --hairberry-peach: #f19f55;
+
+      /* Field Architecture Spacing Model:
+         Desktop: 25% Left Negative Offset, 70% Asymmetric Content Rail, Right edge clamped between 32px and 64px
+         Tablet/Mobile (< 1024px): 5% - 90% - 5% (min 20px padding)
+      */
+      --field-left-offset: 25vw;
+      --field-right-gutter: clamp(32px, 5vw, 64px);
     }
+    @media (max-width: 1023px) {
+      :root {
+        --field-left-offset: clamp(20px, 5vw, 40px);
+        --field-right-gutter: clamp(20px, 5vw, 40px);
+      }
+    }
+
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       background-color: var(--bg-main);
       color: var(--text-main);
       overflow-x: hidden;
     }
+
+    /* Asymmetric Field Layout Containers */
+    .field-header-container {
+      padding-left: var(--field-left-offset);
+      padding-right: var(--field-right-gutter);
+      width: 100%;
+    }
+    .field-content-rail {
+      padding-left: var(--field-left-offset);
+      padding-right: var(--field-right-gutter);
+      width: 100%;
+    }
+
+    /* Ambient Ken-Burns Animation for Hero Slides */
+    @keyframes kenBurnsSubtle {
+      0% {
+        transform: scale(1.0) translate(0, 0);
+      }
+      50% {
+        transform: scale(1.05) translate(-1%, -0.5%);
+      }
+      100% {
+        transform: scale(1.0) translate(0, 0);
+      }
+    }
+    .ambient-motion {
+      animation: kenBurnsSubtle 16s ease-in-out infinite alternate;
+      will-change: transform;
+    }
+    .paused-motion {
+      animation-play-state: paused !important;
+    }
+
+    /* Custom Sleek Dropdown Styling (Default Page) */
+    .custom-dropdown-container {
+      position: relative;
+    }
+    .custom-dropdown-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      padding: 0.5rem 0.85rem;
+      background: #ffffff;
+      border: 1px solid #e2e5e8;
+      font-family: monospace;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #1a1d20;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+    .custom-dropdown-btn:hover {
+      border-color: #38606a;
+    }
+    .custom-dropdown-btn.active-filter {
+      border-color: #de602e;
+      color: #de602e;
+      font-weight: 600;
+    }
+    .custom-dropdown-menu {
+      position: absolute;
+      top: calc(100% + 4px);
+      left: 0;
+      min-width: 100%;
+      background: #ffffff;
+      border: 1px solid #e2e5e8;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
+      z-index: 40;
+      display: none;
+      flex-direction: column;
+      padding: 0.25rem 0;
+    }
+    .custom-dropdown-menu.open {
+      display: flex;
+    }
+    .custom-dropdown-item {
+      padding: 0.5rem 0.85rem;
+      font-family: monospace;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #595f65;
+      text-align: left;
+      transition: all 0.15s ease;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .custom-dropdown-item:hover {
+      background: #f8f9fa;
+      color: #1a1d20;
+    }
+    .custom-dropdown-item.selected {
+      color: #de602e;
+      font-weight: 600;
+      background: #fff5f2;
+    }
+
+    /* Native Dropdown Styling (Variant Page) */
+    .native-architectural-select {
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      background-color: #ffffff;
+      border: 1px solid #e2e5e8;
+      padding: 0.5rem 2rem 0.5rem 0.85rem;
+      font-family: monospace;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #1a1d20;
+      cursor: pointer;
+      outline: none;
+      transition: all 0.2s ease;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23595f65'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0.65rem center;
+      background-size: 0.85rem;
+    }
+    .native-architectural-select:hover {
+      border-color: #38606a;
+    }
+    .native-architectural-select:focus {
+      border-color: #de602e;
+    }
+    .native-architectural-select.active-filter {
+      border-color: #de602e;
+      color: #de602e;
+      font-weight: 600;
+    }
+
     ::-webkit-scrollbar {
       width: 5px;
       height: 5px;
@@ -55,39 +200,18 @@
       -ms-overflow-style: none;
       scrollbar-width: none;
     }
-    @media (hover: none), (max-width: 1023px) {
-      .touch-default-veil {
-        background: linear-gradient(to top, rgba(26, 29, 32, 0.72) 0%, rgba(26, 29, 32, 0.22) 45%, rgba(0, 0, 0, 0) 100%) !important;
-      }
-      .touch-default-overlay {
-        opacity: 1 !important;
-        transform: translateY(0) !important;
-      }
-      .touch-default-title {
-        opacity: 1 !important;
-      }
-      .touch-variant-title {
-        opacity: 1 !important;
-        transform: translateY(0) !important;
-      }
-      .variant-title-space {
-        min-height: 52px !important;
-        padding-top: 10px !important;
-        padding-bottom: 12px !important;
-      }
-    }
   </style>
 
   <title>Aleksandre Karpov — About & Pedigree &bull; Karpov Design LLC</title>
 </head>
 <body class="antialiased bg-[#f8f9fa] text-[#1a1d20]">
 
-  
-  <!-- Top Navigation: Logo + Stacked Text on Top Left, Inline Links on Tablet/Desktop, Field Architecture Light Sheet Toggle on Mobile -->
+
+  <!-- Top Navigation: Header Logo Aligns Flush to Content Left Inset Boundary -->
   <header class="w-full bg-[#f8f9fa]/95 backdrop-blur-md  z-50 sticky top-0 transition-all">
-    <div class="max-w-[1920px] mx-auto px-5 md:px-12 lg:px-16 flex items-center justify-between min-h-[72px] md:min-h-[84px]">
+    <div class="field-header-container flex items-center justify-between min-h-[72px] md:min-h-[84px]">
       
-      <!-- Top Left Corner: Logo Monogram + Stacked Typography -->
+      <!-- Top Left: Logo Monogram + Stacked Typography Flush to Baseline -->
       <a href="index.html" class="flex items-center gap-3 md:gap-3.5 group">
         <img src="assets/official/logo_charcoal.svg" alt="KAD Monogram" class="h-9 md:h-11 w-auto">
         <div class="flex flex-col text-[11px] font-semibold tracking-[0.2em] uppercase leading-tight text-[#1a1d20] font-raleway">
@@ -104,289 +228,117 @@
         <a href="contact.html" class="text-[#595f65] hover:text-[#1a1d20] transition-colors font-raleway">Contact</a>
       </nav>
 
-      <!-- Mobile Navigation Trigger (< 768px) — Field Architecture Style Borderless 'MENU / CLOSE' -->
+      <!-- Mobile Navigation Trigger (< 768px) -->
       <button id="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Menu" aria-expanded="false" class="md:hidden inline-flex items-center gap-2.5 px-2 py-2 -mr-2 text-xs font-mono uppercase tracking-[0.22em] text-[#1a1d20] focus:outline-none">
         <span id="mobile-menu-label" class="font-semibold">Menu</span>
         <div class="w-5 h-3.5 flex flex-col justify-between items-end">
-          <span id="burger-line-1" class="w-5 h-[1.5px] bg-[#1a1d20] transition-all duration-300 origin-center"></span>
-          <span id="burger-line-2" class="w-3.5 h-[1.5px] bg-[#de602e] transition-all duration-300"></span>
-          <span id="burger-line-3" class="w-5 h-[1.5px] bg-[#1a1d20] transition-all duration-300 origin-center"></span>
+          <span id="burger-line-1" class="w-5 h-[1.5px] bg-[#1a1d20] transition-all duration-300 origin-right"></span>
+          <span id="burger-line-2" class="w-3.5 h-[1.5px] bg-[#1a1d20] transition-all duration-300"></span>
+          <span id="burger-line-3" class="w-5 h-[1.5px] bg-[#1a1d20] transition-all duration-300 origin-right"></span>
         </div>
       </button>
 
     </div>
+
+    <!-- Mobile Full-Bleed Navigation Sheet (< 768px) -->
+    <div id="mobile-nav-menu" class="hidden md:hidden w-full bg-[#f8f9fa] border-b border-[#e2e5e8] px-6 py-8 transition-all">
+      <nav class="flex flex-col gap-6 text-sm font-mono uppercase tracking-[0.22em]">
+        <a href="index.html#works" onclick="closeMobileMenu()" class="text-[#595f65] hover:text-[#1a1d20] transition-colors font-raleway pb-2 border-b border-[#e2e5e8]">01 / Works</a>
+        <a href="about.html" onclick="closeMobileMenu()" class="text-[#1a1d20] font-semibold border-b-2 border-[#de602e] pb-0.5 font-raleway pb-2 border-b border-[#e2e5e8]">02 / About</a>
+        <a href="contact.html" onclick="closeMobileMenu()" class="text-[#595f65] hover:text-[#1a1d20] transition-colors font-raleway pb-2 border-b border-[#e2e5e8]">03 / Contact</a>
+      </nav>
+      <div class="mt-8 pt-6 border-t border-[#e2e5e8] flex flex-col gap-2 text-[11px] font-mono text-[#595f65]">
+        <span>Aleksandre Karpov Design LLC</span>
+        <span>Asheville &bull; Charlotte &bull; International</span>
+      </div>
+    </div>
   </header>
 
-  <!-- Light Borderless Fullscreen Mobile Navigation Sheet (< 768px) -->
-  <div id="mobile-drawer" class="fixed inset-0 top-[72px] z-40 bg-[#f8f9fa]/98 backdrop-blur-md text-[#1a1d20] hidden flex-col justify-between p-6 overflow-y-auto md:hidden transition-opacity duration-300">
-    <div class="space-y-6 pt-4">
-      <div class="text-xs font-mono uppercase tracking-[0.25em] text-[#67aec0] font-semibold pb-1">
-        Navigation
-      </div>
-      <nav class="flex flex-col space-y-6">
-        <a href="index.html#works" onclick="closeMobileMenu()" class="group flex items-baseline justify-between py-1">
-          <span class="text-2xl font-semibold tracking-[0.15em] uppercase text-[#1a1d20] group-hover:text-[#de602e] transition-colors font-raleway">Works</span>
-          <span class="text-xs font-mono text-[#38606a] uppercase tracking-widest">21 Projects &rarr;</span>
-        </a>
-        <a href="about.html" onclick="closeMobileMenu()" class="group flex items-baseline justify-between py-1">
-          <span class="text-2xl font-semibold tracking-[0.15em] uppercase text-[#1a1d20] group-hover:text-[#de602e] transition-colors font-raleway">About</span>
-          <span class="text-xs font-mono text-[#38606a] uppercase tracking-widest">Pedigree &amp; BIM &rarr;</span>
-        </a>
-        <a href="contact.html" onclick="closeMobileMenu()" class="group flex items-baseline justify-between py-1">
-          <span class="text-2xl font-semibold tracking-[0.15em] uppercase text-[#1a1d20] group-hover:text-[#de602e] transition-colors font-raleway">Contact</span>
-          <span class="text-xs font-mono text-[#38606a] uppercase tracking-widest">Inquiries &rarr;</span>
-        </a>
-      </nav>
-    </div>
 
-    <div class="pt-6 mt-8 space-y-2.5 text-xs font-mono">
-      <div class="flex items-center justify-between">
-        <span class="text-[#67aec0] font-semibold">CHARLOTTE, NC</span>
-        <a href="tel:+17048459596" class="text-[#2b4951] hover:text-[#de602e] font-semibold">+1 (704) 845-9596</a>
-      </div>
-      <div class="flex items-center justify-between">
-        <span class="text-[#67aec0] font-semibold">INTERNATIONAL</span>
-        <a href="tel:+905385907458" class="text-[#2b4951] hover:text-[#de602e] font-semibold">+90 (538) 590-7458</a>
-      </div>
-      <div class="text-[#595f65] pt-1">
-        contact@karpovdesign.com &bull; Karpov Design LLC
-      </div>
-    </div>
-  </div>
-  <script>
-    function toggleMobileMenu() {
-      const drawer = document.getElementById('mobile-drawer');
-      const label = document.getElementById('mobile-menu-label');
-      const l1 = document.getElementById('burger-line-1');
-      const l2 = document.getElementById('burger-line-2');
-      const l3 = document.getElementById('burger-line-3');
-      const btn = document.getElementById('mobile-menu-btn');
-      if (!drawer) return;
-      const isOpen = !drawer.classList.contains('hidden');
-      if (!isOpen) {
-        drawer.classList.remove('hidden');
-        drawer.classList.add('flex');
-        if (label) label.textContent = 'Close';
-        if (btn) btn.setAttribute('aria-expanded', 'true');
-        if (l1) l1.style.transform = 'translateY(6px) rotate(45deg)';
-        if (l2) l2.style.opacity = '0';
-        if (l3) l3.style.transform = 'translateY(-6px) rotate(-45deg)';
-        document.body.style.overflow = 'hidden';
-      } else {
-        closeMobileMenu();
-      }
-    }
-    function closeMobileMenu() {
-      const drawer = document.getElementById('mobile-drawer');
-      const label = document.getElementById('mobile-menu-label');
-      const l1 = document.getElementById('burger-line-1');
-      const l2 = document.getElementById('burger-line-2');
-      const l3 = document.getElementById('burger-line-3');
-      const btn = document.getElementById('mobile-menu-btn');
-      if (!drawer) return;
-      drawer.classList.add('hidden');
-      drawer.classList.remove('flex');
-      if (label) label.textContent = 'Menu';
-      if (btn) btn.setAttribute('aria-expanded', 'false');
-      if (l1) l1.style.transform = '';
-      if (l2) l2.style.opacity = '1';
-      if (l3) l3.style.transform = '';
-      document.body.style.overflow = '';
-    }
-  </script>
-
-
-  <!-- Breadcrumb Navigation (Seamless, No Borders) -->
-  <div class="w-full bg-[#f8f9fa] py-4 px-5 md:px-12 lg:px-16">
-    <nav aria-label="Breadcrumb" class="breadcrumb-bar max-w-[1920px] mx-auto text-xs md:text-sm font-mono uppercase tracking-widest text-[#595f65]">
+  <!-- Breadcrumb Navigation -->
+  <div class="w-full bg-[#f8f9fa] py-4">
+    <nav aria-label="Breadcrumb" class="field-content-rail text-xs md:text-sm font-mono uppercase tracking-widest text-[#595f65]">
       <a href="index.html" class="hover:text-[#1a1d20] transition-colors">Home</a>
       <span class="mx-2">&bull;</span>
       <span class="text-[#1a1d20] font-semibold">About</span>
     </nav>
   </div>
 
-  <main class="w-full bg-[#f8f9fa] py-12 md:py-16 px-5 md:px-12 lg:px-16">
-    <div class="max-w-[1920px] mx-auto flex flex-col lg:flex-row items-stretch">
+  <main class="w-full bg-[#f8f9fa] py-12 md:py-16">
+    <div class="field-content-rail">
       
-      <!-- 25% Left Pure Empty Negative Space -->
-      <div class="hidden lg:block lg:w-1/4"></div>
-
-      <!-- 75% Right Column Content (Pure Typographic, No Box Outlines) with 15% Right Margin Buffer -->
-      <div class="w-full lg:w-3/4 lg:pl-12">
-        <div class="w-full lg:max-w-[82%] space-y-14 md:space-y-16">
+      <div class="space-y-16">
         
-        <!-- Header: Aleksandre Karpov + Subtitle (Degree & Universities, Eyeblue Soft accent) -->
+        <!-- Studio Narrative -->
         <div>
-          <h1 class="text-3xl md:text-5xl font-semibold tracking-tight text-[#1a1d20]">Aleksandre Karpov</h1>
-          <p class="text-xs font-mono uppercase tracking-wider text-[#67aec0] font-semibold mt-3">
-            B.A. in Architecture &bull; Lund University (Sweden)
-          </p>
-        </div>
-
-        <!-- Profile Section: Compact Mobile Portrait (w-56 sm:w-64) + Larger Tablet/Desktop Portrait (md:w-80 lg:w-96) + Biography -->
-        <div class="flex flex-col md:flex-row items-start gap-8 md:gap-10 lg:gap-14">
-          
-          <div class="w-56 sm:w-64 md:w-80 lg:w-96 shrink-0 flex flex-col">
-            <div class="w-full aspect-[4/5] bg-transparent overflow-hidden">
-              <img src="assets/official/alex_portrait.png" alt="Aleksandre Karpov" class="w-full h-full object-cover">
-            </div>
-            <!-- Caption directly on canvas, zero border, zero white card -->
-            <div class="mt-4">
-              <span class="text-sm font-semibold tracking-wider uppercase text-[#1a1d20] block">Aleksandre Karpov</span>
-              <span class="text-xs font-mono text-[#67aec0] uppercase tracking-widest block mt-1">Principal &bull; Karpov Design LLC</span>
-            </div>
-          </div>
-
-          <!-- Bio Narrative with H2 in Eyeblue Mid (#38606a) -->
-          <div class="flex-1 space-y-6">
-            <h2 class="text-xl md:text-3xl font-semibold text-[#38606a] tracking-tight leading-snug">
-              Dual Mastery: Analog Fine Art & Computational BIM
-            </h2>
-            <p class="text-sm md:text-base text-[#595f65] leading-relaxed">
-              Aleksandre Karpov operates at the convergence of tactile architectural draftsmanship and advanced digital building information modeling. Raised with a rigorous foundation in classical drawing, watercolor plein-air representation, and structural sculpture, he approaches each project with visceral sensitivity to materials, topography, and natural light.
+          <span class="text-xs font-mono uppercase tracking-[0.25em] text-[#67aec0] font-semibold block mb-3">Architectural Practice &bull; Philosophy</span>
+          <h1 class="text-2xl sm:text-3xl md:text-5xl font-semibold tracking-tight text-[#1a1d20] mb-8 font-raleway">
+            Design at the Edge of Landscape and Computation
+          </h1>
+          <div class="space-y-6 text-base md:text-lg text-[#595f65] leading-relaxed max-w-4xl">
+            <p>
+              Aleksandre Karpov Design LLC is an architectural practice based in North Carolina, operating at the intersection of rigorous tectonic thinking, vernacular materiality, and computational form-finding.
             </p>
-            <p class="text-sm md:text-base text-[#595f65] leading-relaxed">
-              Parallel to this analog mastery, Aleksandre possesses extensive experience in computational building coordination, parametric modeling, and Revit/BIM management. He has led technical documentation across international commercial towers, complex mixed-use industrial regenerations, and bespoke mountain residences.
-            </p>
-            <p class="text-sm md:text-base text-[#595f65] leading-relaxed">
-              As principal of <span class="text-[#2b4951] font-semibold">Karpov Design LLC</span>, he provides complete residential design commissions and architectural consultation.
+            <p>
+              Each project is approached not as an isolated sculptural object, but as a responsive ecological and spatial field. From private mountain retreats in the Blue Ridge to urban community infrastructure, our methodology privileges environmental resilience, atmospheric lighting, and high-precision construction detailing.
             </p>
           </div>
-
         </div>
 
-        <!-- Academic & Technical Capabilities (No white boxes, No borders, Eyeblue Mid headings, Deep Eyeblue highlights) -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 pt-4">
-          
-          <!-- Academic Foundation -->
-          <div class="space-y-4">
-            <h3 class="text-sm font-mono font-semibold uppercase tracking-[0.2em] text-[#38606a]">Academic Foundation</h3>
-            <ul class="space-y-4 text-xs md:text-sm text-[#595f65] leading-relaxed">
-              <li>
-                <strong class="text-[#2b4951] font-semibold block sm:inline">UNC Charlotte:</strong>
-                Bachelor of Arts in Architecture. Recipient of studio merit recognitions.
-              </li>
-              <li>
-                <strong class="text-[#2b4951] font-semibold block sm:inline">Lund University (Sweden):</strong>
-                Advanced sustainable urbanism and Nordic housing morphology.
-              </li>
-              <li>
-                <strong class="text-[#2b4951] font-semibold block sm:inline">UNCC Innovative Housing Lab & Studio X:</strong>
-                Research fellow prototyping mass-timber structural assemblies.
-              </li>
-            </ul>
-          </div>
-
-          <!-- Software & Technical Stack -->
-          <div class="space-y-4">
-            <h3 class="text-sm font-mono font-semibold uppercase tracking-[0.2em] text-[#38606a]">Software & Technical Stack</h3>
-            <ul class="space-y-4 text-xs md:text-sm text-[#595f65] leading-relaxed">
-              <li>
-                <strong class="text-[#2b4951] font-semibold block sm:inline">Computational BIM:</strong>
-                Autodesk Revit, ArchiCAD, Navisworks clash detection.
-              </li>
-              <li>
-                <strong class="text-[#2b4951] font-semibold block sm:inline">Parametric & Form-Generation:</strong>
-                Rhino 3D, Grasshopper, SketchUp Pro.
-              </li>
-              <li>
-                <strong class="text-[#2b4951] font-semibold block sm:inline">Visualization & Media:</strong>
-                Enscape, V-Ray, Lumion, Adobe Creative Cloud Suite.
-              </li>
-              <li>
-                <strong class="text-[#2b4951] font-semibold block sm:inline">Analog Methods:</strong>
-                Ink drafting, charcoal massing, watercolor rendering.
-              </li>
-            </ul>
-          </div>
-
-        </div>
-
-        <!-- Competitions & Accolades (Borderless presentation on #f8f9fa) -->
-        <div class="space-y-8 pt-6">
-          <h2 class="text-xl md:text-2xl font-semibold tracking-[0.25em] uppercase text-[#38606a]">Competitions & Accolades</h2>
-          
-          <div class="space-y-8">
-            <!-- Item 1 -->
-            <div class="flex flex-col md:flex-row md:items-baseline justify-between gap-2 md:gap-4">
-              <div class="md:w-3/4">
-                <span class="text-[10px] font-mono uppercase tracking-widest text-[#de602e] font-semibold">1st Place Winner &bull; Invited Competition</span>
-                <h3 class="text-base md:text-lg font-semibold text-[#1a1d20] mt-1">Eskişehir Industrial Regeneration (Multi-City)</h3>
-                <p class="text-xs text-[#595f65] mt-1 leading-relaxed">51,000 m² municipal depot adaptive reuse into cultural and tech center.</p>
-              </div>
-              <div class="md:w-1/4 text-left md:text-right font-mono text-xs text-[#2b4951]">
-                <span>2015 &bull; Eskişehir, TR</span>
-              </div>
+        <!-- Pedigree & Credentials -->
+        <div class="pt-8 border-t border-[#e2e5e8]">
+          <span class="text-xs font-mono uppercase tracking-[0.25em] text-[#67aec0] font-semibold block mb-6">Pedigree &bull; Academic Foundation</span>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="p-6 bg-white border border-[#e2e5e8]">
+              <span class="text-[11px] font-mono uppercase tracking-widest text-[#de602e] block mb-2">Education</span>
+              <h3 class="text-lg font-semibold text-[#1a1d20]">UNCC School of Architecture</h3>
+              <p class="text-xs text-[#595f65] mt-1 font-mono">Bachelor of Arts in Architecture (B.A. Arch)</p>
+              <p class="text-xs text-[#595f65] mt-2 leading-relaxed">
+                Focus on digital fabrication, computational form generation, and high-performance building skins.
+              </p>
             </div>
-
-            <!-- Item 2 -->
-            <div class="flex flex-col md:flex-row md:items-baseline justify-between gap-2 md:gap-4">
-              <div class="md:w-3/4">
-                <span class="text-[10px] font-mono uppercase tracking-widest text-[#de602e] font-semibold">2nd Place Award &bull; National Competition</span>
-                <h3 class="text-base md:text-lg font-semibold text-[#1a1d20] mt-1">Caferağa Community Center & Plaza</h3>
-                <p class="text-xs text-[#595f65] mt-1 leading-relaxed">Civic cultural gathering venue, public library, and tiered urban courtyards.</p>
-              </div>
-              <div class="md:w-1/4 text-left md:text-right font-mono text-xs text-[#2b4951]">
-                <span>2016 &bull; Istanbul, TR</span>
-              </div>
+            <div class="p-6 bg-white border border-[#e2e5e8]">
+              <span class="text-[11px] font-mono uppercase tracking-widest text-[#de602e] block mb-2">Accreditation & Practice</span>
+              <h3 class="text-lg font-semibold text-[#1a1d20]">Karpov Design LLC</h3>
+              <p class="text-xs text-[#595f65] mt-1 font-mono">North Carolina, USA</p>
+              <p class="text-xs text-[#595f65] mt-2 leading-relaxed">
+                Full-service architectural design consulting, digital visualization, and master planning commissions.
+              </p>
             </div>
-
-            <!-- Item 3 -->
-            <div class="flex flex-col md:flex-row md:items-baseline justify-between gap-2 md:gap-4">
-              <div class="md:w-3/4">
-                <span class="text-[10px] font-mono uppercase tracking-widest text-[#de602e] font-semibold">Competition Selection & Finalist</span>
-                <h3 class="text-base md:text-lg font-semibold text-[#1a1d20] mt-1">Sivas Unity Bridge & Cultural Crossing</h3>
-                <p class="text-xs text-[#595f65] mt-1 leading-relaxed">Inhabited civic bridge weaving public amphitheatres and active promenade.</p>
-              </div>
-              <div class="md:w-1/4 text-left md:text-right font-mono text-xs text-[#2b4951]">
-                <span>2015 &bull; Sivas, TR</span>
-              </div>
-            </div>
-
-            <!-- Item 4 -->
-            <div class="flex flex-col md:flex-row md:items-baseline justify-between gap-2 md:gap-4">
-              <div class="md:w-3/4">
-                <span class="text-[10px] font-mono uppercase tracking-widest text-[#de602e] font-semibold">Academic Pedigree & Honors</span>
-                <h3 class="text-base md:text-lg font-semibold text-[#1a1d20] mt-1">UNC Charlotte School of Architecture</h3>
-                <p class="text-xs text-[#595f65] mt-1 leading-relaxed">Bachelor of Arts in Architecture. Advanced digital lab fellow, Studio X.</p>
-              </div>
-              <div class="md:w-1/4 text-left md:text-right font-mono text-xs text-[#2b4951]">
-                <span>2018–2021 &bull; USA / SE</span>
-              </div>
-            </div>
-
           </div>
         </div>
 
-        </div>
       </div>
 
     </div>
   </main>
 
-  
-  <!-- Centered Architectural Footer: Borderless on #f8f9fa -->
-  <footer class="w-full bg-[#f8f9fa]  py-12 md:py-16 px-5 md:px-12 lg:px-16">
-    <div class="max-w-[1920px] mx-auto flex flex-col lg:flex-row items-center justify-between gap-6 md:gap-8">
+
+  <!-- Footer: Field Architecture Layout Alignment -->
+  <footer class="w-full bg-[#f8f9fa]  py-12 md:py-16">
+    <div class="field-content-rail flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
       
-      <!-- Left: Logo & Studio Identity -->
-      <div class="flex items-center gap-4">
-        <img src="assets/official/logo_charcoal.svg" alt="KAD Logo" class="h-9 md:h-10 w-auto">
-        <div>
-          <span class="text-sm font-semibold tracking-[0.2em] uppercase text-[#1a1d20] block font-raleway">Karpov Design LLC</span>
-          <span class="text-xs text-[#595f65] block">Aleksandre Karpov &bull; Charlotte, NC</span>
+      <!-- Studio Monogram & Identity -->
+      <div class="flex items-center gap-3">
+        <img src="assets/official/logo_charcoal.svg" alt="KAD Monogram" class="h-8 w-auto opacity-90">
+        <div class="flex flex-col text-[10px] font-semibold tracking-[0.2em] uppercase leading-tight text-[#1a1d20] font-raleway">
+          <span>ALEKSANDRE KARPOV DESIGN</span>
+          <span class="text-[9px] tracking-[0.2em] text-[#595f65] font-normal">&copy; 2026 &bull; All Rights Reserved</span>
         </div>
       </div>
 
-      <!-- Right: Links & Copyright -->
-      <div class="flex flex-col items-center lg:items-end gap-3 text-xs text-[#595f65]">
-        <div class="flex gap-8 tracking-[0.2em] uppercase font-medium font-raleway">
-          <a href="index.html#works" class="hover:text-[#de602e] transition-colors">Works</a>
-          <a href="about.html" class="hover:text-[#de602e] transition-colors">About</a>
-          <a href="contact.html" class="hover:text-[#de602e] transition-colors">Contact</a>
-        </div>
-        <span class="font-mono text-[11px] text-[#767676]">&copy; 2026 Karpov Design LLC. All rights reserved.</span>
-      </div>
+      <!-- Footer Quick Navigation -->
+      <nav class="flex flex-wrap items-center gap-6 md:gap-8 text-xs font-mono uppercase tracking-widest text-[#595f65]">
+        <a href="index.html#works" class="hover:text-[#de602e] transition-colors">Works</a>
+        <a href="about.html" class="hover:text-[#de602e] transition-colors">About</a>
+        <a href="contact.html" class="hover:text-[#de602e] transition-colors">Contact</a>
+        <a href="academy.html" class="hover:text-[#de602e] transition-colors text-[#38606a]">Academy</a>
+      </nav>
+
+      <!-- Back to top trigger -->
+      <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="text-xs font-mono uppercase tracking-widest text-[#595f65] hover:text-[#1a1d20] transition-colors">
+        Back to Top &uarr;
+      </button>
 
     </div>
   </footer>

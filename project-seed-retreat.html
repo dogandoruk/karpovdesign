@@ -18,7 +18,6 @@
     .font-raleway {
       font-family: 'Raleway', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
     }
-  <style>
     :root {
       --bg-main: #f8f9fa;
       --bg-surface: #ffffff;
@@ -37,13 +36,159 @@
       --hairberry-vibrant: #de602e;
       --hairberry-bright: #f36a34;
       --hairberry-peach: #f19f55;
+
+      /* Field Architecture Spacing Model:
+         Desktop: 25% Left Negative Offset, 70% Asymmetric Content Rail, Right edge clamped between 32px and 64px
+         Tablet/Mobile (< 1024px): 5% - 90% - 5% (min 20px padding)
+      */
+      --field-left-offset: 25vw;
+      --field-right-gutter: clamp(32px, 5vw, 64px);
     }
+    @media (max-width: 1023px) {
+      :root {
+        --field-left-offset: clamp(20px, 5vw, 40px);
+        --field-right-gutter: clamp(20px, 5vw, 40px);
+      }
+    }
+
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       background-color: var(--bg-main);
       color: var(--text-main);
       overflow-x: hidden;
     }
+
+    /* Asymmetric Field Layout Containers */
+    .field-header-container {
+      padding-left: var(--field-left-offset);
+      padding-right: var(--field-right-gutter);
+      width: 100%;
+    }
+    .field-content-rail {
+      padding-left: var(--field-left-offset);
+      padding-right: var(--field-right-gutter);
+      width: 100%;
+    }
+
+    /* Ambient Ken-Burns Animation for Hero Slides */
+    @keyframes kenBurnsSubtle {
+      0% {
+        transform: scale(1.0) translate(0, 0);
+      }
+      50% {
+        transform: scale(1.05) translate(-1%, -0.5%);
+      }
+      100% {
+        transform: scale(1.0) translate(0, 0);
+      }
+    }
+    .ambient-motion {
+      animation: kenBurnsSubtle 16s ease-in-out infinite alternate;
+      will-change: transform;
+    }
+    .paused-motion {
+      animation-play-state: paused !important;
+    }
+
+    /* Custom Sleek Dropdown Styling (Default Page) */
+    .custom-dropdown-container {
+      position: relative;
+    }
+    .custom-dropdown-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      padding: 0.5rem 0.85rem;
+      background: #ffffff;
+      border: 1px solid #e2e5e8;
+      font-family: monospace;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #1a1d20;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+    .custom-dropdown-btn:hover {
+      border-color: #38606a;
+    }
+    .custom-dropdown-btn.active-filter {
+      border-color: #de602e;
+      color: #de602e;
+      font-weight: 600;
+    }
+    .custom-dropdown-menu {
+      position: absolute;
+      top: calc(100% + 4px);
+      left: 0;
+      min-width: 100%;
+      background: #ffffff;
+      border: 1px solid #e2e5e8;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
+      z-index: 40;
+      display: none;
+      flex-direction: column;
+      padding: 0.25rem 0;
+    }
+    .custom-dropdown-menu.open {
+      display: flex;
+    }
+    .custom-dropdown-item {
+      padding: 0.5rem 0.85rem;
+      font-family: monospace;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #595f65;
+      text-align: left;
+      transition: all 0.15s ease;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .custom-dropdown-item:hover {
+      background: #f8f9fa;
+      color: #1a1d20;
+    }
+    .custom-dropdown-item.selected {
+      color: #de602e;
+      font-weight: 600;
+      background: #fff5f2;
+    }
+
+    /* Native Dropdown Styling (Variant Page) */
+    .native-architectural-select {
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      background-color: #ffffff;
+      border: 1px solid #e2e5e8;
+      padding: 0.5rem 2rem 0.5rem 0.85rem;
+      font-family: monospace;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #1a1d20;
+      cursor: pointer;
+      outline: none;
+      transition: all 0.2s ease;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23595f65'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0.65rem center;
+      background-size: 0.85rem;
+    }
+    .native-architectural-select:hover {
+      border-color: #38606a;
+    }
+    .native-architectural-select:focus {
+      border-color: #de602e;
+    }
+    .native-architectural-select.active-filter {
+      border-color: #de602e;
+      color: #de602e;
+      font-weight: 600;
+    }
+
     ::-webkit-scrollbar {
       width: 5px;
       height: 5px;
@@ -55,27 +200,6 @@
       -ms-overflow-style: none;
       scrollbar-width: none;
     }
-    @media (hover: none), (max-width: 1023px) {
-      .touch-default-veil {
-        background: linear-gradient(to top, rgba(26, 29, 32, 0.72) 0%, rgba(26, 29, 32, 0.22) 45%, rgba(0, 0, 0, 0) 100%) !important;
-      }
-      .touch-default-overlay {
-        opacity: 1 !important;
-        transform: translateY(0) !important;
-      }
-      .touch-default-title {
-        opacity: 1 !important;
-      }
-      .touch-variant-title {
-        opacity: 1 !important;
-        transform: translateY(0) !important;
-      }
-      .variant-title-space {
-        min-height: 52px !important;
-        padding-top: 10px !important;
-        padding-bottom: 12px !important;
-      }
-    }
   </style>
 
   <title>SEED Artists Getaway — Aleksandre Karpov &bull; Karpov Design LLC</title>
@@ -83,11 +207,11 @@
 <body class="antialiased bg-[#f8f9fa] text-[#1a1d20]">
 
 
-  <!-- Top Navigation: Logo + Stacked Text on Top Left, Inline Links on Tablet/Desktop, Field Architecture Light Sheet Toggle on Mobile -->
+  <!-- Top Navigation: Header Logo Aligns Flush to Content Left Inset Boundary -->
   <header class="w-full bg-[#f8f9fa]/95 backdrop-blur-md  z-50 sticky top-0 transition-all">
-    <div class="max-w-[1920px] mx-auto px-5 md:px-12 lg:px-16 flex items-center justify-between min-h-[72px] md:min-h-[84px]">
+    <div class="field-header-container flex items-center justify-between min-h-[72px] md:min-h-[84px]">
       
-      <!-- Top Left Corner: Logo Monogram + Stacked Typography -->
+      <!-- Top Left: Logo Monogram + Stacked Typography Flush to Baseline -->
       <a href="index.html" class="flex items-center gap-3 md:gap-3.5 group">
         <img src="assets/official/logo_charcoal.svg" alt="KAD Monogram" class="h-9 md:h-11 w-auto">
         <div class="flex flex-col text-[11px] font-semibold tracking-[0.2em] uppercase leading-tight text-[#1a1d20] font-raleway">
@@ -104,101 +228,36 @@
         <a href="contact.html" class="text-[#595f65] hover:text-[#1a1d20] transition-colors font-raleway">Contact</a>
       </nav>
 
-      <!-- Mobile Navigation Trigger (< 768px) — Field Architecture Style Borderless 'MENU / CLOSE' -->
+      <!-- Mobile Navigation Trigger (< 768px) -->
       <button id="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Menu" aria-expanded="false" class="md:hidden inline-flex items-center gap-2.5 px-2 py-2 -mr-2 text-xs font-mono uppercase tracking-[0.22em] text-[#1a1d20] focus:outline-none">
         <span id="mobile-menu-label" class="font-semibold">Menu</span>
         <div class="w-5 h-3.5 flex flex-col justify-between items-end">
-          <span id="burger-line-1" class="w-5 h-[1.5px] bg-[#1a1d20] transition-all duration-300 origin-center"></span>
-          <span id="burger-line-2" class="w-3.5 h-[1.5px] bg-[#de602e] transition-all duration-300"></span>
-          <span id="burger-line-3" class="w-5 h-[1.5px] bg-[#1a1d20] transition-all duration-300 origin-center"></span>
+          <span id="burger-line-1" class="w-5 h-[1.5px] bg-[#1a1d20] transition-all duration-300 origin-right"></span>
+          <span id="burger-line-2" class="w-3.5 h-[1.5px] bg-[#1a1d20] transition-all duration-300"></span>
+          <span id="burger-line-3" class="w-5 h-[1.5px] bg-[#1a1d20] transition-all duration-300 origin-right"></span>
         </div>
       </button>
 
     </div>
+
+    <!-- Mobile Full-Bleed Navigation Sheet (< 768px) -->
+    <div id="mobile-nav-menu" class="hidden md:hidden w-full bg-[#f8f9fa] border-b border-[#e2e5e8] px-6 py-8 transition-all">
+      <nav class="flex flex-col gap-6 text-sm font-mono uppercase tracking-[0.22em]">
+        <a href="index.html#works" onclick="closeMobileMenu()" class="text-[#1a1d20] font-semibold border-b-2 border-[#de602e] pb-0.5 font-raleway pb-2 border-b border-[#e2e5e8]">01 / Works</a>
+        <a href="about.html" onclick="closeMobileMenu()" class="text-[#595f65] hover:text-[#1a1d20] transition-colors font-raleway pb-2 border-b border-[#e2e5e8]">02 / About</a>
+        <a href="contact.html" onclick="closeMobileMenu()" class="text-[#595f65] hover:text-[#1a1d20] transition-colors font-raleway pb-2 border-b border-[#e2e5e8]">03 / Contact</a>
+      </nav>
+      <div class="mt-8 pt-6 border-t border-[#e2e5e8] flex flex-col gap-2 text-[11px] font-mono text-[#595f65]">
+        <span>Aleksandre Karpov Design LLC</span>
+        <span>Asheville &bull; Charlotte &bull; International</span>
+      </div>
+    </div>
   </header>
 
-  <!-- Light Borderless Fullscreen Mobile Navigation Sheet (< 768px) -->
-  <div id="mobile-drawer" class="fixed inset-0 top-[72px] z-40 bg-[#f8f9fa]/98 backdrop-blur-md text-[#1a1d20] hidden flex-col justify-between p-6 overflow-y-auto md:hidden transition-opacity duration-300">
-    <div class="space-y-6 pt-4">
-      <div class="text-xs font-mono uppercase tracking-[0.25em] text-[#67aec0] font-semibold pb-1">
-        Navigation
-      </div>
-      <nav class="flex flex-col space-y-6">
-        <a href="index.html#works" onclick="closeMobileMenu()" class="group flex items-baseline justify-between py-1">
-          <span class="text-2xl font-semibold tracking-[0.15em] uppercase text-[#1a1d20] group-hover:text-[#de602e] transition-colors font-raleway">Works</span>
-          <span class="text-xs font-mono text-[#38606a] uppercase tracking-widest">21 Projects &rarr;</span>
-        </a>
-        <a href="about.html" onclick="closeMobileMenu()" class="group flex items-baseline justify-between py-1">
-          <span class="text-2xl font-semibold tracking-[0.15em] uppercase text-[#1a1d20] group-hover:text-[#de602e] transition-colors font-raleway">About</span>
-          <span class="text-xs font-mono text-[#38606a] uppercase tracking-widest">Pedigree &amp; BIM &rarr;</span>
-        </a>
-        <a href="contact.html" onclick="closeMobileMenu()" class="group flex items-baseline justify-between py-1">
-          <span class="text-2xl font-semibold tracking-[0.15em] uppercase text-[#1a1d20] group-hover:text-[#de602e] transition-colors font-raleway">Contact</span>
-          <span class="text-xs font-mono text-[#38606a] uppercase tracking-widest">Inquiries &rarr;</span>
-        </a>
-      </nav>
-    </div>
 
-    <div class="pt-6 mt-8 space-y-2.5 text-xs font-mono">
-      <div class="flex items-center justify-between">
-        <span class="text-[#67aec0] font-semibold">CHARLOTTE, NC</span>
-        <a href="tel:+17048459596" class="text-[#2b4951] hover:text-[#de602e] font-semibold">+1 (704) 845-9596</a>
-      </div>
-      <div class="flex items-center justify-between">
-        <span class="text-[#67aec0] font-semibold">INTERNATIONAL</span>
-        <a href="tel:+905385907458" class="text-[#2b4951] hover:text-[#de602e] font-semibold">+90 (538) 590-7458</a>
-      </div>
-      <div class="text-[#595f65] pt-1">
-        contact@karpovdesign.com &bull; Karpov Design LLC
-      </div>
-    </div>
-  </div>
-  <script>
-    function toggleMobileMenu() {
-      const drawer = document.getElementById('mobile-drawer');
-      const label = document.getElementById('mobile-menu-label');
-      const l1 = document.getElementById('burger-line-1');
-      const l2 = document.getElementById('burger-line-2');
-      const l3 = document.getElementById('burger-line-3');
-      const btn = document.getElementById('mobile-menu-btn');
-      if (!drawer) return;
-      const isOpen = !drawer.classList.contains('hidden');
-      if (!isOpen) {
-        drawer.classList.remove('hidden');
-        drawer.classList.add('flex');
-        if (label) label.textContent = 'Close';
-        if (btn) btn.setAttribute('aria-expanded', 'true');
-        if (l1) l1.style.transform = 'translateY(6px) rotate(45deg)';
-        if (l2) l2.style.opacity = '0';
-        if (l3) l3.style.transform = 'translateY(-6px) rotate(-45deg)';
-        document.body.style.overflow = 'hidden';
-      } else {
-        closeMobileMenu();
-      }
-    }
-    function closeMobileMenu() {
-      const drawer = document.getElementById('mobile-drawer');
-      const label = document.getElementById('mobile-menu-label');
-      const l1 = document.getElementById('burger-line-1');
-      const l2 = document.getElementById('burger-line-2');
-      const l3 = document.getElementById('burger-line-3');
-      const btn = document.getElementById('mobile-menu-btn');
-      if (!drawer) return;
-      drawer.classList.add('hidden');
-      drawer.classList.remove('flex');
-      if (label) label.textContent = 'Menu';
-      if (btn) btn.setAttribute('aria-expanded', 'false');
-      if (l1) l1.style.transform = '';
-      if (l2) l2.style.opacity = '1';
-      if (l3) l3.style.transform = '';
-      document.body.style.overflow = '';
-    }
-  </script>
-
-
-  <!-- Breadcrumb Navigation (Seamless #f8f9fa, Borderless) -->
-  <div class="w-full bg-[#f8f9fa] py-4 px-5 md:px-12 lg:px-16">
-    <nav aria-label="Breadcrumb" class="breadcrumb-bar max-w-[1920px] mx-auto text-xs md:text-sm font-mono uppercase tracking-widest text-[#595f65] flex items-center justify-between overflow-x-auto no-scrollbar whitespace-nowrap">
+  <!-- Breadcrumb Navigation -->
+  <div class="w-full bg-[#f8f9fa] py-4">
+    <nav aria-label="Breadcrumb" class="field-content-rail text-xs md:text-sm font-mono uppercase tracking-widest text-[#595f65] flex items-center justify-between overflow-x-auto no-scrollbar whitespace-nowrap">
       <div class="flex items-center">
         <a href="index.html" class="hover:text-[#1a1d20] transition-colors shrink-0">Home</a>
         <span class="mx-2 shrink-0">&bull;</span>
@@ -206,249 +265,331 @@
         <span class="mx-2 shrink-0">&bull;</span>
         <span class="text-[#1a1d20] font-semibold truncate">SEED Artists Getaway</span>
       </div>
-      
     </nav>
   </div>
 
   <main>
-    <!-- Dedicated Hero Banner: Highest Resolution Render -->
+    <!-- Dedicated Hero Banner: Secondary Metadata (Date, Location) OMITTED per User Rule -->
     <section id="project-hero-banner" class="relative w-full h-[52svh] sm:h-[60vh] md:h-[75vh] bg-[#1a1d20] overflow-hidden flex items-end">
-      <img src="assets/official/projects/seed-retreat/seed_2.jpg" alt="SEED Artists Getaway" class="absolute inset-0 w-full h-full object-cover">
+      <img src="assets/official/projects/seed-retreat/updated_visuals_seed_1_f.jpg" alt="SEED Artists Getaway" class="absolute inset-0 w-full h-full object-cover">
       <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-black/20"></div>
 
-      <!-- Hero Title & Key Meta -->
-      <div class="relative z-10 max-w-[1920px] mx-auto w-full px-5 md:px-12 lg:px-16 pb-8 md:pb-12 flex flex-col md:flex-row md:items-end justify-between gap-4 md:gap-6">
-        <div>
-          <h1 class="text-2xl sm:text-3xl md:text-5xl font-semibold tracking-tight text-white drop-shadow-md">SEED Artists Getaway</h1>
-        </div>
-        <div class="text-xs md:text-sm font-mono text-white/90 uppercase tracking-widest">
-          <span>Black Mountain, NC, USA &bull; 2018</span>
-        </div>
+      <!-- Hero Title Only (Secondary metadata omitted) -->
+      <div class="relative z-10 field-content-rail pb-8 md:pb-12">
+        <h1 class="text-2xl sm:text-3xl md:text-5xl font-semibold tracking-tight text-white drop-shadow-md font-raleway">SEED Artists Getaway</h1>
       </div>
     </section>
 
-    <!-- Main Content: Strict 25% Left Pure Negative Space (Borderless on #f8f9fa) -->
-    <section class="w-full bg-[#f8f9fa] py-12 md:py-16 px-5 md:px-12 lg:px-16">
-      <div class="max-w-[1920px] mx-auto flex flex-col lg:flex-row items-stretch">
+    <!-- Main Content: Field Architecture Asymmetric Rail -->
+    <section class="w-full bg-[#f8f9fa] py-12 md:py-16">
+      <div class="field-content-rail space-y-12">
         
-        <!-- 25% Left Pure Empty Negative Space -->
-        <div class="hidden lg:block lg:w-1/4"></div>
+        <!-- Narrative & Brief -->
+        <div class="space-y-6 max-w-4xl">
+          <div class="pb-2">
+            <span class="text-xs font-mono uppercase tracking-[0.25em] text-[#67aec0] font-semibold block mb-3">Project Brief &amp; Spatial Strategy</span>
+            <p class="text-sm sm:text-base md:text-lg text-[#1a1d20] leading-relaxed">
+              A secluded residential sanctuary and studio retreat embedded in the Blue Ridge Mountains, harmonizing local timber framing with passive thermal envelopes.
+            </p>
+          </div>
 
-        <!-- 75% Right Active Column with 15% Right Margin Buffer -->
-        <div class="w-full lg:w-3/4 lg:pl-12">
-          <div class="w-full lg:max-w-[82%] space-y-12">
           
-          <!-- Narrative & Brief -->
-          <div class="space-y-6 max-w-4xl">
-            <div class="pb-2">
-              <span class="text-xs font-mono uppercase tracking-[0.25em] text-[#67aec0] font-semibold block mb-3">Project Brief & Spatial Strategy</span>
-              <p class="text-sm sm:text-base md:text-lg text-[#1a1d20] leading-relaxed">
-                A secluded residential sanctuary and studio retreat embedded in the Blue Ridge Mountains, harmonizing local timber framing with passive thermal envelopes.
-              </p>
-            </div>
-
-            
-            <div class="p-4 bg-[#f8f9fa] border-l-2 border-[#de602e]">
+            <div class="p-4 bg-white border-l-2 border-[#de602e] border border-[#e2e5e8]">
               <span class="text-[10px] font-mono uppercase tracking-widest text-[#de602e] block">Award / Selection</span>
               <p class="text-xs md:text-sm font-semibold text-[#1a1d20] mt-1">UNCC School of Architecture Honor Studio Selection</p>
             </div>
 
 
-            <!-- Specifications Table (Eyeblue Soft Labels, Eyeblue Deep Values, Borderless) -->
-            <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 py-4 text-xs font-mono">
-              <div>
-                <span class="text-[10px] font-mono uppercase tracking-widest text-[#67aec0] font-semibold block">Typology</span>
-                <span class="text-sm font-semibold text-[#2b4951] block mt-1 uppercase">Residential</span>
-              </div>
-              <div>
-                <span class="text-[10px] font-mono uppercase tracking-widest text-[#67aec0] font-semibold block">Status</span>
-                <span class="text-sm font-semibold text-[#2b4951] block mt-1 uppercase">Concept / Exploration</span>
-              </div>
-              <div>
-                <span class="text-[10px] font-mono uppercase tracking-widest text-[#67aec0] font-semibold block">Location</span>
-                <span class="text-sm font-semibold text-[#2b4951] block mt-1">Black Mountain, NC, USA</span>
-              </div>
-              <div>
-                <span class="text-[10px] font-mono uppercase tracking-widest text-[#67aec0] font-semibold block">Year</span>
-                <span class="text-sm font-semibold text-[#2b4951] block mt-1">2018</span>
-              </div>
+          <!-- Specifications Table -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4 border-t border-[#e2e5e8]">
+            <div>
+              <span class="text-[10px] font-mono uppercase tracking-widest text-[#67aec0]">Typology</span>
+              <span class="text-sm font-semibold text-[#2b4951] block mt-1">Residential</span>
+            </div>
+            <div>
+              <span class="text-[10px] font-mono uppercase tracking-widest text-[#67aec0]">Status</span>
+              <span class="text-sm font-semibold text-[#2b4951] block mt-1">Concept / Exploration</span>
+            </div>
+            <div>
+              <span class="text-[10px] font-mono uppercase tracking-widest text-[#67aec0]">Location</span>
+              <span class="text-sm font-semibold text-[#2b4951] block mt-1">Black Mountain, NC, USA</span>
+            </div>
+            <div>
+              <span class="text-[10px] font-mono uppercase tracking-widest text-[#67aec0]">Year</span>
+              <span class="text-sm font-semibold text-[#2b4951] block mt-1">2018</span>
             </div>
           </div>
-
-          <!-- Large Images Gallery: Borderless Plates -->
-          <div>
-            <h2 class="text-lg md:text-xl font-semibold tracking-[0.25em] uppercase text-[#38606a] mb-6 md:mb-8">Visual Documentation & Plates</h2>
-            <div id="project-gallery" class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
-              
-            <div onclick="openLightbox(0)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/seed-retreat/seed_2.jpg" alt="SEED Artists Getaway — Plate 1" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(1)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/seed-retreat/seed_8.jpg" alt="SEED Artists Getaway — Plate 2" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(2)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/seed-retreat/seed_9.jpg" alt="SEED Artists Getaway — Plate 3" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            </div>
-          </div>
-
-          <!-- Previous / Next Commission Navigation (Borderless, Stacked on Mobile) -->
-          <div class="pt-8 md:pt-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-xs font-mono uppercase tracking-widest">
-            <a href="project-pijp-park.html" class="py-1 text-[#595f65] hover:text-[#de602e] transition-colors flex items-center gap-2">
-              &larr; Prev: De Pijp Community Center & Park
-            </a>
-            <a href="project-izka-tower.html" class="py-1 text-[#595f65] hover:text-[#de602e] transition-colors flex items-center sm:justify-end gap-2 sm:text-right">
-              Next: İZKA Corporate Headquarters &rarr;
-            </a>
-          </div>
-
         </div>
+
+        <!-- Large Images Gallery -->
+        <div>
+          <h2 class="text-lg md:text-xl font-semibold tracking-[0.25em] uppercase text-[#38606a] mb-6 md:mb-8 font-raleway">Visual Documentation &amp; Plates</h2>
+          <div id="project-gallery" class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+            
+            <div onclick="openLightbox(0)" class="group cursor-pointer bg-white border border-[#e2e5e8] flex flex-col justify-start overflow-hidden">
+              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
+                <img src="assets/official/projects/seed-retreat/seed_1.jpg" alt="SEED Artists Getaway — Plate 1" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
+                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
+                </div>
+              </div>
+            </div>
+
+            <div onclick="openLightbox(1)" class="group cursor-pointer bg-white border border-[#e2e5e8] flex flex-col justify-start overflow-hidden">
+              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
+                <img src="assets/official/projects/seed-retreat/seed_2.jpg" alt="SEED Artists Getaway — Plate 2" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
+                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
+                </div>
+              </div>
+            </div>
+
+            <div onclick="openLightbox(2)" class="group cursor-pointer bg-white border border-[#e2e5e8] flex flex-col justify-start overflow-hidden">
+              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
+                <img src="assets/official/projects/seed-retreat/seed_3.jpg" alt="SEED Artists Getaway — Plate 3" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
+                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
+                </div>
+              </div>
+            </div>
+
+            <div onclick="openLightbox(3)" class="group cursor-pointer bg-white border border-[#e2e5e8] flex flex-col justify-start overflow-hidden">
+              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
+                <img src="assets/official/projects/seed-retreat/seed_4.jpg" alt="SEED Artists Getaway — Plate 4" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
+                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
+                </div>
+              </div>
+            </div>
+
+            <div onclick="openLightbox(4)" class="group cursor-pointer bg-white border border-[#e2e5e8] flex flex-col justify-start overflow-hidden">
+              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
+                <img src="assets/official/projects/seed-retreat/seed_5.jpg" alt="SEED Artists Getaway — Plate 5" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
+                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
+                </div>
+              </div>
+            </div>
+
+            <div onclick="openLightbox(5)" class="group cursor-pointer bg-white border border-[#e2e5e8] flex flex-col justify-start overflow-hidden">
+              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
+                <img src="assets/official/projects/seed-retreat/seed_6.jpg" alt="SEED Artists Getaway — Plate 6" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
+                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
+                </div>
+              </div>
+            </div>
+
+            <div onclick="openLightbox(6)" class="group cursor-pointer bg-white border border-[#e2e5e8] flex flex-col justify-start overflow-hidden">
+              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
+                <img src="assets/official/projects/seed-retreat/seed_7.jpg" alt="SEED Artists Getaway — Plate 7" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
+                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
+                </div>
+              </div>
+            </div>
+
+            <div onclick="openLightbox(7)" class="group cursor-pointer bg-white border border-[#e2e5e8] flex flex-col justify-start overflow-hidden">
+              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
+                <img src="assets/official/projects/seed-retreat/seed_8.jpg" alt="SEED Artists Getaway — Plate 8" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
+                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
+                </div>
+              </div>
+            </div>
+
+            <div onclick="openLightbox(8)" class="group cursor-pointer bg-white border border-[#e2e5e8] flex flex-col justify-start overflow-hidden">
+              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
+                <img src="assets/official/projects/seed-retreat/seed_9.jpg" alt="SEED Artists Getaway — Plate 9" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
+                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
+                </div>
+              </div>
+            </div>
+
+            <div onclick="openLightbox(9)" class="group cursor-pointer bg-white border border-[#e2e5e8] flex flex-col justify-start overflow-hidden">
+              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
+                <img src="assets/official/projects/seed-retreat/updated_visuals_seed_1_f.jpg" alt="SEED Artists Getaway — Plate 10" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
+                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
+                </div>
+              </div>
+            </div>
+
+            <div onclick="openLightbox(10)" class="group cursor-pointer bg-white border border-[#e2e5e8] flex flex-col justify-start overflow-hidden">
+              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
+                <img src="assets/official/projects/seed-retreat/updated_visuals_seed_2.jpg" alt="SEED Artists Getaway — Plate 11" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
+                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
+                </div>
+              </div>
+            </div>
+
+            <div onclick="openLightbox(11)" class="group cursor-pointer bg-white border border-[#e2e5e8] flex flex-col justify-start overflow-hidden">
+              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
+                <img src="assets/official/projects/seed-retreat/updated_visuals_seed_4.jpg" alt="SEED Artists Getaway — Plate 12" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
+                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
+                </div>
+              </div>
+            </div>
+
+            <div onclick="openLightbox(12)" class="group cursor-pointer bg-white border border-[#e2e5e8] flex flex-col justify-start overflow-hidden">
+              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
+                <img src="assets/official/projects/seed-retreat/updated_visuals_seed_5.jpg" alt="SEED Artists Getaway — Plate 13" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
+                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
+                </div>
+              </div>
+            </div>
+
+            <div onclick="openLightbox(13)" class="group cursor-pointer bg-white border border-[#e2e5e8] flex flex-col justify-start overflow-hidden">
+              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
+                <img src="assets/official/projects/seed-retreat/updated_visuals_seed_6.jpg" alt="SEED Artists Getaway — Plate 14" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
+                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
+                </div>
+              </div>
+            </div>
+
+            <div onclick="openLightbox(14)" class="group cursor-pointer bg-white border border-[#e2e5e8] flex flex-col justify-start overflow-hidden">
+              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
+                <img src="assets/official/projects/seed-retreat/updated_visuals_seed_7_f.jpg" alt="SEED Artists Getaway — Plate 15" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
+                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
+                </div>
+              </div>
+            </div>
+
+            <div onclick="openLightbox(15)" class="group cursor-pointer bg-white border border-[#e2e5e8] flex flex-col justify-start overflow-hidden">
+              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
+                <img src="assets/official/projects/seed-retreat/updated_visuals_seed_8_f.jpg" alt="SEED Artists Getaway — Plate 16" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
+                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
+                </div>
+              </div>
+            </div>
+
+            <div onclick="openLightbox(16)" class="group cursor-pointer bg-white border border-[#e2e5e8] flex flex-col justify-start overflow-hidden">
+              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
+                <img src="assets/official/projects/seed-retreat/updated_visuals_seed_9_f.jpg" alt="SEED Artists Getaway — Plate 17" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
+                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Prev / Next Navigation -->
+        <div class="pt-8 md:pt-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-xs font-mono uppercase tracking-widest border-t border-[#e2e5e8]">
+          <a href="project-pijp-park.html" class="py-1 text-[#595f65] hover:text-[#de602e] transition-colors flex items-center gap-2">
+            &larr; Prev: De Pijp Community Center & Park
+          </a>
+          <a href="project-izka-tower.html" class="py-1 text-[#595f65] hover:text-[#de602e] transition-colors flex items-center sm:justify-end gap-2 sm:text-right">
+            Next: İZKA Corporate Headquarters &rarr;
+          </a>
         </div>
 
       </div>
     </section>
   </main>
 
-  <!-- Near-Fullscreen Image Lightbox Modal (Borderless Controls + Touch Swipe) -->
+  <!-- Image Lightbox Modal -->
   <div id="image-lightbox" class="fixed inset-0 z-50 bg-[#1a1d20]/95 backdrop-blur-md hidden flex flex-col items-center justify-between p-4 md:p-6 cursor-pointer select-none" onclick="handleLightboxClick(event)">
+    <button onclick="closeLightbox()" class="fixed top-4 left-6 z-60 text-[#67aec0] hover:text-[#de602e] text-3xl font-bold bg-transparent border-none p-2 cursor-pointer transition-colors focus:outline-none" title="Close (Esc)" aria-label="Close popup">&times;</button>
     
-    <!-- Top Left: Authentic Eyeblue (#67aec0) "X" Button Without Any Borders per user directive -->
-    <button onclick="closeLightbox()" class="fixed top-4 left-6 z-60 text-[#67aec0] hover:text-[#de602e] text-3xl font-bold bg-transparent border-none p-2 cursor-pointer transition-colors focus:outline-none" title="Close (Esc)" aria-label="Close popup">✕</button>
-
-    <!-- Top Bar: Counter -->
-    <div class="w-full max-w-[1920px] flex items-center justify-end text-white/80 pt-2 pointer-events-none">
-      <span id="lightbox-counter" class="text-xs font-mono uppercase tracking-widest bg-[#2b4951]/80 px-3 py-1.5 text-[#e4f0f2]">Plate 1 of 3</span>
+    <div class="w-full flex items-center justify-end text-white/80 pt-2 pointer-events-none px-6">
+      <span id="lightbox-counter" class="text-xs font-mono uppercase tracking-widest bg-[#2b4951]/80 px-3 py-1.5 text-[#e4f0f2]">Plate 1 of 17</span>
     </div>
 
-    <!-- Center Image Container & Borderless Flank Arrows -->
     <div class="relative w-full flex-1 flex items-center justify-center my-2 select-none">
-      <button onclick="navigateLightbox(-1); event.stopPropagation();" class="absolute left-1 md:left-6 z-10 w-10 h-10 md:w-12 md:h-12 text-white bg-[#1a1d20]/70 hover:bg-[#de602e] flex items-center justify-center transition-colors text-lg font-mono focus:outline-none" title="Previous (Left Arrow)">&#8592;</button>
-      <img id="lightbox-img" src="" alt="Enlarged Project Plate" class="max-w-[94vw] max-h-[82vh] object-contain drop-shadow-2xl transition-all duration-300 cursor-default" onclick="event.stopPropagation()">
-      <button onclick="navigateLightbox(1); event.stopPropagation();" class="absolute right-1 md:right-6 z-10 w-10 h-10 md:w-12 md:h-12 text-white bg-[#1a1d20]/70 hover:bg-[#de602e] flex items-center justify-center transition-colors text-lg font-mono focus:outline-none" title="Next (Right Arrow)">&#8594;</button>
+      <button onclick="navigateLightbox(-1); event.stopPropagation();" class="absolute left-1 md:left-6 z-10 w-10 h-10 md:w-12 md:h-12 text-white bg-[#1a1d20]/70 hover:bg-[#de602e] flex items-center justify-center transition-colors text-lg font-mono focus:outline-none" title="Previous">&larr;</button>
+      <img id="lightbox-img" src="" alt="Enlarged Project Plate" class="max-w-[94vw] max-h-[82vh] object-contain drop-shadow-2xl transition-all duration-300">
+      <button onclick="navigateLightbox(1); event.stopPropagation();" class="absolute right-1 md:right-6 z-10 w-10 h-10 md:w-12 md:h-12 text-white bg-[#1a1d20]/70 hover:bg-[#de602e] flex items-center justify-center transition-colors text-lg font-mono focus:outline-none" title="Next">&rarr;</button>
     </div>
 
-    <!-- Bottom Caption -->
-    <div class="w-full max-w-[1920px] text-center text-xs font-mono uppercase tracking-widest text-white/75 pb-2 pointer-events-none">
-      <span>SEED Artists Getaway &bull; Visual Documentation</span>
+    <div class="w-full text-center pb-2 text-white/70 text-xs font-mono pointer-events-none">
+      <span id="lightbox-caption">SEED Artists Getaway</span>
     </div>
   </div>
 
-  <script>
-    const GALLERY_IMAGES = ["assets/official/projects/seed-retreat/seed_2.jpg", "assets/official/projects/seed-retreat/seed_8.jpg", "assets/official/projects/seed-retreat/seed_9.jpg"];
-    let currentLightboxIndex = 0;
 
-    function openLightbox(idx) {
-      if (!GALLERY_IMAGES || GALLERY_IMAGES.length === 0) return;
-      currentLightboxIndex = (idx + GALLERY_IMAGES.length) % GALLERY_IMAGES.length;
-      updateLightbox();
-      const lb = document.getElementById('image-lightbox');
-      lb.classList.remove('hidden');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeLightbox() {
-      const lb = document.getElementById('image-lightbox');
-      lb.classList.add('hidden');
-      document.body.style.overflow = '';
-    }
-
-    function navigateLightbox(direction) {
-      if (!GALLERY_IMAGES || GALLERY_IMAGES.length === 0) return;
-      currentLightboxIndex = (currentLightboxIndex + direction + GALLERY_IMAGES.length) % GALLERY_IMAGES.length;
-      updateLightbox();
-    }
-
-    function updateLightbox() {
-      const img = document.getElementById('lightbox-img');
-      const counter = document.getElementById('lightbox-counter');
-      if (img && GALLERY_IMAGES[currentLightboxIndex]) {
-        img.src = GALLERY_IMAGES[currentLightboxIndex];
-        img.alt = "SEED Artists Getaway — Plate " + (currentLightboxIndex + 1);
-      }
-      if (counter) {
-        counter.textContent = `Plate ${currentLightboxIndex + 1} of ${GALLERY_IMAGES.length}`;
-      }
-    }
-
-    function handleLightboxClick(e) {
-      if (e.target.closest('#lightbox-img') || e.target.closest('button')) {
-        return;
-      }
-      closeLightbox();
-    }
-
-    window.addEventListener('keydown', (e) => {
-      const lb = document.getElementById('image-lightbox');
-      if (lb && !lb.classList.contains('hidden')) {
-        if (e.key === 'Escape') closeLightbox();
-        if (e.key === 'ArrowLeft') navigateLightbox(-1);
-        if (e.key === 'ArrowRight') navigateLightbox(1);
-      }
-    });
-
-    // Touch-swipe support for lightbox on mobile & tablet
-    let lbTouchStartX = 0;
-    window.addEventListener('DOMContentLoaded', () => {
-      const lb = document.getElementById('image-lightbox');
-      if (lb) {
-        lb.addEventListener('touchstart', (e) => {
-          lbTouchStartX = e.changedTouches[0].screenX;
-        }, { passive: true });
-        lb.addEventListener('touchend', (e) => {
-          const diff = e.changedTouches[0].screenX - lbTouchStartX;
-          if (Math.abs(diff) > 42) {
-            navigateLightbox(diff < 0 ? 1 : -1);
-          }
-        }, { passive: true });
-      }
-    });
-  </script>
-
-
-  <!-- Centered Architectural Footer: Borderless on #f8f9fa -->
-  <footer class="w-full bg-[#f8f9fa]  py-12 md:py-16 px-5 md:px-12 lg:px-16">
-    <div class="max-w-[1920px] mx-auto flex flex-col lg:flex-row items-center justify-between gap-6 md:gap-8">
+  <!-- Footer: Field Architecture Layout Alignment -->
+  <footer class="w-full bg-[#f8f9fa]  py-12 md:py-16">
+    <div class="field-content-rail flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
       
-      <!-- Left: Logo & Studio Identity -->
-      <div class="flex items-center gap-4">
-        <img src="assets/official/logo_charcoal.svg" alt="KAD Logo" class="h-9 md:h-10 w-auto">
-        <div>
-          <span class="text-sm font-semibold tracking-[0.2em] uppercase text-[#1a1d20] block font-raleway">Karpov Design LLC</span>
-          <span class="text-xs text-[#595f65] block">Aleksandre Karpov &bull; Charlotte, NC</span>
+      <!-- Studio Monogram & Identity -->
+      <div class="flex items-center gap-3">
+        <img src="assets/official/logo_charcoal.svg" alt="KAD Monogram" class="h-8 w-auto opacity-90">
+        <div class="flex flex-col text-[10px] font-semibold tracking-[0.2em] uppercase leading-tight text-[#1a1d20] font-raleway">
+          <span>ALEKSANDRE KARPOV DESIGN</span>
+          <span class="text-[9px] tracking-[0.2em] text-[#595f65] font-normal">&copy; 2026 &bull; All Rights Reserved</span>
         </div>
       </div>
 
-      <!-- Right: Links & Copyright -->
-      <div class="flex flex-col items-center lg:items-end gap-3 text-xs text-[#595f65]">
-        <div class="flex gap-8 tracking-[0.2em] uppercase font-medium font-raleway">
-          <a href="index.html#works" class="hover:text-[#de602e] transition-colors">Works</a>
-          <a href="about.html" class="hover:text-[#de602e] transition-colors">About</a>
-          <a href="contact.html" class="hover:text-[#de602e] transition-colors">Contact</a>
-        </div>
-        <span class="font-mono text-[11px] text-[#767676]">&copy; 2026 Karpov Design LLC. All rights reserved.</span>
-      </div>
+      <!-- Footer Quick Navigation -->
+      <nav class="flex flex-wrap items-center gap-6 md:gap-8 text-xs font-mono uppercase tracking-widest text-[#595f65]">
+        <a href="index.html#works" class="hover:text-[#de602e] transition-colors">Works</a>
+        <a href="about.html" class="hover:text-[#de602e] transition-colors">About</a>
+        <a href="contact.html" class="hover:text-[#de602e] transition-colors">Contact</a>
+        <a href="academy.html" class="hover:text-[#de602e] transition-colors text-[#38606a]">Academy</a>
+      </nav>
+
+      <!-- Back to top trigger -->
+      <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="text-xs font-mono uppercase tracking-widest text-[#595f65] hover:text-[#1a1d20] transition-colors">
+        Back to Top &uarr;
+      </button>
 
     </div>
   </footer>
 
 
+  <script>
+    const GALLERY_IMAGES = ["assets/official/projects/seed-retreat/seed_1.jpg", "assets/official/projects/seed-retreat/seed_2.jpg", "assets/official/projects/seed-retreat/seed_3.jpg", "assets/official/projects/seed-retreat/seed_4.jpg", "assets/official/projects/seed-retreat/seed_5.jpg", "assets/official/projects/seed-retreat/seed_6.jpg", "assets/official/projects/seed-retreat/seed_7.jpg", "assets/official/projects/seed-retreat/seed_8.jpg", "assets/official/projects/seed-retreat/seed_9.jpg", "assets/official/projects/seed-retreat/updated_visuals_seed_1_f.jpg", "assets/official/projects/seed-retreat/updated_visuals_seed_2.jpg", "assets/official/projects/seed-retreat/updated_visuals_seed_4.jpg", "assets/official/projects/seed-retreat/updated_visuals_seed_5.jpg", "assets/official/projects/seed-retreat/updated_visuals_seed_6.jpg", "assets/official/projects/seed-retreat/updated_visuals_seed_7_f.jpg", "assets/official/projects/seed-retreat/updated_visuals_seed_8_f.jpg", "assets/official/projects/seed-retreat/updated_visuals_seed_9_f.jpg"];
+    let currentLightboxIdx = 0;
+
+    function openLightbox(idx) {
+      currentLightboxIdx = idx;
+      updateLightbox();
+      document.getElementById('image-lightbox').classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      const lb = document.getElementById('image-lightbox');
+      if (lb) lb.classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    function navigateLightbox(dir) {
+      if (GALLERY_IMAGES.length === 0) return;
+      currentLightboxIdx = (currentLightboxIdx + dir + GALLERY_IMAGES.length) % GALLERY_IMAGES.length;
+      updateLightbox();
+    }
+
+    function updateLightbox() {
+      if (GALLERY_IMAGES.length === 0) return;
+      const img = document.getElementById('lightbox-img');
+      const counter = document.getElementById('lightbox-counter');
+      if (img) img.src = GALLERY_IMAGES[currentLightboxIdx];
+      if (counter) counter.textContent = `Plate ${currentLightboxIdx + 1} of ${GALLERY_IMAGES.length}`;
+    }
+
+    function handleLightboxClick(e) {
+      if (e.target.id === 'image-lightbox' || e.target.closest('.relative')) {
+        closeLightbox();
+      }
+    }
+
+    window.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeLightbox();
+      if (!document.getElementById('image-lightbox').classList.contains('hidden')) {
+        if (e.key === 'ArrowLeft') navigateLightbox(-1);
+        if (e.key === 'ArrowRight') navigateLightbox(1);
+      }
+    });
+  </script>
 </body>
 </html>
