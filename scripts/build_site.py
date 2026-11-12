@@ -103,8 +103,8 @@ def generate_json_ld_schema():
     schema = {
         "@context": "https://schema.org",
         "@type": "ItemList",
-        "name": "Aleksandre Karpov Design LLC Architectural Portfolio",
-        "description": "Selected architectural commissions, computational forms, and tectonic studies.",
+        "name": "Aleksandre Karpov Design LLC Portfolio",
+        "description": "Selected residential design projects, computational models, and spatial studies by Karpov Design LLC.",
         "itemListElement": items
     }
     return json.dumps(schema, indent=2)
@@ -455,7 +455,7 @@ def generate_workflow_section(is_variant=False, layout_mode="default", font_mode
       <div class="flex flex-col md:flex-row items-center gap-8 lg:gap-12">
         <div onclick="openWorkflowLightbox()" class="group cursor-pointer w-full md:w-1/2 aspect-[4/3] bg-transparent overflow-hidden shrink-0 relative" title="Click to view full size">
           <img src="{sketch_src}" 
-               alt="Conceptual Architectural Sketch" 
+               alt="Conceptual Spatial Sketch" 
                class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500 ease-out">
           <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-3 pointer-events-none">
             <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/80 text-[#67aec0] text-[10px] font-mono uppercase tracking-[0.2em] px-2.5 py-1">Enlarge</span>
@@ -464,10 +464,10 @@ def generate_workflow_section(is_variant=False, layout_mode="default", font_mode
 
         <div class="w-full md:w-1/2 space-y-4 text-sm md:text-base text-[#595f65] leading-relaxed">
           <p>
-            Architectural conception at Karpov Design originates with spontaneous observational drawing and spatial geometry. Hand-drawn travel studies establish fundamental relationships between topographical contours, solar orientation, and tactile materials before digital computation begins.
+            Design begins with spontaneous observational drawing and spatial geometry. Hand-drawn field studies establish essential relationships with natural light, topography, and material presence before computational modeling and technical documentation begin.
           </p>
           <p>
-            Through rigorous iterative digital modeling and structural optimization, initial tectonic concepts translate into high-performance architectural environments. Each commission balances contextual sensitivity with bold sculptural presence.
+            The act of design is a process deeply rooted in physical reality, yet has no absolute future as our surroundings continuously change. Through rigorous digital coordination, tactile concepts translate into enduring built form.
           </p>
         </div>
       </div>
@@ -478,9 +478,9 @@ def generate_workflow_section(is_variant=False, layout_mode="default", font_mode
   <div id="workflow-lightbox" class="fixed inset-0 z-50 bg-[#1a1d20]/95 backdrop-blur-md hidden flex flex-col items-center justify-center p-4 md:p-8 cursor-pointer select-none" onclick="closeWorkflowLightbox()">
     <button onclick="closeWorkflowLightbox()" class="fixed top-4 left-6 z-60 text-[#67aec0] hover:text-[#de602e] text-3xl font-bold bg-transparent border-none p-2 cursor-pointer transition-colors focus:outline-none" title="Close (Esc)" aria-label="Close popup">&times;</button>
     <div class="max-w-[94vw] max-h-[88vh] flex flex-col items-center justify-center" onclick="event.stopPropagation()">
-      <img src="{sketch_src}" alt="Conceptual Architectural Sketch - Full View" class="max-w-full max-h-[82vh] object-contain drop-shadow-2xl">
+      <img src="{sketch_src}" alt="Conceptual Spatial Sketch - Full View" class="max-w-full max-h-[82vh] object-contain drop-shadow-2xl">
       <div class="mt-4 text-center">
-        <span class="text-xs font-mono uppercase tracking-[0.25em] text-[#e4f0f2]">Rome &amp; Mediterranean Travel Study &bull; Conceptual Watermark</span>
+        <span class="text-xs font-mono uppercase tracking-[0.25em] text-[#e4f0f2]">Observational Field Studies &bull; Hand Drawing &amp; Spatial Geometry</span>
       </div>
     </div>
   </div>
@@ -499,42 +499,84 @@ def generate_accolades_section(is_variant=False, layout_mode="default", font_mod
         <!-- Item 1 -->
         <div class="flex flex-col md:flex-row md:items-start justify-between gap-2 md:gap-8 pb-6">
           <div class="md:w-1/4">
-            <span class="text-xs font-mono uppercase tracking-[0.2em] text-[#de602e] font-semibold">Finalist Award</span>
+            <span class="text-xs font-mono uppercase tracking-[0.2em] text-[#de602e] font-semibold">1st Place &bull; Jury Special Award</span>
           </div>
           <div class="md:w-2/4">
-            <h3 class="text-base md:text-lg font-semibold text-[#1a1d20]">ArchMedium De Pijp Cultural Center Competition</h3>
-            <p class="text-xs text-[#595f65] mt-1 leading-relaxed">International open architecture competition for Amsterdam's historic De Pijp quarter. Selected among top entries globally.</p>
+            <h3 class="text-base md:text-lg font-semibold text-[#1a1d20]">İZKA Headquarters Competition &bull; Turgut Cansever National Architecture Award</h3>
+            <p class="text-xs text-[#595f65] mt-1 leading-relaxed">1st Prize winning 10,000 m² headquarters for the İzmir Development Agency with Aboutblank.</p>
           </div>
           <div class="md:w-1/4 text-left md:text-right font-mono text-xs text-[#2b4951]">
-            <span>2016 &bull; Amsterdam, NL</span>
+            <span>2014–2016 &bull; İzmir, TR</span>
           </div>
         </div>
 
         <!-- Item 2 -->
         <div class="flex flex-col md:flex-row md:items-start justify-between gap-2 md:gap-8 pb-6">
           <div class="md:w-1/4">
-            <span class="text-xs font-mono uppercase tracking-[0.2em] text-[#de602e] font-semibold">Honor Studio Award</span>
+            <span class="text-xs font-mono uppercase tracking-[0.2em] text-[#de602e] font-semibold">1st Place Award</span>
           </div>
           <div class="md:w-2/4">
-            <h3 class="text-base md:text-lg font-semibold text-[#1a1d20]">UNCC College of Arts + Architecture Studio Excellence</h3>
-            <p class="text-xs text-[#595f65] mt-1 leading-relaxed">Design excellence recognition for SEED Artists Getaway high-performance passive timber sanctuary.</p>
+            <h3 class="text-base md:text-lg font-semibold text-[#1a1d20]">Multi City Depot Adaptive Reuse Master Plan</h3>
+            <p class="text-xs text-[#595f65] mt-1 leading-relaxed">1st Prize winning 51,000 m² industrial regeneration competition victory with Aboutblank.</p>
           </div>
           <div class="md:w-1/4 text-left md:text-right font-mono text-xs text-[#2b4951]">
-            <span>2018 &bull; Charlotte, USA</span>
+            <span>2015 &bull; Eskişehir, TR</span>
           </div>
         </div>
 
         <!-- Item 3 -->
-        <div class="flex flex-col md:flex-row md:items-start justify-between gap-2 md:gap-8">
+        <div class="flex flex-col md:flex-row md:items-start justify-between gap-2 md:gap-8 pb-6">
           <div class="md:w-1/4">
-            <span class="text-xs font-mono uppercase tracking-[0.2em] text-[#de602e] font-semibold">Institutional Pedigree</span>
+            <span class="text-xs font-mono uppercase tracking-[0.2em] text-[#de602e] font-semibold">2nd Place Award</span>
           </div>
           <div class="md:w-2/4">
-            <h3 class="text-base md:text-lg font-semibold text-[#1a1d20]">UNCC School of Architecture</h3>
-            <p class="text-xs text-[#595f65] mt-1 leading-relaxed">Bachelor of Arts in Architecture. Advanced digital fabrication fellow, Studio X.</p>
+            <h3 class="text-base md:text-lg font-semibold text-[#1a1d20]">Caferağa Community Center National Competition</h3>
+            <p class="text-xs text-[#595f65] mt-1 leading-relaxed">2nd Prize winning 14,000 m² cultural center, theater, and elevated community garden in Kadıköy with Aboutblank.</p>
           </div>
           <div class="md:w-1/4 text-left md:text-right font-mono text-xs text-[#2b4951]">
-            <span>2018–2021 &bull; USA</span>
+            <span>2016 &bull; Istanbul, TR</span>
+          </div>
+        </div>
+
+        <!-- Item 4 -->
+        <div class="flex flex-col md:flex-row md:items-start justify-between gap-2 md:gap-8 pb-6">
+          <div class="md:w-1/4">
+            <span class="text-xs font-mono uppercase tracking-[0.2em] text-[#de602e] font-semibold">3rd Place Award</span>
+          </div>
+          <div class="md:w-2/4">
+            <h3 class="text-base md:text-lg font-semibold text-[#1a1d20]">Sivas Unity Bridge &amp; Cultural Crossing</h3>
+            <p class="text-xs text-[#595f65] mt-1 leading-relaxed">3rd Prize winning 150 m span bridge across the Kızılırmak River integrating vehicular, pedestrian, and wetland park paths.</p>
+          </div>
+          <div class="md:w-1/4 text-left md:text-right font-mono text-xs text-[#2b4951]">
+            <span>2016 &bull; Sivas, TR</span>
+          </div>
+        </div>
+
+        <!-- Item 5 -->
+        <div class="flex flex-col md:flex-row md:items-start justify-between gap-2 md:gap-8 pb-6">
+          <div class="md:w-1/4">
+            <span class="text-xs font-mono uppercase tracking-[0.2em] text-[#de602e] font-semibold">Honorable Mention</span>
+          </div>
+          <div class="md:w-2/4">
+            <h3 class="text-base md:text-lg font-semibold text-[#1a1d20]">Beylikdüzü Valley of Life Park Master Plan</h3>
+            <p class="text-xs text-[#595f65] mt-1 leading-relaxed">1,750,000 m² central valley park and river corridor infrastructure with Aboutblank &amp; BOOM Landscape.</p>
+          </div>
+          <div class="md:w-1/4 text-left md:text-right font-mono text-xs text-[#2b4951]">
+            <span>2015 &bull; Istanbul, TR</span>
+          </div>
+        </div>
+
+        <!-- Item 6 -->
+        <div class="flex flex-col md:flex-row md:items-start justify-between gap-2 md:gap-8">
+          <div class="md:w-1/4">
+            <span class="text-xs font-mono uppercase tracking-[0.2em] text-[#de602e] font-semibold">Academic Honors</span>
+          </div>
+          <div class="md:w-2/4">
+            <h3 class="text-base md:text-lg font-semibold text-[#1a1d20]">UNCC Boardman Scholarship &amp; Scholastic Silver Key</h3>
+            <p class="text-xs text-[#595f65] mt-1 leading-relaxed">Academic merit recognition at the University of North Carolina at Charlotte (UNCC) and Myers Park HS.</p>
+          </div>
+          <div class="md:w-1/4 text-left md:text-right font-mono text-xs text-[#2b4951]">
+            <span>2007–2008 &bull; Charlotte, USA</span>
           </div>
         </div>
       </div>
@@ -553,7 +595,7 @@ def generate_landing_contact_section(is_variant=False, layout_mode="default", fo
       <div class="flex flex-col items-start gap-5 py-6">
         <div class="max-w-2xl">
           <h2 class="text-xl sm:text-2xl font-semibold tracking-[0.18em] uppercase text-[#1a1d20] {h2_font}">Start a Conversation</h2>
-          <p class="text-xs sm:text-sm text-[#595f65] mt-2 leading-relaxed">Bespoke residential &amp; cultural architectural commissions across North Carolina and internationally.</p>
+          <p class="text-xs sm:text-sm text-[#595f65] mt-2 leading-relaxed">Residential design and consulting practice based in Charlotte, North Carolina.</p>
         </div>
         <div class="pt-1">
           <a href="{contact_url}" class="inline-flex items-center gap-2 text-xs md:text-sm font-mono uppercase tracking-[0.2em] text-[#1a1d20] hover:text-[#de602e] transition-colors group">
@@ -1342,7 +1384,7 @@ __HEADER__
             Aleksandre Karpov
           </h1>
           <p class="text-xs font-mono uppercase tracking-wider text-[#67aec0] font-semibold mt-3">
-            B.A. in Architecture &bull; Lund University (Sweden)
+            B.A. in Architecture &bull; UNCC &bull; Lund University (Sweden)
           </p>
         </div>
 
@@ -1360,19 +1402,22 @@ __HEADER__
             </div>
           </div>
 
-          <!-- Bio Narrative (Authentic text from d13ccec) -->
+          <!-- Bio Narrative (Authentic portfolio statement & CV) -->
           <div class="flex-1 space-y-6">
             <h2 class="text-xl md:text-2xl lg:text-3xl font-semibold text-[#38606a] tracking-tight leading-snug font-raleway">
-              Dual Mastery: Analog Fine Art &amp; Computational BIM
+              Fine Art Foundations &amp; Virtual Construction
             </h2>
             <p class="text-sm md:text-base text-[#595f65] leading-relaxed">
-              Aleksandre Karpov operates at the convergence of tactile architectural draftsmanship and advanced digital building information modeling. Raised with a rigorous foundation in classical drawing, watercolor plein-air representation, and structural sculpture, he approaches each project with visceral sensitivity to materials, topography, and natural light.
+              Aleksandre Karpov operates at the convergence of tactile draftsmanship and advanced digital building information modeling. Raised with a rigorous foundation in classical drawing, watercolor plein-air representation, and structural sculpture, he approaches each project with visceral sensitivity to materials, topography, and natural light.
+            </p>
+            <p class="text-sm md:text-base text-[#595f65] leading-relaxed italic">
+              &ldquo;The act of design is a process deeply rooted in physical reality, yet has no absolute future as our surroundings continuously change. They are changed by us and they change us, becoming an integral player in the human experiment.&rdquo;
             </p>
             <p class="text-sm md:text-base text-[#595f65] leading-relaxed">
-              Parallel to this analog mastery, Aleksandre possesses extensive experience in computational building coordination, parametric modeling, and Revit/BIM management. He has led technical documentation across international commercial towers, complex mixed-use industrial regenerations, and bespoke mountain residences.
+              Prior to establishing Karpov Design LLC, Aleksandre managed design, municipal documentation, and construction administration for over 20 commercial projects at RD&amp;D in Charlotte, NC, and served as project designer and BIM manager at Aboutblank in Istanbul across international competition victories and realized commercial developments.
             </p>
             <p class="text-sm md:text-base text-[#595f65] leading-relaxed">
-              As principal of <span class="text-[#2b4951] font-semibold">Karpov Design LLC</span>, he provides complete residential design commissions and architectural consultation.
+              As principal of <span class="text-[#2b4951] font-semibold">Karpov Design LLC</span> in Charlotte, NC, he provides complete residential design commissions and consulting services.
             </p>
           </div>
 
@@ -1445,30 +1490,42 @@ __HEADER__
           </div>
         </div>
 
-        <!-- Streamlined 3-Field Mandatory Form (Underline inputs, borderless) -->
-        <form id="contact-form" onsubmit="event.preventDefault(); alert('Inquiry recorded. Direct architect response within 24 business hours.');" class="space-y-8 pt-4">
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
-            <div>
-              <label class="block text-xs font-mono uppercase tracking-wider text-[#2b4951] font-semibold mb-2">Name *</label>
-              <input type="text" required placeholder="Your full name" class="w-full py-2.5 bg-transparent border-b border-[#e2e5e8] text-sm text-[#1a1d20] focus:outline-none focus:border-[#de602e] transition-colors rounded-none placeholder:text-[#595f65]/50">
+        <!-- Streamlined 3-Field Mandatory Form (Underline inputs, borderless, seamless inline success) -->
+        <div id="contact-form-container">
+          <form id="contact-form" onsubmit="event.preventDefault(); showContactSuccess();" class="space-y-8 pt-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+              <div>
+                <label class="block text-xs font-mono uppercase tracking-wider text-[#2b4951] font-semibold mb-2">Name *</label>
+                <input type="text" required placeholder="Your full name" class="w-full py-2.5 bg-transparent border-b border-[#e2e5e8] text-sm text-[#1a1d20] focus:outline-none focus:border-[#de602e] transition-colors rounded-none placeholder:text-[#595f65]/50">
+              </div>
+              <div>
+                <label class="block text-xs font-mono uppercase tracking-wider text-[#2b4951] font-semibold mb-2">Email *</label>
+                <input type="email" required placeholder="your.email@domain.com" class="w-full py-2.5 bg-transparent border-b border-[#e2e5e8] text-sm text-[#1a1d20] focus:outline-none focus:border-[#de602e] transition-colors rounded-none placeholder:text-[#595f65]/50">
+              </div>
             </div>
             <div>
-              <label class="block text-xs font-mono uppercase tracking-wider text-[#2b4951] font-semibold mb-2">Email *</label>
-              <input type="email" required placeholder="your.email@domain.com" class="w-full py-2.5 bg-transparent border-b border-[#e2e5e8] text-sm text-[#1a1d20] focus:outline-none focus:border-[#de602e] transition-colors rounded-none placeholder:text-[#595f65]/50">
+              <label class="block text-xs font-mono uppercase tracking-wider text-[#2b4951] font-semibold mb-2">Project Scope &amp; Description *</label>
+              <textarea id="contact-scope-textarea" rows="5" required placeholder="Describe your vision, site parameters, approximate square footage, or project timeline..." class="w-full py-2.5 bg-transparent border-b border-[#e2e5e8] text-sm text-[#1a1d20] focus:outline-none focus:border-[#de602e] transition-colors rounded-none placeholder:text-[#595f65]/50 resize-y"></textarea>
             </div>
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-2">
+              <span class="text-xs text-[#595f65]">Confidentiality guaranteed. Direct response within 24 business hours.</span>
+              <button type="submit" class="inline-flex items-center gap-2 text-xs md:text-sm font-mono uppercase tracking-[0.2em] text-[#1a1d20] hover:text-[#de602e] bg-transparent border-none py-2 transition-colors group cursor-pointer">
+                <span>Submit Inquiry</span>
+                <span class="group-hover:translate-x-1.5 transition-transform duration-300">&rarr;</span>
+              </button>
+            </div>
+          </form>
+          <div id="contact-success-msg" class="hidden py-10 space-y-3">
+            <h3 class="text-2xl font-semibold text-[#1a1d20] font-raleway">Inquiry Received</h3>
+            <p class="text-sm md:text-base text-[#595f65] leading-relaxed">Thank you. Your message has been sent directly to Aleksandre Karpov. We will respond within 24 business hours.</p>
           </div>
-          <div>
-            <label class="block text-xs font-mono uppercase tracking-wider text-[#2b4951] font-semibold mb-2">Project Scope &amp; Program Requirements *</label>
-            <textarea id="contact-scope-textarea" rows="5" required placeholder="Describe your vision, site parameters, approximate square footage, or architectural timeline..." class="w-full py-2.5 bg-transparent border-b border-[#e2e5e8] text-sm text-[#1a1d20] focus:outline-none focus:border-[#de602e] transition-colors rounded-none placeholder:text-[#595f65]/50 resize-y"></textarea>
-          </div>
-          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-2">
-            <span class="text-xs text-[#595f65]">Confidentiality guaranteed. Direct architect response within 24 business hours.</span>
-            <button type="submit" class="inline-flex items-center gap-2 text-xs md:text-sm font-mono uppercase tracking-[0.2em] text-[#1a1d20] hover:text-[#de602e] bg-transparent border-none py-2 transition-colors group">
-              <span>Submit Inquiry</span>
-              <span class="group-hover:translate-x-1.5 transition-transform duration-300">&rarr;</span>
-            </button>
-          </div>
-        </form>
+        </div>
+        <script>
+          function showContactSuccess() {{
+            document.getElementById('contact-form').classList.add('hidden');
+            document.getElementById('contact-success-msg').classList.remove('hidden');
+          }}
+        </script>
 
       </div>
 
@@ -1540,9 +1597,8 @@ def generate_project_page(p, prev_p, next_p):
     award_markup = ""
     if p.get('award') and p.get('awardText'):
         award_markup = f"""
-            <div class="p-4 bg-white border-l-2 border-[#de602e] border border-[#e2e5e8]">
-              <span class="text-[10px] font-mono uppercase tracking-widest text-[#de602e] block">Award / Selection</span>
-              <p class="text-xs md:text-sm font-semibold text-[#1a1d20] mt-1">{p['awardText']}</p>
+            <div class="py-2">
+              <span class="text-xs font-mono uppercase tracking-widest text-[#de602e] font-semibold">{p['awardText']}</span>
             </div>
 """
 
@@ -1600,48 +1656,23 @@ __HEADER__
     <section class="w-full bg-[#f8f9fa] py-12 md:py-16">
       <div class="field-content-rail space-y-12">
         
-        <!-- Narrative & Brief -->
-        <div class="space-y-6 max-w-4xl">
-          <div class="pb-2">
-            <span class="text-xs font-mono uppercase tracking-[0.25em] text-[#67aec0] font-semibold block mb-3">Project Brief &amp; Spatial Strategy</span>
-            <p class="text-sm sm:text-base md:text-lg text-[#1a1d20] leading-relaxed">
-              {p['description']}
-            </p>
-          </div>
-
+        <!-- Narrative & Description (Zero Visible Clutter, Metadata preserved in head JSON-LD) -->
+        <div class="space-y-4 max-w-4xl">
+          <p class="text-sm sm:text-base md:text-lg text-[#595f65] leading-relaxed">
+            {p['description']}
+          </p>
           {award_markup}
-
-          <!-- Specifications Table -->
-          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4 border-t border-[#e2e5e8]">
-            <div>
-              <span class="text-[10px] font-mono uppercase tracking-widest text-[#67aec0]">Typology</span>
-              <span class="text-sm font-semibold text-[#2b4951] block mt-1">{p['typology']}</span>
-            </div>
-            <div>
-              <span class="text-[10px] font-mono uppercase tracking-widest text-[#67aec0]">Status</span>
-              <span class="text-sm font-semibold text-[#2b4951] block mt-1">{status_label}</span>
-            </div>
-            <div>
-              <span class="text-[10px] font-mono uppercase tracking-widest text-[#67aec0]">Location</span>
-              <span class="text-sm font-semibold text-[#2b4951] block mt-1">{p['location']}</span>
-            </div>
-            <div>
-              <span class="text-[10px] font-mono uppercase tracking-widest text-[#67aec0]">Year</span>
-              <span class="text-sm font-semibold text-[#2b4951] block mt-1">{p['year']}</span>
-            </div>
-          </div>
         </div>
 
         <!-- Large Images Gallery: Consistent 20% Reduced Vertical Row Gap (gap-y-6 md:gap-y-7 gap-x-6 md:gap-x-8) -->
-        <div>
-          <h2 class="text-lg md:text-xl font-semibold tracking-[0.25em] uppercase text-[#38606a] mb-6 md:mb-8 font-raleway">Visual Documentation &amp; Plates</h2>
+        <div class="pt-2">
           <div id="project-gallery" class="grid grid-cols-1 md:grid-cols-2 gap-x-6 md:gap-x-8 gap-y-6 md:gap-y-7">
             {gallery_html}
           </div>
         </div>
 
-        <!-- Prev / Next Navigation -->
-        <div class="pt-8 md:pt-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-xs font-mono uppercase tracking-widest border-t border-[#e2e5e8]">
+        <!-- Prev / Next Navigation (Borderless) -->
+        <div class="pt-8 md:pt-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-xs font-mono uppercase tracking-widest">
           <a href="project-{prev_p['id']}.html" class="py-1 text-[#595f65] hover:text-[#de602e] transition-colors flex items-center gap-2">
             &larr; Prev: {prev_p['title']}
           </a>
@@ -1860,9 +1891,8 @@ def generate_field_summer_island_page(base_path="../../"):
       <img src="{hero_img}" alt="Summer Island Coastal Resort" class="absolute inset-0 w-full h-full object-cover">
       <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/10"></div>
       <div class="relative z-10 field-content-rail pb-10 md:pb-16 text-white">
-        <span class="text-xs font-mono uppercase tracking-[0.3em] text-[#67aec0] block mb-2">01 / Master Territory</span>
         <h1 class="text-3xl sm:text-4xl md:text-6xl font-semibold tracking-tight text-white font-raleway leading-none">
-          Summer Island Coastal Resort
+          Summer Island
         </h1>
       </div>
     </section>
@@ -1870,47 +1900,24 @@ def generate_field_summer_island_page(base_path="../../"):
     <!-- ACT 2: Sticky Split Narrative -->
     <section class="w-full bg-[#f8f9fa] py-16 md:py-24">
       <div class="field-content-rail flex flex-col lg:flex-row items-start gap-12 lg:gap-16">
-        <div class="w-full lg:w-5/12 lg:sticky lg:top-28 space-y-6">
-          <span class="text-xs font-mono uppercase tracking-[0.25em] text-[#67aec0] font-semibold block">02 / Narrative &bull; Spatial Logic</span>
+        <div class="w-full lg:w-5/12 lg:sticky lg:top-28 space-y-4">
           <h2 class="text-2xl sm:text-3xl font-semibold tracking-tight text-[#1a1d20] font-raleway">
-            A Resilient Tectonic Reef Along the Aegean Shore
+            Barca-nation Collegian Social Center
           </h2>
           <p class="text-sm sm:text-base text-[#595f65] leading-relaxed">
             {summer_island.get('description', '')}
           </p>
-          <div class="pt-6 border-t border-[#e2e5e8] space-y-3 font-mono text-xs text-[#595f65]">
-            <div class="flex justify-between py-1 border-b border-[#e2e5e8]/50">
-              <span class="text-[#67aec0] uppercase tracking-wider">Typology</span>
-              <span class="text-[#1a1d20] font-semibold">{summer_island.get('typology', '')}</span>
-            </div>
-            <div class="flex justify-between py-1 border-b border-[#e2e5e8]/50">
-              <span class="text-[#67aec0] uppercase tracking-wider">Location</span>
-              <span class="text-[#1a1d20] font-semibold">{summer_island.get('location', '')}</span>
-            </div>
-            <div class="flex justify-between py-1 border-b border-[#e2e5e8]/50">
-              <span class="text-[#67aec0] uppercase tracking-wider">Year</span>
-              <span class="text-[#1a1d20] font-semibold">{summer_island.get('year', '')}</span>
-            </div>
-          </div>
         </div>
 
         <div class="w-full lg:w-7/12 space-y-10">
-          <div onclick="openLightbox(1)" class="group cursor-pointer bg-white border border-[#e2e5e8] overflow-hidden">
+          <div onclick="openLightbox(1)" class="group cursor-pointer bg-transparent overflow-hidden">
             <div class="relative w-full aspect-[4/3] overflow-hidden bg-[#1a1d20]">
               <img src="{split_1}" alt="Summer Island Plate 2" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
             </div>
-            <div class="p-4 bg-white border-t border-[#e2e5e8]/60 flex items-center justify-between text-xs font-mono text-[#595f65]">
-              <span class="uppercase tracking-wider">Plate 02 &bull; Exterior Villa Envelope</span>
-              <span class="text-[#67aec0] group-hover:text-[#de602e] transition-colors">Enlarge &rarr;</span>
-            </div>
           </div>
-          <div onclick="openLightbox(2)" class="group cursor-pointer bg-white border border-[#e2e5e8] overflow-hidden">
+          <div onclick="openLightbox(2)" class="group cursor-pointer bg-transparent overflow-hidden">
             <div class="relative w-full aspect-[4/3] overflow-hidden bg-[#1a1d20]">
               <img src="{split_2}" alt="Summer Island Plate 3" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-            </div>
-            <div class="p-4 bg-white border-t border-[#e2e5e8]/60 flex items-center justify-between text-xs font-mono text-[#595f65]">
-              <span class="uppercase tracking-wider">Plate 03 &bull; Shaded Aegean Courtyard</span>
-              <span class="text-[#67aec0] group-hover:text-[#de602e] transition-colors">Enlarge &rarr;</span>
             </div>
           </div>
         </div>
@@ -1922,7 +1929,7 @@ def generate_field_summer_island_page(base_path="../../"):
       <div class="field-horizontal-pin flex flex-col justify-between py-8 md:py-12">
         <div class="field-content-rail flex items-center justify-between z-10 shrink-0">
           <div class="flex items-center gap-4">
-            <span class="text-xs font-mono uppercase tracking-[0.25em] text-[#67aec0]">03 / Tectonic Sequence</span>
+            <span class="text-xs font-mono uppercase tracking-[0.25em] text-[#67aec0]">Photographic Sequence</span>
             <span class="text-[#595f65] hidden sm:inline">&bull;</span>
             <span class="text-xs font-mono text-white/70 hidden sm:inline">Scroll to Scrub Photographic Plates</span>
           </div>
@@ -1936,39 +1943,39 @@ def generate_field_summer_island_page(base_path="../../"):
 
         <div class="w-full overflow-hidden flex-1 flex items-center my-4">
           <div id="horizontal-track" class="flex gap-6 md:gap-10 pl-[var(--field-left-offset)] pr-[var(--field-right-gutter)] transition-transform duration-75 ease-out select-none">
-            <div onclick="openLightbox(3)" class="w-[78vw] sm:w-[62vw] lg:w-[48vw] shrink-0 group cursor-pointer bg-black/40 border border-white/10 overflow-hidden">
+            <div onclick="openLightbox(3)" class="w-[78vw] sm:w-[62vw] lg:w-[48vw] shrink-0 group cursor-pointer bg-black/40 overflow-hidden">
               <div class="relative w-full aspect-[16/10] overflow-hidden">
                 <img src="{horiz_1}" alt="Plate 04" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
               </div>
               <div class="p-4 flex items-center justify-between text-xs font-mono text-white/70">
-                <span>04 &bull; Arrival Pavilion</span>
+                <span>Plate 04</span>
                 <span class="text-[#67aec0] group-hover:text-[#de602e] transition-colors">Enlarge &rarr;</span>
               </div>
             </div>
-            <div onclick="openLightbox(4)" class="w-[78vw] sm:w-[62vw] lg:w-[48vw] shrink-0 group cursor-pointer bg-black/40 border border-white/10 overflow-hidden">
+            <div onclick="openLightbox(4)" class="w-[78vw] sm:w-[62vw] lg:w-[48vw] shrink-0 group cursor-pointer bg-black/40 overflow-hidden">
               <div class="relative w-full aspect-[16/10] overflow-hidden">
                 <img src="{horiz_2}" alt="Plate 05" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
               </div>
               <div class="p-4 flex items-center justify-between text-xs font-mono text-white/70">
-                <span>05 &bull; Infinity Horizon Basin</span>
+                <span>Plate 05</span>
                 <span class="text-[#67aec0] group-hover:text-[#de602e] transition-colors">Enlarge &rarr;</span>
               </div>
             </div>
-            <div onclick="openLightbox(5)" class="w-[78vw] sm:w-[62vw] lg:w-[48vw] shrink-0 group cursor-pointer bg-black/40 border border-white/10 overflow-hidden">
+            <div onclick="openLightbox(5)" class="w-[78vw] sm:w-[62vw] lg:w-[48vw] shrink-0 group cursor-pointer bg-black/40 overflow-hidden">
               <div class="relative w-full aspect-[16/10] overflow-hidden">
                 <img src="{horiz_3}" alt="Plate 06" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
               </div>
               <div class="p-4 flex items-center justify-between text-xs font-mono text-white/70">
-                <span>06 &bull; Coastal Villa Terraces</span>
+                <span>Plate 06</span>
                 <span class="text-[#67aec0] group-hover:text-[#de602e] transition-colors">Enlarge &rarr;</span>
               </div>
             </div>
-            <div onclick="openLightbox(6)" class="w-[78vw] sm:w-[62vw] lg:w-[48vw] shrink-0 group cursor-pointer bg-black/40 border border-white/10 overflow-hidden">
+            <div onclick="openLightbox(6)" class="w-[78vw] sm:w-[62vw] lg:w-[48vw] shrink-0 group cursor-pointer bg-black/40 overflow-hidden">
               <div class="relative w-full aspect-[16/10] overflow-hidden">
                 <img src="{horiz_4}" alt="Plate 07" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
               </div>
               <div class="p-4 flex items-center justify-between text-xs font-mono text-white/70">
-                <span>07 &bull; Shaded Promenade Corridor</span>
+                <span>Plate 07</span>
                 <span class="text-[#67aec0] group-hover:text-[#de602e] transition-colors">Enlarge &rarr;</span>
               </div>
             </div>
@@ -1984,29 +1991,15 @@ def generate_field_summer_island_page(base_path="../../"):
     <!-- ACT 4: Comparative Pair Plates -->
     <section class="w-full bg-[#f8f9fa] py-16 md:py-24">
       <div class="field-content-rail space-y-10">
-        <div>
-          <span class="text-xs font-mono uppercase tracking-[0.25em] text-[#67aec0] font-semibold block mb-2">04 / Material Dialogue</span>
-          <h2 class="text-2xl sm:text-3xl font-semibold tracking-tight text-[#1a1d20] font-raleway">
-            Sunken Courtyards &amp; Shaded Colonnades
-          </h2>
-        </div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 md:gap-x-8 gap-y-6 md:gap-y-7">
-          <div onclick="openLightbox(7)" class="group cursor-pointer bg-white border border-[#e2e5e8] overflow-hidden">
+          <div onclick="openLightbox(7)" class="group cursor-pointer bg-transparent overflow-hidden">
             <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
               <img src="{pair_1}" alt="Summer Island Plate 8" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
             </div>
-            <div class="p-4 bg-white border-t border-[#e2e5e8]/60 flex items-center justify-between text-xs font-mono text-[#595f65]">
-              <span>Plate 08 &bull; Perimeter Screen Detail</span>
-              <span class="text-[#67aec0] group-hover:text-[#de602e] transition-colors">Enlarge &rarr;</span>
-            </div>
           </div>
-          <div onclick="openLightbox(8)" class="group cursor-pointer bg-white border border-[#e2e5e8] overflow-hidden">
+          <div onclick="openLightbox(8)" class="group cursor-pointer bg-transparent overflow-hidden">
             <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
               <img src="{pair_2}" alt="Summer Island Plate 9" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-            </div>
-            <div class="p-4 bg-white border-t border-[#e2e5e8]/60 flex items-center justify-between text-xs font-mono text-[#595f65]">
-              <span>Plate 09 &bull; Timber Sunshade Pergola</span>
-              <span class="text-[#67aec0] group-hover:text-[#de602e] transition-colors">Enlarge &rarr;</span>
             </div>
           </div>
         </div>
@@ -2019,10 +2012,9 @@ def generate_field_summer_island_page(base_path="../../"):
       <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent flex items-end">
         <div class="field-content-rail pb-8 md:pb-12 text-white flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4">
           <div>
-            <span class="text-xs font-mono uppercase tracking-[0.25em] text-[#67aec0] block mb-1">05 / Masterplate</span>
-            <h3 class="text-xl sm:text-2xl md:text-3xl font-semibold font-raleway">Complete Coastal Master Plan</h3>
+            <h3 class="text-xl sm:text-2xl md:text-3xl font-semibold font-raleway">Full Master Plan</h3>
           </div>
-          <button onclick="openLightbox(9)" class="px-5 py-2.5 bg-white/20 hover:bg-[#de602e] backdrop-blur-sm text-white text-xs font-mono uppercase tracking-widest transition-colors">
+          <button onclick="openLightbox(9)" class="px-5 py-2.5 bg-white/20 hover:bg-[#de602e] backdrop-blur-sm text-white text-xs font-mono uppercase tracking-widest transition-colors cursor-pointer">
             View Full-Res Master &rarr;
           </button>
         </div>
@@ -2030,7 +2022,7 @@ def generate_field_summer_island_page(base_path="../../"):
     </section>
 
     <!-- Project Navigation Bar -->
-    <div class="w-full bg-[#f8f9fa] py-8 border-t border-[#e2e5e8]">
+    <div class="w-full bg-[#f8f9fa] py-8">
       <div class="field-content-rail flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-xs font-mono uppercase tracking-widest">
         <a href="{prev_url}" class="py-1 text-[#595f65] hover:text-[#de602e] transition-colors flex items-center gap-2">
           &larr; Prev Project: Hand Study
