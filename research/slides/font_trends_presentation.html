@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Architectural Font & Color Brand Identity Analysis — Karpov Design LLC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Heebo:wght@300;400;500&family=Inter:wght@300;400;500;600;700&family=Manrope:wght@400;600&family=Nunito+Sans:wght@300;400;600&family=Outfit:wght@400;600&family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Red+Hat+Text:wght@400;500&family=Space+Grotesk:wght@400;700&family=Space+Mono:wght@400;700&family=Tinos:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #111111;
+    color: #1a1a1a;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    overflow: hidden;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  #presentation-container {
+    width: 100vw;
+    height: 56.25vw;
+    max-height: 100vh;
+    max-width: 177.78vh;
+    position: relative;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.5);
+    background: #fff;
+    overflow: hidden;
+  }
+  .slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    padding: 3% 4.5%;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .slide.active {
+    display: flex;
+  }
+  .slide-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(0,0,0,0.12);
+  }
+  .studio-title {
+    font-size: 1.15vw;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: #1a1a1a;
+    text-transform: uppercase;
+  }
+  .studio-url {
+    font-size: 0.85vw;
+    color: #777777;
+    margin-top: 2px;
+  }
+  .slide-counter {
+    font-size: 0.95vw;
+    font-weight: 700;
+    color: #999999;
+  }
+  .slide-body {
+    display: flex;
+    gap: 4%;
+    height: 85%;
+    margin-top: 2%;
+  }
+  .left-col {
+    width: 48%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .img-frame {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #fff;
+    border: 1px solid rgba(0,0,0,0.15);
+    overflow: hidden;
+  }
+  .img-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .swatches-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2%;
+    margin-top: 3%;
+  }
+  .swatch-card {
+    background: #ffffff;
+    border: 1px solid rgba(0,0,0,0.12);
+    border-radius: 4px;
+    padding: 6px;
+    display: flex;
+    flex-direction: column;
+  }
+  .swatch-chip {
+    width: 100%;
+    height: 3.2vw;
+    border-radius: 3px;
+    border: 1px solid rgba(0,0,0,0.08);
+  }
+  .swatch-hex {
+    font-size: 0.72vw;
+    font-weight: 700;
+    margin-top: 6px;
+    color: #222;
+  }
+  .swatch-role {
+    font-size: 0.62vw;
+    color: #777;
+    margin-top: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .right-col {
+    width: 48%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0 1%;
+  }
+  .font-stack-tag {
+    font-size: 0.7vw;
+    font-weight: 600;
+    color: #666666;
+    font-family: monospace;
+    background: rgba(0,0,0,0.05);
+    padding: 2px 6px;
+    border-radius: 3px;
+    margin-bottom: 4px;
+    display: inline-block;
+  }
+  .display-specimen {
+    font-size: 2.2vw;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 2%;
+    color: #111;
+  }
+  .subhead-specimen {
+    font-size: 0.9vw;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 2%;
+  }
+  .body-specimen {
+    font-size: 0.88vw;
+    line-height: 1.75;
+    color: #383838;
+    margin-bottom: 2%;
+  }
+  .body-specimen p {
+    margin-bottom: 1%;
+  }
+  .meta-specimen {
+    font-size: 0.72vw;
+    line-height: 1.6;
+    letter-spacing: 0.04em;
+    color: #555;
+    padding-top: 1.5%;
+    border-top: 1px dashed rgba(0,0,0,0.18);
+  }
+  .controls-bar {
+    position: fixed;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(20,20,20,0.85);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 30px;
+    padding: 8px 18px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    z-index: 999;
+  }
+  .btn-nav {
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 4px 10px;
+    border-radius: 12px;
+    transition: background 0.2s;
+  }
+  .btn-nav:hover {
+    background: rgba(255,255,255,0.2);
+  }
+  .nav-info {
+    color: #ccc;
+    font-size: 13px;
+    font-family: monospace;
+  }
+</style>
+</head>
+<body>
+
+<div id="presentation-container">
+
+  <!-- SLIDE 1: BIG -->
+  <div class="slide active" style="background-color: #FFFFFF;">
+    <div class="slide-header">
+      <div>
+        <div class="studio-title">BIG | Bjarke Ingels Group</div>
+        <div class="studio-url">https://big.dk</div>
+      </div>
+      <div class="slide-counter">01 / 10</div>
+    </div>
+    <div class="slide-body">
+      <div class="left-col">
+        <div class="img-frame"><img src="../scratch/pptx_assets/big_rich_crop.png" alt="BIG"></div>
+        <div class="swatches-row">
+          <div class="swatch-card"><div class="swatch-chip" style="background:#FFFFFF;"></div><div class="swatch-hex">#FFFFFF</div><div class="swatch-role">Canvas / Background</div></div>
+          <div class="swatch-card"><div class="swatch-chip" style="background:#000000;"></div><div class="swatch-hex">#000000</div><div class="swatch-role">Primary Text Ink</div></div>
+          <div class="swatch-card"><div class="swatch-chip" style="background:#797979;"></div><div class="swatch-hex">#797979</div><div class="swatch-role">Secondary / Narrative</div></div>
+          <div class="swatch-card"><div class="swatch-chip" style="background:#E5E5E5;"></div><div class="swatch-hex">#E5E5E5</div><div class="swatch-role">Border / Structure</div></div>
+        </div>
+      </div>
+      <div class="right-col">
+        <div>
+          <div><span class="font-stack-tag">everett, sans-serif (Display)</span></div>
+          <div class="display-specimen" style="font-family:'Plus Jakarta Sans', sans-serif; font-weight:800;">L'Architecture Silencieuse</div>
+          <div><span class="font-stack-tag">everett, sans-serif (Subhead)</span></div>
+          <div class="subhead-specimen" style="font-family:'Plus Jakarta Sans', sans-serif; color:#797979;">SPATIAL CONTINUITY & MATERIAL INTEGRITY // RESIDENCE 04</div>
+          <div><span class="font-stack-tag">everett, sans-serif (Body)</span></div>
+          <div class="body-specimen" style="font-family:'Plus Jakarta Sans', sans-serif;">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          </div>
+        </div>
+        <div>
+          <div><span class="font-stack-tag">everett, monospace (Metadata)</span></div>
+          <div class="meta-specimen" style="font-family:'Space Mono', monospace;">[DRAWING: SECTION A-A] [SCALE: 1:50] [ELEV: +142.50M] [MATERIAL: REINFORCED CONCRETE // WEATHERED CEDAR]</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 2: FIELD ARCHITECTURE -->
+  <div class="slide" style="background-color: #FFFFFF;">
+    <div class="slide-header">
+      <div>
+        <div class="studio-title">Field Architecture</div>
+        <div class="studio-url">https://fieldarchitecture.com</div>
+      </div>
+      <div class="slide-counter">02 / 10</div>
+    </div>
+    <div class="slide-body">
+      <div class="left-col">
+        <div class="img-frame"><img src="../scratch/pptx_assets/field_rich_crop.png" alt="Field Architecture"></div>
+        <div class="swatches-row">
+          <div class="swatch-card"><div class="swatch-chip" style="background:#FFFFFF;"></div><div class="swatch-hex">#FFFFFF</div><div class="swatch-role">Canvas / Background</div></div>
+          <div class="swatch-card"><div class="swatch-chip" style="background:#000000;"></div><div class="swatch-hex">#000000</div><div class="swatch-role">Body Narrative Ink</div></div>
+          <div class="swatch-card"><div class="swatch-chip" style="background:#4E5254;"></div><div class="swatch-hex">#4E5254</div><div class="swatch-role">Heading & Nav</div></div>
+          <div class="swatch-card"><div class="swatch-chip" style="background:#EEEDEB;"></div><div class="swatch-hex">#EEEDEB</div><div class="swatch-role">Section Container</div></div>
+        </div>
+      </div>
+      <div class="right-col">
+        <div>
+          <div><span class="font-stack-tag">sans-serif, Manrope (Heading)</span></div>
+          <div class="display-specimen" style="font-family:'Manrope', sans-serif; font-weight:600;">L'Architecture Silencieuse</div>
+          <div><span class="font-stack-tag">sans-serif, Manrope (Subhead)</span></div>
+          <div class="subhead-specimen" style="font-family:'Manrope', sans-serif; color:#4E5254;">SPATIAL CONTINUITY & MATERIAL INTEGRITY // RESIDENCE 04</div>
+          <div><span class="font-stack-tag">"Nunito Sans", sans-serif (Body)</span></div>
+          <div class="body-specimen" style="font-family:'Nunito Sans', sans-serif;">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          </div>
+        </div>
+        <div>
+          <div><span class="font-stack-tag">"Nunito Sans", sans-serif (Metadata)</span></div>
+          <div class="meta-specimen" style="font-family:'Nunito Sans', sans-serif;">[DRAWING: SECTION A-A] [SCALE: 1:50] [ELEV: +142.50M] [MATERIAL: REINFORCED CONCRETE // WEATHERED CEDAR]</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 3: FRAN SILVESTRE -->
+  <div class="slide" style="background-color: #FFFFFF;">
+    <div class="slide-header">
+      <div>
+        <div class="studio-title">Fran Silvestre Arquitectos</div>
+        <div class="studio-url">https://fransilvestrearquitectos.com</div>
+      </div>
+      <div class="slide-counter">03 / 10</div>
+    </div>
+    <div class="slide-body">
+      <div class="left-col">
+        <div class="img-frame"><img src="../scratch/pptx_assets/fran_rich_crop.png" alt="Fran Silvestre"></div>
+        <div class="swatches-row">
+          <div class="swatch-card"><div class="swatch-chip" style="background:#FFFFFF;"></div><div class="swatch-hex">#FFFFFF</div><div class="swatch-role">Canvas / Background</div></div>
+          <div class="swatch-card"><div class="swatch-chip" style="background:#000000;"></div><div class="swatch-hex">#000000</div><div class="swatch-role">Paragraph Ink</div></div>
+          <div class="swatch-card"><div class="swatch-chip" style="background:#777777;"></div><div class="swatch-hex">#777777</div><div class="swatch-role">Subhead / Nav</div></div>
+          <div class="swatch-card"><div class="swatch-chip" style="background:#AEAEAE;"></div><div class="swatch-hex">#AEAEAE</div><div class="swatch-role">Display Meta</div></div>
+        </div>
+      </div>
+      <div class="right-col">
+        <div>
+          <div><span class="font-stack-tag">Inter, sans-serif (500 Display)</span></div>
+          <div class="display-specimen" style="font-family:'Inter', sans-serif; font-weight:500;">L'Architecture Silencieuse</div>
+          <div><span class="font-stack-tag">Inter, sans-serif (500 Subhead)</span></div>
+          <div class="subhead-specimen" style="font-family:'Inter', sans-serif; color:#777777;">SPATIAL CONTINUITY & MATERIAL INTEGRITY // RESIDENCE 04</div>
+          <div><span class="font-stack-tag">Inter, sans-serif (400 Body)</span></div>
+          <div class="body-specimen" style="font-family:'Inter', sans-serif;">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          </div>
+        </div>
+        <div>
+          <div><span class="font-stack-tag">Inter, sans-serif (Metadata)</span></div>
+          <div class="meta-specimen" style="font-family:'Inter', sans-serif;">[DRAWING: SECTION A-A] [SCALE: 1:50] [ELEV: +142.50M] [MATERIAL: REINFORCED CONCRETE // WEATHERED CEDAR]</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 4: THE MODERN HOUSE -->
+  <div class="slide" style="background-color: #FFFFFF;">
+    <div class="slide-header">
+      <div>
+        <div class="studio-title">The Modern House</div>
+        <div class="studio-url">https://themodernhouse.com</div>
+      </div>
+      <div class="slide-counter">04 / 10</div>
+    </div>
+    <div class="slide-body">
+      <div class="left-col">
+        <div class="img-frame"><img src="../scratch/pptx_assets/modernhouse_rich_crop.png" alt="The Modern House"></div>
+        <div class="swatches-row">
+          <div class="swatch-card"><div class="swatch-chip" style="background:#FFFFFF;"></div><div class="swatch-hex">#FFFFFF</div><div class="swatch-role">Canvas / Background</div></div>
+          <div class="swatch-card"><div class="swatch-chip" style="background:#000000;"></div><div class="swatch-hex">#000000</div><div class="swatch-role">Editorial Serif Ink</div></div>
+          <div class="swatch-card"><div class="swatch-chip" style="background:#313131;"></div><div class="swatch-hex">#313131</div><div class="swatch-role">Secondary Text</div></div>
+          <div class="swatch-card"><div class="swatch-chip" style="background:#F5F3EF;"></div><div class="swatch-hex">#F5F3EF</div><div class="swatch-role">Paper Tint Container</div></div>
+        </div>
+      </div>
+      <div class="right-col">
+        <div>
+          <div><span class="font-stack-tag">"serif", serif (Heading)</span></div>
+          <div class="display-specimen" style="font-family:'Cormorant Garamond', serif; font-weight:400;">L'Architecture Silencieuse</div>
+          <div><span class="font-stack-tag">sans, Arial, sans-serif (Category)</span></div>
+          <div class="subhead-specimen" style="font-family:'Inter', sans-serif; color:#000000;">SPATIAL CONTINUITY & MATERIAL INTEGRITY // RESIDENCE 04</div>
+          <div><span class="font-stack-tag">"serif", serif (Body Narrative)</span></div>
+          <div class="body-specimen" style="font-family:'Cormorant Garamond', serif;">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          </div>
+        </div>
+        <div>
+          <div><span class="font-stack-tag">sans, Arial, sans-serif (Metadata)</span></div>
+          <div class="meta-specimen" style="font-family:'Inter', sans-serif;">[DRAWING: SECTION A-A] [SCALE: 1:50] [ELEV: +142.50M] [MATERIAL: REINFORCED CONCRETE // WEATHERED CEDAR]</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 5: IN SITU STUDIO -->
+  <div class="slide" style="background-color: #FFFFFF;">
+    <div class="slide-header">
+      <div>
+        <div class="studio-title">In Situ Studio</div>
+        <div class="studio-url">https://insitustudio.us</div>
+      </div>
+      <div class="slide-counter">05 / 10</div>
+    </div>
+    <div class="slide-body">
+      <div class="left-col">
+        <div class="img-frame"><img src="../scratch/pptx_assets/insitu_rich_crop.png" alt="In Situ Studio"></div>
+        <div class="swatches-row">
+          <div class="swatch-card"><div class="swatch-chip" style="background:#FFFFFF;"></div><div class="swatch-hex">#FFFFFF</div><div class="swatch-role">Canvas / Background</div></div>
+          <div class="swatch-card"><div class="swatch-chip" style="background:#000000;"></div><div class="swatch-hex">#000000</div><div class="swatch-role">Primary Text Ink</div></div>
+          <div class="swatch-card"><div class="swatch-chip" style="background:#3DBFE8;"></div><div class="swatch-hex">#3DBFE8</div><div class="swatch-role">Link Accent Cyan</div></div>
+          <div class="swatch-card"><div class="swatch-chip" style="background:#BDE1F4;"></div><div class="swatch-hex">#BDE1F4</div><div class="swatch-role">Light Tint Container</div></div>
+        </div>
+      </div>
+      <div class="right-col">
+        <div>
+          <div><span class="font-stack-tag">degular, sans-serif (800 Display)</span></div>
+          <div class="display-specimen" style="font-family:'Space Grotesk', sans-serif; font-weight:700;">L'Architecture Silencieuse</div>
+          <div><span class="font-stack-tag">degular, sans-serif (Subhead)</span></div>
+          <div class="subhead-specimen" style="font-family:'Space Grotesk', sans-serif; color:#3DBFE8;">SPATIAL CONTINUITY & MATERIAL INTEGRITY // RESIDENCE 04</div>
+          <div><span class="font-stack-tag">"Red Hat Text", sans-serif (Body)</span></div>
+          <div class="body-specimen" style="font-family:'Red Hat Text', sans-serif;">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          </div>
+        </div>
+        <div>
+          <div><span class="font-stack-tag">"Red Hat Text", sans-serif (Metadata)</span></div>
+          <div class="meta-specimen" style="font-family:'Red Hat Text', sans-serif;">[DRAWING: SECTION A-A] [SCALE: 1:50] [ELEV: +142.50M] [MATERIAL: REINFORCED CONCRETE // WEATHERED CEDAR]</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 6: RAVN ARKITEKTUR -->
+  <div class="slide" style="background-color: #FFFFFF;">
+    <div class="slide-header">
+      <div>
+        <div class="studio-title">RAVN Arkitektur</div>
+        <div class="studio-url">https://ravnarkitektur.dk</div>
+      </div>
+      <div class="slide-counter">06 / 10</div>
+    </div>
+    <div class="slide-body">
+      <div class="left-col">
+        <div class="img-frame"><img src="../scratch/pptx_assets/ravn_rich_crop.png" alt="RAVN Arkitektur"></div>
+        <div class="swatches-row">
+          <div class="swatch-card"><div class="swatch-chip" style="background:#FFFFFF;"></div><div class="swatch-hex">#FFFFFF</div><div class="swatch-role">Canvas / Background</div></div>
+          <div class="swatch-card"><div class="swatch-chip" style="background:#000000;"></div><div class="swatch-hex">#000000</div><div class="swatch-role">Primary Text Ink</div></div>
+          <div class="swatch-card"><div class="swatch-chip" style="background:#85868A;"></div><div class="swatch-hex">#85868A</div><div class="swatch-role">Metadata Grey</div></div>
+          <div class="swatch-card"><div class="swatch-chip" style="background:#666666;"></div><div class="swatch-hex">#666666</div><div class="swatch-role">Panel Frame</div></div>
+        </div>
+      </div>
+      <div class="right-col">
+        <div>
+          <div><span class="font-stack-tag">"Century Gothic", sans-serif (Display)</span></div>
+          <div class="display-specimen" style="font-family:'Outfit', sans-serif; font-weight:600;">L'Architecture Silencieuse</div>
+          <div><span class="font-stack-tag">"Century Gothic", sans-serif (Subhead)</span></div>
+          <div class="subhead-specimen" style="font-family:'Outfit', sans-serif; color:#85868A;">SPATIAL CONTINUITY & MATERIAL INTEGRITY // RESIDENCE 04</div>
+          <div><span class="font-stack-tag">"Times New Roman", serif (Body)</span></div>
+          <div class="body-specimen" style="font-family:'Tinos', serif;">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          </div>
+        </div>
+        <div>
+          <div><span class="font-stack-tag">Arial, sans-serif (Metadata)</span></div>
+          <div class="meta-specimen" style="font-family:'Inter', sans-serif;">[DRAWING: SECTION A-A] [SCALE: 1:50] [ELEV: +142.50M] [MATERIAL: REINFORCED CONCRETE // WEATHERED CEDAR]</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 7: STUDIO MM ARCHITECT -->
+  <div class="slide" style="background-color: #FFFFFF;">
+    <div class="slide-header">
+      <div>
+        <div class="studio-title">Studio MM Architect</div>
+        <div class="studio-url">https://maricamckeel.com</div>
+      </div>
+      <div class="slide-counter">07 / 10</div>
+    </div>
+    <div class="slide-body">
+      <div class="left-col">
+        <div class="img-frame"><img src="../scratch/pptx_assets/studiomm_rich_crop.png" alt="Studio MM"></div>
+        <div class="swatches-row">
+          <div class="swatch-card"><div class="swatch-chip" style="background:#FFFFFF;"></div><div class="swatch-hex">#FFFFFF</div><div class="swatch-role">Canvas / Background</div></div>
+          <div class="swatch-card"><div class="swatch-chip" style="background:#000000;"></div><div class="swatch-hex">#000000</div><div class="swatch-role">Primary Text Ink</div></div>
+          <div class="swatch-card"><div class="swatch-chip" style="background:#666666;"></div><div class="swatch-hex">#666666</div><div class="swatch-role">Case Study Body</div></div>
+          <div class="swatch-card"><div class="swatch-chip" style="background:#123A8A;"></div><div class="swatch-hex">#123A8A</div><div class="swatch-role">Link Accent Blue</div></div>
+        </div>
+      </div>
+      <div class="right-col">
+        <div>
+          <div><span class="font-stack-tag">"Nunito Sans", sans-serif (Heading)</span></div>
+          <div class="display-specimen" style="font-family:'Nunito Sans', sans-serif; font-weight:700;">L'Architecture Silencieuse</div>
+          <div><span class="font-stack-tag">"Nunito Sans", sans-serif (Subhead)</span></div>
+          <div class="subhead-specimen" style="font-family:'Nunito Sans', sans-serif; color:#123A8A;">SPATIAL CONTINUITY & MATERIAL INTEGRITY // RESIDENCE 04</div>
+          <div><span class="font-stack-tag">"Nunito Sans", sans-serif (400 Body)</span></div>
+          <div class="body-specimen" style="font-family:'Nunito Sans', sans-serif;">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          </div>
+        </div>
+        <div>
+          <div><span class="font-stack-tag">"Nunito Sans", sans-serif (Metadata)</span></div>
+          <div class="meta-specimen" style="font-family:'Nunito Sans', sans-serif;">[DRAWING: SECTION A-A] [SCALE: 1:50] [ELEV: +142.50M] [MATERIAL: REINFORCED CONCRETE // WEATHERED CEDAR]</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 8: DEN OUTDOORS -->
+  <div class="slide" style="background-color: #FFFFFF;">
+    <div class="slide-header">
+      <div>
+        <div class="studio-title">Den Outdoors</div>
+        <div class="studio-url">https://denoutdoors.com</div>
+      </div>
+      <div class="slide-counter">08 / 10</div>
+    </div>
+    <div class="slide-body">
+      <div class="left-col">
+        <div class="img-frame"><img src="../scratch/pptx_assets/den_rich_crop.png" alt="Den Outdoors"></div>
+        <div class="swatches-row">
+          <div class="swatch-card"><div class="swatch-chip" style="background:#FFFFFF;"></div><div class="swatch-hex">#FFFFFF</div><div class="swatch-role">Primary Canvas</div></div>
+          <div class="swatch-card"><div class="swatch-chip" style="background:#000000;"></div><div class="swatch-hex">#000000</div><div class="swatch-role">Text / Hero Dark</div></div>
+          <div class="swatch-card"><div class="swatch-chip" style="background:#F0EEE9;"></div><div class="swatch-hex">#F0EEE9</div><div class="swatch-role">Warm Section BG</div></div>
+          <div class="swatch-card"><div class="swatch-chip" style="background:#623CEA;"></div><div class="swatch-hex">#623CEA</div><div class="swatch-role">Interactive Purple</div></div>
+        </div>
+      </div>
+      <div class="right-col">
+        <div>
+          <div><span class="font-stack-tag">Helvetica, Arial, sans-serif (Heading)</span></div>
+          <div class="display-specimen" style="font-family:'Inter', sans-serif; font-weight:700;">L'Architecture Silencieuse</div>
+          <div><span class="font-stack-tag">"Helvetica Neue", sans-serif (Subhead)</span></div>
+          <div class="subhead-specimen" style="font-family:'Inter', sans-serif; color:#623CEA;">SPATIAL CONTINUITY & MATERIAL INTEGRITY // RESIDENCE 04</div>
+          <div><span class="font-stack-tag">"Helvetica Neue", sans-serif (Body)</span></div>
+          <div class="body-specimen" style="font-family:'Inter', sans-serif;">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          </div>
+        </div>
+        <div>
+          <div><span class="font-stack-tag">Helvetica, sans-serif (Metadata)</span></div>
+          <div class="meta-specimen" style="font-family:'Inter', sans-serif;">[DRAWING: SECTION A-A] [SCALE: 1:50] [ELEV: +142.50M] [MATERIAL: REINFORCED CONCRETE // WEATHERED CEDAR]</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 9: MCLAREN EXCELL -->
+  <div class="slide" style="background-color: #F7F7F7;">
+    <div class="slide-header">
+      <div>
+        <div class="studio-title">McLaren Excell</div>
+        <div class="studio-url">https://mclarenexcell.com</div>
+      </div>
+      <div class="slide-counter">09 / 10</div>
+    </div>
+    <div class="slide-body">
+      <div class="left-col">
+        <div class="img-frame"><img src="../scratch/pptx_assets/mclaren_rich_crop.png" alt="McLaren Excell"></div>
+        <div class="swatches-row">
+          <div class="swatch-card"><div class="swatch-chip" style="background:#F7F7F7;"></div><div class="swatch-hex">#F7F7F7</div><div class="swatch-role">Canvas / Background</div></div>
+          <div class="swatch-card"><div class="swatch-chip" style="background:#242424;"></div><div class="swatch-hex">#242424</div><div class="swatch-role">Primary Dark Ink</div></div>
+          <div class="swatch-card"><div class="swatch-chip" style="background:#4D4D4D;"></div><div class="swatch-hex">#4D4D4D</div><div class="swatch-role">Secondary Slate</div></div>
+          <div class="swatch-card"><div class="swatch-chip" style="background:#DEDFE0;"></div><div class="swatch-hex">#DEDFE0</div><div class="swatch-role">Structure Border</div></div>
+        </div>
+      </div>
+      <div class="right-col">
+        <div>
+          <div><span class="font-stack-tag">Heebo, sans-serif (300 Heading)</span></div>
+          <div class="display-specimen" style="font-family:'Heebo', sans-serif; font-weight:300;">L'Architecture Silencieuse</div>
+          <div><span class="font-stack-tag">Heebo, sans-serif (300 Subhead)</span></div>
+          <div class="subhead-specimen" style="font-family:'Heebo', sans-serif; color:#4D4D4D;">SPATIAL CONTINUITY & MATERIAL INTEGRITY // RESIDENCE 04</div>
+          <div><span class="font-stack-tag">Heebo, sans-serif (300 Body)</span></div>
+          <div class="body-specimen" style="font-family:'Heebo', sans-serif; font-weight:300;">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          </div>
+        </div>
+        <div>
+          <div><span class="font-stack-tag">Heebo, sans-serif (Metadata)</span></div>
+          <div class="meta-specimen" style="font-family:'Heebo', sans-serif;">[DRAWING: SECTION A-A] [SCALE: 1:50] [ELEV: +142.50M] [MATERIAL: REINFORCED CONCRETE // WEATHERED CEDAR]</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 10: MACKAY-LYONS SWEETAPPLE -->
+  <div class="slide" style="background-color: #FFFFFF;">
+    <div class="slide-header">
+      <div>
+        <div class="studio-title">MacKay-Lyons Sweetapple</div>
+        <div class="studio-url">https://mlsarchitects.ca</div>
+      </div>
+      <div class="slide-counter">10 / 10</div>
+    </div>
+    <div class="slide-body">
+      <div class="left-col">
+        <div class="img-frame"><img src="../scratch/pptx_assets/mls_rich_crop.png" alt="MacKay-Lyons Sweetapple"></div>
+        <div class="swatches-row">
+          <div class="swatch-card"><div class="swatch-chip" style="background:#FFFFFF;"></div><div class="swatch-hex">#FFFFFF</div><div class="swatch-role">Canvas / Background</div></div>
+          <div class="swatch-card"><div class="swatch-chip" style="background:#000000;"></div><div class="swatch-hex">#000000</div><div class="swatch-role">Primary Text Ink</div></div>
+          <div class="swatch-card"><div class="swatch-chip" style="background:#4F5861;"></div><div class="swatch-hex">#4F5861</div><div class="swatch-role">Atlantic Slate</div></div>
+          <div class="swatch-card"><div class="swatch-chip" style="background:#9BA5AE;"></div><div class="swatch-hex">#9BA5AE</div><div class="swatch-role">Sea Mist Tint</div></div>
+        </div>
+      </div>
+      <div class="right-col">
+        <div>
+          <div><span class="font-stack-tag">neue-haas-grotesk-display, sans-serif (Heading)</span></div>
+          <div class="display-specimen" style="font-family:'Inter', sans-serif; font-weight:600;">L'Architecture Silencieuse</div>
+          <div><span class="font-stack-tag">neue-haas-grotesk-display, sans-serif (Subhead)</span></div>
+          <div class="subhead-specimen" style="font-family:'Inter', sans-serif; color:#000000;">SPATIAL CONTINUITY & MATERIAL INTEGRITY // RESIDENCE 04</div>
+          <div><span class="font-stack-tag">neue-haas-grotesk-display, sans-serif (Body)</span></div>
+          <div class="body-specimen" style="font-family:'Inter', sans-serif;">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          </div>
+        </div>
+        <div>
+          <div><span class="font-stack-tag">Arial, sans-serif (Metadata)</span></div>
+          <div class="meta-specimen" style="font-family:'Inter', sans-serif;">[DRAWING: SECTION A-A] [SCALE: 1:50] [ELEV: +142.50M] [MATERIAL: REINFORCED CONCRETE // WEATHERED CEDAR]</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Navigation Controls Bar -->
+<div class="controls-bar">
+  <button class="btn-nav" id="btn-prev" onclick="prevSlide()">&#8592; Prev</button>
+  <div class="nav-info" id="nav-info">Slide 1 / 10</div>
+  <button class="btn-nav" id="btn-next" onclick="nextSlide()">Next &#8594;</button>
+  <button class="btn-nav" style="border-left: 1px solid rgba(255,255,255,0.2); padding-left: 12px;" onclick="toggleFullscreen()">&#x26F6; Fullscreen</button>
+</div>
+
+<script>
+  let currentSlide = 0;
+  const slides = document.querySelectorAll('.slide');
+  const navInfo = document.getElementById('nav-info');
+
+  function showSlide(idx) {
+    if (idx < 0) idx = 0;
+    if (idx >= slides.length) idx = slides.length - 1;
+    slides.forEach((s, i) => {
+      s.classList.toggle('active', i === idx);
+    });
+    currentSlide = idx;
+    navInfo.textContent = `Slide ${currentSlide + 1} / ${slides.length}`;
+  }
+
+  function nextSlide() {
+    showSlide(currentSlide + 1);
+  }
+
+  function prevSlide() {
+    showSlide(currentSlide - 1);
+  }
+
+  function toggleFullscreen() {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen();
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      }
+    }
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+      nextSlide();
+    } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+      prevSlide();
+    } else if (e.key === 'f' || e.key === 'F') {
+      toggleFullscreen();
+    }
+  });
+</script>
+
+</body>
+</html>

@@ -202,7 +202,7 @@ def generate_json_ld_schema():
                 "artform": p.get("typology"),
                 "dateCreated": str(p.get("year")),
                 "contentLocation": p.get("location"),
-                "url": f"https://dogandoruk.github.io/karpovdesign/project-{p.get('id')}.html",
+                "url": f"https://dogandoruk.github.io/karpovdesign/projects/{p.get('id')}/",
                 "description": p.get("description")
             }
         })
@@ -877,7 +877,7 @@ JS_TEMPLATE = """
     function updateCtaLink(idx) {
       const ctaBtn = document.getElementById('hero-cta-btn');
       if (ctaBtn && HERO_SLIDES[idx]) {
-        ctaBtn.href = `project-${HERO_SLIDES[idx].id}.html`;
+        ctaBtn.href = `projects/${HERO_SLIDES[idx].id}/`;
       }
     }
 
@@ -946,7 +946,7 @@ JS_TEMPLATE = """
         card.dataset.isMatch = isMatched ? 'true' : 'false';
 
         if (!IS_VARIANT) {
-          card.onclick = () => { window.location.href = `project-${p.id}.html`; };
+          card.onclick = () => { window.location.href = `projects/${p.id}/`; };
         } else {
           card.onclick = () => openModal(p.id);
         }
@@ -1122,7 +1122,7 @@ JS_TEMPLATE = """
 
       const pageLink = document.getElementById('modal-project-link');
       if (pageLink) {
-        pageLink.href = `project-${p.id}.html`;
+        pageLink.href = `projects/${p.id}/`;
       }
 
       const mainImg = document.getElementById('modal-main-img');
@@ -1792,7 +1792,7 @@ def build_project_lightbox_markup_and_script(project_title, images, base_path=""
     return markup
 
 
-def generate_dawnridge_project_page(p, prev_p, next_p, base_path=""):
+def generate_dawnridge_project_page(p, prev_p, next_p, base_path="../../"):
     roles = get_project_image_roles(p)
     crops = get_project_image_crops(p)
     images = p.get('images', [])
@@ -1813,9 +1813,8 @@ def generate_dawnridge_project_page(p, prev_p, next_p, base_path=""):
 
     home_url = f"{base_path}index.html"
     works_url = f"{base_path}index.html#works"
-    variant_url = f"{base_path}project-{p['id']}/variant/index.html"
-    prev_url = f"{base_path}project-{prev_p['id']}.html"
-    next_url = f"{base_path}project-{next_p['id']}.html"
+    prev_url = f"{base_path}projects/{prev_p['id']}/"
+    next_url = f"{base_path}projects/{next_p['id']}/"
 
     head_html = SHARED_HEAD_TAGS.replace('{JSON_LD_SCHEMA_TAG}', JSON_LD_SCHEMA_TAG)
     if base_path:
@@ -1834,24 +1833,6 @@ def generate_dawnridge_project_page(p, prev_p, next_p, base_path=""):
 <body class="antialiased bg-[#f8f9fa] text-[#1a1d20]">
 
 {header_html}
-
-  <!-- Breadcrumb Navigation with Layout Switcher -->
-  <div class="w-full bg-[#f8f9fa] py-4">
-    <nav aria-label="Breadcrumb" class="field-content-rail text-xs md:text-sm font-mono uppercase tracking-widest text-[#595f65] flex items-center justify-between overflow-x-auto no-scrollbar whitespace-nowrap">
-      <div class="flex items-center">
-        <a href="{home_url}" class="hover:text-[#1a1d20] transition-colors shrink-0">Home</a>
-        <span class="mx-2 shrink-0">&bull;</span>
-        <a href="{works_url}" class="hover:text-[#1a1d20] transition-colors shrink-0">Works</a>
-        <span class="mx-2 shrink-0">&bull;</span>
-        <span class="text-[#1a1d20] font-semibold truncate font-raleway tracking-wider">{p['title']}</span>
-      </div>
-      <div class="ml-auto flex items-center gap-2 pl-4 shrink-0 text-[11px] font-mono">
-        <span class="text-[#767676] uppercase tracking-wider hidden sm:inline">Layout:</span>
-        <span class="px-2 py-0.5 text-[#de602e] font-semibold border-b border-[#de602e]">Editorial</span>
-        <a href="{variant_url}" class="px-2 py-0.5 text-[#595f65] hover:text-[#1a1d20] transition-colors">Grid Variant</a>
-      </div>
-    </nav>
-  </div>
 
   <main class="w-full bg-[#f8f9fa]">
     <!-- Slot 1: Top Full-Bleed Hero (Zero Text Overlay) -->
@@ -1937,7 +1918,7 @@ def generate_dawnridge_project_page(p, prev_p, next_p, base_path=""):
 """
 
 
-def generate_grid_variant_project_page(p, prev_p, next_p, base_path="../../"):
+def generate_grid_variant_project_page(p, prev_p, next_p, base_path="../../../"):
     roles = get_project_image_roles(p)
     crops = get_project_image_crops(p)
     hero_rel = roles.get('hero_image') or get_best_hero_image(p)
@@ -1968,9 +1949,8 @@ def generate_grid_variant_project_page(p, prev_p, next_p, base_path="../../"):
 
     home_url = f"{base_path}index.html"
     works_url = f"{base_path}index.html#works"
-    editorial_url = f"{base_path}project-{p['id']}.html"
-    prev_url = f"{base_path}project-{prev_p['id']}/variant/index.html"
-    next_url = f"{base_path}project-{next_p['id']}/variant/index.html"
+    prev_url = f"{base_path}projects/{prev_p['id']}/variant/"
+    next_url = f"{base_path}projects/{next_p['id']}/variant/"
 
     head_html = SHARED_HEAD_TAGS.replace('{JSON_LD_SCHEMA_TAG}', JSON_LD_SCHEMA_TAG)
     if base_path:
@@ -1989,24 +1969,6 @@ def generate_grid_variant_project_page(p, prev_p, next_p, base_path="../../"):
 <body class="antialiased bg-[#f8f9fa] text-[#1a1d20]">
 
 {header_html}
-
-  <!-- Breadcrumb Navigation with Layout Switcher -->
-  <div class="w-full bg-[#f8f9fa] py-4">
-    <nav aria-label="Breadcrumb" class="field-content-rail text-xs md:text-sm font-mono uppercase tracking-widest text-[#595f65] flex items-center justify-between overflow-x-auto no-scrollbar whitespace-nowrap">
-      <div class="flex items-center">
-        <a href="{home_url}" class="hover:text-[#1a1d20] transition-colors shrink-0">Home</a>
-        <span class="mx-2 shrink-0">&bull;</span>
-        <a href="{works_url}" class="hover:text-[#1a1d20] transition-colors shrink-0">Works</a>
-        <span class="mx-2 shrink-0">&bull;</span>
-        <span class="text-[#1a1d20] font-semibold truncate">{p['title']}</span>
-      </div>
-      <div class="ml-auto flex items-center gap-2 pl-4 shrink-0 text-[11px] font-mono">
-        <span class="text-[#767676] uppercase tracking-wider hidden sm:inline">Layout:</span>
-        <a href="{editorial_url}" class="px-2 py-0.5 text-[#595f65] hover:text-[#1a1d20] transition-colors">Editorial</a>
-        <span class="px-2 py-0.5 text-[#de602e] font-semibold border-b border-[#de602e]">Grid Variant</span>
-      </div>
-    </nav>
-  </div>
 
   <main>
     <!-- Dedicated Hero Banner: Secondary Metadata (Date, Location) OMITTED per User Rule -->
@@ -2073,11 +2035,6 @@ def main():
         f.write(generate_landing_page(variant_mode="variant"))
     print("Saved variant.html")
 
-    print("Building Version 3 (variant2.html): Field Architecture Variant 2...")
-    with open('variant2.html', 'w', encoding='utf-8') as f:
-        f.write(generate_landing_page(variant_mode="variant2"))
-    print("Saved variant2.html")
-
     print("Building about.html...")
     with open('about.html', 'w', encoding='utf-8') as f:
         f.write(generate_about_page())
@@ -2093,25 +2050,20 @@ def main():
         f.write(generate_academy_page())
     print("Saved academy.html")
 
-    print("Building 21 individual project pages (Dawnridge Editorial as Default + Grid Variant)...")
+    print("Building 21 individual project pages (Dawnridge Editorial as Default + Grid Variant) under projects/<id>/...")
     for idx, p in enumerate(projects_data):
         prev_p = projects_data[(idx - 1 + len(projects_data)) % len(projects_data)]
         next_p = projects_data[(idx + 1) % len(projects_data)]
 
-        # Default page: Dawnridge Editorial layout
-        fname = f"project-{p['id']}.html"
-        with open(fname, 'w', encoding='utf-8') as f:
-            f.write(generate_dawnridge_project_page(p, prev_p, next_p, base_path=""))
+        proj_dir = os.path.join("projects", p['id'])
+        os.makedirs(proj_dir, exist_ok=True)
+        with open(os.path.join(proj_dir, "index.html"), 'w', encoding='utf-8') as f:
+            f.write(generate_dawnridge_project_page(p, prev_p, next_p, base_path="../../"))
 
-        # Variant page: 2-Column Grid Variant layout
-        variant_dir = os.path.join(f"project-{p['id']}", "variant")
+        variant_dir = os.path.join(proj_dir, "variant")
         os.makedirs(variant_dir, exist_ok=True)
         with open(os.path.join(variant_dir, "index.html"), 'w', encoding='utf-8') as f:
-            f.write(generate_grid_variant_project_page(p, prev_p, next_p, base_path="../../"))
-
-        if p['id'] == 'summer-island':
-            with open('project-summer-island-variant.html', 'w', encoding='utf-8') as f:
-                f.write(generate_grid_variant_project_page(p, prev_p, next_p, base_path=""))
+            f.write(generate_grid_variant_project_page(p, prev_p, next_p, base_path="../../../"))
 
     print(f"Saved {len(projects_data)} Dawnridge editorial project pages and {len(projects_data)} Grid Variant pages!")
     print("Site compilation finished successfully.")

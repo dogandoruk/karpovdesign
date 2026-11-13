@@ -7,8 +7,24 @@ import re
 import json
 import glob
 
-html_files = ['index.html', 'variant.html', 'about.html', 'contact.html', 'academy.html'] + sorted(glob.glob('project-*.html'))
+html_files = (
+    ['index.html', 'variant.html', 'about.html', 'contact.html', 'academy.html']
+    + sorted(glob.glob('projects/*/index.html'))
+    + sorted(glob.glob('projects/*/variant/index.html'))
+)
 errors = []
+
+
+def resolve_local_target(hf, ref):
+    clean_ref = ref.split('?')[0].split('#')[0]
+    if not clean_ref:
+        return hf
+    base_dir = os.path.dirname(hf)
+    joined = os.path.normpath(os.path.join(base_dir, clean_ref))
+    if clean_ref.endswith('/') or os.path.isdir(joined):
+        joined = os.path.join(joined, 'index.html')
+    return joined
+
 
 for hf in html_files:
     if not os.path.exists(hf):
@@ -16,26 +32,26 @@ for hf in html_files:
         continue
     with open(hf, 'r', encoding='utf-8') as f:
         content = f.read()
-    
+
     # Strip <script> tags for raw HTML image checks
     html_no_scripts = re.sub(r'<script.*?</script>', '', content, flags=re.DOTALL)
-    
+
     srcs = re.findall(r'<img[^>]+src=["\']([^"\']+)["\']', html_no_scripts)
     for src in srcs:
         if src.startswith(('http', 'data:')):
             continue
-        clean_src = src.split('?')[0].split('#')[0]
-        if not os.path.exists(clean_src):
-            errors.append(f"Broken static img src in {hf}: {src}")
+        target = resolve_local_target(hf, src)
+        if not os.path.exists(target):
+            errors.append(f"Broken static img src in {hf}: {src} -> {target}")
 
     # Check favicon / link hrefs
     links = re.findall(r'<link[^>]+href=["\']([^"\']+)["\']', content)
     for l in links:
         if l.startswith(('http', 'data:')):
             continue
-        clean_l = l.split('?')[0].split('#')[0]
-        if not os.path.exists(clean_l):
-            errors.append(f"Broken link in {hf}: {l}")
+        target = resolve_local_target(hf, l)
+        if not os.path.exists(target):
+            errors.append(f"Broken link in {hf}: {l} -> {target}")
 
     # Check internal <a> hrefs
     a_hrefs = re.findall(r'<a[^>]+href=["\']([^"\']+)["\']', html_no_scripts)
@@ -43,8 +59,11 @@ for hf in html_files:
         if href.startswith(('http', 'mailto:', 'tel:', '#', 'javascript:')):
             continue
         clean_href = href.split('?')[0].split('#')[0]
-        if clean_href and not os.path.exists(clean_href):
-            errors.append(f"Broken a href in {hf}: {href}")
+        if not clean_href:
+            continue
+        target = resolve_local_target(hf, href)
+        if not os.path.exists(target):
+            errors.append(f"Broken a href in {hf}: {href} -> {target}")
 
 # Check all images in projects.json
 with open('assets/official/projects.json', 'r', encoding='utf-8') as f:
