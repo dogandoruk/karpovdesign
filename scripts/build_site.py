@@ -1840,11 +1840,11 @@ def generate_dawnridge_project_page(p, prev_p, next_p, base_path="../../"):
       <img src="{src_of('hero_image')}" alt="{p['title']} — Hero View" data-slot-key="hero_image" class="w-full h-full {crop_cls('hero_image')} group-hover:scale-[1.01] transition-transform duration-700 ease-out">
     </section>
 
-    <!-- Centered 720px Dawnridge Editorial Rail -->
-    <div class="max-w-[720px] mx-auto px-5 sm:px-6 py-14 md:py-20 space-y-12 md:space-y-16">
+    <!-- Field Architecture Asymmetric Rail (25vw left offset, matches header/homepage alignment) -->
+    <div class="field-content-rail py-14 md:py-20 space-y-12 md:space-y-16">
       <!-- Section 1: 2-Column Title, Narrative & Concept Sketch Pair -->
       <section class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 items-center">
-        <div class="space-y-4">
+        <div class="space-y-4 max-w-xl">
           <h1 class="text-2xl sm:text-3xl font-semibold tracking-[0.14em] uppercase text-[#1a1d20] font-raleway">
             {p['title']}
           </h1>
@@ -1863,8 +1863,8 @@ def generate_dawnridge_project_page(p, prev_p, next_p, base_path="../../"):
         <img src="{src_of('landscape_1')}" alt="{p['title']} — Landscape Plate" data-slot-key="landscape_1" class="w-full h-auto {crop_cls('landscape_1')} group-hover:scale-[1.02] transition-transform duration-700 ease-out">
       </section>
 
-      <!-- Slots 4 & 5: Centered 2-Column Vertical Pair (4:5, 12px gutter) -->
-      <section class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+      <!-- Slots 4 & 5: 2-Column Vertical Pair (4:5) -->
+      <section class="grid grid-cols-1 sm:grid-cols-2 gap-5 md:gap-6">
         <div data-project-id="{p['id']}" data-slot-key="pair_1a" data-slot-label="Vertical Pair Left (4:5)" onclick="openLightbox('{roles.get('pair_1a', '')}')" class="cursor-pointer group overflow-hidden bg-[#1a1d20] aspect-[4/5]">
           <img src="{src_of('pair_1a')}" alt="{p['title']} — Vertical Study 1" data-slot-key="pair_1a" class="w-full h-full {crop_cls('pair_1a')} group-hover:scale-[1.03] transition-transform duration-700 ease-out">
         </div>
@@ -1878,8 +1878,8 @@ def generate_dawnridge_project_page(p, prev_p, next_p, base_path="../../"):
         <img src="{src_of('landscape_2')}" alt="{p['title']} — Spatial Cutaway" data-slot-key="landscape_2" class="w-full h-auto {crop_cls('landscape_2')} group-hover:scale-[1.02] transition-transform duration-700 ease-out">
       </section>
 
-      <!-- Slots 7 & 8: Centered 2-Column Study Pair (4:3, 12px gutter) -->
-      <section class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+      <!-- Slots 7 & 8: 2-Column Study Pair (4:3) -->
+      <section class="grid grid-cols-1 sm:grid-cols-2 gap-5 md:gap-6">
         <div data-project-id="{p['id']}" data-slot-key="pair_2a" data-slot-label="Study Pair Left (4:3)" onclick="openLightbox('{roles.get('pair_2a', '')}')" class="cursor-pointer group overflow-hidden bg-white aspect-[4/3]">
           <img src="{src_of('pair_2a')}" alt="{p['title']} — Detail Study 1" data-slot-key="pair_2a" class="w-full h-full {crop_cls('pair_2a')} group-hover:scale-[1.03] transition-transform duration-700 ease-out">
         </div>
@@ -1896,7 +1896,7 @@ def generate_dawnridge_project_page(p, prev_p, next_p, base_path="../../"):
 
     <!-- Borderless Linear Project Pagination Bar (Zero Clutter) -->
     <div class="w-full bg-[#f8f9fa] py-12 md:py-16">
-      <div class="max-w-[720px] mx-auto px-5 sm:px-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-sm sm:text-base font-medium text-[#1a1d20] font-raleway">
+      <div class="field-content-rail flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-sm sm:text-base font-medium text-[#1a1d20] font-raleway">
         <a href="{prev_url}" class="py-1 hover:text-[#de602e] transition-colors flex items-center gap-2">
           <span>&lsaquo;</span>
           <span>{prev_p['title']}</span>
@@ -1977,14 +1977,14 @@ def generate_grid_variant_project_page(p, prev_p, next_p, base_path="../../../")
       <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-black/20"></div>
 
       <!-- Hero Title Only (Secondary metadata omitted) -->
-      <div class="relative z-10 field-content-rail pb-8 md:pb-12">
+      <div class="relative z-10 w-full max-w-[1280px] mx-auto px-5 sm:px-6 pb-8 md:pb-12">
         <h1 class="text-2xl sm:text-3xl md:text-5xl font-semibold tracking-tight text-white drop-shadow-md font-raleway">{p['title']}</h1>
       </div>
     </section>
 
-    <!-- Main Content: Field Architecture Asymmetric Rail -->
+    <!-- Main Content: Centered 1280px Variant Container -->
     <section class="w-full bg-[#f8f9fa] py-12 md:py-16">
-      <div class="field-content-rail space-y-12">
+      <div class="w-full max-w-[1280px] mx-auto px-5 sm:px-6 space-y-12">
         
         <!-- Narrative & Description (Zero Visible Clutter, Metadata preserved in head JSON-LD) -->
         <div class="space-y-4 max-w-4xl">
