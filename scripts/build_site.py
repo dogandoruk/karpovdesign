@@ -1768,16 +1768,15 @@ def generate_field_summer_island_page(base_path="../../"):
     full_images = [f"{base_path}{img}" for img in images]
     images_json = json.dumps(full_images).replace('</script>', '<\\/script>')
 
-    hero_img = full_images[0] if full_images else ""
-    split_1 = full_images[1] if len(full_images) > 1 else hero_img
-    split_2 = full_images[2] if len(full_images) > 2 else hero_img
-    horiz_1 = full_images[3] if len(full_images) > 3 else hero_img
-    horiz_2 = full_images[4] if len(full_images) > 4 else hero_img
-    horiz_3 = full_images[5] if len(full_images) > 5 else hero_img
-    horiz_4 = full_images[6] if len(full_images) > 6 else hero_img
-    pair_1  = full_images[7] if len(full_images) > 7 else hero_img
-    pair_2  = full_images[8] if len(full_images) > 8 else hero_img
-    master_plate = full_images[9] if len(full_images) > 9 else hero_img
+    hero_img = full_images[0] if len(full_images) > 0 else ""
+    sketch_img = full_images[10] if len(full_images) > 10 else hero_img
+    landscape_1 = full_images[7] if len(full_images) > 7 else hero_img
+    pair_1a = full_images[6] if len(full_images) > 6 else hero_img
+    pair_1b = full_images[8] if len(full_images) > 8 else hero_img
+    landscape_2 = full_images[4] if len(full_images) > 4 else hero_img
+    pair_2a = full_images[11] if len(full_images) > 11 else hero_img
+    pair_2b = full_images[5] if len(full_images) > 5 else hero_img
+    full_bleed_2 = full_images[9] if len(full_images) > 9 else hero_img
 
     header_html = generate_header(active_nav="works", borderless=True, font_mode="raleway", base_path=base_path)
     footer_html = generate_footer(borderless=True, bg="#f8f9fa", font_mode="raleway", base_path=base_path)
@@ -1804,7 +1803,7 @@ def generate_field_summer_island_page(base_path="../../"):
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
   {JSON_LD_SCHEMA_TAG}
-  <title>Summer Island Coastal Resort &amp; Villas — Field Architecture Rendition &bull; Karpov Design LLC</title>
+  <title>Summer Island — Field Architecture Rendition &bull; Karpov Design LLC</title>
   <style>
     .font-raleway {{
       font-family: 'Raleway', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
@@ -1852,15 +1851,6 @@ def generate_field_summer_island_page(base_path="../../"):
       -ms-overflow-style: none;
       scrollbar-width: none;
     }}
-    @media (min-width: 1024px) {{
-      .field-horizontal-pin {{
-        position: sticky;
-        top: 0;
-        height: 100vh;
-        width: 100%;
-        overflow: hidden;
-      }}
-    }}
   </style>
 </head>
 <body class="antialiased bg-[#f8f9fa] text-[#1a1d20]">
@@ -1868,7 +1858,7 @@ def generate_field_summer_island_page(base_path="../../"):
   {header_html}
 
   <!-- Breadcrumb Navigation with Rendition Switcher -->
-  <div class="w-full bg-[#f8f9fa] py-4 border-b border-[#e2e5e8]/60">
+  <div class="w-full bg-[#f8f9fa] py-4">
     <nav aria-label="Breadcrumb" class="field-content-rail text-xs md:text-sm font-mono uppercase tracking-widest text-[#595f65] flex items-center justify-between overflow-x-auto no-scrollbar whitespace-nowrap">
       <div class="flex items-center">
         <a href="{home_url}" class="hover:text-[#1a1d20] transition-colors shrink-0">Home</a>
@@ -1885,150 +1875,89 @@ def generate_field_summer_island_page(base_path="../../"):
     </nav>
   </div>
 
-  <main>
-    <!-- ACT 1: Monumental Full-Bleed Hero Plate -->
-    <section class="relative w-full h-[75vh] md:h-[90vh] bg-[#1a1d20] overflow-hidden flex items-end">
-      <img src="{hero_img}" alt="Summer Island Coastal Resort" class="absolute inset-0 w-full h-full object-cover">
-      <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/10"></div>
-      <div class="relative z-10 field-content-rail pb-10 md:pb-16 text-white">
-        <h1 class="text-3xl sm:text-4xl md:text-6xl font-semibold tracking-tight text-white font-raleway leading-none">
-          Summer Island
-        </h1>
-      </div>
+  <main class="w-full bg-[#f8f9fa]">
+    <!-- Section 0: Full-Bleed Hero (100vw x 88vh, ZERO text overlay) -->
+    <section onclick="openLightbox(0)" class="relative w-full h-[75vh] md:h-[88vh] bg-[#1a1d20] overflow-hidden cursor-pointer group">
+      <img src="{hero_img}" alt="Summer Island" class="w-full h-full object-cover group-hover:scale-[1.01] transition-transform duration-700 ease-out">
     </section>
 
-    <!-- ACT 2: Sticky Split Narrative -->
-    <section class="w-full bg-[#f8f9fa] py-16 md:py-24">
-      <div class="field-content-rail flex flex-col lg:flex-row items-start gap-12 lg:gap-16">
-        <div class="w-full lg:w-5/12 lg:sticky lg:top-28 space-y-4">
-          <h2 class="text-2xl sm:text-3xl font-semibold tracking-tight text-[#1a1d20] font-raleway">
-            Barca-nation Collegian Social Center
-          </h2>
-          <p class="text-sm sm:text-base text-[#595f65] leading-relaxed">
-            {summer_island.get('description', '')}
+    <!-- Centered 720px Editorial Container -->
+    <div class="max-w-[720px] mx-auto px-5 sm:px-6 py-14 md:py-20 space-y-12 md:space-y-16">
+      <!-- Section 1: 2-Column Title & Concept Sketch Pair -->
+      <section class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 items-center">
+        <div class="space-y-4">
+          <h1 class="text-2xl sm:text-3xl font-semibold tracking-[0.14em] uppercase text-[#1a1d20] font-raleway">
+            Summer Island
+          </h1>
+          <p class="text-sm sm:text-[15px] text-[#595f65] leading-relaxed">
+            Developing a &ldquo;Nation&rdquo; collegian cultural clubhouse with a Spanish theme inspired by my own experience in Lund.
           </p>
         </div>
-
-        <div class="w-full lg:w-7/12 space-y-10">
-          <div onclick="openLightbox(1)" class="group cursor-pointer bg-transparent overflow-hidden">
-            <div class="relative w-full aspect-[4/3] overflow-hidden bg-[#1a1d20]">
-              <img src="{split_1}" alt="Summer Island Plate 2" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-            </div>
-          </div>
-          <div onclick="openLightbox(2)" class="group cursor-pointer bg-transparent overflow-hidden">
-            <div class="relative w-full aspect-[4/3] overflow-hidden bg-[#1a1d20]">
-              <img src="{split_2}" alt="Summer Island Plate 3" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-            </div>
-          </div>
+        <div onclick="openLightbox(10)" class="cursor-pointer group overflow-hidden bg-transparent">
+          <img src="{sketch_img}" alt="Summer Island Concept Sketch" class="w-full h-auto object-contain group-hover:scale-[1.02] transition-transform duration-500 ease-out">
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- ACT 3: Horizontal Scroll Filmstrip (250vh Pin) -->
-    <section id="field-horizontal-section" class="relative w-full h-[180vh] lg:h-[260vh] bg-[#1a1d20] text-white">
-      <div class="field-horizontal-pin flex flex-col justify-between py-8 md:py-12">
-        <div class="field-content-rail flex items-center justify-between z-10 shrink-0">
-          <div class="flex items-center gap-4">
-            <span class="text-xs font-mono uppercase tracking-[0.25em] text-[#67aec0]">Photographic Sequence</span>
-            <span class="text-[#595f65] hidden sm:inline">&bull;</span>
-            <span class="text-xs font-mono text-white/70 hidden sm:inline">Scroll to Scrub Photographic Plates</span>
-          </div>
-          <div class="flex items-center gap-3 font-mono text-xs">
-            <span id="horizontal-counter" class="text-[#67aec0]">01 / 04</span>
-            <div class="w-20 sm:w-28 h-0.5 bg-white/20 overflow-hidden">
-              <div id="horizontal-progress" class="h-full bg-[#de602e] transition-all duration-100" style="width: 25%;"></div>
-            </div>
-          </div>
+      <!-- Section 2: Centered Single Landscape Plate -->
+      <section onclick="openLightbox(7)" class="cursor-pointer group overflow-hidden bg-[#1a1d20]">
+        <img src="{landscape_1}" alt="Summer Island Greenhouse Courtyard" class="w-full h-auto object-cover group-hover:scale-[1.02] transition-transform duration-700 ease-out">
+      </section>
+
+      <!-- Section 3: Centered 2-Column Plate Pair (12px gutter) -->
+      <section class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div onclick="openLightbox(6)" class="cursor-pointer group overflow-hidden bg-[#1a1d20] aspect-[4/5]">
+          <img src="{pair_1a}" alt="Summer Island Exterior" class="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out">
         </div>
-
-        <div class="w-full overflow-hidden flex-1 flex items-center my-4">
-          <div id="horizontal-track" class="flex gap-6 md:gap-10 pl-[var(--field-left-offset)] pr-[var(--field-right-gutter)] transition-transform duration-75 ease-out select-none">
-            <div onclick="openLightbox(3)" class="w-[78vw] sm:w-[62vw] lg:w-[48vw] shrink-0 group cursor-pointer bg-black/40 overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden">
-                <img src="{horiz_1}" alt="Plate 04" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-              </div>
-              <div class="p-4 flex items-center justify-between text-xs font-mono text-white/70">
-                <span>Plate 04</span>
-                <span class="text-[#67aec0] group-hover:text-[#de602e] transition-colors">Enlarge &rarr;</span>
-              </div>
-            </div>
-            <div onclick="openLightbox(4)" class="w-[78vw] sm:w-[62vw] lg:w-[48vw] shrink-0 group cursor-pointer bg-black/40 overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden">
-                <img src="{horiz_2}" alt="Plate 05" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-              </div>
-              <div class="p-4 flex items-center justify-between text-xs font-mono text-white/70">
-                <span>Plate 05</span>
-                <span class="text-[#67aec0] group-hover:text-[#de602e] transition-colors">Enlarge &rarr;</span>
-              </div>
-            </div>
-            <div onclick="openLightbox(5)" class="w-[78vw] sm:w-[62vw] lg:w-[48vw] shrink-0 group cursor-pointer bg-black/40 overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden">
-                <img src="{horiz_3}" alt="Plate 06" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-              </div>
-              <div class="p-4 flex items-center justify-between text-xs font-mono text-white/70">
-                <span>Plate 06</span>
-                <span class="text-[#67aec0] group-hover:text-[#de602e] transition-colors">Enlarge &rarr;</span>
-              </div>
-            </div>
-            <div onclick="openLightbox(6)" class="w-[78vw] sm:w-[62vw] lg:w-[48vw] shrink-0 group cursor-pointer bg-black/40 overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden">
-                <img src="{horiz_4}" alt="Plate 07" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-              </div>
-              <div class="p-4 flex items-center justify-between text-xs font-mono text-white/70">
-                <span>Plate 07</span>
-                <span class="text-[#67aec0] group-hover:text-[#de602e] transition-colors">Enlarge &rarr;</span>
-              </div>
-            </div>
-          </div>
+        <div onclick="openLightbox(8)" class="cursor-pointer group overflow-hidden bg-[#1a1d20] aspect-[4/5]">
+          <img src="{pair_1b}" alt="Summer Island Interior Terraces" class="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out">
         </div>
+      </section>
 
-        <div class="field-content-rail z-10 text-xs font-mono text-white/50 shrink-0">
-          <span>Field Architecture Sequence &bull; Karpov Design LLC</span>
+      <!-- Section 4: Centered Landscape Section Cutaway + 2-Column Pull-Quote & Narrative -->
+      <section class="space-y-10 md:space-y-12">
+        <div onclick="openLightbox(4)" class="cursor-pointer group overflow-hidden bg-white">
+          <img src="{landscape_2}" alt="Summer Island Section Cutaway" class="w-full h-auto object-contain group-hover:scale-[1.02] transition-transform duration-700 ease-out">
         </div>
-      </div>
-    </section>
-
-    <!-- ACT 4: Comparative Pair Plates -->
-    <section class="w-full bg-[#f8f9fa] py-16 md:py-24">
-      <div class="field-content-rail space-y-10">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 md:gap-x-8 gap-y-6 md:gap-y-7">
-          <div onclick="openLightbox(7)" class="group cursor-pointer bg-transparent overflow-hidden">
-            <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-              <img src="{pair_1}" alt="Summer Island Plate 8" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-            </div>
-          </div>
-          <div onclick="openLightbox(8)" class="group cursor-pointer bg-transparent overflow-hidden">
-            <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-              <img src="{pair_2}" alt="Summer Island Plate 9" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ACT 5: Full-Width Master Plate -->
-    <section class="relative w-full aspect-[16/9] md:aspect-[21/9] bg-[#1a1d20] overflow-hidden">
-      <img src="{master_plate}" alt="Summer Island Master Elevation" class="w-full h-full object-cover">
-      <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent flex items-end">
-        <div class="field-content-rail pb-8 md:pb-12 text-white flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 items-start pt-2">
           <div>
-            <h3 class="text-xl sm:text-2xl md:text-3xl font-semibold font-raleway">Full Master Plan</h3>
+            <h2 class="text-lg sm:text-xl font-medium text-[#1a1d20] leading-snug font-raleway">
+              The city wall is continued around a greenhouse garden preserving summer for the whole year.
+            </h2>
           </div>
-          <button onclick="openLightbox(9)" class="px-5 py-2.5 bg-white/20 hover:bg-[#de602e] backdrop-blur-sm text-white text-xs font-mono uppercase tracking-widest transition-colors cursor-pointer">
-            View Full-Res Master &rarr;
-          </button>
+          <div>
+            <p class="text-sm sm:text-[15px] text-[#595f65] leading-relaxed">
+              On-site sketching and cataloging establish an infill site perimeter block where the residential ribbon frames an interior botanical landscape sheltered from the Nordic winter.
+            </p>
+          </div>
         </div>
-      </div>
+      </section>
+
+      <!-- Section 5 & 6: Centered 2-Column Study & Watercolor Pair (12px gutter) -->
+      <section class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div onclick="openLightbox(11)" class="cursor-pointer group overflow-hidden bg-white aspect-[4/3]">
+          <img src="{pair_2a}" alt="Summer Island Lund Watercolor Studies" class="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out">
+        </div>
+        <div onclick="openLightbox(5)" class="cursor-pointer group overflow-hidden bg-white aspect-[4/3]">
+          <img src="{pair_2b}" alt="Summer Island Spatial Axonometric" class="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out">
+        </div>
+      </section>
+    </div>
+
+    <!-- Section 7: Full-Bleed Panoramic Bookend Plate (100vw) -->
+    <section onclick="openLightbox(9)" class="relative w-full h-[65vh] md:h-[82vh] bg-[#1a1d20] overflow-hidden cursor-pointer group">
+      <img src="{full_bleed_2}" alt="Summer Island Panoramic Elevation" class="w-full h-full object-cover group-hover:scale-[1.01] transition-transform duration-700 ease-out">
     </section>
 
-    <!-- Project Navigation Bar -->
-    <div class="w-full bg-[#f8f9fa] py-8">
-      <div class="field-content-rail flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-xs font-mono uppercase tracking-widest">
-        <a href="{prev_url}" class="py-1 text-[#595f65] hover:text-[#de602e] transition-colors flex items-center gap-2">
-          &larr; Prev Project: Hand Study
+    <!-- Section 8: Linear Project Pagination Bar -->
+    <div class="w-full bg-[#f8f9fa] py-12 md:py-16">
+      <div class="max-w-[720px] mx-auto px-5 sm:px-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-sm sm:text-base font-medium text-[#1a1d20] font-raleway">
+        <a href="{prev_url}" class="py-1 hover:text-[#de602e] transition-colors flex items-center gap-2">
+          <span>&lsaquo;</span>
+          <span>Hand Study</span>
         </a>
-        <a href="{next_url}" class="py-1 text-[#595f65] hover:text-[#de602e] transition-colors flex items-center sm:justify-end gap-2 sm:text-right">
-          Next Project: Tent Hill &rarr;
+        <a href="{next_url}" class="py-1 hover:text-[#de602e] transition-colors flex items-center sm:justify-end gap-2 sm:text-right">
+          <span>Tent Hill</span>
+          <span>&rsaquo;</span>
         </a>
       </div>
     </div>
@@ -2097,36 +2026,6 @@ def generate_field_summer_island_page(base_path="../../"):
         if (e.key === 'ArrowRight') navigateLightbox(1);
       }}
     }});
-
-    // Scroll-Linked Horizontal Scrubbing for Desktop (Field Architecture SKHorizontalScroll)
-    function onFieldScroll() {{
-      const section = document.getElementById('field-horizontal-section');
-      const track = document.getElementById('horizontal-track');
-      const bar = document.getElementById('horizontal-progress');
-      const counter = document.getElementById('horizontal-counter');
-      if (!section || !track) return;
-      if (window.innerWidth < 1024) {{
-        track.style.transform = '';
-        return;
-      }}
-      const rect = section.getBoundingClientRect();
-      const totalScroll = section.offsetHeight - window.innerHeight;
-      if (totalScroll <= 0) return;
-      
-      let progress = -rect.top / totalScroll;
-      progress = Math.max(0, Math.min(1, progress));
-      
-      const maxTranslate = track.scrollWidth - window.innerWidth + 96;
-      track.style.transform = `translate3d(-${{progress * maxTranslate}}px, 0, 0)`;
-      if (bar) bar.style.width = `${{progress * 100}}%`;
-      
-      const plateIdx = Math.min(4, Math.floor(progress * 4) + 1);
-      if (counter) counter.textContent = `0${{plateIdx}} / 04`;
-    }}
-
-    window.addEventListener('scroll', onFieldScroll, {{ passive: true }});
-    window.addEventListener('resize', onFieldScroll, {{ passive: true }});
-    onFieldScroll();
   </script>
 
   {footer_html}
