@@ -663,7 +663,7 @@
   </header>
 
 
-  <!-- Breadcrumb Navigation -->
+  <!-- Breadcrumb Navigation with Layout Switcher -->
   <div class="w-full bg-[#f8f9fa] py-4">
     <nav aria-label="Breadcrumb" class="field-content-rail text-xs md:text-sm font-mono uppercase tracking-widest text-[#595f65] flex items-center justify-between overflow-x-auto no-scrollbar whitespace-nowrap">
       <div class="flex items-center">
@@ -671,902 +671,170 @@
         <span class="mx-2 shrink-0">&bull;</span>
         <a href="index.html#works" class="hover:text-[#1a1d20] transition-colors shrink-0">Works</a>
         <span class="mx-2 shrink-0">&bull;</span>
-        <span class="text-[#1a1d20] font-semibold truncate">Travel Sketches</span>
+        <span class="text-[#1a1d20] font-semibold truncate font-raleway tracking-wider">Travel Sketches</span>
+      </div>
+      <div class="ml-auto flex items-center gap-2 pl-4 shrink-0 text-[11px] font-mono">
+        <span class="text-[#767676] uppercase tracking-wider hidden sm:inline">Layout:</span>
+        <span class="px-2 py-0.5 text-[#de602e] font-semibold border-b border-[#de602e]">Editorial</span>
+        <a href="project-travel-sketches/variant/index.html" class="px-2 py-0.5 text-[#595f65] hover:text-[#1a1d20] transition-colors">Grid Variant</a>
       </div>
     </nav>
   </div>
 
-  <main>
-    <!-- Dedicated Hero Banner: Secondary Metadata (Date, Location) OMITTED per User Rule -->
-    <section id="project-hero-banner" class="relative w-full h-[52svh] sm:h-[60vh] md:h-[75vh] bg-[#1a1d20] overflow-hidden flex items-end">
-      <img src="assets/official/projects/travel-sketches/ak_3.jpg" alt="Travel Sketches" class="absolute inset-0 w-full h-full object-cover">
-      <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-black/20"></div>
-
-      <!-- Hero Title Only (Secondary metadata omitted) -->
-      <div class="relative z-10 field-content-rail pb-8 md:pb-12">
-        <h1 class="text-2xl sm:text-3xl md:text-5xl font-semibold tracking-tight text-white drop-shadow-md font-raleway">Travel Sketches</h1>
-      </div>
+  <main class="w-full bg-[#f8f9fa]">
+    <!-- Slot 1: Top Full-Bleed Hero (Zero Text Overlay) -->
+    <section id="project-hero-banner" data-project-id="travel-sketches" data-slot-key="hero_image" data-slot-label="Top Full-Bleed Hero" onclick="openLightbox('assets/official/projects/travel-sketches/ak_28.jpg')" class="relative w-full h-[75vh] md:h-[88vh] bg-[#1a1d20] overflow-hidden cursor-pointer group">
+      <img src="assets/official/projects/travel-sketches/ak_28.jpg" alt="Travel Sketches — Hero View" data-slot-key="hero_image" class="w-full h-full object-cover object-center group-hover:scale-[1.01] transition-transform duration-700 ease-out">
     </section>
 
-    <!-- Main Content: Field Architecture Asymmetric Rail -->
-    <section class="w-full bg-[#f8f9fa] py-12 md:py-16">
-      <div class="field-content-rail space-y-12">
-        
-        <!-- Narrative & Description (Zero Visible Clutter, Metadata preserved in head JSON-LD) -->
-        <div class="space-y-4 max-w-4xl">
-          <p class="text-sm sm:text-base md:text-lg text-[#595f65] leading-relaxed">
+    <!-- Centered 720px Dawnridge Editorial Rail -->
+    <div class="max-w-[720px] mx-auto px-5 sm:px-6 py-14 md:py-20 space-y-12 md:space-y-16">
+      <!-- Section 1: 2-Column Title, Narrative & Concept Sketch Pair -->
+      <section class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 items-center">
+        <div class="space-y-4">
+          <h1 class="text-2xl sm:text-3xl font-semibold tracking-[0.14em] uppercase text-[#1a1d20] font-raleway">
+            Travel Sketches
+          </h1>
+          <p class="text-sm sm:text-[15px] text-[#595f65] leading-relaxed">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
           </p>
           
         </div>
-
-        <!-- Large Images Gallery: Consistent 20% Reduced Vertical Row Gap (gap-y-6 md:gap-y-7 gap-x-6 md:gap-x-8) -->
-        <div class="pt-2">
-          <div id="project-gallery" class="grid grid-cols-1 md:grid-cols-2 gap-x-6 md:gap-x-8 gap-y-6 md:gap-y-7">
-            
-            <div onclick="openLightbox(0)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak72.jpg" alt="Travel Sketches — Plate 1" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(1)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak73.jpg" alt="Travel Sketches — Plate 2" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(2)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak74.jpg" alt="Travel Sketches — Plate 3" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(3)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak75.jpg" alt="Travel Sketches — Plate 4" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(4)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak76.jpg" alt="Travel Sketches — Plate 5" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(5)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak77.jpg" alt="Travel Sketches — Plate 6" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(6)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak78.jpg" alt="Travel Sketches — Plate 7" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(7)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak79.jpg" alt="Travel Sketches — Plate 8" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(8)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak80.jpg" alt="Travel Sketches — Plate 9" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(9)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak81.jpg" alt="Travel Sketches — Plate 10" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(10)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak82.jpg" alt="Travel Sketches — Plate 11" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(11)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak83.jpg" alt="Travel Sketches — Plate 12" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(12)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak84.jpg" alt="Travel Sketches — Plate 13" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(13)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak85.jpg" alt="Travel Sketches — Plate 14" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(14)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak86.jpg" alt="Travel Sketches — Plate 15" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(15)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak87.jpg" alt="Travel Sketches — Plate 16" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(16)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak88.jpg" alt="Travel Sketches — Plate 17" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(17)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak89.jpg" alt="Travel Sketches — Plate 18" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(18)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak90.jpg" alt="Travel Sketches — Plate 19" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(19)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak91.jpg" alt="Travel Sketches — Plate 20" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(20)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak92.jpg" alt="Travel Sketches — Plate 21" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(21)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak_1.jpg" alt="Travel Sketches — Plate 22" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(22)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak_10.jpg" alt="Travel Sketches — Plate 23" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(23)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak_11.jpg" alt="Travel Sketches — Plate 24" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(24)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak_12.jpg" alt="Travel Sketches — Plate 25" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(25)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak_13.jpg" alt="Travel Sketches — Plate 26" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(26)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak_14.jpg" alt="Travel Sketches — Plate 27" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(27)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak_15.jpg" alt="Travel Sketches — Plate 28" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(28)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak_16.jpg" alt="Travel Sketches — Plate 29" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(29)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak_17.jpg" alt="Travel Sketches — Plate 30" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(30)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak_18.jpg" alt="Travel Sketches — Plate 31" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(31)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak_19.jpg" alt="Travel Sketches — Plate 32" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(32)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak_2.jpg" alt="Travel Sketches — Plate 33" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(33)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak_20.jpg" alt="Travel Sketches — Plate 34" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(34)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak_21.jpg" alt="Travel Sketches — Plate 35" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(35)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak_22.jpg" alt="Travel Sketches — Plate 36" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(36)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak_23.jpg" alt="Travel Sketches — Plate 37" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(37)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak_24.jpg" alt="Travel Sketches — Plate 38" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(38)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak_25.jpg" alt="Travel Sketches — Plate 39" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(39)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak_26.jpg" alt="Travel Sketches — Plate 40" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(40)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak_27.jpg" alt="Travel Sketches — Plate 41" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(41)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak_28.jpg" alt="Travel Sketches — Plate 42" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(42)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak_29.jpg" alt="Travel Sketches — Plate 43" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(43)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak_3.jpg" alt="Travel Sketches — Plate 44" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(44)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak_30.jpg" alt="Travel Sketches — Plate 45" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(45)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak_31.jpg" alt="Travel Sketches — Plate 46" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(46)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak_32.jpg" alt="Travel Sketches — Plate 47" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(47)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak_33.jpg" alt="Travel Sketches — Plate 48" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(48)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak_34.jpg" alt="Travel Sketches — Plate 49" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(49)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak_35.jpg" alt="Travel Sketches — Plate 50" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(50)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak_36.jpg" alt="Travel Sketches — Plate 51" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(51)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak_37.jpg" alt="Travel Sketches — Plate 52" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(52)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak_38.jpg" alt="Travel Sketches — Plate 53" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(53)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak_39.jpg" alt="Travel Sketches — Plate 54" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(54)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak_4.jpg" alt="Travel Sketches — Plate 55" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(55)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak_40.jpg" alt="Travel Sketches — Plate 56" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(56)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak_41.jpg" alt="Travel Sketches — Plate 57" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(57)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak_42.jpg" alt="Travel Sketches — Plate 58" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(58)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak_43.jpg" alt="Travel Sketches — Plate 59" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(59)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak_44.jpg" alt="Travel Sketches — Plate 60" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(60)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak_45.jpg" alt="Travel Sketches — Plate 61" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(61)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak_46.jpg" alt="Travel Sketches — Plate 62" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(62)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak_47.jpg" alt="Travel Sketches — Plate 63" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(63)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak_48.jpg" alt="Travel Sketches — Plate 64" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(64)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak_49.jpg" alt="Travel Sketches — Plate 65" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(65)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak_5.jpg" alt="Travel Sketches — Plate 66" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(66)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak_50.jpg" alt="Travel Sketches — Plate 67" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(67)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak_51.jpg" alt="Travel Sketches — Plate 68" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(68)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak_52.jpg" alt="Travel Sketches — Plate 69" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(69)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak_53.jpg" alt="Travel Sketches — Plate 70" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(70)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak_54.jpg" alt="Travel Sketches — Plate 71" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(71)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak_55.jpg" alt="Travel Sketches — Plate 72" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(72)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak_56.jpg" alt="Travel Sketches — Plate 73" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(73)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak_57.jpg" alt="Travel Sketches — Plate 74" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(74)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak_58.jpg" alt="Travel Sketches — Plate 75" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(75)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak_59.jpg" alt="Travel Sketches — Plate 76" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(76)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak_6.jpg" alt="Travel Sketches — Plate 77" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(77)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak_60.jpg" alt="Travel Sketches — Plate 78" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(78)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak_61.jpg" alt="Travel Sketches — Plate 79" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(79)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak_62.jpg" alt="Travel Sketches — Plate 80" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(80)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak_63.jpg" alt="Travel Sketches — Plate 81" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(81)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak_64.jpg" alt="Travel Sketches — Plate 82" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(82)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak_65.jpg" alt="Travel Sketches — Plate 83" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(83)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak_66.jpg" alt="Travel Sketches — Plate 84" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(84)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak_67.jpg" alt="Travel Sketches — Plate 85" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(85)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak_68.jpg" alt="Travel Sketches — Plate 86" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(86)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak_69.jpg" alt="Travel Sketches — Plate 87" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(87)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak_7.jpg" alt="Travel Sketches — Plate 88" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(88)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak_70.jpg" alt="Travel Sketches — Plate 89" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(89)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak_71.jpg" alt="Travel Sketches — Plate 90" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(90)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak_8.jpg" alt="Travel Sketches — Plate 91" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-            <div onclick="openLightbox(91)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="assets/official/projects/travel-sketches/ak_9.jpg" alt="Travel Sketches — Plate 92" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
-                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
-                </div>
-              </div>
-            </div>
-
-          </div>
+        <div data-project-id="travel-sketches" data-slot-key="sketch_image" data-slot-label="Concept Sketch / Diagram" onclick="openLightbox('assets/official/projects/travel-sketches/ak72.jpg')" class="cursor-pointer group overflow-hidden bg-transparent">
+          <img src="assets/official/projects/travel-sketches/ak72.jpg" alt="Travel Sketches — Concept Sketch" data-slot-key="sketch_image" class="w-full h-auto object-contain object-center group-hover:scale-[1.02] transition-transform duration-500 ease-out">
         </div>
+      </section>
 
-        <!-- Prev / Next Navigation (Borderless) -->
-        <div class="pt-8 md:pt-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-xs font-mono uppercase tracking-widest">
-          <a href="project-beer-code.html" class="py-1 text-[#595f65] hover:text-[#de602e] transition-colors flex items-center gap-2">
-            &larr; Prev: Beer Code
-          </a>
-          <a href="project-growing-cell.html" class="py-1 text-[#595f65] hover:text-[#de602e] transition-colors flex items-center sm:justify-end gap-2 sm:text-right">
-            Next: Growing Cell &rarr;
-          </a>
+      <!-- Slot 3: Centered Single Landscape Plate -->
+      <section data-project-id="travel-sketches" data-slot-key="landscape_1" data-slot-label="Primary Landscape Plate" onclick="openLightbox('assets/official/projects/travel-sketches/ak73.jpg')" class="cursor-pointer group overflow-hidden bg-[#1a1d20]">
+        <img src="assets/official/projects/travel-sketches/ak73.jpg" alt="Travel Sketches — Landscape Plate" data-slot-key="landscape_1" class="w-full h-auto object-cover object-center group-hover:scale-[1.02] transition-transform duration-700 ease-out">
+      </section>
+
+      <!-- Slots 4 & 5: Centered 2-Column Vertical Pair (4:5, 12px gutter) -->
+      <section class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div data-project-id="travel-sketches" data-slot-key="pair_1a" data-slot-label="Vertical Pair Left (4:5)" onclick="openLightbox('assets/official/projects/travel-sketches/ak74.jpg')" class="cursor-pointer group overflow-hidden bg-[#1a1d20] aspect-[4/5]">
+          <img src="assets/official/projects/travel-sketches/ak74.jpg" alt="Travel Sketches — Vertical Study 1" data-slot-key="pair_1a" class="w-full h-full object-cover object-center group-hover:scale-[1.03] transition-transform duration-700 ease-out">
         </div>
+        <div data-project-id="travel-sketches" data-slot-key="pair_1b" data-slot-label="Vertical Pair Right (4:5)" onclick="openLightbox('assets/official/projects/travel-sketches/ak75.jpg')" class="cursor-pointer group overflow-hidden bg-[#1a1d20] aspect-[4/5]">
+          <img src="assets/official/projects/travel-sketches/ak75.jpg" alt="Travel Sketches — Vertical Study 2" data-slot-key="pair_1b" class="w-full h-full object-cover object-center group-hover:scale-[1.03] transition-transform duration-700 ease-out">
+        </div>
+      </section>
 
-      </div>
+      <!-- Slot 6: Centered Secondary Landscape / Cutaway Plate -->
+      <section data-project-id="travel-sketches" data-slot-key="landscape_2" data-slot-label="Secondary Landscape / Cutaway" onclick="openLightbox('assets/official/projects/travel-sketches/ak76.jpg')" class="cursor-pointer group overflow-hidden bg-transparent">
+        <img src="assets/official/projects/travel-sketches/ak76.jpg" alt="Travel Sketches — Spatial Cutaway" data-slot-key="landscape_2" class="w-full h-auto object-contain object-center group-hover:scale-[1.02] transition-transform duration-700 ease-out">
+      </section>
+
+      <!-- Slots 7 & 8: Centered 2-Column Study Pair (4:3, 12px gutter) -->
+      <section class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div data-project-id="travel-sketches" data-slot-key="pair_2a" data-slot-label="Study Pair Left (4:3)" onclick="openLightbox('assets/official/projects/travel-sketches/ak77.jpg')" class="cursor-pointer group overflow-hidden bg-white aspect-[4/3]">
+          <img src="assets/official/projects/travel-sketches/ak77.jpg" alt="Travel Sketches — Detail Study 1" data-slot-key="pair_2a" class="w-full h-full object-cover object-center group-hover:scale-[1.03] transition-transform duration-700 ease-out">
+        </div>
+        <div data-project-id="travel-sketches" data-slot-key="pair_2b" data-slot-label="Study Pair Right (4:3)" onclick="openLightbox('assets/official/projects/travel-sketches/ak78.jpg')" class="cursor-pointer group overflow-hidden bg-white aspect-[4/3]">
+          <img src="assets/official/projects/travel-sketches/ak78.jpg" alt="Travel Sketches — Detail Study 2" data-slot-key="pair_2b" class="w-full h-full object-cover object-center group-hover:scale-[1.03] transition-transform duration-700 ease-out">
+        </div>
+      </section>
+    </div>
+
+    <!-- Slot 9: Bottom Full-Bleed Bookend Banner (100vw) -->
+    <section data-project-id="travel-sketches" data-slot-key="banner_image" data-slot-label="Bottom Full-Bleed Banner" onclick="openLightbox('assets/official/projects/travel-sketches/ak79.jpg')" class="relative w-full h-[65vh] md:h-[82vh] bg-[#1a1d20] overflow-hidden cursor-pointer group">
+      <img src="assets/official/projects/travel-sketches/ak79.jpg" alt="Travel Sketches — Panoramic Banner" data-slot-key="banner_image" class="w-full h-full object-cover object-center group-hover:scale-[1.01] transition-transform duration-700 ease-out">
     </section>
+
+    <!-- Borderless Linear Project Pagination Bar (Zero Clutter) -->
+    <div class="w-full bg-[#f8f9fa] py-12 md:py-16">
+      <div class="max-w-[720px] mx-auto px-5 sm:px-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-sm sm:text-base font-medium text-[#1a1d20] font-raleway">
+        <a href="project-beer-code.html" class="py-1 hover:text-[#de602e] transition-colors flex items-center gap-2">
+          <span>&lsaquo;</span>
+          <span>Beer Code</span>
+        </a>
+        <a href="project-growing-cell.html" class="py-1 hover:text-[#de602e] transition-colors flex items-center sm:justify-end gap-2 sm:text-right">
+          <span>Growing Cell</span>
+          <span>&rsaquo;</span>
+        </a>
+      </div>
+    </div>
   </main>
 
-  <!-- Image Lightbox Modal -->
+
+  <!-- Full-Viewport Image Lightbox Modal -->
   <div id="image-lightbox" class="fixed inset-0 z-50 bg-[#1a1d20]/95 backdrop-blur-md hidden flex flex-col items-center justify-between p-4 md:p-6 cursor-pointer select-none" onclick="handleLightboxClick(event)">
-    <button onclick="closeLightbox()" class="fixed top-4 left-6 z-60 text-[#67aec0] hover:text-[#de602e] text-3xl font-bold bg-transparent border-none p-2 cursor-pointer transition-colors focus:outline-none" title="Close (Esc)" aria-label="Close popup">&times;</button>
-    
+    <button onclick="closeLightbox(); event.stopPropagation();" class="fixed top-4 left-6 z-60 text-[#67aec0] hover:text-[#de602e] text-3xl font-bold bg-transparent border-none p-2 cursor-pointer transition-colors focus:outline-none" title="Close (Esc)" aria-label="Close popup">&times;</button>
+
     <div class="w-full flex items-center justify-end text-white/80 pt-2 pointer-events-none px-6">
       <span id="lightbox-counter" class="text-xs font-mono uppercase tracking-widest bg-[#2b4951]/80 px-3 py-1.5 text-[#e4f0f2]">Plate 1 of 92</span>
     </div>
 
     <div class="relative w-full flex-1 flex items-center justify-center my-2 select-none">
-      <button onclick="navigateLightbox(-1); event.stopPropagation();" class="absolute left-1 md:left-6 z-10 w-10 h-10 md:w-12 md:h-12 text-white bg-[#1a1d20]/70 hover:bg-[#de602e] flex items-center justify-center transition-colors text-lg font-mono focus:outline-none" title="Previous">&larr;</button>
-      <img id="lightbox-img" src="" alt="Enlarged Project Plate" class="max-w-[94vw] max-h-[82vh] object-contain drop-shadow-2xl transition-all duration-300">
-      <button onclick="navigateLightbox(1); event.stopPropagation();" class="absolute right-1 md:right-6 z-10 w-10 h-10 md:w-12 md:h-12 text-white bg-[#1a1d20]/70 hover:bg-[#de602e] flex items-center justify-center transition-colors text-lg font-mono focus:outline-none" title="Next">&rarr;</button>
+      <button onclick="navigateLightbox(-1); event.stopPropagation();" class="absolute left-1 md:left-6 z-10 w-10 h-10 md:w-12 md:h-12 text-white bg-[#1a1d20]/70 hover:bg-[#de602e] flex items-center justify-center transition-colors text-lg font-mono focus:outline-none cursor-pointer" title="Previous" aria-label="Previous image">&larr;</button>
+      <img id="lightbox-img" src="" alt="Enlarged Project Plate" class="max-w-[86vw] md:max-w-[85vw] max-h-[82vh] object-contain drop-shadow-2xl transition-all duration-300" onclick="event.stopPropagation()">
+      <button onclick="navigateLightbox(1); event.stopPropagation();" class="absolute right-1 md:right-6 z-10 w-10 h-10 md:w-12 md:h-12 text-white bg-[#1a1d20]/70 hover:bg-[#de602e] flex items-center justify-center transition-colors text-lg font-mono focus:outline-none cursor-pointer" title="Next" aria-label="Next image">&rarr;</button>
     </div>
 
     <div class="w-full text-center pb-2 text-white/70 text-xs font-mono pointer-events-none">
       <span id="lightbox-caption">Travel Sketches</span>
     </div>
   </div>
+
+  <script>
+    const GALLERY_IMAGES = ["assets/official/projects/travel-sketches/ak72.jpg", "assets/official/projects/travel-sketches/ak73.jpg", "assets/official/projects/travel-sketches/ak74.jpg", "assets/official/projects/travel-sketches/ak75.jpg", "assets/official/projects/travel-sketches/ak76.jpg", "assets/official/projects/travel-sketches/ak77.jpg", "assets/official/projects/travel-sketches/ak78.jpg", "assets/official/projects/travel-sketches/ak79.jpg", "assets/official/projects/travel-sketches/ak80.jpg", "assets/official/projects/travel-sketches/ak81.jpg", "assets/official/projects/travel-sketches/ak82.jpg", "assets/official/projects/travel-sketches/ak83.jpg", "assets/official/projects/travel-sketches/ak84.jpg", "assets/official/projects/travel-sketches/ak85.jpg", "assets/official/projects/travel-sketches/ak86.jpg", "assets/official/projects/travel-sketches/ak87.jpg", "assets/official/projects/travel-sketches/ak88.jpg", "assets/official/projects/travel-sketches/ak89.jpg", "assets/official/projects/travel-sketches/ak90.jpg", "assets/official/projects/travel-sketches/ak91.jpg", "assets/official/projects/travel-sketches/ak92.jpg", "assets/official/projects/travel-sketches/ak_1.jpg", "assets/official/projects/travel-sketches/ak_10.jpg", "assets/official/projects/travel-sketches/ak_11.jpg", "assets/official/projects/travel-sketches/ak_12.jpg", "assets/official/projects/travel-sketches/ak_13.jpg", "assets/official/projects/travel-sketches/ak_14.jpg", "assets/official/projects/travel-sketches/ak_15.jpg", "assets/official/projects/travel-sketches/ak_16.jpg", "assets/official/projects/travel-sketches/ak_17.jpg", "assets/official/projects/travel-sketches/ak_18.jpg", "assets/official/projects/travel-sketches/ak_19.jpg", "assets/official/projects/travel-sketches/ak_2.jpg", "assets/official/projects/travel-sketches/ak_20.jpg", "assets/official/projects/travel-sketches/ak_21.jpg", "assets/official/projects/travel-sketches/ak_22.jpg", "assets/official/projects/travel-sketches/ak_23.jpg", "assets/official/projects/travel-sketches/ak_24.jpg", "assets/official/projects/travel-sketches/ak_25.jpg", "assets/official/projects/travel-sketches/ak_26.jpg", "assets/official/projects/travel-sketches/ak_27.jpg", "assets/official/projects/travel-sketches/ak_28.jpg", "assets/official/projects/travel-sketches/ak_29.jpg", "assets/official/projects/travel-sketches/ak_3.jpg", "assets/official/projects/travel-sketches/ak_30.jpg", "assets/official/projects/travel-sketches/ak_31.jpg", "assets/official/projects/travel-sketches/ak_32.jpg", "assets/official/projects/travel-sketches/ak_33.jpg", "assets/official/projects/travel-sketches/ak_34.jpg", "assets/official/projects/travel-sketches/ak_35.jpg", "assets/official/projects/travel-sketches/ak_36.jpg", "assets/official/projects/travel-sketches/ak_37.jpg", "assets/official/projects/travel-sketches/ak_38.jpg", "assets/official/projects/travel-sketches/ak_39.jpg", "assets/official/projects/travel-sketches/ak_4.jpg", "assets/official/projects/travel-sketches/ak_40.jpg", "assets/official/projects/travel-sketches/ak_41.jpg", "assets/official/projects/travel-sketches/ak_42.jpg", "assets/official/projects/travel-sketches/ak_43.jpg", "assets/official/projects/travel-sketches/ak_44.jpg", "assets/official/projects/travel-sketches/ak_45.jpg", "assets/official/projects/travel-sketches/ak_46.jpg", "assets/official/projects/travel-sketches/ak_47.jpg", "assets/official/projects/travel-sketches/ak_48.jpg", "assets/official/projects/travel-sketches/ak_49.jpg", "assets/official/projects/travel-sketches/ak_5.jpg", "assets/official/projects/travel-sketches/ak_50.jpg", "assets/official/projects/travel-sketches/ak_51.jpg", "assets/official/projects/travel-sketches/ak_52.jpg", "assets/official/projects/travel-sketches/ak_53.jpg", "assets/official/projects/travel-sketches/ak_54.jpg", "assets/official/projects/travel-sketches/ak_55.jpg", "assets/official/projects/travel-sketches/ak_56.jpg", "assets/official/projects/travel-sketches/ak_57.jpg", "assets/official/projects/travel-sketches/ak_58.jpg", "assets/official/projects/travel-sketches/ak_59.jpg", "assets/official/projects/travel-sketches/ak_6.jpg", "assets/official/projects/travel-sketches/ak_60.jpg", "assets/official/projects/travel-sketches/ak_61.jpg", "assets/official/projects/travel-sketches/ak_62.jpg", "assets/official/projects/travel-sketches/ak_63.jpg", "assets/official/projects/travel-sketches/ak_64.jpg", "assets/official/projects/travel-sketches/ak_65.jpg", "assets/official/projects/travel-sketches/ak_66.jpg", "assets/official/projects/travel-sketches/ak_67.jpg", "assets/official/projects/travel-sketches/ak_68.jpg", "assets/official/projects/travel-sketches/ak_69.jpg", "assets/official/projects/travel-sketches/ak_7.jpg", "assets/official/projects/travel-sketches/ak_70.jpg", "assets/official/projects/travel-sketches/ak_71.jpg", "assets/official/projects/travel-sketches/ak_8.jpg", "assets/official/projects/travel-sketches/ak_9.jpg"];
+    let currentLightboxIdx = 0;
+
+    function openLightbox(target) {
+      if (!GALLERY_IMAGES || GALLERY_IMAGES.length === 0) return;
+      let idx = 0;
+      if (typeof target === 'number') {
+        idx = target;
+      } else if (typeof target === 'string') {
+        const cleanTarget = target.replace(/^(\.\.\/)+/, '');
+        const found = GALLERY_IMAGES.findIndex(img => img === target || img.endsWith(cleanTarget));
+        idx = found !== -1 ? found : 0;
+      }
+      currentLightboxIdx = ((idx % GALLERY_IMAGES.length) + GALLERY_IMAGES.length) % GALLERY_IMAGES.length;
+      updateLightbox();
+      const lb = document.getElementById('image-lightbox');
+      if (lb) lb.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      const lb = document.getElementById('image-lightbox');
+      if (lb) lb.classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    function navigateLightbox(dir) {
+      if (!GALLERY_IMAGES || GALLERY_IMAGES.length === 0) return;
+      currentLightboxIdx = (currentLightboxIdx + dir + GALLERY_IMAGES.length) % GALLERY_IMAGES.length;
+      updateLightbox();
+    }
+
+    function updateLightbox() {
+      if (!GALLERY_IMAGES || GALLERY_IMAGES.length === 0) return;
+      const img = document.getElementById('lightbox-img');
+      const counter = document.getElementById('lightbox-counter');
+      if (img) {
+        img.src = GALLERY_IMAGES[currentLightboxIdx];
+        img.alt = "Travel Sketches — Plate " + (currentLightboxIdx + 1);
+      }
+      if (counter) counter.textContent = `Plate ${currentLightboxIdx + 1} of ${GALLERY_IMAGES.length}`;
+    }
+
+    function handleLightboxClick(e) {
+      if (e.target.closest('#lightbox-img') || e.target.closest('button')) return;
+      closeLightbox();
+    }
+
+    window.addEventListener('keydown', e => {
+      const lb = document.getElementById('image-lightbox');
+      if (lb && !lb.classList.contains('hidden')) {
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowLeft') navigateLightbox(-1);
+        if (e.key === 'ArrowRight') navigateLightbox(1);
+      }
+    });
+  </script>
+
 
 
   <!-- Footer: Field Architecture Layout Alignment -->
@@ -1599,50 +867,5 @@
   </footer>
 
 
-  <script>
-    const GALLERY_IMAGES = ["assets/official/projects/travel-sketches/ak72.jpg", "assets/official/projects/travel-sketches/ak73.jpg", "assets/official/projects/travel-sketches/ak74.jpg", "assets/official/projects/travel-sketches/ak75.jpg", "assets/official/projects/travel-sketches/ak76.jpg", "assets/official/projects/travel-sketches/ak77.jpg", "assets/official/projects/travel-sketches/ak78.jpg", "assets/official/projects/travel-sketches/ak79.jpg", "assets/official/projects/travel-sketches/ak80.jpg", "assets/official/projects/travel-sketches/ak81.jpg", "assets/official/projects/travel-sketches/ak82.jpg", "assets/official/projects/travel-sketches/ak83.jpg", "assets/official/projects/travel-sketches/ak84.jpg", "assets/official/projects/travel-sketches/ak85.jpg", "assets/official/projects/travel-sketches/ak86.jpg", "assets/official/projects/travel-sketches/ak87.jpg", "assets/official/projects/travel-sketches/ak88.jpg", "assets/official/projects/travel-sketches/ak89.jpg", "assets/official/projects/travel-sketches/ak90.jpg", "assets/official/projects/travel-sketches/ak91.jpg", "assets/official/projects/travel-sketches/ak92.jpg", "assets/official/projects/travel-sketches/ak_1.jpg", "assets/official/projects/travel-sketches/ak_10.jpg", "assets/official/projects/travel-sketches/ak_11.jpg", "assets/official/projects/travel-sketches/ak_12.jpg", "assets/official/projects/travel-sketches/ak_13.jpg", "assets/official/projects/travel-sketches/ak_14.jpg", "assets/official/projects/travel-sketches/ak_15.jpg", "assets/official/projects/travel-sketches/ak_16.jpg", "assets/official/projects/travel-sketches/ak_17.jpg", "assets/official/projects/travel-sketches/ak_18.jpg", "assets/official/projects/travel-sketches/ak_19.jpg", "assets/official/projects/travel-sketches/ak_2.jpg", "assets/official/projects/travel-sketches/ak_20.jpg", "assets/official/projects/travel-sketches/ak_21.jpg", "assets/official/projects/travel-sketches/ak_22.jpg", "assets/official/projects/travel-sketches/ak_23.jpg", "assets/official/projects/travel-sketches/ak_24.jpg", "assets/official/projects/travel-sketches/ak_25.jpg", "assets/official/projects/travel-sketches/ak_26.jpg", "assets/official/projects/travel-sketches/ak_27.jpg", "assets/official/projects/travel-sketches/ak_28.jpg", "assets/official/projects/travel-sketches/ak_29.jpg", "assets/official/projects/travel-sketches/ak_3.jpg", "assets/official/projects/travel-sketches/ak_30.jpg", "assets/official/projects/travel-sketches/ak_31.jpg", "assets/official/projects/travel-sketches/ak_32.jpg", "assets/official/projects/travel-sketches/ak_33.jpg", "assets/official/projects/travel-sketches/ak_34.jpg", "assets/official/projects/travel-sketches/ak_35.jpg", "assets/official/projects/travel-sketches/ak_36.jpg", "assets/official/projects/travel-sketches/ak_37.jpg", "assets/official/projects/travel-sketches/ak_38.jpg", "assets/official/projects/travel-sketches/ak_39.jpg", "assets/official/projects/travel-sketches/ak_4.jpg", "assets/official/projects/travel-sketches/ak_40.jpg", "assets/official/projects/travel-sketches/ak_41.jpg", "assets/official/projects/travel-sketches/ak_42.jpg", "assets/official/projects/travel-sketches/ak_43.jpg", "assets/official/projects/travel-sketches/ak_44.jpg", "assets/official/projects/travel-sketches/ak_45.jpg", "assets/official/projects/travel-sketches/ak_46.jpg", "assets/official/projects/travel-sketches/ak_47.jpg", "assets/official/projects/travel-sketches/ak_48.jpg", "assets/official/projects/travel-sketches/ak_49.jpg", "assets/official/projects/travel-sketches/ak_5.jpg", "assets/official/projects/travel-sketches/ak_50.jpg", "assets/official/projects/travel-sketches/ak_51.jpg", "assets/official/projects/travel-sketches/ak_52.jpg", "assets/official/projects/travel-sketches/ak_53.jpg", "assets/official/projects/travel-sketches/ak_54.jpg", "assets/official/projects/travel-sketches/ak_55.jpg", "assets/official/projects/travel-sketches/ak_56.jpg", "assets/official/projects/travel-sketches/ak_57.jpg", "assets/official/projects/travel-sketches/ak_58.jpg", "assets/official/projects/travel-sketches/ak_59.jpg", "assets/official/projects/travel-sketches/ak_6.jpg", "assets/official/projects/travel-sketches/ak_60.jpg", "assets/official/projects/travel-sketches/ak_61.jpg", "assets/official/projects/travel-sketches/ak_62.jpg", "assets/official/projects/travel-sketches/ak_63.jpg", "assets/official/projects/travel-sketches/ak_64.jpg", "assets/official/projects/travel-sketches/ak_65.jpg", "assets/official/projects/travel-sketches/ak_66.jpg", "assets/official/projects/travel-sketches/ak_67.jpg", "assets/official/projects/travel-sketches/ak_68.jpg", "assets/official/projects/travel-sketches/ak_69.jpg", "assets/official/projects/travel-sketches/ak_7.jpg", "assets/official/projects/travel-sketches/ak_70.jpg", "assets/official/projects/travel-sketches/ak_71.jpg", "assets/official/projects/travel-sketches/ak_8.jpg", "assets/official/projects/travel-sketches/ak_9.jpg"];
-    let currentLightboxIdx = 0;
-
-    function openLightbox(idx) {
-      currentLightboxIdx = idx;
-      updateLightbox();
-      document.getElementById('image-lightbox').classList.remove('hidden');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeLightbox() {
-      const lb = document.getElementById('image-lightbox');
-      if (lb) lb.classList.add('hidden');
-      document.body.style.overflow = '';
-    }
-
-    function navigateLightbox(dir) {
-      if (GALLERY_IMAGES.length === 0) return;
-      currentLightboxIdx = (currentLightboxIdx + dir + GALLERY_IMAGES.length) % GALLERY_IMAGES.length;
-      updateLightbox();
-    }
-
-    function updateLightbox() {
-      if (GALLERY_IMAGES.length === 0) return;
-      const img = document.getElementById('lightbox-img');
-      const counter = document.getElementById('lightbox-counter');
-      if (img) img.src = GALLERY_IMAGES[currentLightboxIdx];
-      if (counter) counter.textContent = `Plate ${currentLightboxIdx + 1} of ${GALLERY_IMAGES.length}`;
-    }
-
-    function handleLightboxClick(e) {
-      if (e.target.id === 'image-lightbox' || e.target.closest('.relative')) {
-        closeLightbox();
-      }
-    }
-
-    window.addEventListener('keydown', e => {
-      if (e.key === 'Escape') closeLightbox();
-      if (!document.getElementById('image-lightbox').classList.contains('hidden')) {
-        if (e.key === 'ArrowLeft') navigateLightbox(-1);
-        if (e.key === 'ArrowRight') navigateLightbox(1);
-      }
-    });
-  </script>
 </body>
 </html>

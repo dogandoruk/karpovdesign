@@ -23,7 +23,31 @@
       "assets/official/projects/pijp-park/pijp_park_7.jpg",
       "assets/official/projects/pijp-park/pijp_park_8.jpg"
     ],
-    "primary_luminosity": 121.76
+    "primary_luminosity": 121.76,
+    "image_roles": {
+      "card_thumb": "assets/official/projects/pijp-park/pijp_park_4.jpg",
+      "hero_image": "assets/official/projects/pijp-park/pijp_park_4.jpg",
+      "sketch_image": "assets/official/projects/pijp-park/pijp_park_1.jpg",
+      "landscape_1": "assets/official/projects/pijp-park/pijp_park_2.jpg",
+      "pair_1a": "assets/official/projects/pijp-park/pijp_park_3.jpg",
+      "pair_1b": "assets/official/projects/pijp-park/pijp_park_5.jpg",
+      "landscape_2": "assets/official/projects/pijp-park/pijp_park_6.jpg",
+      "pair_2a": "assets/official/projects/pijp-park/pijp_park_7.jpg",
+      "pair_2b": "assets/official/projects/pijp-park/pijp_park_8.jpg",
+      "banner_image": "assets/official/projects/pijp-park/pijp_park_4.jpg"
+    },
+    "image_crops": {
+      "card_thumb": "cover-center",
+      "hero_image": "cover-center",
+      "sketch_image": "contain",
+      "landscape_1": "cover-center",
+      "pair_1a": "cover-center",
+      "pair_1b": "cover-center",
+      "landscape_2": "contain",
+      "pair_2a": "cover-center",
+      "pair_2b": "cover-center",
+      "banner_image": "cover-center"
+    }
   },
   {
     "id": "seed-retreat",
@@ -58,7 +82,31 @@
       "assets/official/projects/seed-retreat/updated_visuals_seed_8_f.jpg",
       "assets/official/projects/seed-retreat/updated_visuals_seed_9_f.jpg"
     ],
-    "primary_luminosity": 113.85
+    "primary_luminosity": 113.85,
+    "image_roles": {
+      "card_thumb": "assets/official/projects/seed-retreat/updated_visuals_seed_1_f.jpg",
+      "hero_image": "assets/official/projects/seed-retreat/updated_visuals_seed_1_f.jpg",
+      "sketch_image": "assets/official/projects/seed-retreat/seed_1.jpg",
+      "landscape_1": "assets/official/projects/seed-retreat/seed_2.jpg",
+      "pair_1a": "assets/official/projects/seed-retreat/seed_3.jpg",
+      "pair_1b": "assets/official/projects/seed-retreat/seed_4.jpg",
+      "landscape_2": "assets/official/projects/seed-retreat/seed_5.jpg",
+      "pair_2a": "assets/official/projects/seed-retreat/seed_6.jpg",
+      "pair_2b": "assets/official/projects/seed-retreat/seed_7.jpg",
+      "banner_image": "assets/official/projects/seed-retreat/seed_8.jpg"
+    },
+    "image_crops": {
+      "card_thumb": "cover-center",
+      "hero_image": "cover-center",
+      "sketch_image": "contain",
+      "landscape_1": "cover-center",
+      "pair_1a": "cover-center",
+      "pair_1b": "cover-center",
+      "landscape_2": "contain",
+      "pair_2a": "cover-center",
+      "pair_2b": "cover-center",
+      "banner_image": "cover-center"
+    }
   },
   {
     "id": "izka-tower",
@@ -88,7 +136,31 @@
       "assets/official/projects/izka-tower/izka_8.jpg",
       "assets/official/projects/izka-tower/izka_9.jpg"
     ],
-    "primary_luminosity": 134.94
+    "primary_luminosity": 134.94,
+    "image_roles": {
+      "card_thumb": "assets/official/projects/izka-tower/izka_10.jpg",
+      "hero_image": "assets/official/projects/izka-tower/izka_10.jpg",
+      "sketch_image": "assets/official/projects/izka-tower/izka_1.jpg",
+      "landscape_1": "assets/official/projects/izka-tower/izka_11.jpg",
+      "pair_1a": "assets/official/projects/izka-tower/izka_12.jpg",
+      "pair_1b": "assets/official/projects/izka-tower/izka_2.jpg",
+      "landscape_2": "assets/official/projects/izka-tower/izka_3.jpg",
+      "pair_2a": "assets/official/projects/izka-tower/izka_4.jpg",
+      "pair_2b": "assets/official/projects/izka-tower/izka_5.jpg",
+      "banner_image": "assets/official/projects/izka-tower/izka_6.jpg"
+    },
+    "image_crops": {
+      "card_thumb": "cover-center",
+      "hero_image": "cover-center",
+      "sketch_image": "contain",
+      "landscape_1": "cover-center",
+      "pair_1a": "cover-center",
+      "pair_1b": "cover-center",
+      "landscape_2": "contain",
+      "pair_2a": "cover-center",
+      "pair_2b": "cover-center",
+      "banner_image": "cover-center"
+    }
   },
   {
     "id": "beer-code",
@@ -115,7 +187,31 @@
       "assets/official/projects/beer-code/beer_8.jpg",
       "assets/official/projects/beer-code/beer_9.jpg"
     ],
-    "primary_luminosity": 24.68
+    "primary_luminosity": 24.68,
+    "image_roles": {
+      "card_thumb": "assets/official/projects/beer-code/beer_1.jpg",
+      "hero_image": "assets/official/projects/beer-code/beer_1.jpg",
+      "sketch_image": "assets/official/projects/beer-code/beer_13.jpg",
+      "landscape_1": "assets/official/projects/beer-code/beer_14.jpg",
+      "pair_1a": "assets/official/projects/beer-code/beer_4.jpg",
+      "pair_1b": "assets/official/projects/beer-code/beer_5.jpg",
+      "landscape_2": "assets/official/projects/beer-code/beer_6.jpg",
+      "pair_2a": "assets/official/projects/beer-code/beer_7.jpg",
+      "pair_2b": "assets/official/projects/beer-code/beer_8.jpg",
+      "banner_image": "assets/official/projects/beer-code/beer_9.jpg"
+    },
+    "image_crops": {
+      "card_thumb": "cover-center",
+      "hero_image": "cover-center",
+      "sketch_image": "contain",
+      "landscape_1": "cover-center",
+      "pair_1a": "cover-center",
+      "pair_1b": "cover-center",
+      "landscape_2": "contain",
+      "pair_2a": "cover-center",
+      "pair_2b": "cover-center",
+      "banner_image": "cover-center"
+    }
   },
   {
     "id": "travel-sketches",
@@ -225,7 +321,31 @@
       "assets/official/projects/travel-sketches/ak_8.jpg",
       "assets/official/projects/travel-sketches/ak_9.jpg"
     ],
-    "primary_luminosity": 32.67
+    "primary_luminosity": 32.67,
+    "image_roles": {
+      "card_thumb": "assets/official/projects/travel-sketches/ak_28.jpg",
+      "hero_image": "assets/official/projects/travel-sketches/ak_28.jpg",
+      "sketch_image": "assets/official/projects/travel-sketches/ak72.jpg",
+      "landscape_1": "assets/official/projects/travel-sketches/ak73.jpg",
+      "pair_1a": "assets/official/projects/travel-sketches/ak74.jpg",
+      "pair_1b": "assets/official/projects/travel-sketches/ak75.jpg",
+      "landscape_2": "assets/official/projects/travel-sketches/ak76.jpg",
+      "pair_2a": "assets/official/projects/travel-sketches/ak77.jpg",
+      "pair_2b": "assets/official/projects/travel-sketches/ak78.jpg",
+      "banner_image": "assets/official/projects/travel-sketches/ak79.jpg"
+    },
+    "image_crops": {
+      "card_thumb": "cover-center",
+      "hero_image": "cover-center",
+      "sketch_image": "contain",
+      "landscape_1": "cover-center",
+      "pair_1a": "cover-center",
+      "pair_1b": "cover-center",
+      "landscape_2": "contain",
+      "pair_2a": "cover-center",
+      "pair_2b": "cover-center",
+      "banner_image": "cover-center"
+    }
   },
   {
     "id": "growing-cell",
@@ -258,7 +378,31 @@
       "assets/official/projects/growing-cell/growingcell_8.jpg",
       "assets/official/projects/growing-cell/growingcell_9.jpg"
     ],
-    "primary_luminosity": 110.99
+    "primary_luminosity": 110.99,
+    "image_roles": {
+      "card_thumb": "assets/official/projects/growing-cell/growingcell_15.jpg",
+      "hero_image": "assets/official/projects/growing-cell/growingcell_15.jpg",
+      "sketch_image": "assets/official/projects/growing-cell/growingcell_1.jpg",
+      "landscape_1": "assets/official/projects/growing-cell/growingcell_10.jpg",
+      "pair_1a": "assets/official/projects/growing-cell/growingcell_11.jpg",
+      "pair_1b": "assets/official/projects/growing-cell/growingcell_12.jpg",
+      "landscape_2": "assets/official/projects/growing-cell/growingcell_13.jpg",
+      "pair_2a": "assets/official/projects/growing-cell/growingcell_16.jpg",
+      "pair_2b": "assets/official/projects/growing-cell/growingcell_2.jpg",
+      "banner_image": "assets/official/projects/growing-cell/growingcell_3.jpg"
+    },
+    "image_crops": {
+      "card_thumb": "cover-center",
+      "hero_image": "cover-center",
+      "sketch_image": "contain",
+      "landscape_1": "cover-center",
+      "pair_1a": "cover-center",
+      "pair_1b": "cover-center",
+      "landscape_2": "contain",
+      "pair_2a": "cover-center",
+      "pair_2b": "cover-center",
+      "banner_image": "cover-center"
+    }
   },
   {
     "id": "valley-of-life",
@@ -289,7 +433,31 @@
       "assets/official/projects/valley-of-life/valey_of_life_8.jpg",
       "assets/official/projects/valley-of-life/valey_of_life_9.jpg"
     ],
-    "primary_luminosity": 135.41
+    "primary_luminosity": 135.41,
+    "image_roles": {
+      "card_thumb": "assets/official/projects/valley-of-life/valey_of_life_10.jpg",
+      "hero_image": "assets/official/projects/valley-of-life/valey_of_life_10.jpg",
+      "sketch_image": "assets/official/projects/valley-of-life/valey_of_life_1.jpg",
+      "landscape_1": "assets/official/projects/valley-of-life/valey_of_life_11.jpg",
+      "pair_1a": "assets/official/projects/valley-of-life/valey_of_life_12.jpg",
+      "pair_1b": "assets/official/projects/valley-of-life/valey_of_life_13.jpg",
+      "landscape_2": "assets/official/projects/valley-of-life/valey_of_life_2.jpg",
+      "pair_2a": "assets/official/projects/valley-of-life/valey_of_life_3.jpg",
+      "pair_2b": "assets/official/projects/valley-of-life/valey_of_life_4.jpg",
+      "banner_image": "assets/official/projects/valley-of-life/valey_of_life_5.jpg"
+    },
+    "image_crops": {
+      "card_thumb": "cover-center",
+      "hero_image": "cover-center",
+      "sketch_image": "contain",
+      "landscape_1": "cover-center",
+      "pair_1a": "cover-center",
+      "pair_1b": "cover-center",
+      "landscape_2": "contain",
+      "pair_2a": "cover-center",
+      "pair_2b": "cover-center",
+      "banner_image": "cover-center"
+    }
   },
   {
     "id": "life-bridge",
@@ -324,7 +492,31 @@
       "assets/official/projects/life-bridge/life_bridge_8.jpg",
       "assets/official/projects/life-bridge/life_bridge_9.jpg"
     ],
-    "primary_luminosity": 105.36
+    "primary_luminosity": 105.36,
+    "image_roles": {
+      "card_thumb": "assets/official/projects/life-bridge/life_bridge_16.jpg",
+      "hero_image": "assets/official/projects/life-bridge/life_bridge_16.jpg",
+      "sketch_image": "assets/official/projects/life-bridge/life_bridge_1.jpg",
+      "landscape_1": "assets/official/projects/life-bridge/life_bridge_10.jpg",
+      "pair_1a": "assets/official/projects/life-bridge/life_bridge_11.jpg",
+      "pair_1b": "assets/official/projects/life-bridge/life_bridge_12.jpg",
+      "landscape_2": "assets/official/projects/life-bridge/life_bridge_13.jpg",
+      "pair_2a": "assets/official/projects/life-bridge/life_bridge_14.jpg",
+      "pair_2b": "assets/official/projects/life-bridge/life_bridge_15.jpg",
+      "banner_image": "assets/official/projects/life-bridge/life_bridge_17.jpg"
+    },
+    "image_crops": {
+      "card_thumb": "cover-center",
+      "hero_image": "cover-center",
+      "sketch_image": "contain",
+      "landscape_1": "cover-center",
+      "pair_1a": "cover-center",
+      "pair_1b": "cover-center",
+      "landscape_2": "contain",
+      "pair_2a": "cover-center",
+      "pair_2b": "cover-center",
+      "banner_image": "cover-center"
+    }
   },
   {
     "id": "multi-city",
@@ -369,7 +561,31 @@
       "assets/official/projects/multi-city/multi_city_8.jpg",
       "assets/official/projects/multi-city/multi_city_9.jpg"
     ],
-    "primary_luminosity": 99.76
+    "primary_luminosity": 99.76,
+    "image_roles": {
+      "card_thumb": "assets/official/projects/multi-city/multi_city_24.jpg",
+      "hero_image": "assets/official/projects/multi-city/multi_city_24.jpg",
+      "sketch_image": "assets/official/projects/multi-city/multi_city_1.jpg",
+      "landscape_1": "assets/official/projects/multi-city/multi_city_10.jpg",
+      "pair_1a": "assets/official/projects/multi-city/multi_city_11.jpg",
+      "pair_1b": "assets/official/projects/multi-city/multi_city_12.jpg",
+      "landscape_2": "assets/official/projects/multi-city/multi_city_13.jpg",
+      "pair_2a": "assets/official/projects/multi-city/multi_city_14.jpg",
+      "pair_2b": "assets/official/projects/multi-city/multi_city_15.jpg",
+      "banner_image": "assets/official/projects/multi-city/multi_city_16.jpg"
+    },
+    "image_crops": {
+      "card_thumb": "cover-center",
+      "hero_image": "cover-center",
+      "sketch_image": "contain",
+      "landscape_1": "cover-center",
+      "pair_1a": "cover-center",
+      "pair_1b": "cover-center",
+      "landscape_2": "contain",
+      "pair_2a": "cover-center",
+      "pair_2b": "cover-center",
+      "banner_image": "cover-center"
+    }
   },
   {
     "id": "hand-study",
@@ -423,7 +639,31 @@
       "assets/official/projects/hand-study/hand_study35.jpg",
       "assets/official/projects/hand-study/hand_study36.jpg"
     ],
-    "primary_luminosity": 35.18
+    "primary_luminosity": 35.18,
+    "image_roles": {
+      "card_thumb": "assets/official/projects/hand-study/hand_study01.jpg",
+      "hero_image": "assets/official/projects/hand-study/hand_study01.jpg",
+      "sketch_image": "assets/official/projects/hand-study/hand_study02.jpg",
+      "landscape_1": "assets/official/projects/hand-study/hand_study03.jpg",
+      "pair_1a": "assets/official/projects/hand-study/hand_study04.jpg",
+      "pair_1b": "assets/official/projects/hand-study/hand_study05.jpg",
+      "landscape_2": "assets/official/projects/hand-study/hand_study06.jpg",
+      "pair_2a": "assets/official/projects/hand-study/hand_study07.jpg",
+      "pair_2b": "assets/official/projects/hand-study/hand_study08.jpg",
+      "banner_image": "assets/official/projects/hand-study/hand_study09.jpg"
+    },
+    "image_crops": {
+      "card_thumb": "cover-center",
+      "hero_image": "cover-center",
+      "sketch_image": "contain",
+      "landscape_1": "cover-center",
+      "pair_1a": "cover-center",
+      "pair_1b": "cover-center",
+      "landscape_2": "contain",
+      "pair_2a": "cover-center",
+      "pair_2b": "cover-center",
+      "banner_image": "cover-center"
+    }
   },
   {
     "id": "folding-edge",
@@ -454,7 +694,31 @@
       "assets/official/projects/folding-edge/folding_edge_8.jpg",
       "assets/official/projects/folding-edge/folding_edge_9.jpg"
     ],
-    "primary_luminosity": 152.38
+    "primary_luminosity": 152.38,
+    "image_roles": {
+      "card_thumb": "assets/official/projects/folding-edge/folding_edge_13.jpg",
+      "hero_image": "assets/official/projects/folding-edge/folding_edge_13.jpg",
+      "sketch_image": "assets/official/projects/folding-edge/folding_edge_10.jpg",
+      "landscape_1": "assets/official/projects/folding-edge/folding_edge_11.jpg",
+      "pair_1a": "assets/official/projects/folding-edge/folding_edge_12.jpg",
+      "pair_1b": "assets/official/projects/folding-edge/folding_edge_14.jpg",
+      "landscape_2": "assets/official/projects/folding-edge/folding_edge_2.jpg",
+      "pair_2a": "assets/official/projects/folding-edge/folding_edge_3.jpg",
+      "pair_2b": "assets/official/projects/folding-edge/folding_edge_4.jpg",
+      "banner_image": "assets/official/projects/folding-edge/folding_edge_5.jpg"
+    },
+    "image_crops": {
+      "card_thumb": "cover-center",
+      "hero_image": "cover-center",
+      "sketch_image": "contain",
+      "landscape_1": "cover-center",
+      "pair_1a": "cover-center",
+      "pair_1b": "cover-center",
+      "landscape_2": "contain",
+      "pair_2a": "cover-center",
+      "pair_2b": "cover-center",
+      "banner_image": "cover-center"
+    }
   },
   {
     "id": "community-plaza",
@@ -483,7 +747,31 @@
       "assets/official/projects/community-plaza/community_plaza_8.jpg",
       "assets/official/projects/community-plaza/community_plaza_9.jpg"
     ],
-    "primary_luminosity": 121.34
+    "primary_luminosity": 121.34,
+    "image_roles": {
+      "card_thumb": "assets/official/projects/community-plaza/community_plaza_10.jpg",
+      "hero_image": "assets/official/projects/community-plaza/community_plaza_10.jpg",
+      "sketch_image": "assets/official/projects/community-plaza/community_plaza_1.jpg",
+      "landscape_1": "assets/official/projects/community-plaza/community_plaza_11.jpg",
+      "pair_1a": "assets/official/projects/community-plaza/community_plaza_2.jpg",
+      "pair_1b": "assets/official/projects/community-plaza/community_plaza_3.jpg",
+      "landscape_2": "assets/official/projects/community-plaza/community_plaza_4.jpg",
+      "pair_2a": "assets/official/projects/community-plaza/community_plaza_5.jpg",
+      "pair_2b": "assets/official/projects/community-plaza/community_plaza_6.jpg",
+      "banner_image": "assets/official/projects/community-plaza/community_plaza_7.jpg"
+    },
+    "image_crops": {
+      "card_thumb": "cover-center",
+      "hero_image": "cover-center",
+      "sketch_image": "contain",
+      "landscape_1": "cover-center",
+      "pair_1a": "cover-center",
+      "pair_1b": "cover-center",
+      "landscape_2": "contain",
+      "pair_2a": "cover-center",
+      "pair_2b": "cover-center",
+      "banner_image": "cover-center"
+    }
   },
   {
     "id": "summer-island",
@@ -519,7 +807,31 @@
       "assets/official/projects/summer-island/summer_island_8.jpg",
       "assets/official/projects/summer-island/summer_island_9.jpg"
     ],
-    "primary_luminosity": 127.32
+    "primary_luminosity": 127.32,
+    "image_roles": {
+      "card_thumb": "assets/official/projects/summer-island/summer_island_17.jpg",
+      "hero_image": "assets/official/projects/summer-island/summer_island_1.jpg",
+      "sketch_image": "assets/official/projects/summer-island/summer_island_2.jpg",
+      "landscape_1": "assets/official/projects/summer-island/summer_island_16.jpg",
+      "pair_1a": "assets/official/projects/summer-island/summer_island_15.jpg",
+      "pair_1b": "assets/official/projects/summer-island/summer_island_17.jpg",
+      "landscape_2": "assets/official/projects/summer-island/summer_island_13.jpg",
+      "pair_2a": "assets/official/projects/summer-island/summer_island_3.jpg",
+      "pair_2b": "assets/official/projects/summer-island/summer_island_14.jpg",
+      "banner_image": "assets/official/projects/summer-island/summer_island_18.jpg"
+    },
+    "image_crops": {
+      "card_thumb": "cover-center",
+      "hero_image": "cover-center",
+      "sketch_image": "contain",
+      "landscape_1": "cover-center",
+      "pair_1a": "cover-center",
+      "pair_1b": "cover-center",
+      "landscape_2": "contain",
+      "pair_2a": "cover-center",
+      "pair_2b": "cover-center",
+      "banner_image": "cover-center"
+    }
   },
   {
     "id": "flowing-garden",
@@ -554,7 +866,31 @@
       "assets/official/projects/flowing-garden/flowing_garden_8.jpg",
       "assets/official/projects/flowing-garden/flowing_garden_9.jpg"
     ],
-    "primary_luminosity": 116.83
+    "primary_luminosity": 116.83,
+    "image_roles": {
+      "card_thumb": "assets/official/projects/flowing-garden/flowing_garden_1.jpg",
+      "hero_image": "assets/official/projects/flowing-garden/flowing_garden_1.jpg",
+      "sketch_image": "assets/official/projects/flowing-garden/flowing_garden_10.jpg",
+      "landscape_1": "assets/official/projects/flowing-garden/flowing_garden_11.jpg",
+      "pair_1a": "assets/official/projects/flowing-garden/flowing_garden_12.jpg",
+      "pair_1b": "assets/official/projects/flowing-garden/flowing_garden_13.jpg",
+      "landscape_2": "assets/official/projects/flowing-garden/flowing_garden_14.jpg",
+      "pair_2a": "assets/official/projects/flowing-garden/flowing_garden_15.jpg",
+      "pair_2b": "assets/official/projects/flowing-garden/flowing_garden_16.jpg",
+      "banner_image": "assets/official/projects/flowing-garden/flowing_garden_17.jpg"
+    },
+    "image_crops": {
+      "card_thumb": "cover-center",
+      "hero_image": "cover-center",
+      "sketch_image": "contain",
+      "landscape_1": "cover-center",
+      "pair_1a": "cover-center",
+      "pair_1b": "cover-center",
+      "landscape_2": "contain",
+      "pair_2a": "cover-center",
+      "pair_2b": "cover-center",
+      "banner_image": "cover-center"
+    }
   },
   {
     "id": "tent-hill",
@@ -603,7 +939,31 @@
       "assets/official/projects/tent-hill/updated_visual_tent_hill_8.jpg",
       "assets/official/projects/tent-hill/updated_visual_tent_hill_9.jpg"
     ],
-    "primary_luminosity": 26.75
+    "primary_luminosity": 26.75,
+    "image_roles": {
+      "card_thumb": "assets/official/projects/tent-hill/tent_hill_3.jpg",
+      "hero_image": "assets/official/projects/tent-hill/tent_hill_3.jpg",
+      "sketch_image": "assets/official/projects/tent-hill/tent_hill_1.jpg",
+      "landscape_1": "assets/official/projects/tent-hill/tent_hill_10.jpg",
+      "pair_1a": "assets/official/projects/tent-hill/tent_hill_11.jpg",
+      "pair_1b": "assets/official/projects/tent-hill/tent_hill_12.jpg",
+      "landscape_2": "assets/official/projects/tent-hill/tent_hill_13.jpg",
+      "pair_2a": "assets/official/projects/tent-hill/tent_hill_14.jpg",
+      "pair_2b": "assets/official/projects/tent-hill/tent_hill_15.jpg",
+      "banner_image": "assets/official/projects/tent-hill/tent_hill_2.jpg"
+    },
+    "image_crops": {
+      "card_thumb": "cover-center",
+      "hero_image": "cover-center",
+      "sketch_image": "contain",
+      "landscape_1": "cover-center",
+      "pair_1a": "cover-center",
+      "pair_1b": "cover-center",
+      "landscape_2": "contain",
+      "pair_2a": "cover-center",
+      "pair_2b": "cover-center",
+      "banner_image": "cover-center"
+    }
   },
   {
     "id": "chrono-orb",
@@ -627,7 +987,31 @@
       "assets/official/projects/chrono-orb/chrono_orb_5.jpg",
       "assets/official/projects/chrono-orb/chrono_orb_6.jpg"
     ],
-    "primary_luminosity": 79.55
+    "primary_luminosity": 79.55,
+    "image_roles": {
+      "card_thumb": "assets/official/projects/chrono-orb/chrono_orb_1.jpg",
+      "hero_image": "assets/official/projects/chrono-orb/chrono_orb_1.jpg",
+      "sketch_image": "assets/official/projects/chrono-orb/chrono_orb_2.jpg",
+      "landscape_1": "assets/official/projects/chrono-orb/chrono_orb_3.jpg",
+      "pair_1a": "assets/official/projects/chrono-orb/chrono_orb_4.jpg",
+      "pair_1b": "assets/official/projects/chrono-orb/chrono_orb_5.jpg",
+      "landscape_2": "assets/official/projects/chrono-orb/chrono_orb_6.jpg",
+      "pair_2a": "assets/official/projects/chrono-orb/chrono_orb_1.jpg",
+      "pair_2b": "assets/official/projects/chrono-orb/chrono_orb_2.jpg",
+      "banner_image": "assets/official/projects/chrono-orb/chrono_orb_3.jpg"
+    },
+    "image_crops": {
+      "card_thumb": "cover-center",
+      "hero_image": "cover-center",
+      "sketch_image": "contain",
+      "landscape_1": "cover-center",
+      "pair_1a": "cover-center",
+      "pair_1b": "cover-center",
+      "landscape_2": "contain",
+      "pair_2a": "cover-center",
+      "pair_2b": "cover-center",
+      "banner_image": "cover-center"
+    }
   },
   {
     "id": "eternity-ring",
@@ -653,7 +1037,31 @@
       "assets/official/projects/eternity-ring/eternigy_ring_7.jpg",
       "assets/official/projects/eternity-ring/eternigy_ring_8.jpg"
     ],
-    "primary_luminosity": 96.48
+    "primary_luminosity": 96.48,
+    "image_roles": {
+      "card_thumb": "assets/official/projects/eternity-ring/eternigy_ring_5.jpg",
+      "hero_image": "assets/official/projects/eternity-ring/eternigy_ring_5.jpg",
+      "sketch_image": "assets/official/projects/eternity-ring/eternigy_ring_1.jpg",
+      "landscape_1": "assets/official/projects/eternity-ring/eternigy_ring_2.jpg",
+      "pair_1a": "assets/official/projects/eternity-ring/eternigy_ring_3.jpg",
+      "pair_1b": "assets/official/projects/eternity-ring/eternigy_ring_4.jpg",
+      "landscape_2": "assets/official/projects/eternity-ring/eternigy_ring_6.jpg",
+      "pair_2a": "assets/official/projects/eternity-ring/eternigy_ring_7.jpg",
+      "pair_2b": "assets/official/projects/eternity-ring/eternigy_ring_8.jpg",
+      "banner_image": "assets/official/projects/eternity-ring/eternigy_ring_5.jpg"
+    },
+    "image_crops": {
+      "card_thumb": "cover-center",
+      "hero_image": "cover-center",
+      "sketch_image": "contain",
+      "landscape_1": "cover-center",
+      "pair_1a": "cover-center",
+      "pair_1b": "cover-center",
+      "landscape_2": "contain",
+      "pair_2a": "cover-center",
+      "pair_2b": "cover-center",
+      "banner_image": "cover-center"
+    }
   },
   {
     "id": "modular-house",
@@ -682,7 +1090,31 @@
       "assets/official/projects/modular-house/modular_house_8.jpg",
       "assets/official/projects/modular-house/modular_house_9.jpg"
     ],
-    "primary_luminosity": 150.73
+    "primary_luminosity": 150.73,
+    "image_roles": {
+      "card_thumb": "assets/official/projects/modular-house/modular_house_12.jpg",
+      "hero_image": "assets/official/projects/modular-house/modular_house_12.jpg",
+      "sketch_image": "assets/official/projects/modular-house/modular_house_1.jpg",
+      "landscape_1": "assets/official/projects/modular-house/modular_house_10.jpg",
+      "pair_1a": "assets/official/projects/modular-house/modular_house_11.jpg",
+      "pair_1b": "assets/official/projects/modular-house/modular_house_2.jpg",
+      "landscape_2": "assets/official/projects/modular-house/modular_house_3.jpg",
+      "pair_2a": "assets/official/projects/modular-house/modular_house_5.jpg",
+      "pair_2b": "assets/official/projects/modular-house/modular_house_6.jpg",
+      "banner_image": "assets/official/projects/modular-house/modular_house_7.jpg"
+    },
+    "image_crops": {
+      "card_thumb": "cover-center",
+      "hero_image": "cover-center",
+      "sketch_image": "contain",
+      "landscape_1": "cover-center",
+      "pair_1a": "cover-center",
+      "pair_1b": "cover-center",
+      "landscape_2": "contain",
+      "pair_2a": "cover-center",
+      "pair_2b": "cover-center",
+      "banner_image": "cover-center"
+    }
   },
   {
     "id": "natures-gateway",
@@ -725,7 +1157,31 @@
       "assets/official/projects/natures-gateway/updates_natures_gateway_5.jpg",
       "assets/official/projects/natures-gateway/updates_natures_gateway_6.jpg"
     ],
-    "primary_luminosity": 119.87
+    "primary_luminosity": 119.87,
+    "image_roles": {
+      "card_thumb": "assets/official/projects/natures-gateway/updates_fin_v6.jpg",
+      "hero_image": "assets/official/projects/natures-gateway/updates_fin_v6.jpg",
+      "sketch_image": "assets/official/projects/natures-gateway/natures_gateway_1.jpg",
+      "landscape_1": "assets/official/projects/natures-gateway/natures_gateway_10.jpg",
+      "pair_1a": "assets/official/projects/natures-gateway/natures_gateway_11.jpg",
+      "pair_1b": "assets/official/projects/natures-gateway/natures_gateway_12.jpg",
+      "landscape_2": "assets/official/projects/natures-gateway/natures_gateway_2.jpg",
+      "pair_2a": "assets/official/projects/natures-gateway/natures_gateway_3.jpg",
+      "pair_2b": "assets/official/projects/natures-gateway/natures_gateway_4.jpg",
+      "banner_image": "assets/official/projects/natures-gateway/natures_gateway_5.jpg"
+    },
+    "image_crops": {
+      "card_thumb": "cover-center",
+      "hero_image": "cover-center",
+      "sketch_image": "contain",
+      "landscape_1": "cover-center",
+      "pair_1a": "cover-center",
+      "pair_1b": "cover-center",
+      "landscape_2": "contain",
+      "pair_2a": "cover-center",
+      "pair_2b": "cover-center",
+      "banner_image": "cover-center"
+    }
   },
   {
     "id": "flex-tower",
@@ -757,7 +1213,31 @@
       "assets/official/projects/flex-tower/flex_tower_15.jpg",
       "assets/official/projects/flex-tower/flex_tower_16.jpg"
     ],
-    "primary_luminosity": 146.24
+    "primary_luminosity": 146.24,
+    "image_roles": {
+      "card_thumb": "assets/official/projects/flex-tower/flex_tower_12.jpg",
+      "hero_image": "assets/official/projects/flex-tower/flex_tower_12.jpg",
+      "sketch_image": "assets/official/projects/flex-tower/flex_tower_01.jpg",
+      "landscape_1": "assets/official/projects/flex-tower/flex_tower_02.jpg",
+      "pair_1a": "assets/official/projects/flex-tower/flex_tower_03.jpg",
+      "pair_1b": "assets/official/projects/flex-tower/flex_tower_04.jpg",
+      "landscape_2": "assets/official/projects/flex-tower/flex_tower_05.jpg",
+      "pair_2a": "assets/official/projects/flex-tower/flex_tower_06.jpg",
+      "pair_2b": "assets/official/projects/flex-tower/flex_tower_07.jpg",
+      "banner_image": "assets/official/projects/flex-tower/flex_tower_10.jpg"
+    },
+    "image_crops": {
+      "card_thumb": "cover-center",
+      "hero_image": "cover-center",
+      "sketch_image": "contain",
+      "landscape_1": "cover-center",
+      "pair_1a": "cover-center",
+      "pair_1b": "cover-center",
+      "landscape_2": "contain",
+      "pair_2a": "cover-center",
+      "pair_2b": "cover-center",
+      "banner_image": "cover-center"
+    }
   },
   {
     "id": "outside-in",
@@ -792,6 +1272,30 @@
       "assets/official/projects/outside-in/outside_in_8.jpg",
       "assets/official/projects/outside-in/outside_in_9.jpg"
     ],
-    "primary_luminosity": 118.27
+    "primary_luminosity": 118.27,
+    "image_roles": {
+      "card_thumb": "assets/official/projects/outside-in/outside_in_12.jpg",
+      "hero_image": "assets/official/projects/outside-in/outside_in_12.jpg",
+      "sketch_image": "assets/official/projects/outside-in/outside_in_1.jpg",
+      "landscape_1": "assets/official/projects/outside-in/outside_in_10.jpg",
+      "pair_1a": "assets/official/projects/outside-in/outside_in_11.jpg",
+      "pair_1b": "assets/official/projects/outside-in/outside_in_13.jpg",
+      "landscape_2": "assets/official/projects/outside-in/outside_in_14.jpg",
+      "pair_2a": "assets/official/projects/outside-in/outside_in_15.jpg",
+      "pair_2b": "assets/official/projects/outside-in/outside_in_16.jpg",
+      "banner_image": "assets/official/projects/outside-in/outside_in_18.jpg"
+    },
+    "image_crops": {
+      "card_thumb": "cover-center",
+      "hero_image": "cover-center",
+      "sketch_image": "contain",
+      "landscape_1": "cover-center",
+      "pair_1a": "cover-center",
+      "pair_1b": "cover-center",
+      "landscape_2": "contain",
+      "pair_2a": "cover-center",
+      "pair_2b": "cover-center",
+      "banner_image": "cover-center"
+    }
   }
 ]

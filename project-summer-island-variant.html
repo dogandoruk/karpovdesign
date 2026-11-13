@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/svg+xml" href="assets/official/logo_charcoal.svg">
@@ -401,12 +402,33 @@
   ]
 }
 </script>
-  <title>Summer Island — Field Architecture Rendition &bull; Karpov Design LLC</title>
   <style>
     .font-raleway {
       font-family: 'Raleway', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
     }
     :root {
+      --bg-main: #f8f9fa;
+      --bg-surface: #ffffff;
+      --text-main: #1a1d20;
+      --text-muted: #595f65;
+      --border-line: #e2e5e8;
+      
+      /* Eyeblue palette */
+      --eyeblue-deep: #2b4951;
+      --eyeblue-mid: #38606a;
+      --eyeblue-soft: #67aec0;
+      --eyeblue-pale: #e4f0f2;
+
+      /* Hairberry orange palette */
+      --hairberry-rich: #ad4b24;
+      --hairberry-vibrant: #de602e;
+      --hairberry-bright: #f36a34;
+      --hairberry-peach: #f19f55;
+
+      /* Field Architecture Spacing Model:
+         Desktop: 25% Left Negative Offset, 70% Asymmetric Content Rail, Right edge clamped between 32px and 64px
+         Tablet/Mobile (< 1024px): 5% - 90% - 5% (min 20px padding)
+      */
       --field-left-offset: 25vw;
       --field-right-gutter: clamp(32px, 5vw, 64px);
     }
@@ -416,12 +438,15 @@
         --field-right-gutter: clamp(20px, 5vw, 40px);
       }
     }
+
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background-color: #f8f9fa;
-      color: #1a1d20;
+      background-color: var(--bg-main);
+      color: var(--text-main);
       overflow-x: hidden;
     }
+
+    /* Asymmetric Field Layout Containers */
     .field-header-container {
       padding-left: var(--field-left-offset);
       padding-right: var(--field-right-gutter);
@@ -432,6 +457,127 @@
       padding-right: var(--field-right-gutter);
       width: 100%;
     }
+
+    /* Ambient Ken-Burns Animation for Hero Slides */
+    @keyframes kenBurnsSubtle {
+      0% {
+        transform: scale(1.0) translate(0, 0);
+      }
+      50% {
+        transform: scale(1.05) translate(-1%, -0.5%);
+      }
+      100% {
+        transform: scale(1.0) translate(0, 0);
+      }
+    }
+    .ambient-motion {
+      animation: kenBurnsSubtle 16s ease-in-out infinite alternate;
+      will-change: transform;
+    }
+    .paused-motion {
+      animation-play-state: paused !important;
+    }
+
+    /* Custom Sleek Dropdown Styling (Default Page) */
+    .custom-dropdown-container {
+      position: relative;
+    }
+    .custom-dropdown-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      padding: 0.5rem 0.85rem;
+      background: #ffffff;
+      border: 1px solid #e2e5e8;
+      font-family: monospace;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #1a1d20;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+    .custom-dropdown-btn:hover {
+      border-color: #38606a;
+    }
+    .custom-dropdown-btn.active-filter {
+      border-color: #de602e;
+      color: #de602e;
+      font-weight: 600;
+    }
+    .custom-dropdown-menu {
+      position: absolute;
+      top: calc(100% + 4px);
+      left: 0;
+      min-width: 100%;
+      background: #ffffff;
+      border: 1px solid #e2e5e8;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
+      z-index: 40;
+      display: none;
+      flex-direction: column;
+      padding: 0.25rem 0;
+    }
+    .custom-dropdown-menu.open {
+      display: flex;
+    }
+    .custom-dropdown-item {
+      padding: 0.5rem 0.85rem;
+      font-family: monospace;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #595f65;
+      text-align: left;
+      transition: all 0.15s ease;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .custom-dropdown-item:hover {
+      background: #f8f9fa;
+      color: #1a1d20;
+    }
+    .custom-dropdown-item.selected {
+      color: #de602e;
+      font-weight: 600;
+      background: #fff5f2;
+    }
+
+    /* Native Dropdown Styling (Variant Page) */
+    .native-architectural-select {
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      background-color: #ffffff;
+      border: 1px solid #e2e5e8;
+      padding: 0.5rem 2rem 0.5rem 0.85rem;
+      font-family: monospace;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #1a1d20;
+      cursor: pointer;
+      outline: none;
+      transition: all 0.2s ease;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23595f65'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0.65rem center;
+      background-size: 0.85rem;
+    }
+    .native-architectural-select:hover {
+      border-color: #38606a;
+    }
+    .native-architectural-select:focus {
+      border-color: #de602e;
+    }
+    .native-architectural-select.active-filter {
+      border-color: #de602e;
+      color: #de602e;
+      font-weight: 600;
+    }
+
+    /* Header Logo Height & Tight 2px Margin to Borders */
     #header-logo-img {
       height: 72px;
       width: auto;
@@ -442,6 +588,19 @@
         height: 84px;
       }
     }
+
+    
+    @media (hover: none), (max-width: 1023px) {
+      .touch-variant-title {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+      }
+    }
+
+    ::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
     .no-scrollbar::-webkit-scrollbar {
       display: none;
     }
@@ -450,10 +609,12 @@
       scrollbar-width: none;
     }
   </style>
+
+  <title>Summer Island (Grid Variant) — Aleksandre Karpov &bull; Karpov Design LLC</title>
 </head>
 <body class="antialiased bg-[#f8f9fa] text-[#1a1d20]">
 
-  
+
   <!-- Top Navigation: Header Height Tailored to Logo Option 2 (84px desktop / 72px mobile) with 2px Vertical Clearance -->
   <header id="main-site-header" class="w-full bg-[#f8f9fa]/95 backdrop-blur-md  z-50 sticky top-0 transition-all border-b border-[#e2e5e8]/60">
     <div class="field-header-container flex items-center justify-between py-[2px]">
@@ -502,7 +663,7 @@
   </header>
 
 
-  <!-- Breadcrumb Navigation with Rendition Switcher -->
+  <!-- Breadcrumb Navigation with Layout Switcher -->
   <div class="w-full bg-[#f8f9fa] py-4">
     <nav aria-label="Breadcrumb" class="field-content-rail text-xs md:text-sm font-mono uppercase tracking-widest text-[#595f65] flex items-center justify-between overflow-x-auto no-scrollbar whitespace-nowrap">
       <div class="flex items-center">
@@ -510,152 +671,285 @@
         <span class="mx-2 shrink-0">&bull;</span>
         <a href="index.html#works" class="hover:text-[#1a1d20] transition-colors shrink-0">Works</a>
         <span class="mx-2 shrink-0">&bull;</span>
-        <span class="text-[#1a1d20] font-semibold truncate font-raleway tracking-wider">Summer Island</span>
+        <span class="text-[#1a1d20] font-semibold truncate">Summer Island</span>
       </div>
       <div class="ml-auto flex items-center gap-2 pl-4 shrink-0 text-[11px] font-mono">
         <span class="text-[#767676] uppercase tracking-wider hidden sm:inline">Layout:</span>
-        <a href="project-summer-island.html" class="px-2 py-0.5 text-[#595f65] hover:text-[#1a1d20] transition-colors">Standard</a>
-        <span class="px-2 py-0.5 text-[#de602e] font-semibold border-b border-[#de602e]">Field Architecture</span>
+        <a href="project-summer-island.html" class="px-2 py-0.5 text-[#595f65] hover:text-[#1a1d20] transition-colors">Editorial</a>
+        <span class="px-2 py-0.5 text-[#de602e] font-semibold border-b border-[#de602e]">Grid Variant</span>
       </div>
     </nav>
   </div>
 
-  <main class="w-full bg-[#f8f9fa]">
-    <!-- Section 0: Full-Bleed Hero (100vw x 88vh, ZERO text overlay) -->
-    <section onclick="openLightbox(0)" class="relative w-full h-[75vh] md:h-[88vh] bg-[#1a1d20] overflow-hidden cursor-pointer group">
-      <img src="assets/official/projects/summer-island/summer_island_1.jpg" alt="Summer Island" class="w-full h-full object-cover group-hover:scale-[1.01] transition-transform duration-700 ease-out">
-    </section>
+  <main>
+    <!-- Dedicated Hero Banner: Secondary Metadata (Date, Location) OMITTED per User Rule -->
+    <section id="project-hero-banner" data-project-id="summer-island" data-slot-key="hero_image" data-slot-label="Top Hero Banner" class="relative w-full h-[52svh] sm:h-[60vh] md:h-[75vh] bg-[#1a1d20] overflow-hidden flex items-end">
+      <img src="assets/official/projects/summer-island/summer_island_1.jpg" alt="Summer Island" data-slot-key="hero_image" class="absolute inset-0 w-full h-full object-cover object-center">
+      <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-black/20"></div>
 
-    <!-- Centered 720px Editorial Container -->
-    <div class="max-w-[720px] mx-auto px-5 sm:px-6 py-14 md:py-20 space-y-12 md:space-y-16">
-      <!-- Section 1: 2-Column Title & Concept Sketch Pair -->
-      <section class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 items-center">
-        <div class="space-y-4">
-          <h1 class="text-2xl sm:text-3xl font-semibold tracking-[0.14em] uppercase text-[#1a1d20] font-raleway">
-            Summer Island
-          </h1>
-          <p class="text-sm sm:text-[15px] text-[#595f65] leading-relaxed">
-            Developing a &ldquo;Nation&rdquo; collegian cultural clubhouse with a Spanish theme inspired by my own experience in Lund.
-          </p>
-        </div>
-        <div onclick="openLightbox(10)" class="cursor-pointer group overflow-hidden bg-transparent">
-          <img src="assets/official/projects/summer-island/summer_island_2.jpg" alt="Summer Island Concept Sketch" class="w-full h-auto object-contain group-hover:scale-[1.02] transition-transform duration-500 ease-out">
-        </div>
-      </section>
-
-      <!-- Section 2: Centered Single Landscape Plate -->
-      <section onclick="openLightbox(7)" class="cursor-pointer group overflow-hidden bg-[#1a1d20]">
-        <img src="assets/official/projects/summer-island/summer_island_16.jpg" alt="Summer Island Greenhouse Courtyard" class="w-full h-auto object-cover group-hover:scale-[1.02] transition-transform duration-700 ease-out">
-      </section>
-
-      <!-- Section 3: Centered 2-Column Plate Pair (12px gutter) -->
-      <section class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-        <div onclick="openLightbox(6)" class="cursor-pointer group overflow-hidden bg-[#1a1d20] aspect-[4/5]">
-          <img src="assets/official/projects/summer-island/summer_island_15.jpg" alt="Summer Island Exterior" class="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out">
-        </div>
-        <div onclick="openLightbox(8)" class="cursor-pointer group overflow-hidden bg-[#1a1d20] aspect-[4/5]">
-          <img src="assets/official/projects/summer-island/summer_island_17.jpg" alt="Summer Island Interior Terraces" class="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out">
-        </div>
-      </section>
-
-      <!-- Section 4: Centered Landscape Section Cutaway + 2-Column Pull-Quote & Narrative -->
-      <section class="space-y-10 md:space-y-12">
-        <div onclick="openLightbox(4)" class="cursor-pointer group overflow-hidden bg-white">
-          <img src="assets/official/projects/summer-island/summer_island_13.jpg" alt="Summer Island Section Cutaway" class="w-full h-auto object-contain group-hover:scale-[1.02] transition-transform duration-700 ease-out">
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 items-start pt-2">
-          <div>
-            <h2 class="text-lg sm:text-xl font-medium text-[#1a1d20] leading-snug font-raleway">
-              The city wall is continued around a greenhouse garden preserving summer for the whole year.
-            </h2>
-          </div>
-          <div>
-            <p class="text-sm sm:text-[15px] text-[#595f65] leading-relaxed">
-              On-site sketching and cataloging establish an infill site perimeter block where the residential ribbon frames an interior botanical landscape sheltered from the Nordic winter.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <!-- Section 5 & 6: Centered 2-Column Study & Watercolor Pair (12px gutter) -->
-      <section class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-        <div onclick="openLightbox(11)" class="cursor-pointer group overflow-hidden bg-white aspect-[4/3]">
-          <img src="assets/official/projects/summer-island/summer_island_3.jpg" alt="Summer Island Lund Watercolor Studies" class="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out">
-        </div>
-        <div onclick="openLightbox(5)" class="cursor-pointer group overflow-hidden bg-white aspect-[4/3]">
-          <img src="assets/official/projects/summer-island/summer_island_14.jpg" alt="Summer Island Spatial Axonometric" class="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out">
-        </div>
-      </section>
-    </div>
-
-    <!-- Section 7: Full-Bleed Panoramic Bookend Plate (100vw) -->
-    <section onclick="openLightbox(9)" class="relative w-full h-[65vh] md:h-[82vh] bg-[#1a1d20] overflow-hidden cursor-pointer group">
-      <img src="assets/official/projects/summer-island/summer_island_18.jpg" alt="Summer Island Panoramic Elevation" class="w-full h-full object-cover group-hover:scale-[1.01] transition-transform duration-700 ease-out">
-    </section>
-
-    <!-- Section 8: Linear Project Pagination Bar -->
-    <div class="w-full bg-[#f8f9fa] py-12 md:py-16">
-      <div class="max-w-[720px] mx-auto px-5 sm:px-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-sm sm:text-base font-medium text-[#1a1d20] font-raleway">
-        <a href="project-hand-study.html" class="py-1 hover:text-[#de602e] transition-colors flex items-center gap-2">
-          <span>&lsaquo;</span>
-          <span>Hand Study</span>
-        </a>
-        <a href="project-tent-hill.html" class="py-1 hover:text-[#de602e] transition-colors flex items-center sm:justify-end gap-2 sm:text-right">
-          <span>Tent Hill</span>
-          <span>&rsaquo;</span>
-        </a>
+      <!-- Hero Title Only (Secondary metadata omitted) -->
+      <div class="relative z-10 field-content-rail pb-8 md:pb-12">
+        <h1 class="text-2xl sm:text-3xl md:text-5xl font-semibold tracking-tight text-white drop-shadow-md font-raleway">Summer Island</h1>
       </div>
-    </div>
+    </section>
+
+    <!-- Main Content: Field Architecture Asymmetric Rail -->
+    <section class="w-full bg-[#f8f9fa] py-12 md:py-16">
+      <div class="field-content-rail space-y-12">
+        
+        <!-- Narrative & Description (Zero Visible Clutter, Metadata preserved in head JSON-LD) -->
+        <div class="space-y-4 max-w-4xl">
+          <p class="text-sm sm:text-base md:text-lg text-[#595f65] leading-relaxed">
+            Collegian cultural clubhouse and residence in Lund inspired by a Spanish theme. The historic city wall continues around a greenhouse garden preserving summer climate year-round (UNCC Lund University Exchange).
+          </p>
+          
+        </div>
+
+        <!-- Large Images Gallery -->
+        <div class="pt-2">
+          <div id="project-gallery" class="grid grid-cols-1 md:grid-cols-2 gap-x-6 md:gap-x-8 gap-y-6 md:gap-y-7">
+            
+            <div onclick="openLightbox(0)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
+              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
+                <img src="assets/official/projects/summer-island/summer_island_1.jpg" alt="Summer Island — Plate 1" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
+                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
+                </div>
+              </div>
+            </div>
+
+            <div onclick="openLightbox(1)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
+              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
+                <img src="assets/official/projects/summer-island/summer_island_10.jpg" alt="Summer Island — Plate 2" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
+                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
+                </div>
+              </div>
+            </div>
+
+            <div onclick="openLightbox(2)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
+              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
+                <img src="assets/official/projects/summer-island/summer_island_11.jpg" alt="Summer Island — Plate 3" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
+                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
+                </div>
+              </div>
+            </div>
+
+            <div onclick="openLightbox(3)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
+              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
+                <img src="assets/official/projects/summer-island/summer_island_12.jpg" alt="Summer Island — Plate 4" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
+                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
+                </div>
+              </div>
+            </div>
+
+            <div onclick="openLightbox(4)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
+              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
+                <img src="assets/official/projects/summer-island/summer_island_13.jpg" alt="Summer Island — Plate 5" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
+                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
+                </div>
+              </div>
+            </div>
+
+            <div onclick="openLightbox(5)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
+              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
+                <img src="assets/official/projects/summer-island/summer_island_14.jpg" alt="Summer Island — Plate 6" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
+                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
+                </div>
+              </div>
+            </div>
+
+            <div onclick="openLightbox(6)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
+              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
+                <img src="assets/official/projects/summer-island/summer_island_15.jpg" alt="Summer Island — Plate 7" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
+                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
+                </div>
+              </div>
+            </div>
+
+            <div onclick="openLightbox(7)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
+              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
+                <img src="assets/official/projects/summer-island/summer_island_16.jpg" alt="Summer Island — Plate 8" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
+                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
+                </div>
+              </div>
+            </div>
+
+            <div onclick="openLightbox(8)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
+              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
+                <img src="assets/official/projects/summer-island/summer_island_17.jpg" alt="Summer Island — Plate 9" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
+                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
+                </div>
+              </div>
+            </div>
+
+            <div onclick="openLightbox(9)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
+              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
+                <img src="assets/official/projects/summer-island/summer_island_18.jpg" alt="Summer Island — Plate 10" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
+                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
+                </div>
+              </div>
+            </div>
+
+            <div onclick="openLightbox(10)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
+              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
+                <img src="assets/official/projects/summer-island/summer_island_2.jpg" alt="Summer Island — Plate 11" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
+                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
+                </div>
+              </div>
+            </div>
+
+            <div onclick="openLightbox(11)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
+              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
+                <img src="assets/official/projects/summer-island/summer_island_3.jpg" alt="Summer Island — Plate 12" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
+                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
+                </div>
+              </div>
+            </div>
+
+            <div onclick="openLightbox(12)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
+              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
+                <img src="assets/official/projects/summer-island/summer_island_4.jpg" alt="Summer Island — Plate 13" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
+                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
+                </div>
+              </div>
+            </div>
+
+            <div onclick="openLightbox(13)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
+              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
+                <img src="assets/official/projects/summer-island/summer_island_5.jpg" alt="Summer Island — Plate 14" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
+                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
+                </div>
+              </div>
+            </div>
+
+            <div onclick="openLightbox(14)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
+              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
+                <img src="assets/official/projects/summer-island/summer_island_6.jpg" alt="Summer Island — Plate 15" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
+                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
+                </div>
+              </div>
+            </div>
+
+            <div onclick="openLightbox(15)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
+              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
+                <img src="assets/official/projects/summer-island/summer_island_7.jpg" alt="Summer Island — Plate 16" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
+                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
+                </div>
+              </div>
+            </div>
+
+            <div onclick="openLightbox(16)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
+              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
+                <img src="assets/official/projects/summer-island/summer_island_8.jpg" alt="Summer Island — Plate 17" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
+                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
+                </div>
+              </div>
+            </div>
+
+            <div onclick="openLightbox(17)" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
+              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
+                <img src="assets/official/projects/summer-island/summer_island_9.jpg" alt="Summer Island — Plate 18" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
+                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Prev / Next Navigation (Borderless) -->
+        <div class="pt-8 md:pt-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-xs font-mono uppercase tracking-widest">
+          <a href="project-community-plaza/variant/index.html" class="py-1 text-[#595f65] hover:text-[#de602e] transition-colors flex items-center gap-2">
+            &larr; Prev: Caferağa Community Center
+          </a>
+          <a href="project-flowing-garden/variant/index.html" class="py-1 text-[#595f65] hover:text-[#de602e] transition-colors flex items-center sm:justify-end gap-2 sm:text-right">
+            Next: Flowing Garden &rarr;
+          </a>
+        </div>
+
+      </div>
+    </section>
   </main>
 
-  <!-- Full-Size Image Lightbox Modal with top-left X close button -->
-  <div id="image-lightbox" class="fixed inset-0 z-50 bg-[#1a1d20]/90 backdrop-blur-md hidden flex items-center justify-center p-4 sm:p-6 md:p-10 cursor-pointer" onclick="handleLightboxClick(event)">
-    <div class="relative max-w-6xl max-h-[92vh] flex flex-col items-center justify-center cursor-default" onclick="event.stopPropagation()">
-      <button onclick="closeLightbox()" class="absolute top-3 left-3 z-30 text-[#67aec0] hover:text-[#de602e] text-2xl md:text-3xl font-bold bg-[#1a1d20]/80 hover:bg-[#1a1d20] w-10 h-10 flex items-center justify-center transition-colors focus:outline-none cursor-pointer" title="Close (Esc)" aria-label="Close popup">✕</button>
-      <button onclick="navigateLightbox(-1)" class="absolute left-3 top-1/2 -translate-y-1/2 z-20 text-white/80 hover:text-white text-3xl md:text-4xl p-3 bg-black/40 hover:bg-black/70 transition-colors focus:outline-none" aria-label="Previous image">&lsaquo;</button>
-      <button onclick="navigateLightbox(1)" class="absolute right-3 top-1/2 -translate-y-1/2 z-20 text-white/80 hover:text-white text-3xl md:text-4xl p-3 bg-black/40 hover:bg-black/70 transition-colors focus:outline-none" aria-label="Next image">&rsaquo;</button>
-      <img id="lightbox-img" src="" alt="Project View" class="max-w-[94vw] max-h-[82vh] object-contain drop-shadow-2xl">
-      <div id="lightbox-counter" class="mt-3 text-xs font-mono text-white/70 uppercase tracking-widest">Plate 1 of 10</div>
+
+  <!-- Full-Viewport Image Lightbox Modal -->
+  <div id="image-lightbox" class="fixed inset-0 z-50 bg-[#1a1d20]/95 backdrop-blur-md hidden flex flex-col items-center justify-between p-4 md:p-6 cursor-pointer select-none" onclick="handleLightboxClick(event)">
+    <button onclick="closeLightbox(); event.stopPropagation();" class="fixed top-4 left-6 z-60 text-[#67aec0] hover:text-[#de602e] text-3xl font-bold bg-transparent border-none p-2 cursor-pointer transition-colors focus:outline-none" title="Close (Esc)" aria-label="Close popup">&times;</button>
+
+    <div class="w-full flex items-center justify-end text-white/80 pt-2 pointer-events-none px-6">
+      <span id="lightbox-counter" class="text-xs font-mono uppercase tracking-widest bg-[#2b4951]/80 px-3 py-1.5 text-[#e4f0f2]">Plate 1 of 18</span>
+    </div>
+
+    <div class="relative w-full flex-1 flex items-center justify-center my-2 select-none">
+      <button onclick="navigateLightbox(-1); event.stopPropagation();" class="absolute left-1 md:left-6 z-10 w-10 h-10 md:w-12 md:h-12 text-white bg-[#1a1d20]/70 hover:bg-[#de602e] flex items-center justify-center transition-colors text-lg font-mono focus:outline-none cursor-pointer" title="Previous" aria-label="Previous image">&larr;</button>
+      <img id="lightbox-img" src="" alt="Enlarged Project Plate" class="max-w-[86vw] md:max-w-[85vw] max-h-[82vh] object-contain drop-shadow-2xl transition-all duration-300" onclick="event.stopPropagation()">
+      <button onclick="navigateLightbox(1); event.stopPropagation();" class="absolute right-1 md:right-6 z-10 w-10 h-10 md:w-12 md:h-12 text-white bg-[#1a1d20]/70 hover:bg-[#de602e] flex items-center justify-center transition-colors text-lg font-mono focus:outline-none cursor-pointer" title="Next" aria-label="Next image">&rarr;</button>
+    </div>
+
+    <div class="w-full text-center pb-2 text-white/70 text-xs font-mono pointer-events-none">
+      <span id="lightbox-caption">Summer Island</span>
     </div>
   </div>
 
   <script>
     const GALLERY_IMAGES = ["assets/official/projects/summer-island/summer_island_1.jpg", "assets/official/projects/summer-island/summer_island_10.jpg", "assets/official/projects/summer-island/summer_island_11.jpg", "assets/official/projects/summer-island/summer_island_12.jpg", "assets/official/projects/summer-island/summer_island_13.jpg", "assets/official/projects/summer-island/summer_island_14.jpg", "assets/official/projects/summer-island/summer_island_15.jpg", "assets/official/projects/summer-island/summer_island_16.jpg", "assets/official/projects/summer-island/summer_island_17.jpg", "assets/official/projects/summer-island/summer_island_18.jpg", "assets/official/projects/summer-island/summer_island_2.jpg", "assets/official/projects/summer-island/summer_island_3.jpg", "assets/official/projects/summer-island/summer_island_4.jpg", "assets/official/projects/summer-island/summer_island_5.jpg", "assets/official/projects/summer-island/summer_island_6.jpg", "assets/official/projects/summer-island/summer_island_7.jpg", "assets/official/projects/summer-island/summer_island_8.jpg", "assets/official/projects/summer-island/summer_island_9.jpg"];
-    let currentLightboxIndex = 0;
+    let currentLightboxIdx = 0;
 
-    function openLightbox(idx) {
-      currentLightboxIndex = idx;
-      updateLightboxContent();
-      const lb = document.getElementById('image-lightbox');
-      if (lb) {
-        lb.classList.remove('hidden');
-        document.body.style.overflow = 'hidden';
+    function openLightbox(target) {
+      if (!GALLERY_IMAGES || GALLERY_IMAGES.length === 0) return;
+      let idx = 0;
+      if (typeof target === 'number') {
+        idx = target;
+      } else if (typeof target === 'string') {
+        const cleanTarget = target.replace(/^(\.\.\/)+/, '');
+        const found = GALLERY_IMAGES.findIndex(img => img === target || img.endsWith(cleanTarget));
+        idx = found !== -1 ? found : 0;
       }
+      currentLightboxIdx = ((idx % GALLERY_IMAGES.length) + GALLERY_IMAGES.length) % GALLERY_IMAGES.length;
+      updateLightbox();
+      const lb = document.getElementById('image-lightbox');
+      if (lb) lb.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
     }
 
     function closeLightbox() {
       const lb = document.getElementById('image-lightbox');
-      if (lb && !lb.classList.contains('hidden')) {
-        lb.classList.add('hidden');
-        document.body.style.overflow = '';
-      }
+      if (lb) lb.classList.add('hidden');
+      document.body.style.overflow = '';
     }
 
     function navigateLightbox(dir) {
-      currentLightboxIndex = (currentLightboxIndex + dir + GALLERY_IMAGES.length) % GALLERY_IMAGES.length;
-      updateLightboxContent();
+      if (!GALLERY_IMAGES || GALLERY_IMAGES.length === 0) return;
+      currentLightboxIdx = (currentLightboxIdx + dir + GALLERY_IMAGES.length) % GALLERY_IMAGES.length;
+      updateLightbox();
     }
 
-    function updateLightboxContent() {
+    function updateLightbox() {
+      if (!GALLERY_IMAGES || GALLERY_IMAGES.length === 0) return;
       const img = document.getElementById('lightbox-img');
       const counter = document.getElementById('lightbox-counter');
-      if (img && GALLERY_IMAGES[currentLightboxIndex]) {
-        img.src = GALLERY_IMAGES[currentLightboxIndex];
-        img.alt = "Summer Island — Plate " + (currentLightboxIndex + 1);
+      if (img) {
+        img.src = GALLERY_IMAGES[currentLightboxIdx];
+        img.alt = "Summer Island — Plate " + (currentLightboxIdx + 1);
       }
-      if (counter) {
-        counter.textContent = `Plate ${currentLightboxIndex + 1} of ${GALLERY_IMAGES.length}`;
-      }
+      if (counter) counter.textContent = `Plate ${currentLightboxIdx + 1} of ${GALLERY_IMAGES.length}`;
     }
 
     function handleLightboxClick(e) {
@@ -663,7 +957,7 @@
       closeLightbox();
     }
 
-    window.addEventListener('keydown', (e) => {
+    window.addEventListener('keydown', e => {
       const lb = document.getElementById('image-lightbox');
       if (lb && !lb.classList.contains('hidden')) {
         if (e.key === 'Escape') closeLightbox();
@@ -673,7 +967,8 @@
     });
   </script>
 
-  
+
+
   <!-- Footer: Field Architecture Layout Alignment -->
   <footer class="w-full bg-[#f8f9fa]  py-12 md:py-16">
     <div class="field-content-rail flex flex-col md:flex-row items-start md:items-center justify-between gap-8">

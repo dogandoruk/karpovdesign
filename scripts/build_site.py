@@ -33,6 +33,112 @@ def get_best_hero_image(p):
 for p in projects_data:
     p['best_hero_image'] = get_best_hero_image(p)
 
+CROP_CLASS_MAP = {
+    'cover-center': 'object-cover object-center',
+    'cover-top': 'object-cover object-top',
+    'cover-bottom': 'object-cover object-bottom',
+    'contain': 'object-contain object-center',
+}
+
+def crop_mode_to_class(mode):
+    return CROP_CLASS_MAP.get(mode, 'object-cover object-center')
+
+def get_project_image_roles(p):
+    images = p.get('images') or []
+    primary = p.get('primary_image') or (images[0] if images else '')
+    existing = p.get('image_roles') if isinstance(p.get('image_roles'), dict) else {}
+
+    def pick_fallback(idx):
+        if not images:
+            return primary
+        return images[idx % len(images)]
+
+    if p.get('id') == 'summer-island':
+        defaults = {
+            'card_thumb': primary,
+            'hero_image': pick_fallback(0),
+            'sketch_image': pick_fallback(10),
+            'landscape_1': pick_fallback(7),
+            'pair_1a': pick_fallback(6),
+            'pair_1b': pick_fallback(8),
+            'landscape_2': pick_fallback(4),
+            'pair_2a': pick_fallback(11),
+            'pair_2b': pick_fallback(5),
+            'banner_image': pick_fallback(9),
+        }
+    else:
+        ordered = []
+        if primary:
+            ordered.append(primary)
+        for img in images:
+            if img not in ordered:
+                ordered.append(img)
+        if not ordered:
+            ordered = ['']
+        def pick_seq(idx):
+            return ordered[idx % len(ordered)]
+        defaults = {
+            'card_thumb': primary or pick_seq(0),
+            'hero_image': primary or pick_seq(0),
+            'sketch_image': pick_seq(1),
+            'landscape_1': pick_seq(2),
+            'pair_1a': pick_seq(3),
+            'pair_1b': pick_seq(4),
+            'landscape_2': pick_seq(5),
+            'pair_2a': pick_seq(6),
+            'pair_2b': pick_seq(7),
+            'banner_image': pick_seq(8),
+        }
+
+    roles = {}
+    for key, fallback_val in defaults.items():
+        val = existing.get(key)
+        if val and (val in images or os.path.exists(val)):
+            roles[key] = val
+        else:
+            roles[key] = fallback_val
+    return roles
+
+def get_project_image_crops(p):
+    existing = p.get('image_crops') if isinstance(p.get('image_crops'), dict) else {}
+    defaults = {
+        'card_thumb': 'cover-center',
+        'hero_image': 'cover-center',
+        'sketch_image': 'contain',
+        'landscape_1': 'cover-center',
+        'pair_1a': 'cover-center',
+        'pair_1b': 'cover-center',
+        'landscape_2': 'contain',
+        'pair_2a': 'cover-center',
+        'pair_2b': 'cover-center',
+        'banner_image': 'cover-center',
+    }
+    crops = {}
+    for key, fallback_val in defaults.items():
+        val = existing.get(key)
+        crops[key] = val if val in CROP_CLASS_MAP else fallback_val
+    return crops
+
+roles_updated = False
+for p in projects_data:
+    computed_roles = get_project_image_roles(p)
+    computed_crops = get_project_image_crops(p)
+    if p.get('image_roles') != computed_roles or p.get('image_crops') != computed_crops:
+        p['image_roles'] = computed_roles
+        p['image_crops'] = computed_crops
+        p['primary_image'] = computed_roles.get('card_thumb') or p.get('primary_image')
+        roles_updated = True
+
+if roles_updated:
+    projects_to_save = []
+    for p in projects_data:
+        copy_p = {k: v for k, v in p.items() if k != 'best_hero_image'}
+        projects_to_save.append(copy_p)
+    with open('assets/official/projects.json', 'w', encoding='utf-8') as f:
+        json.dump(projects_to_save, f, indent=2, ensure_ascii=False)
+
+projects_json_str = json.dumps(projects_data).replace('</script>', '<\\/script>')
+
 # Curated Alternating Hero Slideshow Sequence (Dark & Moody Rhythm based on luminosity)
 # Alternating deep darks (lum 24-80) with architectural midtones (lum 99-127)
 CURATED_PROJECT_ORDER = [
@@ -847,10 +953,19 @@ JS_TEMPLATE = """
 
         const titleMinH = IS_VARIANT ? 'min-h-[48px]' : 'min-h-[52px] md:min-h-[64px]';
 
+        const cardThumb = (p.image_roles && p.image_roles.card_thumb) || p.primary_image;
+        const cardCropMap = {
+          'cover-center': 'object-cover object-center',
+          'cover-top': 'object-cover object-top',
+          'cover-bottom': 'object-cover object-bottom',
+          'contain': 'object-contain object-center bg-[#1a1d20]'
+        };
+        const cardCropCls = cardCropMap[(p.image_crops && p.image_crops.card_thumb) || 'cover-center'] || 'object-cover object-center';
+
         // Historical Variant Standard (commit 128202d): dedicated space beneath image, title appears on hover/touch
         card.innerHTML = `
           <div class="relative w-full aspect-[4/3] overflow-hidden bg-[#1a1d20]">
-            <img src="${p.primary_image}" alt="${p.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+            <img src="${cardThumb}" alt="${p.title}" class="w-full h-full ${cardCropCls} group-hover:scale-105 transition-transform duration-700 ease-out">
           </div>
           <!-- Dedicated space UNDERNEATH image: empty by default on desktop mouse, title appears on hover / touch -->
           <div class="variant-title-space pt-4 pb-5 px-1 ${titleMinH} bg-transparent flex items-start">
@@ -1590,10 +1705,245 @@ __FOOTER__
     page = page.replace('__FOOTER__', generate_footer(borderless=True, bg="#f8f9fa", font_mode="raleway"))
     return page
 
-def generate_project_page(p, prev_p, next_p):
-    best_hero = get_best_hero_image(p)
-    status_label = "Built Commission" if p.get('status') == 'Completion' else "Concept / Exploration"
-    
+def build_project_lightbox_markup_and_script(project_title, images, base_path=""):
+    full_images = [f"{base_path}{img}" for img in images]
+    images_json = json.dumps(full_images).replace('</script>', '<\\/script>')
+    escaped_title = project_title.replace('"', '&quot;')
+
+    markup = f"""
+  <!-- Full-Viewport Image Lightbox Modal -->
+  <div id="image-lightbox" class="fixed inset-0 z-50 bg-[#1a1d20]/95 backdrop-blur-md hidden flex flex-col items-center justify-between p-4 md:p-6 cursor-pointer select-none" onclick="handleLightboxClick(event)">
+    <button onclick="closeLightbox(); event.stopPropagation();" class="fixed top-4 left-6 z-60 text-[#67aec0] hover:text-[#de602e] text-3xl font-bold bg-transparent border-none p-2 cursor-pointer transition-colors focus:outline-none" title="Close (Esc)" aria-label="Close popup">&times;</button>
+
+    <div class="w-full flex items-center justify-end text-white/80 pt-2 pointer-events-none px-6">
+      <span id="lightbox-counter" class="text-xs font-mono uppercase tracking-widest bg-[#2b4951]/80 px-3 py-1.5 text-[#e4f0f2]">Plate 1 of {len(full_images)}</span>
+    </div>
+
+    <div class="relative w-full flex-1 flex items-center justify-center my-2 select-none">
+      <button onclick="navigateLightbox(-1); event.stopPropagation();" class="absolute left-1 md:left-6 z-10 w-10 h-10 md:w-12 md:h-12 text-white bg-[#1a1d20]/70 hover:bg-[#de602e] flex items-center justify-center transition-colors text-lg font-mono focus:outline-none cursor-pointer" title="Previous" aria-label="Previous image">&larr;</button>
+      <img id="lightbox-img" src="" alt="Enlarged Project Plate" class="max-w-[86vw] md:max-w-[85vw] max-h-[82vh] object-contain drop-shadow-2xl transition-all duration-300" onclick="event.stopPropagation()">
+      <button onclick="navigateLightbox(1); event.stopPropagation();" class="absolute right-1 md:right-6 z-10 w-10 h-10 md:w-12 md:h-12 text-white bg-[#1a1d20]/70 hover:bg-[#de602e] flex items-center justify-center transition-colors text-lg font-mono focus:outline-none cursor-pointer" title="Next" aria-label="Next image">&rarr;</button>
+    </div>
+
+    <div class="w-full text-center pb-2 text-white/70 text-xs font-mono pointer-events-none">
+      <span id="lightbox-caption">{project_title}</span>
+    </div>
+  </div>
+
+  <script>
+    const GALLERY_IMAGES = {images_json};
+    let currentLightboxIdx = 0;
+
+    function openLightbox(target) {{
+      if (!GALLERY_IMAGES || GALLERY_IMAGES.length === 0) return;
+      let idx = 0;
+      if (typeof target === 'number') {{
+        idx = target;
+      }} else if (typeof target === 'string') {{
+        const cleanTarget = target.replace(/^(\\.\\.\\/)+/, '');
+        const found = GALLERY_IMAGES.findIndex(img => img === target || img.endsWith(cleanTarget));
+        idx = found !== -1 ? found : 0;
+      }}
+      currentLightboxIdx = ((idx % GALLERY_IMAGES.length) + GALLERY_IMAGES.length) % GALLERY_IMAGES.length;
+      updateLightbox();
+      const lb = document.getElementById('image-lightbox');
+      if (lb) lb.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }}
+
+    function closeLightbox() {{
+      const lb = document.getElementById('image-lightbox');
+      if (lb) lb.classList.add('hidden');
+      document.body.style.overflow = '';
+    }}
+
+    function navigateLightbox(dir) {{
+      if (!GALLERY_IMAGES || GALLERY_IMAGES.length === 0) return;
+      currentLightboxIdx = (currentLightboxIdx + dir + GALLERY_IMAGES.length) % GALLERY_IMAGES.length;
+      updateLightbox();
+    }}
+
+    function updateLightbox() {{
+      if (!GALLERY_IMAGES || GALLERY_IMAGES.length === 0) return;
+      const img = document.getElementById('lightbox-img');
+      const counter = document.getElementById('lightbox-counter');
+      if (img) {{
+        img.src = GALLERY_IMAGES[currentLightboxIdx];
+        img.alt = "{escaped_title} — Plate " + (currentLightboxIdx + 1);
+      }}
+      if (counter) counter.textContent = `Plate ${{currentLightboxIdx + 1}} of ${{GALLERY_IMAGES.length}}`;
+    }}
+
+    function handleLightboxClick(e) {{
+      if (e.target.closest('#lightbox-img') || e.target.closest('button')) return;
+      closeLightbox();
+    }}
+
+    window.addEventListener('keydown', e => {{
+      const lb = document.getElementById('image-lightbox');
+      if (lb && !lb.classList.contains('hidden')) {{
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowLeft') navigateLightbox(-1);
+        if (e.key === 'ArrowRight') navigateLightbox(1);
+      }}
+    }});
+  </script>
+"""
+    return markup
+
+
+def generate_dawnridge_project_page(p, prev_p, next_p, base_path=""):
+    roles = get_project_image_roles(p)
+    crops = get_project_image_crops(p)
+    images = p.get('images', [])
+
+    def src_of(slot):
+        rel = roles.get(slot, '')
+        return f"{base_path}{rel}" if rel else ''
+
+    def crop_cls(slot):
+        return crop_mode_to_class(crops.get(slot, 'cover-center'))
+
+    award_markup = ""
+    if p.get('award') and p.get('awardText'):
+        award_markup = f"""
+            <div class="pt-1">
+              <span class="text-xs font-mono uppercase tracking-widest text-[#de602e] font-semibold">{p['awardText']}</span>
+            </div>"""
+
+    home_url = f"{base_path}index.html"
+    works_url = f"{base_path}index.html#works"
+    variant_url = f"{base_path}project-{p['id']}/variant/index.html"
+    prev_url = f"{base_path}project-{prev_p['id']}.html"
+    next_url = f"{base_path}project-{next_p['id']}.html"
+
+    head_html = SHARED_HEAD_TAGS.replace('{JSON_LD_SCHEMA_TAG}', JSON_LD_SCHEMA_TAG)
+    if base_path:
+        head_html = head_html.replace('href="assets/official/', f'href="{base_path}assets/official/')
+
+    header_html = generate_header(active_nav="works", borderless=True, font_mode="raleway", base_path=base_path)
+    footer_html = generate_footer(borderless=True, bg="#f8f9fa", font_mode="raleway", base_path=base_path)
+    lightbox_html = build_project_lightbox_markup_and_script(p['title'], images, base_path=base_path)
+
+    return f"""<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+{head_html}
+  <title>{p['title']} — Aleksandre Karpov &bull; Karpov Design LLC</title>
+</head>
+<body class="antialiased bg-[#f8f9fa] text-[#1a1d20]">
+
+{header_html}
+
+  <!-- Breadcrumb Navigation with Layout Switcher -->
+  <div class="w-full bg-[#f8f9fa] py-4">
+    <nav aria-label="Breadcrumb" class="field-content-rail text-xs md:text-sm font-mono uppercase tracking-widest text-[#595f65] flex items-center justify-between overflow-x-auto no-scrollbar whitespace-nowrap">
+      <div class="flex items-center">
+        <a href="{home_url}" class="hover:text-[#1a1d20] transition-colors shrink-0">Home</a>
+        <span class="mx-2 shrink-0">&bull;</span>
+        <a href="{works_url}" class="hover:text-[#1a1d20] transition-colors shrink-0">Works</a>
+        <span class="mx-2 shrink-0">&bull;</span>
+        <span class="text-[#1a1d20] font-semibold truncate font-raleway tracking-wider">{p['title']}</span>
+      </div>
+      <div class="ml-auto flex items-center gap-2 pl-4 shrink-0 text-[11px] font-mono">
+        <span class="text-[#767676] uppercase tracking-wider hidden sm:inline">Layout:</span>
+        <span class="px-2 py-0.5 text-[#de602e] font-semibold border-b border-[#de602e]">Editorial</span>
+        <a href="{variant_url}" class="px-2 py-0.5 text-[#595f65] hover:text-[#1a1d20] transition-colors">Grid Variant</a>
+      </div>
+    </nav>
+  </div>
+
+  <main class="w-full bg-[#f8f9fa]">
+    <!-- Slot 1: Top Full-Bleed Hero (Zero Text Overlay) -->
+    <section id="project-hero-banner" data-project-id="{p['id']}" data-slot-key="hero_image" data-slot-label="Top Full-Bleed Hero" onclick="openLightbox('{roles.get('hero_image', '')}')" class="relative w-full h-[75vh] md:h-[88vh] bg-[#1a1d20] overflow-hidden cursor-pointer group">
+      <img src="{src_of('hero_image')}" alt="{p['title']} — Hero View" data-slot-key="hero_image" class="w-full h-full {crop_cls('hero_image')} group-hover:scale-[1.01] transition-transform duration-700 ease-out">
+    </section>
+
+    <!-- Centered 720px Dawnridge Editorial Rail -->
+    <div class="max-w-[720px] mx-auto px-5 sm:px-6 py-14 md:py-20 space-y-12 md:space-y-16">
+      <!-- Section 1: 2-Column Title, Narrative & Concept Sketch Pair -->
+      <section class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 items-center">
+        <div class="space-y-4">
+          <h1 class="text-2xl sm:text-3xl font-semibold tracking-[0.14em] uppercase text-[#1a1d20] font-raleway">
+            {p['title']}
+          </h1>
+          <p class="text-sm sm:text-[15px] text-[#595f65] leading-relaxed">
+            {p['description']}
+          </p>
+          {award_markup}
+        </div>
+        <div data-project-id="{p['id']}" data-slot-key="sketch_image" data-slot-label="Concept Sketch / Diagram" onclick="openLightbox('{roles.get('sketch_image', '')}')" class="cursor-pointer group overflow-hidden bg-transparent">
+          <img src="{src_of('sketch_image')}" alt="{p['title']} — Concept Sketch" data-slot-key="sketch_image" class="w-full h-auto {crop_cls('sketch_image')} group-hover:scale-[1.02] transition-transform duration-500 ease-out">
+        </div>
+      </section>
+
+      <!-- Slot 3: Centered Single Landscape Plate -->
+      <section data-project-id="{p['id']}" data-slot-key="landscape_1" data-slot-label="Primary Landscape Plate" onclick="openLightbox('{roles.get('landscape_1', '')}')" class="cursor-pointer group overflow-hidden bg-[#1a1d20]">
+        <img src="{src_of('landscape_1')}" alt="{p['title']} — Landscape Plate" data-slot-key="landscape_1" class="w-full h-auto {crop_cls('landscape_1')} group-hover:scale-[1.02] transition-transform duration-700 ease-out">
+      </section>
+
+      <!-- Slots 4 & 5: Centered 2-Column Vertical Pair (4:5, 12px gutter) -->
+      <section class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div data-project-id="{p['id']}" data-slot-key="pair_1a" data-slot-label="Vertical Pair Left (4:5)" onclick="openLightbox('{roles.get('pair_1a', '')}')" class="cursor-pointer group overflow-hidden bg-[#1a1d20] aspect-[4/5]">
+          <img src="{src_of('pair_1a')}" alt="{p['title']} — Vertical Study 1" data-slot-key="pair_1a" class="w-full h-full {crop_cls('pair_1a')} group-hover:scale-[1.03] transition-transform duration-700 ease-out">
+        </div>
+        <div data-project-id="{p['id']}" data-slot-key="pair_1b" data-slot-label="Vertical Pair Right (4:5)" onclick="openLightbox('{roles.get('pair_1b', '')}')" class="cursor-pointer group overflow-hidden bg-[#1a1d20] aspect-[4/5]">
+          <img src="{src_of('pair_1b')}" alt="{p['title']} — Vertical Study 2" data-slot-key="pair_1b" class="w-full h-full {crop_cls('pair_1b')} group-hover:scale-[1.03] transition-transform duration-700 ease-out">
+        </div>
+      </section>
+
+      <!-- Slot 6: Centered Secondary Landscape / Cutaway Plate -->
+      <section data-project-id="{p['id']}" data-slot-key="landscape_2" data-slot-label="Secondary Landscape / Cutaway" onclick="openLightbox('{roles.get('landscape_2', '')}')" class="cursor-pointer group overflow-hidden bg-transparent">
+        <img src="{src_of('landscape_2')}" alt="{p['title']} — Spatial Cutaway" data-slot-key="landscape_2" class="w-full h-auto {crop_cls('landscape_2')} group-hover:scale-[1.02] transition-transform duration-700 ease-out">
+      </section>
+
+      <!-- Slots 7 & 8: Centered 2-Column Study Pair (4:3, 12px gutter) -->
+      <section class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div data-project-id="{p['id']}" data-slot-key="pair_2a" data-slot-label="Study Pair Left (4:3)" onclick="openLightbox('{roles.get('pair_2a', '')}')" class="cursor-pointer group overflow-hidden bg-white aspect-[4/3]">
+          <img src="{src_of('pair_2a')}" alt="{p['title']} — Detail Study 1" data-slot-key="pair_2a" class="w-full h-full {crop_cls('pair_2a')} group-hover:scale-[1.03] transition-transform duration-700 ease-out">
+        </div>
+        <div data-project-id="{p['id']}" data-slot-key="pair_2b" data-slot-label="Study Pair Right (4:3)" onclick="openLightbox('{roles.get('pair_2b', '')}')" class="cursor-pointer group overflow-hidden bg-white aspect-[4/3]">
+          <img src="{src_of('pair_2b')}" alt="{p['title']} — Detail Study 2" data-slot-key="pair_2b" class="w-full h-full {crop_cls('pair_2b')} group-hover:scale-[1.03] transition-transform duration-700 ease-out">
+        </div>
+      </section>
+    </div>
+
+    <!-- Slot 9: Bottom Full-Bleed Bookend Banner (100vw) -->
+    <section data-project-id="{p['id']}" data-slot-key="banner_image" data-slot-label="Bottom Full-Bleed Banner" onclick="openLightbox('{roles.get('banner_image', '')}')" class="relative w-full h-[65vh] md:h-[82vh] bg-[#1a1d20] overflow-hidden cursor-pointer group">
+      <img src="{src_of('banner_image')}" alt="{p['title']} — Panoramic Banner" data-slot-key="banner_image" class="w-full h-full {crop_cls('banner_image')} group-hover:scale-[1.01] transition-transform duration-700 ease-out">
+    </section>
+
+    <!-- Borderless Linear Project Pagination Bar (Zero Clutter) -->
+    <div class="w-full bg-[#f8f9fa] py-12 md:py-16">
+      <div class="max-w-[720px] mx-auto px-5 sm:px-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-sm sm:text-base font-medium text-[#1a1d20] font-raleway">
+        <a href="{prev_url}" class="py-1 hover:text-[#de602e] transition-colors flex items-center gap-2">
+          <span>&lsaquo;</span>
+          <span>{prev_p['title']}</span>
+        </a>
+        <a href="{next_url}" class="py-1 hover:text-[#de602e] transition-colors flex items-center sm:justify-end gap-2 sm:text-right">
+          <span>{next_p['title']}</span>
+          <span>&rsaquo;</span>
+        </a>
+      </div>
+    </div>
+  </main>
+
+{lightbox_html}
+
+{footer_html}
+
+</body>
+</html>
+"""
+
+
+def generate_grid_variant_project_page(p, prev_p, next_p, base_path="../../"):
+    roles = get_project_image_roles(p)
+    crops = get_project_image_crops(p)
+    hero_rel = roles.get('hero_image') or get_best_hero_image(p)
+    hero_src = f"{base_path}{hero_rel}"
+    hero_crop_cls = crop_mode_to_class(crops.get('hero_image', 'cover-center'))
+
     award_markup = ""
     if p.get('award') and p.get('awardText'):
         award_markup = f"""
@@ -1603,13 +1953,12 @@ def generate_project_page(p, prev_p, next_p):
 """
 
     images = p.get('images', [])
-    images_json = json.dumps(images).replace('</script>', '<\\/script>')
     gallery_html = ""
     for idx, img_path in enumerate(images):
         gallery_html += f"""
             <div onclick="openLightbox({idx})" class="group cursor-pointer bg-transparent flex flex-col justify-start overflow-hidden">
               <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1a1d20]">
-                <img src="{img_path}" alt="{p['title']} — Plate {idx+1}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                <img src="{base_path}{img_path}" alt="{p['title']} — Plate {idx+1}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
                 <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end justify-end p-4">
                   <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#1a1d20]/85 text-white text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5">Enlarge</span>
                 </div>
@@ -1617,33 +1966,52 @@ def generate_project_page(p, prev_p, next_p):
             </div>
 """
 
+    home_url = f"{base_path}index.html"
+    works_url = f"{base_path}index.html#works"
+    editorial_url = f"{base_path}project-{p['id']}.html"
+    prev_url = f"{base_path}project-{prev_p['id']}/variant/index.html"
+    next_url = f"{base_path}project-{next_p['id']}/variant/index.html"
+
+    head_html = SHARED_HEAD_TAGS.replace('{JSON_LD_SCHEMA_TAG}', JSON_LD_SCHEMA_TAG)
+    if base_path:
+        head_html = head_html.replace('href="assets/official/', f'href="{base_path}assets/official/')
+
+    header_html = generate_header(active_nav="works", borderless=True, font_mode="raleway", base_path=base_path)
+    footer_html = generate_footer(borderless=True, bg="#f8f9fa", font_mode="raleway", base_path=base_path)
+    lightbox_html = build_project_lightbox_markup_and_script(p['title'], images, base_path=base_path)
+
     template = f"""<!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
-__SHARED_HEAD__
-  <title>{p['title']} — Aleksandre Karpov &bull; Karpov Design LLC</title>
+{head_html}
+  <title>{p['title']} (Grid Variant) — Aleksandre Karpov &bull; Karpov Design LLC</title>
 </head>
 <body class="antialiased bg-[#f8f9fa] text-[#1a1d20]">
 
-__HEADER__
+{header_html}
 
-  <!-- Breadcrumb Navigation -->
+  <!-- Breadcrumb Navigation with Layout Switcher -->
   <div class="w-full bg-[#f8f9fa] py-4">
     <nav aria-label="Breadcrumb" class="field-content-rail text-xs md:text-sm font-mono uppercase tracking-widest text-[#595f65] flex items-center justify-between overflow-x-auto no-scrollbar whitespace-nowrap">
       <div class="flex items-center">
-        <a href="index.html" class="hover:text-[#1a1d20] transition-colors shrink-0">Home</a>
+        <a href="{home_url}" class="hover:text-[#1a1d20] transition-colors shrink-0">Home</a>
         <span class="mx-2 shrink-0">&bull;</span>
-        <a href="index.html#works" class="hover:text-[#1a1d20] transition-colors shrink-0">Works</a>
+        <a href="{works_url}" class="hover:text-[#1a1d20] transition-colors shrink-0">Works</a>
         <span class="mx-2 shrink-0">&bull;</span>
         <span class="text-[#1a1d20] font-semibold truncate">{p['title']}</span>
+      </div>
+      <div class="ml-auto flex items-center gap-2 pl-4 shrink-0 text-[11px] font-mono">
+        <span class="text-[#767676] uppercase tracking-wider hidden sm:inline">Layout:</span>
+        <a href="{editorial_url}" class="px-2 py-0.5 text-[#595f65] hover:text-[#1a1d20] transition-colors">Editorial</a>
+        <span class="px-2 py-0.5 text-[#de602e] font-semibold border-b border-[#de602e]">Grid Variant</span>
       </div>
     </nav>
   </div>
 
   <main>
     <!-- Dedicated Hero Banner: Secondary Metadata (Date, Location) OMITTED per User Rule -->
-    <section id="project-hero-banner" class="relative w-full h-[52svh] sm:h-[60vh] md:h-[75vh] bg-[#1a1d20] overflow-hidden flex items-end">
-      <img src="{best_hero}" alt="{p['title']}" class="absolute inset-0 w-full h-full object-cover">
+    <section id="project-hero-banner" data-project-id="{p['id']}" data-slot-key="hero_image" data-slot-label="Top Hero Banner" class="relative w-full h-[52svh] sm:h-[60vh] md:h-[75vh] bg-[#1a1d20] overflow-hidden flex items-end">
+      <img src="{hero_src}" alt="{p['title']}" data-slot-key="hero_image" class="absolute inset-0 w-full h-full {hero_crop_cls}">
       <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-black/20"></div>
 
       <!-- Hero Title Only (Secondary metadata omitted) -->
@@ -1664,7 +2032,7 @@ __HEADER__
           {award_markup}
         </div>
 
-        <!-- Large Images Gallery: Consistent 20% Reduced Vertical Row Gap (gap-y-6 md:gap-y-7 gap-x-6 md:gap-x-8) -->
+        <!-- Large Images Gallery -->
         <div class="pt-2">
           <div id="project-gallery" class="grid grid-cols-1 md:grid-cols-2 gap-x-6 md:gap-x-8 gap-y-6 md:gap-y-7">
             {gallery_html}
@@ -1673,10 +2041,10 @@ __HEADER__
 
         <!-- Prev / Next Navigation (Borderless) -->
         <div class="pt-8 md:pt-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-xs font-mono uppercase tracking-widest">
-          <a href="project-{prev_p['id']}.html" class="py-1 text-[#595f65] hover:text-[#de602e] transition-colors flex items-center gap-2">
+          <a href="{prev_url}" class="py-1 text-[#595f65] hover:text-[#de602e] transition-colors flex items-center gap-2">
             &larr; Prev: {prev_p['title']}
           </a>
-          <a href="project-{next_p['id']}.html" class="py-1 text-[#595f65] hover:text-[#de602e] transition-colors flex items-center sm:justify-end gap-2 sm:text-right">
+          <a href="{next_url}" class="py-1 text-[#595f65] hover:text-[#de602e] transition-colors flex items-center sm:justify-end gap-2 sm:text-right">
             Next: {next_p['title']} &rarr;
           </a>
         </div>
@@ -1685,354 +2053,14 @@ __HEADER__
     </section>
   </main>
 
-  <!-- Image Lightbox Modal -->
-  <div id="image-lightbox" class="fixed inset-0 z-50 bg-[#1a1d20]/95 backdrop-blur-md hidden flex flex-col items-center justify-between p-4 md:p-6 cursor-pointer select-none" onclick="handleLightboxClick(event)">
-    <button onclick="closeLightbox()" class="fixed top-4 left-6 z-60 text-[#67aec0] hover:text-[#de602e] text-3xl font-bold bg-transparent border-none p-2 cursor-pointer transition-colors focus:outline-none" title="Close (Esc)" aria-label="Close popup">&times;</button>
-    
-    <div class="w-full flex items-center justify-end text-white/80 pt-2 pointer-events-none px-6">
-      <span id="lightbox-counter" class="text-xs font-mono uppercase tracking-widest bg-[#2b4951]/80 px-3 py-1.5 text-[#e4f0f2]">Plate 1 of {len(images)}</span>
-    </div>
+{lightbox_html}
 
-    <div class="relative w-full flex-1 flex items-center justify-center my-2 select-none">
-      <button onclick="navigateLightbox(-1); event.stopPropagation();" class="absolute left-1 md:left-6 z-10 w-10 h-10 md:w-12 md:h-12 text-white bg-[#1a1d20]/70 hover:bg-[#de602e] flex items-center justify-center transition-colors text-lg font-mono focus:outline-none" title="Previous">&larr;</button>
-      <img id="lightbox-img" src="" alt="Enlarged Project Plate" class="max-w-[94vw] max-h-[82vh] object-contain drop-shadow-2xl transition-all duration-300">
-      <button onclick="navigateLightbox(1); event.stopPropagation();" class="absolute right-1 md:right-6 z-10 w-10 h-10 md:w-12 md:h-12 text-white bg-[#1a1d20]/70 hover:bg-[#de602e] flex items-center justify-center transition-colors text-lg font-mono focus:outline-none" title="Next">&rarr;</button>
-    </div>
+{footer_html}
 
-    <div class="w-full text-center pb-2 text-white/70 text-xs font-mono pointer-events-none">
-      <span id="lightbox-caption">{p['title']}</span>
-    </div>
-  </div>
-
-__FOOTER__
-
-  <script>
-    const GALLERY_IMAGES = {images_json};
-    let currentLightboxIdx = 0;
-
-    function openLightbox(idx) {{
-      currentLightboxIdx = idx;
-      updateLightbox();
-      document.getElementById('image-lightbox').classList.remove('hidden');
-      document.body.style.overflow = 'hidden';
-    }}
-
-    function closeLightbox() {{
-      const lb = document.getElementById('image-lightbox');
-      if (lb) lb.classList.add('hidden');
-      document.body.style.overflow = '';
-    }}
-
-    function navigateLightbox(dir) {{
-      if (GALLERY_IMAGES.length === 0) return;
-      currentLightboxIdx = (currentLightboxIdx + dir + GALLERY_IMAGES.length) % GALLERY_IMAGES.length;
-      updateLightbox();
-    }}
-
-    function updateLightbox() {{
-      if (GALLERY_IMAGES.length === 0) return;
-      const img = document.getElementById('lightbox-img');
-      const counter = document.getElementById('lightbox-counter');
-      if (img) img.src = GALLERY_IMAGES[currentLightboxIdx];
-      if (counter) counter.textContent = `Plate ${{currentLightboxIdx + 1}} of ${{GALLERY_IMAGES.length}}`;
-    }}
-
-    function handleLightboxClick(e) {{
-      if (e.target.id === 'image-lightbox' || e.target.closest('.relative')) {{
-        closeLightbox();
-      }}
-    }}
-
-    window.addEventListener('keydown', e => {{
-      if (e.key === 'Escape') closeLightbox();
-      if (!document.getElementById('image-lightbox').classList.contains('hidden')) {{
-        if (e.key === 'ArrowLeft') navigateLightbox(-1);
-        if (e.key === 'ArrowRight') navigateLightbox(1);
-      }}
-    }});
-  </script>
 </body>
 </html>
 """
-    template = template.replace('__SHARED_HEAD__', SHARED_HEAD_TAGS.replace('{JSON_LD_SCHEMA_TAG}', JSON_LD_SCHEMA_TAG))
-    template = template.replace('__HEADER__', generate_header(active_nav="works", borderless=True, font_mode="raleway"))
-    template = template.replace('__FOOTER__', generate_footer(borderless=True, bg="#f8f9fa", font_mode="raleway"))
     return template
-
-def generate_field_summer_island_page(base_path="../../"):
-    summer_island = next((p for p in projects_data if p['id'] == 'summer-island'), None)
-    if not summer_island:
-        return ""
-    
-    images = summer_island.get('images', [])
-    full_images = [f"{base_path}{img}" for img in images]
-    images_json = json.dumps(full_images).replace('</script>', '<\\/script>')
-
-    hero_img = full_images[0] if len(full_images) > 0 else ""
-    sketch_img = full_images[10] if len(full_images) > 10 else hero_img
-    landscape_1 = full_images[7] if len(full_images) > 7 else hero_img
-    pair_1a = full_images[6] if len(full_images) > 6 else hero_img
-    pair_1b = full_images[8] if len(full_images) > 8 else hero_img
-    landscape_2 = full_images[4] if len(full_images) > 4 else hero_img
-    pair_2a = full_images[11] if len(full_images) > 11 else hero_img
-    pair_2b = full_images[5] if len(full_images) > 5 else hero_img
-    full_bleed_2 = full_images[9] if len(full_images) > 9 else hero_img
-
-    header_html = generate_header(active_nav="works", borderless=True, font_mode="raleway", base_path=base_path)
-    footer_html = generate_footer(borderless=True, bg="#f8f9fa", font_mode="raleway", base_path=base_path)
-
-    standard_url = f"{base_path}project-summer-island.html"
-    home_url = f"{base_path}index.html"
-    works_url = f"{base_path}index.html#works"
-    prev_url = f"{base_path}project-hand-study.html"
-    next_url = f"{base_path}project-tent-hill.html"
-
-    return f"""<!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/svg+xml" href="{base_path}assets/official/logo_charcoal.svg">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    if (!window.tailwind) {{
-      document.write('<script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"><\\/script>');
-    }}
-  </script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
-  {JSON_LD_SCHEMA_TAG}
-  <title>Summer Island — Field Architecture Rendition &bull; Karpov Design LLC</title>
-  <style>
-    .font-raleway {{
-      font-family: 'Raleway', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
-    }}
-    :root {{
-      --field-left-offset: 25vw;
-      --field-right-gutter: clamp(32px, 5vw, 64px);
-    }}
-    @media (max-width: 1023px) {{
-      :root {{
-        --field-left-offset: clamp(20px, 5vw, 40px);
-        --field-right-gutter: clamp(20px, 5vw, 40px);
-      }}
-    }}
-    body {{
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background-color: #f8f9fa;
-      color: #1a1d20;
-      overflow-x: hidden;
-    }}
-    .field-header-container {{
-      padding-left: var(--field-left-offset);
-      padding-right: var(--field-right-gutter);
-      width: 100%;
-    }}
-    .field-content-rail {{
-      padding-left: var(--field-left-offset);
-      padding-right: var(--field-right-gutter);
-      width: 100%;
-    }}
-    #header-logo-img {{
-      height: 72px;
-      width: auto;
-      display: block;
-    }}
-    @media (min-width: 768px) {{
-      #header-logo-img {{
-        height: 84px;
-      }}
-    }}
-    .no-scrollbar::-webkit-scrollbar {{
-      display: none;
-    }}
-    .no-scrollbar {{
-      -ms-overflow-style: none;
-      scrollbar-width: none;
-    }}
-  </style>
-</head>
-<body class="antialiased bg-[#f8f9fa] text-[#1a1d20]">
-
-  {header_html}
-
-  <!-- Breadcrumb Navigation with Rendition Switcher -->
-  <div class="w-full bg-[#f8f9fa] py-4">
-    <nav aria-label="Breadcrumb" class="field-content-rail text-xs md:text-sm font-mono uppercase tracking-widest text-[#595f65] flex items-center justify-between overflow-x-auto no-scrollbar whitespace-nowrap">
-      <div class="flex items-center">
-        <a href="{home_url}" class="hover:text-[#1a1d20] transition-colors shrink-0">Home</a>
-        <span class="mx-2 shrink-0">&bull;</span>
-        <a href="{works_url}" class="hover:text-[#1a1d20] transition-colors shrink-0">Works</a>
-        <span class="mx-2 shrink-0">&bull;</span>
-        <span class="text-[#1a1d20] font-semibold truncate font-raleway tracking-wider">Summer Island</span>
-      </div>
-      <div class="ml-auto flex items-center gap-2 pl-4 shrink-0 text-[11px] font-mono">
-        <span class="text-[#767676] uppercase tracking-wider hidden sm:inline">Layout:</span>
-        <a href="{standard_url}" class="px-2 py-0.5 text-[#595f65] hover:text-[#1a1d20] transition-colors">Standard</a>
-        <span class="px-2 py-0.5 text-[#de602e] font-semibold border-b border-[#de602e]">Field Architecture</span>
-      </div>
-    </nav>
-  </div>
-
-  <main class="w-full bg-[#f8f9fa]">
-    <!-- Section 0: Full-Bleed Hero (100vw x 88vh, ZERO text overlay) -->
-    <section onclick="openLightbox(0)" class="relative w-full h-[75vh] md:h-[88vh] bg-[#1a1d20] overflow-hidden cursor-pointer group">
-      <img src="{hero_img}" alt="Summer Island" class="w-full h-full object-cover group-hover:scale-[1.01] transition-transform duration-700 ease-out">
-    </section>
-
-    <!-- Centered 720px Editorial Container -->
-    <div class="max-w-[720px] mx-auto px-5 sm:px-6 py-14 md:py-20 space-y-12 md:space-y-16">
-      <!-- Section 1: 2-Column Title & Concept Sketch Pair -->
-      <section class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 items-center">
-        <div class="space-y-4">
-          <h1 class="text-2xl sm:text-3xl font-semibold tracking-[0.14em] uppercase text-[#1a1d20] font-raleway">
-            Summer Island
-          </h1>
-          <p class="text-sm sm:text-[15px] text-[#595f65] leading-relaxed">
-            Developing a &ldquo;Nation&rdquo; collegian cultural clubhouse with a Spanish theme inspired by my own experience in Lund.
-          </p>
-        </div>
-        <div onclick="openLightbox(10)" class="cursor-pointer group overflow-hidden bg-transparent">
-          <img src="{sketch_img}" alt="Summer Island Concept Sketch" class="w-full h-auto object-contain group-hover:scale-[1.02] transition-transform duration-500 ease-out">
-        </div>
-      </section>
-
-      <!-- Section 2: Centered Single Landscape Plate -->
-      <section onclick="openLightbox(7)" class="cursor-pointer group overflow-hidden bg-[#1a1d20]">
-        <img src="{landscape_1}" alt="Summer Island Greenhouse Courtyard" class="w-full h-auto object-cover group-hover:scale-[1.02] transition-transform duration-700 ease-out">
-      </section>
-
-      <!-- Section 3: Centered 2-Column Plate Pair (12px gutter) -->
-      <section class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-        <div onclick="openLightbox(6)" class="cursor-pointer group overflow-hidden bg-[#1a1d20] aspect-[4/5]">
-          <img src="{pair_1a}" alt="Summer Island Exterior" class="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out">
-        </div>
-        <div onclick="openLightbox(8)" class="cursor-pointer group overflow-hidden bg-[#1a1d20] aspect-[4/5]">
-          <img src="{pair_1b}" alt="Summer Island Interior Terraces" class="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out">
-        </div>
-      </section>
-
-      <!-- Section 4: Centered Landscape Section Cutaway + 2-Column Pull-Quote & Narrative -->
-      <section class="space-y-10 md:space-y-12">
-        <div onclick="openLightbox(4)" class="cursor-pointer group overflow-hidden bg-white">
-          <img src="{landscape_2}" alt="Summer Island Section Cutaway" class="w-full h-auto object-contain group-hover:scale-[1.02] transition-transform duration-700 ease-out">
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 items-start pt-2">
-          <div>
-            <h2 class="text-lg sm:text-xl font-medium text-[#1a1d20] leading-snug font-raleway">
-              The city wall is continued around a greenhouse garden preserving summer for the whole year.
-            </h2>
-          </div>
-          <div>
-            <p class="text-sm sm:text-[15px] text-[#595f65] leading-relaxed">
-              On-site sketching and cataloging establish an infill site perimeter block where the residential ribbon frames an interior botanical landscape sheltered from the Nordic winter.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <!-- Section 5 & 6: Centered 2-Column Study & Watercolor Pair (12px gutter) -->
-      <section class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-        <div onclick="openLightbox(11)" class="cursor-pointer group overflow-hidden bg-white aspect-[4/3]">
-          <img src="{pair_2a}" alt="Summer Island Lund Watercolor Studies" class="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out">
-        </div>
-        <div onclick="openLightbox(5)" class="cursor-pointer group overflow-hidden bg-white aspect-[4/3]">
-          <img src="{pair_2b}" alt="Summer Island Spatial Axonometric" class="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out">
-        </div>
-      </section>
-    </div>
-
-    <!-- Section 7: Full-Bleed Panoramic Bookend Plate (100vw) -->
-    <section onclick="openLightbox(9)" class="relative w-full h-[65vh] md:h-[82vh] bg-[#1a1d20] overflow-hidden cursor-pointer group">
-      <img src="{full_bleed_2}" alt="Summer Island Panoramic Elevation" class="w-full h-full object-cover group-hover:scale-[1.01] transition-transform duration-700 ease-out">
-    </section>
-
-    <!-- Section 8: Linear Project Pagination Bar -->
-    <div class="w-full bg-[#f8f9fa] py-12 md:py-16">
-      <div class="max-w-[720px] mx-auto px-5 sm:px-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-sm sm:text-base font-medium text-[#1a1d20] font-raleway">
-        <a href="{prev_url}" class="py-1 hover:text-[#de602e] transition-colors flex items-center gap-2">
-          <span>&lsaquo;</span>
-          <span>Hand Study</span>
-        </a>
-        <a href="{next_url}" class="py-1 hover:text-[#de602e] transition-colors flex items-center sm:justify-end gap-2 sm:text-right">
-          <span>Tent Hill</span>
-          <span>&rsaquo;</span>
-        </a>
-      </div>
-    </div>
-  </main>
-
-  <!-- Full-Size Image Lightbox Modal with top-left X close button -->
-  <div id="image-lightbox" class="fixed inset-0 z-50 bg-[#1a1d20]/90 backdrop-blur-md hidden flex items-center justify-center p-4 sm:p-6 md:p-10 cursor-pointer" onclick="handleLightboxClick(event)">
-    <div class="relative max-w-6xl max-h-[92vh] flex flex-col items-center justify-center cursor-default" onclick="event.stopPropagation()">
-      <button onclick="closeLightbox()" class="absolute top-3 left-3 z-30 text-[#67aec0] hover:text-[#de602e] text-2xl md:text-3xl font-bold bg-[#1a1d20]/80 hover:bg-[#1a1d20] w-10 h-10 flex items-center justify-center transition-colors focus:outline-none cursor-pointer" title="Close (Esc)" aria-label="Close popup">✕</button>
-      <button onclick="navigateLightbox(-1)" class="absolute left-3 top-1/2 -translate-y-1/2 z-20 text-white/80 hover:text-white text-3xl md:text-4xl p-3 bg-black/40 hover:bg-black/70 transition-colors focus:outline-none" aria-label="Previous image">&lsaquo;</button>
-      <button onclick="navigateLightbox(1)" class="absolute right-3 top-1/2 -translate-y-1/2 z-20 text-white/80 hover:text-white text-3xl md:text-4xl p-3 bg-black/40 hover:bg-black/70 transition-colors focus:outline-none" aria-label="Next image">&rsaquo;</button>
-      <img id="lightbox-img" src="" alt="Project View" class="max-w-[94vw] max-h-[82vh] object-contain drop-shadow-2xl">
-      <div id="lightbox-counter" class="mt-3 text-xs font-mono text-white/70 uppercase tracking-widest">Plate 1 of 10</div>
-    </div>
-  </div>
-
-  <script>
-    const GALLERY_IMAGES = {images_json};
-    let currentLightboxIndex = 0;
-
-    function openLightbox(idx) {{
-      currentLightboxIndex = idx;
-      updateLightboxContent();
-      const lb = document.getElementById('image-lightbox');
-      if (lb) {{
-        lb.classList.remove('hidden');
-        document.body.style.overflow = 'hidden';
-      }}
-    }}
-
-    function closeLightbox() {{
-      const lb = document.getElementById('image-lightbox');
-      if (lb && !lb.classList.contains('hidden')) {{
-        lb.classList.add('hidden');
-        document.body.style.overflow = '';
-      }}
-    }}
-
-    function navigateLightbox(dir) {{
-      currentLightboxIndex = (currentLightboxIndex + dir + GALLERY_IMAGES.length) % GALLERY_IMAGES.length;
-      updateLightboxContent();
-    }}
-
-    function updateLightboxContent() {{
-      const img = document.getElementById('lightbox-img');
-      const counter = document.getElementById('lightbox-counter');
-      if (img && GALLERY_IMAGES[currentLightboxIndex]) {{
-        img.src = GALLERY_IMAGES[currentLightboxIndex];
-        img.alt = "Summer Island — Plate " + (currentLightboxIndex + 1);
-      }}
-      if (counter) {{
-        counter.textContent = `Plate ${{currentLightboxIndex + 1}} of ${{GALLERY_IMAGES.length}}`;
-      }}
-    }}
-
-    function handleLightboxClick(e) {{
-      if (e.target.closest('#lightbox-img') || e.target.closest('button')) return;
-      closeLightbox();
-    }}
-
-    window.addEventListener('keydown', (e) => {{
-      const lb = document.getElementById('image-lightbox');
-      if (lb && !lb.classList.contains('hidden')) {{
-        if (e.key === 'Escape') closeLightbox();
-        if (e.key === 'ArrowLeft') navigateLightbox(-1);
-        if (e.key === 'ArrowRight') navigateLightbox(1);
-      }}
-    }});
-  </script>
-
-  {footer_html}
-
-</body>
-</html>
-"""
 
 def main():
     print("Building Version 1 (index.html): Centered Hero Logo, Custom Dropdowns, Option 2 Logo (2px boundary clearance)...")
@@ -2065,23 +2093,27 @@ def main():
         f.write(generate_academy_page())
     print("Saved academy.html")
 
-    print("Building 21 individual project pages...")
+    print("Building 21 individual project pages (Dawnridge Editorial as Default + Grid Variant)...")
     for idx, p in enumerate(projects_data):
         prev_p = projects_data[(idx - 1 + len(projects_data)) % len(projects_data)]
         next_p = projects_data[(idx + 1) % len(projects_data)]
+
+        # Default page: Dawnridge Editorial layout
         fname = f"project-{p['id']}.html"
         with open(fname, 'w', encoding='utf-8') as f:
-            f.write(generate_project_page(p, prev_p, next_p))
-    print(f"Saved {len(projects_data)} individual project pages!")
+            f.write(generate_dawnridge_project_page(p, prev_p, next_p, base_path=""))
 
-    print("Building Field Architecture Summer Island Variant at project-summer-island/variant/index.html...")
-    os.makedirs('project-summer-island/variant', exist_ok=True)
-    with open('project-summer-island/variant/index.html', 'w', encoding='utf-8') as f:
-        f.write(generate_field_summer_island_page())
-    with open('project-summer-island-variant.html', 'w', encoding='utf-8') as f:
-        f.write(generate_field_summer_island_page(base_path=""))
-    print("Saved project-summer-island/variant/index.html and project-summer-island-variant.html!")
+        # Variant page: 2-Column Grid Variant layout
+        variant_dir = os.path.join(f"project-{p['id']}", "variant")
+        os.makedirs(variant_dir, exist_ok=True)
+        with open(os.path.join(variant_dir, "index.html"), 'w', encoding='utf-8') as f:
+            f.write(generate_grid_variant_project_page(p, prev_p, next_p, base_path="../../"))
 
+        if p['id'] == 'summer-island':
+            with open('project-summer-island-variant.html', 'w', encoding='utf-8') as f:
+                f.write(generate_grid_variant_project_page(p, prev_p, next_p, base_path=""))
+
+    print(f"Saved {len(projects_data)} Dawnridge editorial project pages and {len(projects_data)} Grid Variant pages!")
     print("Site compilation finished successfully.")
 
 if __name__ == '__main__':
